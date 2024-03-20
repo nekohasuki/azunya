@@ -31,7 +31,10 @@ async def ping(ctx):    #延遲
     await ctx.send(f"{round(bot.latency*1000)} (ms)")
     
 
-
+@bot.command()
+async def imege(ctx):   #指定圖片
+    pic = discord.File(setting["Imege"])
+    await ctx.send(file = pic)
 
 
 
