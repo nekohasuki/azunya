@@ -6,7 +6,7 @@ import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 import asyncio, random
-import keep_alive
+#import keep_alive
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 intents = discord.Intents.all()
@@ -42,5 +42,5 @@ async def main():
             await bot.load_extension(f"cmds.{Filename[:-3]}")
     await bot.start(setting["TOKEN"])
 if __name__=="__main__":
-    keep_alive.keep_alive()
+#    keep_alive.keep_alive()
     asyncio.run(main())
