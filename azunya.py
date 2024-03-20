@@ -32,7 +32,7 @@ async def on_member_remove(member):
 
 @bot.command()
 async def ping(ctx):    #延遲
-    await ctx.send(f"{round(bot.latency*1000)}/ms")
+    await ctx.send(f"{round(bot.latency*1000)} (ms)")
     
 
 
