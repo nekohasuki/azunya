@@ -14,19 +14,6 @@ bot = commands.Bot(command_prefix =["a-","/",""], intents = intents)
 async def on_ready():
     print(">>","嗨嗨嗨!! {0.user}已經成功登陸嘍!!!".format(bot),"<<")
 
-@bot.event  #成員加入通知
-async def on_member_join(member):
-    print(f'User {member} 加入了伺服器!')
-    channel = bot.get_channel(int(setting["Welcome_channel"]))
-    await channel.send(f'User** {member} **加入了伺服器!')
-
-@bot.event  #成員退出通知
-async def on_member_remove(member):
-    print(f'User {member} 離開了伺服器!')
-    channel = bot.get_channel(int(setting["Welcome_channel"]))
-    await channel.send(f'User** {member} **離開了伺服器!')
-
-
 @bot.command()      #加載類別
 async def load(ctx, extension):
     await bot.load_extension(f"cmds.{extension}")
@@ -34,7 +21,6 @@ async def load(ctx, extension):
 
 @bot.command()      #重新加載類別
 async def reload(ctx, extension):
-    await bot.load_extension(f"cmds.{extension}")
     await bot.reload_extension(f"cmds.{extension}")
     await ctx.send(f"Reloaded {extension} done.")
 
