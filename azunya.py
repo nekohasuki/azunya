@@ -17,7 +17,9 @@ bot = commands.Bot(command_prefix =["a-","/"], intents = intents)
 async def on_ready():
     print(">>","嗨嗨嗨!! {0.user}已經成功登陸嘍!!!".format(bot),"<<")
 
-
+@bot.event
+async def on_member_join(member):
+    print(f"{member} join!")
 
 
 
