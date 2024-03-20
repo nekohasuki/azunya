@@ -5,6 +5,7 @@ import os
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
+import asyncio
 import random
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 intents = discord.Intents.all()
@@ -26,6 +27,21 @@ async def on_member_remove(member):
     await channel.send(f'User** {member} **離開了伺服器!')
 
 
+@bot.command()      #加載類別
+async def load(ctx, extension):
+    await bot.load_extension(f"cmds.{extension}")
+    await ctx.send(f"Loaded {extension} done.")
+
+@bot.command()      #重新加載類別
+async def reload(ctx, extension):
+    await bot.load_extension(f"cmds.{extension}")
+    await bot.reload_extension(f"cmds.{extension}")
+    await ctx.send(f"Reloaded {extension} done.")
+
+@bot.command()      #取消加載類別
+async def unload(ctx, extension):
+    await bot.unload_extension(f"cmds.{extension}")
+    await ctx.send(f"Unloaded {extension} done.")
 
 
 
@@ -33,15 +49,6 @@ async def on_member_remove(member):
 
 
 
-
-
-
-
-
-
-    
-
-import asyncio
 async def main():
     for Filename in  os.listdir("./cmds"):
         if Filename.endswith("py"):
