@@ -20,6 +20,10 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
     print(f"{member} join!")
+    
+@bot.event
+async def on_member_remove(member):
+    print(f"{member} leave!")
 
 
 
