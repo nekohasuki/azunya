@@ -5,7 +5,7 @@ from core.classes import Cog_extension
 class Main(Cog_extension):
         
     @commands.command()
-    async def ping(self, ctx):   #延遲
+    async def ping(self, ctx):      #延遲
         await ctx.send(f"{round(self.bot.latency)}/s\n"  f"{round(((self.bot.latency)-round(self.bot.latency))*1000)}/ms"),
 
 
