@@ -18,4 +18,18 @@ async def on_ready():
     print(">>","嗨嗨嗨!! {0.user}已經成功登陸嘍!!!".format(bot),"<<")
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 bot.run(setting["TOKEN"])
