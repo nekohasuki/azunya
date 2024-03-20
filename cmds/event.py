@@ -23,6 +23,7 @@ class Event(Cog_extension):
         await channel.send(f'User** {member} **離開了伺服器!')
 
 
+#///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @commands.Cog.listener()        #對話
     async def on_message(self, msg):
         #==:等於/!=:不等於
@@ -40,17 +41,16 @@ class Event(Cog_extension):
         #……以及訊息等於關鍵字(key)
         #<and msg.content == key>
 
-        if msg.content == key and msg.author != self.bot.user:
-            await msg.channel.send("1")     #完全等於
-
-        if msg.content.endswith("apple") and msg.author != self.bot.user:
-            await msg.channel.send("2")     #結束詞
-
         key= ["apple","banana"]
-        if any(word in msg.content for word in key):
-            await msg.channel.send("3")  
+        if any(word in msg.content for word in (key)):
+            random_count = random.choice(setting["count"])
+            if (random_count) == "0" or (random_count) == "2" or (random_count) == "4" or (random_count) == "6" or (random_count) == "8":
+                await msg.channel.send("text")
+            if (random_count) == "1" or (random_count) == "3" or (random_count) == "5" or (random_count) == "7" or (random_count) == "9":
+                await msg.channel.send("!!!")
 
-
+                
+#///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
