@@ -20,5 +20,5 @@ class React(Cog_extension):
         pic = discord.File(random_pic)
         await ctx.send(file = pic)
 
-def setup(bot):
-    bot.add_cog(React(bot))
+async def setup(bot):
+    await bot.add_cog(React(bot))
