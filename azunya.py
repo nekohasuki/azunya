@@ -49,5 +49,10 @@ async def main():
             await bot.load_extension(f"cmds.{Filename[:-3]}")
     await bot.start(setting["TOKEN"])
 if __name__=="__main__":
-    #keep_alive.keep_alive()
-    asyncio.run(main())
+    if setting["keep_alive"] == "True":
+        keep_alive.keep_alive()
+        asyncio.run(main())
+    elif setting["keep_alive"] == "False":
+        asyncio.run(main())
+    else:
+        print("ERROR")
