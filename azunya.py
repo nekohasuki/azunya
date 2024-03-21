@@ -13,6 +13,15 @@ bot = commands.Bot(command_prefix =["a-","/",""],intents = intents)
 async def on_ready():
     print(">>","嗨嗨嗨!! {0.user}已經成功登陸嘍!!!".format(bot),"<<")
 
+@bot.event  #機器人登陸通知(僅後台)
+async def on_ready():
+    print(">>","嗨嗨嗨!! {0.user}已經成功登陸嘍!!!".format(bot),"<<")
+    try:
+        synced = await bot.tree.sync()
+        print(f"已為您同步{len(synced)}條命令")
+    except Exception as e:
+        print("命令同步時發生錯誤: ", e)
+
 @bot.command()      #加載類別
 async def load(ctx,extension):
     await bot.load_extension(f"cmds.{extension}")
