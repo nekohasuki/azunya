@@ -11,21 +11,21 @@ import random
 class Event(Cog_extension):
         
     @commands.Cog.listener()      #成員加入通知
-    async def on_member_join(self, member):
+    async def on_member_join(self,member):
         print(f'User {member} 加入了伺服器!')
-        channel = self.bot.get_channel(int(setting["Welcome_channel"]))
+        channel = self.bot.get_channel(int(setting["WELCOME_CHANNEL_ID"]))
         await channel.send(f'User** {member} **加入了伺服器!')
 
     @commands.Cog.listener()      #成員退出通知
-    async def on_member_remove(self, member):
+    async def on_member_remove(self,member):
         print(f'User {member} 離開了伺服器!')
-        channel = self.bot.get_channel(int(setting["Welcome_channel"]))
+        channel = self.bot.get_channel(int(setting["WELCOME_CHANNEL_ID"]))
         await channel.send(f'User** {member} **離開了伺服器!')
 
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @commands.Cog.listener()        #對話
-    async def on_message(self, msg):
+    async def on_message(self,msg):
         #==:等於/!=:不等於
         #in:等於/not in:不等於
         #endswith:結束詞/startswith:開始詞
