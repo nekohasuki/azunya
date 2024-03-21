@@ -16,11 +16,9 @@ class Main(Cog_extension):
     @commands.command()
         #, timestamp=datetime.datetime.now()
     async def p(self, ctx):
-        random_pic = random.choice(setting["Logo"])
-        pic = discord.File(random_pic)
         embed=discord.Embed(title="**__請按照規則領取身份__**", url="https://discord.com/channels/1219180207534243891/1219815148622057523", description="** **", color=0xaa095f, timestamp=datetime.datetime.now())
         embed.set_author(name="Azumari : ", url="https://github.com/nekohasuki/azunya/blob/main/azunya.py")
-        embed.set_thumbnail(file = pic)
+        embed.set_thumbnail(url= random.choice(setting["ROLE_MESSAGE_Thumbnail"]))
         embed.add_field(name="**現界[**一**]** - @普通平民老百姓", value="介紹：普通人\n\n條件：底下:free:按鈕領取\n\n** **", inline=True)
         embed.add_field(name="**現界[**二**]** - @平民老百姓", value="介紹：有錢\n　　　但還是普通人\n條件：現界一級並至少■■■■\n(條件未開放)\n\n** **", inline=True)
         embed.add_field(name="", value=" ", inline=False)
@@ -33,8 +31,8 @@ class Main(Cog_extension):
         embed.add_field(name="", value=" ", inline=False)
         embed.add_field(name="", value=" ", inline=False)
         embed.add_field(name="", value=" ", inline=False)
-        #embed.set_image()#設置大圖
-        embed.set_footer(text= "Copyright ⑨ 2024 N..S All Rights Reserved")#設置頁尾文本
+        embed.set_image(url= random.choice(setting["ROLE_MESSAGE_IMEGE"]))
+        embed.set_footer(text= "Copyright ⑨ 2024 N..S ")
         await ctx.send(embed=embed)
 
 
