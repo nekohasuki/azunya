@@ -1,12 +1,8 @@
-import os
+li=['event', 'main', 'react', 'rule', 'task']
 
-print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-----------------------------------------------------------\n@ALL:")
-for Filename in os.listdir("./cmds"):
-        print(Filename)
-        
-print("-----------------------------------------------------------\n@Pythin:")
-for Filename in os.listdir("./cmds"):
-    if Filename.endswith(".py"):
-        print(Filename[:-3])
-        
-print("-----------------------------------------------------------")
+abc = "event"
+
+if abc in li:
+    print(f"\n\n\n{abc}.wow")
+else:
+    print("\n\n\nno")
