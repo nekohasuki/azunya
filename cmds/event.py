@@ -30,6 +30,16 @@ class Event(Cog_extension):
                 guild = self.bot.get_guild(reaction.guild_id)
                 role = guild.get_role(int(setting["ROLE_ID"]))
                 await reaction.member.add_roles(role)
+        # if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
+        #     if str(reaction.emoji) == "✨":
+        #         guild = self.bot.get_guild(reaction.guild_id)
+        #         role = guild.get_role(12196450831971408)
+        #         await reaction.member.add_roles(role)
+        # if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
+        #     if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
+        #         guild = self.bot.get_guild(reaction.guild_id)
+        #         role = guild.get_role(12215029180445194)
+                await reaction.member.add_roles(role)
     #移除身分組
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self,reaction):
@@ -39,6 +49,18 @@ class Event(Cog_extension):
                 user = guild.get_member(reaction.user_id)
                 role = guild.get_role(int(setting["ROLE_ID"]))
                 await user.remove_roles(role)
+        # if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
+        #     if str(reaction.emoji) == "✨":
+        #         guild = self.bot.get_guild(reaction.guild_id)
+        #         user = guild.get_member(reaction.user_id)
+        #         role = guild.get_role(12196450831971408)
+        #         await user.remove_roles(role)
+        # if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
+        #     if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
+        #         guild = self.bot.get_guild(reaction.guild_id)
+        #         user = guild.get_member(reaction.user_id)
+        #         role = guild.get_role(12215029180445194)
+        #         await user.remove_roles(role)
     #"指令"錯誤報錯
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
