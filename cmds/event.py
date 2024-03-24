@@ -25,28 +25,30 @@ class Event(Cog_extension):
     #添加身分組
     @commands.Cog.listener()
     async def on_raw_reaction_add(self,reaction):
-        if str(reaction.emoji)  == "🆓":
-            guild = self.bot.get_guild(reaction.guild_id)
-            role = guild.get_role(1219645862502731876)
-            await reaction.member.add_roles(role)
+        if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
+            if str(reaction.emoji) == setting["EMOJI_FREE"]:
+                guild = self.bot.get_guild(reaction.guild_id)
+                role = guild.get_role(int(setting["ROLE_ID"]))
+                await reaction.member.add_roles(role)
     #移除身分組
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self,reaction):
-        if str(reaction.emoji)  == "🆓":
-            print("hi!!!!!!!!!!!")
-            guild = self.bot.get_guild(reaction.guild_id)
-            role = guild.get_role(1219645862502731876)
-            await reaction.member.remove_roles(role)
-    #"指令"錯誤報錯   
+        if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
+            if str(reaction.emoji) == setting["EMOJI_FREE"]:
+                guild = self.bot.get_guild(reaction.guild_id)
+                user = guild.get_member(reaction.user_id)
+                role = guild.get_role(int(setting["ROLE_ID"]))
+                await user.remove_roles(role)
+    #"指令"錯誤報錯
     @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
+    async def on_command_error(self,ctx,error):
         error_command = '{0}_error'.format(ctx.command)
-        if hasattr(Errors, error_command):  # 檢查是否有 Custom Error Handler
-            error_cmd = getattr(Errors, error_command)
-            await error_cmd(self, ctx, error)
+        if hasattr(Errors,error_command):      # 檢查是否有 Custom Error Handler
+            error_cmd = getattr(Errors,error_command)
+            await error_cmd(self,ctx,error)
             return
-        else:  # 使用 Default Error Handler
-            await Errors.default_error(self, ctx, error)
+        else:       # 使用 Default Error Handler
+            await Errors.default_error(self,ctx,error)
 
 
 
@@ -71,16 +73,16 @@ class Event(Cog_extension):
     #         return
     #     if isinstance(error,commands.errors.MissingRequiredArgument):
     #         await ctx.send(f"參數缺失,以下為錯誤報告：\n```ex\ndiscord.ext.commands.errors.MissingRequiredArgument:\n    {error}```")
-    #         Logger.log(self, ctx, error)
+    #         Logger.log(self,ctx,error)
     #     elif isinstance(error,commands.errors.CommandNotFound):
     #         await ctx.send(f"未知指令,以下為錯誤報告：\n```ex\ndiscord.ext.commands.errors.CommandNotFound:\n    {error}```")
-    #         Logger.log(self, ctx, error)
+    #         Logger.log(self,ctx,error)
     #     elif isinstance(error,commands.errors.CommandError):
     #         await ctx.send(f"以下為錯誤報告：\n```ex\ndiscord.ext.cmmands.errors.TooManyArguments:\n    {error}```")
-    #         Logger.log(self, ctx, error)
+    #         Logger.log(self,ctx,error)
     #     else:
     #         await ctx.send(f"未知錯誤,以下為錯誤報告：\n```ex\ndiscord.ext.commands.errors.TooManyArguments:\n    {error}```")
-    #         Logger.log(self, ctx, error)
+    #         Logger.log(self,ctx,error)
 
 
 
