@@ -21,10 +21,9 @@ class Event(Cog_extension):
         print(f'User {member} 離開了伺服器!')
         channel = self.bot.get_channel(int(setting["WELCOME_CHANNEL_ID"]))
         await channel.send(f'User** {member} **離開了伺服器!')
-
-
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @commands.Cog.listener()        #對話
+    #對話
+    @commands.Cog.listener()
     async def on_message(self,msg):
         #==:等於/!=:不等於
         #in:等於/not in:不等於
@@ -34,10 +33,8 @@ class Event(Cog_extension):
 
         #……以及訊息不為自身(機器人)發出
         #<and msg.author != self.bot.user:>
-
         #……以及訊息中如果有包含關鍵字(key)
         #<and any(word in msg.content for word in key)>
-
         #……以及訊息等於關鍵字(key)
         #<and msg.content == key>
 
