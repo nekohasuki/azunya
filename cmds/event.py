@@ -20,6 +20,22 @@ class Event(Cog_extension):
         print(f'User {member} 離開了伺服器!')
         channel = self.bot.get_channel(int(setting["WELCOME_CHANNEL_ID"]))
         await channel.send(f'User** {member} **離開了伺服器!')
+    #添加身分組
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self,reaction):
+        if str(reaction.emoji)  == "🆓":
+            print("hi??????????")
+            guild = self.bot.get_guild(reaction.guild_id)
+            role = guild.get_role(1219645862502731876)
+            await reaction.member.add_roles(role)
+    #移除身分組
+    @commands.Cog.listener()
+    async def on_raw_reaction_remove(self,reaction):
+        if str(reaction.emoji)  == "🆓":
+            print("hi!!!!!!!!!!!")
+            guild = self.bot.get_guild(reaction.guild_id)
+            role = guild.get_role(1219645862502731876)
+            await reaction.member.remove_roles(role)
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #對話
     @commands.Cog.listener()
