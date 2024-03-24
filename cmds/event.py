@@ -7,7 +7,6 @@ with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 import random
 
-
 class Event(Cog_extension):
     #成員加入通知
     @commands.Cog.listener()
