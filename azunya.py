@@ -64,7 +64,7 @@ async def unload(ctx,extension):
 
 
 async def main():
-    for Filename in  os.listdir("./cmds"):
+    for Filename in os.listdir("./cmds"):
         if Filename.endswith("py"):
             await bot.load_extension(f"cmds.{Filename[:-3]}")
     await bot.start(setting["TOKEN"])
