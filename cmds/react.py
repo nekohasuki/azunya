@@ -9,7 +9,6 @@ with open("setting.json","r",encoding="utf8") as setting_file:
 import random
 
 class React(Cog_extension):
-    
     #指定圖片/PATH
     @app_commands.command(name = "imege", description = "imege!")
     async def imege(self, interaction: discord.Interaction):
