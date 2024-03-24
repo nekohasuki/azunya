@@ -1,7 +1,11 @@
 import discord
 from discord.ext import commands
 from core.classes import Cog_extension
-import json,asyncio,datetime
+
+import json
+with open("setting.json","r",encoding="utf8") as setting_file:
+    setting = json.load(setting_file)
+import asyncio,datetime
 
 class Task(Cog_extension):
     def __init__(self,*args,**kwargs):
