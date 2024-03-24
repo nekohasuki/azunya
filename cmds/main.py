@@ -29,7 +29,7 @@ class Main(Cog_extension):
     async def say(self,ctx, *,msg):
         await ctx.message.delete()
         await ctx.send(msg)
-
+    #刪除訊息
     @commands.command()
     async def clear(self,ctx,num:int):
         member = self.bot.get_user(id(int))
