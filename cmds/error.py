@@ -9,9 +9,10 @@ from cmds.main import Main
 
 class Error(Cog_extension):
     #"指令"錯誤報錯(個別指令)
-
-
-
+    @Main.say.error
+    async def say_error(self,ctx,error):
+        if isinstance(error,commands.errors.MissingRequiredArgument):
+            await ctx.send(f"請輸入想要發送的訊息內文\n參考：\n```\n/say hellow```")
     #"指令"錯誤報錯    
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
