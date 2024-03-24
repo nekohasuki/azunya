@@ -9,11 +9,12 @@ import asyncio,random,keep_alive
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix =["a-","/",""],intents = intents)
-@bot.event  #機器人登陸通知(僅後台)
+#機器人登陸通知
+@bot.event
 async def on_ready():
     print(">>","嗨嗨嗨!! {0.user}已經成功登陸嘍!!!".format(bot),"<<")
-
-@bot.event  #機器人登陸通知(僅後台)
+#機器人登陸通知
+@bot.event
 async def on_ready():
     print(">>","嗨嗨嗨!! {0.user}已經成功登陸嘍!!!".format(bot),"<<")
     try:
@@ -21,18 +22,18 @@ async def on_ready():
         print(f"已為您同步{len(synced)}條命令")
     except Exception as e:
         print("命令同步時發生錯誤: ", e)
-
-@bot.command()      #加載類別
+#加載類別
+@bot.command()
 async def load(ctx,extension):
     await bot.load_extension(f"cmds.{extension}")
     await ctx.send(f"Loaded {extension} done.")
-
-@bot.command()      #重新加載類別
+#重新加載類別
+@bot.command()
 async def reload(ctx,extension):
     await bot.reload_extension(f"cmds.{extension}")
     await ctx.send(f"Reloaded {extension} done.")
-
-@bot.command()      #取消加載類別
+#取消加載類別
+@bot.command()
 async def unload(ctx,extension):
     await bot.unload_extension(f"cmds.{extension}")
     await ctx.send(f"Unloaded {extension} done.")
@@ -64,7 +65,7 @@ async def unload(ctx,extension):
 
 
 async def main():
-    for Filename in  os.listdir("./cmds"):
+    for Filename in os.listdir("./cmds"):
         if Filename.endswith("py"):
             await bot.load_extension(f"cmds.{Filename[:-3]}")
     await bot.start(setting["TOKEN"])
