@@ -55,4 +55,4 @@ if __name__=="__main__":
     elif setting["keep_alive"] == "False":
         asyncio.run(main())
     else:
-        print("ERROR")
+        print("EROR")
