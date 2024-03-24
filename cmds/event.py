@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
-from core.classes import Cog_extension
+from core.classes import Cog_extension,Logger
+from core.error import Errors
+from cmds.main import Main
 
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
@@ -24,7 +26,6 @@ class Event(Cog_extension):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self,reaction):
         if str(reaction.emoji)  == "🆓":
-            print("hi??????????")
             guild = self.bot.get_guild(reaction.guild_id)
             role = guild.get_role(1219645862502731876)
             await reaction.member.add_roles(role)
@@ -36,6 +37,62 @@ class Event(Cog_extension):
             guild = self.bot.get_guild(reaction.guild_id)
             role = guild.get_role(1219645862502731876)
             await reaction.member.remove_roles(role)
+    #"指令"錯誤報錯   
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        error_command = '{0}_error'.format(ctx.command)
+        if hasattr(Errors, error_command):  # 檢查是否有 Custom Error Handler
+            error_cmd = getattr(Errors, error_command)
+            await error_cmd(self, ctx, error)
+            return
+        else:  # 使用 Default Error Handler
+            await Errors.default_error(self, ctx, error)
+
+
+
+
+
+
+
+
+
+
+
+
+    # #"指令"錯誤報錯(個別指令)
+    # @Main.say.error
+    # async def say_error(self,ctx,error):
+    #     if isinstance(error,commands.errors.MissingRequiredArgument):
+    #         await ctx.send(f"請輸入想要發送的訊息內文\n參考：\n```\n/say hellow```")
+    # #"指令"錯誤報錯    
+    # @commands.Cog.listener()
+    # async def on_command_error(self,ctx,error):
+    #     if hasattr(ctx.command,"on_error"):
+    #         return
+    #     if isinstance(error,commands.errors.MissingRequiredArgument):
+    #         await ctx.send(f"參數缺失,以下為錯誤報告：\n```ex\ndiscord.ext.commands.errors.MissingRequiredArgument:\n    {error}```")
+    #         Logger.log(self, ctx, error)
+    #     elif isinstance(error,commands.errors.CommandNotFound):
+    #         await ctx.send(f"未知指令,以下為錯誤報告：\n```ex\ndiscord.ext.commands.errors.CommandNotFound:\n    {error}```")
+    #         Logger.log(self, ctx, error)
+    #     elif isinstance(error,commands.errors.CommandError):
+    #         await ctx.send(f"以下為錯誤報告：\n```ex\ndiscord.ext.cmmands.errors.TooManyArguments:\n    {error}```")
+    #         Logger.log(self, ctx, error)
+    #     else:
+    #         await ctx.send(f"未知錯誤,以下為錯誤報告：\n```ex\ndiscord.ext.commands.errors.TooManyArguments:\n    {error}```")
+    #         Logger.log(self, ctx, error)
+
+
+
+
+
+
+
+
+
+
+
+
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #對話
     @commands.Cog.listener()
