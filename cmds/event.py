@@ -47,10 +47,12 @@ class Event(Cog_extension):
         #第二組
         if reaction.message_id == "1219818319889043476":
             if str(reaction.emoji) == "✨":
+                print(f"{user} add role")
                 await user.add_roles(role)
         #第三組
         if reaction.message_id == "1219818319889043476":
             if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
+                print(f"{user} add role")
                 await user.add_roles(role)
     #移除身分組
     @commands.Cog.listener()
@@ -66,10 +68,12 @@ class Event(Cog_extension):
         #第二組
         if reaction.message_id == "1219818319889043476":
             if str(reaction.emoji) == "✨":
+                print(f"{user} remove role")
                 await user.remove_roles(role)
         #第三組
         if reaction.message_id == "1219818319889043476":
             if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
+                print(f"{user} remove role")
                 await user.remove_roles(role) 
     #"指令"錯誤報錯
     @commands.Cog.listener()
