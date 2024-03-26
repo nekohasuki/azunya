@@ -4,6 +4,6 @@ rule.py
 
 /cmds/__pycache__
 /core/__pycache__
-/__pycache__/
+/__pycache__
 /.vscode
-/node_modules/
+/node_modules
