@@ -1,11 +1,12 @@
 import discord
 from discord.ext import commands
-from core.classes import Cog_extension
 
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 import random
+
+from core.classes import Cog_extension
 
 class React(Cog_extension):
     #指定圖片/PATH
@@ -24,6 +25,9 @@ class React(Cog_extension):
     async def omikuji(self, ctx):
         random_pic = random.choice(setting["Omikuji"])
         await ctx.send(random_pic)
+
+
+
 
 
 
