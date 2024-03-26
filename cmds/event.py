@@ -42,8 +42,8 @@ class Event(Cog_extension):
         if str(reaction.message_id) == "1221830423592570910":
             if str(reaction.emoji) == setting["EMOJI_FREE"]:
                 role = guild.get_role(int(setting["ROLE_ID"]))
-                print(f"[#{guild}] : User'{user}' add {reaction.emoji}-@{role}")
-                await user.add_roles(role,reason=f"User{user}不想要{role}的身分了QQ")
+                print(f"#|[{guild}] : User'{user}' add {reaction.emoji}-@{role}")
+                await user.add_roles(role,reason=f"已為User: ' {user} ' 增添了 ' @{role} ' 的身分^W^!!!")
         #第二組
         if str(reaction.message_id) == "1222165371705098250":
             print(reaction.emoji)
@@ -68,8 +68,8 @@ class Event(Cog_extension):
             print(reaction.emoji)
             if str(reaction.emoji) == setting["EMOJI_FREE"]:
                 role = guild.get_role(int(setting["ROLE_ID"]))
-                print(f"[#{guild}] : User'{user}' remove {reaction.emoji}-@{role}")
-                await user.remove_roles(role,reason=f"User{user}不想要{role}的身分了QQ")
+                print(f"#|[{guild}] : User'{user}' remove {reaction.emoji}-@{role}")
+                await user.remove_roles(role,reason=f"User: ' {user} ' 不想要 ' @{role} ' 的身分了QQ")
         #第二組
         if str(reaction.message_id) == "1222165371705098250":
             print(reaction.emoji)
