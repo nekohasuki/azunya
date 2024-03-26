@@ -1,14 +1,15 @@
 import discord
 from discord.ext import commands
-import os
+intents = discord.Intents.all()
+intents.typing = False
+intents.presences = False
+bot = commands.Bot(command_prefix =["a-","/"],intents = intents)
 
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import asyncio,random,keep_alive
-#///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-intents = discord.Intents.all()
-bot = commands.Bot(command_prefix =["a-","/"],intents = intents)
+import os,asyncio,random,keep_alive
+
 #機器人登陸通知
 @bot.event
 async def on_ready():
