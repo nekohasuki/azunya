@@ -56,23 +56,6 @@ async def unload(ctx,extension):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 async def main():
     for Filename in os.listdir("./cmds"):
         if Filename.endswith("py"):
