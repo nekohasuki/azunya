@@ -4,7 +4,9 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import random
+import random,datetime
+now = datetime.datetime.now()
+time = now.strftime("%H:%M")
 
 from core.classes import Cog_extension,Logger
 from core.error import Errors
@@ -16,13 +18,19 @@ class Event(Cog_extension):
     async def on_member_join(self,member):
         print(f'User {member} 加入了伺服器!')
         channel = self.bot.get_channel(int(setting["Welcome_channel_ID"]))
-        await channel.send(f'User** {member} **加入了伺服器!')
+        embed = discord.Embed(title="吉訊",url="https://www.jcolor.com.tw/jcolorfiles/release/product/pdt-868/pdt-8689539/medium.jpg",description="GOOD NEWS",colour=0xad0000,timestamp=now)
+        embed.add_field(name="#最新消息：",value=f"User：__**{member}**__於今天的{time}\n奇蹟般的降臨了這個伺服器\n\n讓我們熱烈的歡迎!!!!!!!\n將祝福賜予User：__**{member}**__\n\n\n** **",inline=False)
+        embed.add_field(name="#Latest News：",value=f"User: \"__**{member}**__\" in today's {time}\nMiraculously arrived at this server\n\nLet us give you a warm welcome!!!!!!!\nGive blessings to User: __**{member}**__",inline=False)
+        await channel.send(embed=embed)
     #成員退出通知
     @commands.Cog.listener()
     async def on_member_remove(self,member):
         print(f'User {member} 離開了伺服器!')
         channel = self.bot.get_channel(int(setting["Welcome_channel_ID"]))
-        await channel.send(f'User** {member} **離開了伺服器!')  
+        embed = discord.Embed(title="悲報",url="https://img.soundofhope.org/2024-03/1709580096451.jpg",description="SAD NEWS",colour=0x787878,timestamp=now)
+        embed.add_field(name="#最新消息：",value=f"User：\"__**{member}**__\"於今天的{time}\n突然地離開了這個伺服器\n\n對此我們感到非常的難受\n願這伺服器，再無苦痛\n\n\n** **",inline=False)
+        embed.add_field(name="#Latest News：",value=f"User：\"__**{member}**__\" in today's {time}\nLeft this server suddenly\n\nWe feel very uncomfortable about this\nI wish this server would have no more pain",inline=False)
+        await channel.send(embed=embed)
     #"指令"錯誤報錯
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
