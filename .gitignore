@@ -4,5 +4,5 @@ rule.py
 
 /cmds/__pycache__
 /core/__pycache__
-/.vscode
 /__pycache__
+/.vscode
