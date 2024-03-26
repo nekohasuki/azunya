@@ -15,13 +15,13 @@ class Event(Cog_extension):
     @commands.Cog.listener()
     async def on_member_join(self,member):
         print(f'User {member} 加入了伺服器!')
-        channel = self.bot.get_channel(int(setting["WELCOME_CHANNEL_ID"]))
+        channel = self.bot.get_channel(int(setting["Welcome_channel_ID"]))
         await channel.send(f'User** {member} **加入了伺服器!')
     #成員退出通知
     @commands.Cog.listener()
     async def on_member_remove(self,member):
         print(f'User {member} 離開了伺服器!')
-        channel = self.bot.get_channel(int(setting["WELCOME_CHANNEL_ID"]))
+        channel = self.bot.get_channel(int(setting["Welcome_channel_ID"]))
         await channel.send(f'User** {member} **離開了伺服器!')
     #添加身分組
     @commands.Cog.listener()
