@@ -38,20 +38,24 @@ class Event(Cog_extension):
     async def on_raw_reaction_add(self,reaction):
         guild = self.bot.get_guild(reaction.guild_id)
         user = guild.get_member(reaction.user_id)
-        role = guild.get_role(int(setting["ROLE_ID"]))
         #第一組
-        if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
+        if str(reaction.message_id) == "1221830423592570910":
             if str(reaction.emoji) == setting["EMOJI_FREE"]:
-                print(f"{guild} add {user}/{role}")
-                await user.add_roles(role)
+                role = guild.get_role(int(setting["ROLE_ID"]))
+                print(f"[#{guild}] : User'{user}' add {reaction.emoji}-@{role}")
+                await user.add_roles(role,reason=f"User{user}不想要{role}的身分了QQ")
         #第二組
-        if reaction.message_id == "1219818319889043476":
+        if str(reaction.message_id) == "1222165371705098250":
+            print(reaction.emoji)
             if str(reaction.emoji) == "✨":
+                role = guild.get_role(1219645880831971408)
                 print(f"{user} add role")
                 await user.add_roles(role)
         #第三組
-        if reaction.message_id == "1219818319889043476":
-            if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
+        if str(reaction.message_id) == "1222165371705098250":
+            print(reaction.emoji)
+            if str(reaction.emoji) == "<:LOGO1:1221378614524641332>":
+                role = guild.get_role(1219645862502731876)
                 print(f"{user} add role")
                 await user.add_roles(role)
     #移除身分組
@@ -59,20 +63,24 @@ class Event(Cog_extension):
     async def on_raw_reaction_remove(self,reaction):
         guild = self.bot.get_guild(reaction.guild_id)
         user = guild.get_member(reaction.user_id)
-        role = guild.get_role(int(setting["ROLE_ID"]))
         #第一組
-        if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
+        if str(reaction.message_id) == "1221830423592570910":
+            print(reaction.emoji)
             if str(reaction.emoji) == setting["EMOJI_FREE"]:
-                print(f"{guild} remove {user}/{role}")
+                role = guild.get_role(int(setting["ROLE_ID"]))
+                print(f"[#{guild}] : User'{user}' remove {reaction.emoji}-@{role}")
                 await user.remove_roles(role,reason=f"User{user}不想要{role}的身分了QQ")
         #第二組
-        if reaction.message_id == "1219818319889043476":
+        if str(reaction.message_id) == "1222165371705098250":
+            print(reaction.emoji)
             if str(reaction.emoji) == "✨":
+                role = guild.get_role(1219645880831971408)
                 print(f"{user} remove role")
                 await user.remove_roles(role)
         #第三組
-        if reaction.message_id == "1219818319889043476":
-            if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
+        if str(reaction.message_id) == "1222165371705098250":
+            if str(reaction.emoji) == "<:LOGO1:1221378614524641332>":
+                role = guild.get_role(1219645862502731876)
                 print(f"{user} remove role")
                 await user.remove_roles(role) 
     #"指令"錯誤報錯
