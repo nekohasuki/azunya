@@ -22,46 +22,55 @@ class Event(Cog_extension):
     async def on_member_remove(self,member):
         print(f'User {member} 離開了伺服器!')
         channel = self.bot.get_channel(int(setting["Welcome_channel_ID"]))
-        await channel.send(f'User** {member} **離開了伺服器!')
+        await channel.send(f'User** {member} **離開了伺服器!')  
+    #"指令"錯誤報錯
+    @commands.Cog.listener()
+    async def on_command_error(self,ctx,error):
+        error_command = '{0}_error'.format(ctx.command)
+        if hasattr(Errors,error_command):      # 檢查是否有 Custom Error Handler
+            error_cmd = getattr(Errors,error_command)
+            await error_cmd(self,ctx,error)
+            return
+        else:       # 使用 Default Error Handler
+            await Errors.default_error(self,ctx,error)
     #添加身分組
     @commands.Cog.listener()
     async def on_raw_reaction_add(self,reaction):
+        guild = self.bot.get_guild(reaction.guild_id)
+        user = guild.get_member(reaction.user_id)
+        role = guild.get_role(int(setting["ROLE_ID"]))
+        #第一組
         if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
             if str(reaction.emoji) == setting["EMOJI_FREE"]:
-                guild = self.bot.get_guild(reaction.guild_id)
-                role = guild.get_role(int(setting["ROLE_ID"]))
-                await reaction.member.add_roles(role)
-        # if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
-        #     if str(reaction.emoji) == "✨":
-        #         guild = self.bot.get_guild(reaction.guild_id)
-        #         role = guild.get_role(12196450831971408)
-        #         await reaction.member.add_roles(role)
-        # if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
-        #     if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
-        #         guild = self.bot.get_guild(reaction.guild_id)
-        #         role = guild.get_role(12215029180445194)
-                await reaction.member.add_roles(role)
+                print(f"{guild} add {user}/{role}")
+                await user.add_roles(role)
+        #第二組
+        if reaction.message_id == "1219818319889043476":
+            if str(reaction.emoji) == "✨":
+                await user.add_roles(role)
+        #第三組
+        if reaction.message_id == "1219818319889043476":
+            if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
+                await user.add_roles(role)
     #移除身分組
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self,reaction):
+        guild = self.bot.get_guild(reaction.guild_id)
+        user = guild.get_member(reaction.user_id)
+        role = guild.get_role(int(setting["ROLE_ID"]))
+        #第一組
         if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
             if str(reaction.emoji) == setting["EMOJI_FREE"]:
-                guild = self.bot.get_guild(reaction.guild_id)
-                user = guild.get_member(reaction.user_id)
-                role = guild.get_role(int(setting["ROLE_ID"]))
+                print(f"{guild} remove {user}/{role}")
+                await user.remove_roles(role,reason=f"User{user}不想要{role}的身分了QQ")
+        #第二組
+        if reaction.message_id == "1219818319889043476":
+            if str(reaction.emoji) == "✨":
                 await user.remove_roles(role)
-        # if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
-        #     if str(reaction.emoji) == "✨":
-        #         guild = self.bot.get_guild(reaction.guild_id)
-        #         user = guild.get_member(reaction.user_id)
-        #         role = guild.get_role(12196450831971408)
-        #         await user.remove_roles(role)
-        # if reaction.message_id == int(setting["ROLE_MESSAGE_ID"]):
-        #     if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
-        #         guild = self.bot.get_guild(reaction.guild_id)
-        #         user = guild.get_member(reaction.user_id)
-        #         role = guild.get_role(12215029180445194)
-        #         await user.remove_roles(role)
+        #第三組
+        if reaction.message_id == "1219818319889043476":
+            if str(reaction.emoji) == "<:LOGO1:12213786144641332>":
+                await user.remove_roles(role) 
     #"指令"錯誤報錯
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
@@ -108,6 +117,8 @@ class Event(Cog_extension):
                 await msg.channel.send("!!!")
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
