@@ -1,11 +1,12 @@
 import discord
 from discord.ext import commands
-from core.classes import Cog_extension
 
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 import asyncio,datetime
+
+from core.classes import Cog_extension
 
 class Task(Cog_extension):
     def __init__(self,*args,**kwargs):
@@ -22,6 +23,9 @@ class Task(Cog_extension):
 #    async def setchannel(self,ctx,channel_id:int):
 #        self.channel = self.bot.get_channel(channel_id)
 #        await ctx.sand(f"Set channel:{self.channel.mention}")
+
+
+
 
 
 
