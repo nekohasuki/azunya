@@ -1,11 +1,12 @@
 import discord
 from discord.ext import commands
-from core.classes import Cog_extension
 
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 import datetime ,random
+
+from core.classes import Cog_extension
 
 class Main(Cog_extension):
     #查看延遲
@@ -27,6 +28,7 @@ class Main(Cog_extension):
         member = self.bot.get_user(id(int))
         deleted = await ctx.channel.purge(limit=count+1)
         await ctx.channel.send(f'已為USER:{member}刪除{len(deleted)-1}條訊息')
+
 
 
 
