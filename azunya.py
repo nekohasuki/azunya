@@ -22,8 +22,20 @@ async def on_ready():
 #加載類別
 @bot.command()
 async def load(ctx,extension):
-    await bot.load_extension(f"cmds.{extension}")
-    await ctx.send(f"Loaded {extension} done.")
+    extension_list = []
+    for allfile in os.listdir("./cmds"):
+        if allfile.endswith(".py"):extension_list.append(allfile[:-3])
+    if extension == "all":
+        for reload in extension_list:
+            await asyncio.sleep(.5)
+            await bot.load_extension(f"cmds.{reload}")
+        await ctx.send(f"Loaded {len(extension_list)} done.")
+    else:
+        if extension in extension_list:
+            await bot.load_extension(f"cmds.{extension}")
+            await ctx.send(f"Loaded {extension} done.")
+        else:
+            await ctx.send(f"no extension '{extension}'")
 #重新加載類別
 @bot.command()
 async def reload(ctx,extension):
@@ -40,13 +52,24 @@ async def reload(ctx,extension):
             await bot.reload_extension(f"cmds.{extension}")
             await ctx.send(f"Reloaded {extension} done.")
         else:
-            await ctx.send(f"no command '{extension}'")
+            await ctx.send(f"no extension '{extension}'")
 #取消加載類別
 @bot.command()
 async def unload(ctx,extension):
-    await bot.unload_extension(f"cmds.{extension}")
-    await ctx.send(f"Unloaded {extension} done.")
-
+    extension_list = []
+    for allfile in os.listdir("./cmds"):
+        if allfile.endswith(".py"):extension_list.append(allfile[:-3])
+    if extension == "all":
+        for reload in extension_list:
+            await asyncio.sleep(.5)
+            await bot.unload_extension(f"cmds.{reload}")
+        await ctx.send(f"Unloaded {len(extension_list)} done.")
+    else:
+        if extension in extension_list:
+            await bot.unload_extension(f"cmds.{extension}")
+            await ctx.send(f"Unloaded {extension} done.")
+        else:
+            await ctx.send(f"no extension '{extension}'")
 
 
 
