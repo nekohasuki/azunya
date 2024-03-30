@@ -4,9 +4,12 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import random
+import random,datetime
+
 
 from core.classes import Cog_extension
+
+Current_Time = datetime.datetime.now().strftime("%H:%M")
 
 class React(Cog_extension):
     #指定圖片/PATH
