@@ -4,28 +4,34 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
+    
 import asyncio,datetime
+
+Current_Time = datetime.datetime.now().strftime("%H:%M")
+Current_seconds = datetime.datetime.now().strftime("%S")
 
 from core.classes import Cog_extension
 
 class Task(Cog_extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-
-#        async def interval():
-#            await self.bot.wait_until_ready()
-#            self.channel = self.bot.get_channel(1221262279484510310)
-#            while not self.bot.is_closed():
-#                await self.channel.send("Hi i'm running")
-#                await asyncio.sleep(5)#單位:秒
-#        self.bg_task = self.bot.loop.create_task(interval())
-#    @commands.command()
-#    async def setchannel(self,ctx,channel_id:int):
-#        self.channel = self.bot.get_channel(channel_id)
-#        await ctx.sand(f"Set channel:{self.channel.mention}")
+        async def omikuji():       
+                await self.bot.wait_until_ready()
+                channel = self.bot.get_channel(1219180207534243894)
+                if Current_Time == ("06:16"):
+                    while not self.bot.is_closed():
+                        await channel.send(Current_seconds)
+                        await asyncio.sleep(1)#單位:秒
+        self.bg_task = self.bot.loop.create_task(omikuji())
 
 
-
+# Clock = 0
+# if Current_Time == ("18:00"):
+#     Clock == 1
+# if Current_Time == ("18:01") and Clock == 0:
+#     # 清空 history.json
+        
+#     Clock += 1
 
 
 
