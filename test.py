@@ -1,6 +1,7 @@
 import datetime
 Current_Time = datetime.datetime.now().strftime("%H:%M")
-# print(Current_Time)
+Current_seconds = datetime.datetime.now().strftime("%S")
+print(Current_seconds)
 # @commands.command()
 # async def omikuji(self, ctx):
 #     user = ctx.get_user()
@@ -25,13 +26,3 @@ Current_Time = datetime.datetime.now().strftime("%H:%M")
 #     print(Clock)
 #     Clock += 1
 #     print(Clock)
-
-
-
-
-
-# {
-#     "userdata": [697842681082281985],
-#     "697842681082281985": "https://www.illust-box.jp/db_img/sozai/00019/196972/watermark.jpg"
-    
-# }
