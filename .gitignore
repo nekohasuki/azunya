@@ -1,10 +1,10 @@
 setting.json
 not.pytxt
 rule.py
+cmds/data/omikuji.json
 
 /cmds/__pycache__
 /core/__pycache__
 /__pycache__
 /.vscode
 /node_modules
-cmds/data/omikuji.json
