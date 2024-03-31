@@ -4,9 +4,10 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import datetime ,random,asyncio
 
+import asyncio,datetime,random
 from core.classes import Cog_extension
+
 
 class Main(Cog_extension):
     #查看延遲
