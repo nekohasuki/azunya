@@ -4,8 +4,10 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import random,datetime
+with open("cmds\history.json","r",encoding="utf8") as history_file:
+    history = json.load(history_file)
 
+import random,datetime
 
 from core.classes import Cog_extension
 
@@ -28,6 +30,62 @@ class React(Cog_extension):
     async def omikuji(self, ctx):
         random_pic = random.choice(setting["Omikuji"])
         await ctx.send(random_pic)
+    #取得用戶ID
+    @commands.command()
+    async def myid(self,ctx):
+        user = ctx.author
+        id = user.id
+        name = user.name
+        await ctx.send(f'User：<@{id}>的ID是{id}呦!')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @commands.command()
+    async def ttt(self,ctx):
+        guild = ctx.guild
+        channel = ctx.channel
+        user = ctx.author.id
+        if "history.json" != "history.json":
+            await ctx.send(f"User : <@{user}>\n你今天已經抽過了啦!\n[點我看抽到的籤]({setting["Embed"]})")
+        else:
+            random_pic = random.choice(setting["Omikuji"])
+            await ctx.send(random_pic)
+            await ctx.send(f"{user}")
+            # await ctx.send(f"[{guild}]|[{channel}]|[{user}]")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
