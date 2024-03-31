@@ -4,13 +4,14 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import random,datetime
-now = datetime.datetime.now()
-time = now.strftime("%H:%M")
 
+import datetime,random
 from core.classes import Cog_extension,Logger
 from core.error import Errors
 from cmds.main import Main
+
+now = datetime.datetime.now()
+time = now.strftime("%H:%M")
 
 class Event(Cog_extension):
     #成員加入通知
