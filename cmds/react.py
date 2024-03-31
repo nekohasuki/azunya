@@ -5,8 +5,7 @@ import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 
-import random,datetime,asyncio
-
+import asyncio,datetime,random
 from core.classes import Cog_extension
 
 Current_Time = datetime.datetime.now().strftime("%H:%M")
@@ -51,7 +50,7 @@ class React(Cog_extension):
     @commands.command()
     async def myid(self,ctx):
         id = ctx.author.id
-        await ctx.send(f'User：<@{id}>的ID是{id}呦!')
+        await ctx.send(f'User：<@{id}>的ID是__{id}__呦!')
 
 
 
