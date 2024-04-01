@@ -10,9 +10,9 @@ class Cog_extension(commands.Cog):
 class Logger:
     def log(self, ctx, data, type='error'):
         '''事件紀錄器'''
-        time = datetime.datetime.now().strftime('[%Y-%m-%d] [%H:%M]')
-        user = ctx.author.name
+        time = datetime.datetime.now().strftime('[%Y/%m/%d-%H:%M]')
+        guild = ctx.guild
         channel = ctx.channel.name
-        command = ctx.command
+        user = ctx.author.name
         if type == 'error':
-            print(f'<Error Log>: {time}/[{user}][{channel}][{command}]: {data}')
+            print(f'Error Log: {time} | {guild}/<@{user}>/<#{channel}>: {data}')
