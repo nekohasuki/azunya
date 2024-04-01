@@ -12,10 +12,6 @@ class Main(Cog_extension):
     @commands.command()
     async def ping(self, ctx):
         await ctx.send(f"{round(self.bot.latency)}/s\n"  f"{round(((self.bot.latency)-round(self.bot.latency))*1000)}/ms"),
-    #回覆使用者訊息
-    @commands.command()
-    async def hello(self, ctx):
-        await ctx.send("Hello, world!")
     #以梓喵身分發送訊息
     @commands.command()
     async def say(self,ctx, *,msg):
@@ -23,6 +19,7 @@ class Main(Cog_extension):
         await ctx.message.delete()
     #刪除訊息
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def clear(self,ctx,count):
         user = ctx.author.id
         if count == "all" or int(count) == -402:
