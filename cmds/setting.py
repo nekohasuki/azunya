@@ -4,7 +4,6 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-    
 import datetime
 from core.classes import Cog_extension
 
@@ -29,6 +28,7 @@ class Setting(Cog_extension):
             with open("setting.json","w",encoding="utf8") as setting_file:
                 json.dump(setting,setting_file,indent=4)
                 await ctx.send(f"已將抽籤系統更新時間從__{oldtime}__調整為__{newtime}__")
+
 
 
 
