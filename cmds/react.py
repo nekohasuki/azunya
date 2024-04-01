@@ -33,7 +33,7 @@ class React(Cog_extension):
             # channel = ctx.channel
             user = ctx.author.id
             name = ctx.author
-            if Current_Time == setting["OmikujiTime"]:
+            if Current_Time != setting["OmikujiTime"]:
                 #如果抽過了就回傳抽出結果
                 if user in omikuji["userdata"]:
                     await ctx.send(f"[User :]({omikuji[f"{int(user)}"]}) <@{user}>\n你今天已經抽過了啦!")
