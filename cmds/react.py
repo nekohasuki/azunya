@@ -4,7 +4,6 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-
 import asyncio,datetime,random
 from core.classes import Cog_extension
 
@@ -56,28 +55,6 @@ class React(Cog_extension):
                 omikuji.update(omikuji_update)
                 with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
                     json.dump(omikuji,omikuji_file,indent=4)
-
-
-# Clock = 0
-# if Current_Time == ("18:00"):
-#     Clock == 1
-# if Current_Time == ("18:01") and Clock == 0:
-#     # 清空 history.json
-        
-#     Clock += 1
-
-
-
-
-
-
-
-
-
-
-
-
-
     #取得用戶ID
     @commands.command()
     async def myid(self,ctx):
