@@ -23,9 +23,6 @@ class Task(Cog_extension):
         channel_id = 1219180207534243894
         channel = self.bot.get_channel(channel_id)
         if Current_Time == setting["OmikujiTime"]:
-            print(f"{setting["OmikujiTime"]}")
-            print(f"{Current_Time}:{Current_seconds}")
-            print(Clock)
             with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
                 omikuji = json.load(omikuji_file)
                 omikuji={"userdata": [],"namedata": []}
