@@ -36,8 +36,17 @@ class Main(Cog_extension):
         async for message in ctx.channel.history(limit=1):
             await asyncio.sleep(5)
             await ctx.channel.purge(check=lambda m: m.id == int(message.id))
-
-
+    #碼表
+    @commands.command()
+    async def stopwatch(self,ctx, t: int):
+        await ctx.send(f'好的User : {ctx.message.author.mention} !\n已將時間設定為**{t}**秒\n開始到計時')
+        message = await ctx.send(f'剩餘時間 : __ **{t}** __秒')
+        while t > 0:
+            t -=1
+            await asyncio.sleep(1)
+            await message.edit(content=f'剩餘時間 : __ **{t}** __秒')
+        await ctx.channel.purge(check=lambda m: m.id == int(message.id))
+        await ctx.send(f'User：{ctx.message.author.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
 
 
 
