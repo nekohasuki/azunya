@@ -1,37 +1,39 @@
 import discord
-from discord.ext import commands
+from discord.ext import tasks, commands
 
 import json
-with open("setting.json","r",encoding="utf8") as setting_file:
-    setting = json.load(setting_file)
-    
-import asyncio,datetime
-
-Current_Time = datetime.datetime.now().strftime("%H:%M")
-Current_seconds = datetime.datetime.now().strftime("%S")
-
+import datetime,schedule
 from core.classes import Cog_extension
 
 class Task(Cog_extension):
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
-        async def omikuji():       
-                await self.bot.wait_until_ready()
-                channel = self.bot.get_channel(1219180207534243894)
-                if Current_Time == ("06:16"):
-                    while not self.bot.is_closed():
-                        await channel.send(Current_seconds)
-                        await asyncio.sleep(1)#單位:秒
-        self.bg_task = self.bot.loop.create_task(omikuji())
+    tz = datetime.timezone(datetime.timedelta(hours = 8))
+    everyday_time = datetime.time(hour = 3, minute = 57, tzinfo = tz)
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
+        self.omikujidataclear.start()
+    def cog_unload(self):
+        self.omikujidataclear.cancel()
+ 
+    @tasks.loop(seconds=1)
+    async def omikujidataclear(self):
+        with open("setting.json","r",encoding="utf8") as setting_file:
+            setting = json.load(setting_file)
+        Current_Time = datetime.datetime.now().strftime("%H:%M")
+        Current_seconds = datetime.datetime.now().strftime("%S")
+        channel_id = 1219180207534243894
+        channel = self.bot.get_channel(channel_id)
+        if Current_Time == setting["OmikujiTime"]:
+            print(f"{setting["OmikujiTime"]}")
+            print(f"{Current_Time}:{Current_seconds}")
+            print(Clock)
+            with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
+                omikuji = json.load(omikuji_file)
+                omikuji={"userdata": [],"namedata": []}
+                omikuji.update(omikuji)
+            with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
+                json.dump(omikuji,omikuji_file)
 
 
-# Clock = 0
-# if Current_Time == ("18:00"):
-#     Clock == 1
-# if Current_Time == ("18:01") and Clock == 0:
-#     # 清空 history.json
-        
-#     Clock += 1
 
 
 
@@ -39,5 +41,6 @@ class Task(Cog_extension):
 
 
 
+    
 async def setup(bot):
     await bot.add_cog(Task(bot))
