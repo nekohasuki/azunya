@@ -25,33 +25,59 @@ class React(Cog_extension):
     #抽籤/URL
     @commands.command()
     async def omikuji(self,ctx):
+        with open("setting.json","r",encoding="utf8") as setting_file:
+            setting = json.load(setting_file)
         with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
             omikuji = json.load(omikuji_file)
-            usercache = omikuji["userdata"]
-            namecache = omikuji["namedata"]
-            # guild = ctx.guild
-            # channel = ctx.channel
-            user = ctx.author.id
-            name = ctx.author
-            if Current_Time != setting["OmikujiTime"]:
-                #如果抽過了就回傳抽出結果
-                if user in omikuji["userdata"]:
-                    await ctx.send(f"[User :]({omikuji[f"{int(user)}"]}) <@{user}>\n你今天已經抽過了啦!")
-                #沒抽過就抽出結果後更新資料進"omikuji.json"
-                else:
-                    random_pic = random.choice(setting["Omikuji"])
-                    await ctx.send("抽出的結果是!!!!\n(搖籤筒聲)")
-                    await asyncio.sleep (3)
-                    await ctx.send(f"[User :]({random_pic}) <@{user}>\n抽出抽出結果了!!快看快看!!!")
-                    #資料更新
-                    usercache.append (user) 
-                    namecache.append({f"{user}":f"{name}"})
-                    omikuji_update = {"namedata":namecache,"userdata":usercache,f"{user}":random_pic}
-                    omikuji.update(omikuji_update)
-                    with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
-                        json.dump(omikuji,omikuji_file,indent=4)
+        Current_Time = datetime.datetime.now().strftime("%H:%M")
+        usercache = omikuji["userdata"]
+        namecache = omikuji["namedata"]
+        # guild = ctx.guild
+        # channel = ctx.channel
+        user = ctx.author.id
+        name = ctx.author
+        #如果當前時間等同於" setting["OmikujiTime"] "的設定時間
+        if Current_Time == str(setting["OmikujiTime"]):
+            await ctx.send("系統維護中，請稍等1分鐘")
+        else:
+            #如果抽過了就回傳抽出結果
+            if user in omikuji["userdata"]:
+                await ctx.send(f"[User :]({omikuji[f"{int(user)}"]}) <@{user}>\n你今天已經抽過了啦!")
+            #沒抽過就抽出結果後更新資料進"omikuji.json"
             else:
-                await ctx.send("系統維護中，請稍等1分鐘")
+                random_pic = random.choice(setting["Omikuji"])
+                await ctx.send("抽出的結果是!!!!\n(搖籤筒聲)")
+                await asyncio.sleep (3)
+                await ctx.send(f"[User :]({random_pic}) <@{user}>\n抽出抽出結果了!!快看快看!!!")
+                #資料更新
+                usercache.append (user) 
+                namecache.append({f"{user}":f"{name}"})
+                omikuji_update = {"namedata":namecache,"userdata":usercache,f"{user}":random_pic}
+                omikuji.update(omikuji_update)
+                with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
+                    json.dump(omikuji,omikuji_file,indent=4)
+
+
+# Clock = 0
+# if Current_Time == ("18:00"):
+#     Clock == 1
+# if Current_Time == ("18:01") and Clock == 0:
+#     # 清空 history.json
+        
+#     Clock += 1
+
+
+
+
+
+
+
+
+
+
+
+
+
     #取得用戶ID
     @commands.command()
     async def myid(self,ctx):
