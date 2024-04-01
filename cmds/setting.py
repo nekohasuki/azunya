@@ -18,6 +18,7 @@ class Setting(Cog_extension):
     #     self.channel = self.bot.get_channel(channel)
     #     await ctx.send(f"set chammel:{self.channel.mention}")
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def setomikujitime(self,ctx,time):
         oldtime = setting["OmikujiTime"]
         setting["OmikujiTime"] = time
