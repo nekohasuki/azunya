@@ -8,7 +8,6 @@ bot = commands.Bot(command_prefix =["a-","/"],intents = intents)
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-    
 import os,asyncio,random,keep_alive
 
 #機器人登陸通知
@@ -71,6 +70,7 @@ async def unload(ctx,extension):
             await ctx.send(f"Unloaded {extension} done.")
         else:
             await ctx.send(f"no extension '{extension}'")
+
 
 
 
