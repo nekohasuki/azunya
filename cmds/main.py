@@ -26,9 +26,6 @@ class Main(Cog_extension):
     #刪除訊息
     @commands.command()
     async def clear(self,ctx,count):
-        # guild = ctx.guild
-        # azunya = self.bot
-        # print(azunya)
         user = ctx.author.id
         if count == "all" or int(count) == -402:
                 deleted = await ctx.channel.purge(limit=2147483648)
@@ -36,8 +33,9 @@ class Main(Cog_extension):
         else:
             deleted = await ctx.channel.purge(limit=int(count)+1)
             await ctx.channel.send(f'已為USER : <@{user}>刪除{len(deleted)-1}條訊息')
-        await asyncio.sleep(10)
-        await ctx.channel.purge(limit=1)
+        async for message in ctx.channel.history(limit=1):
+            await asyncio.sleep(5)
+            await ctx.channel.purge(check=lambda m: m.id == int(message.id))
 
 
 
@@ -45,7 +43,7 @@ class Main(Cog_extension):
 
 
 
-
+        
 
 
 async def setup(bot):
