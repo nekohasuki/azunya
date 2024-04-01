@@ -27,10 +27,12 @@ class React(Cog_extension):
     async def omikuji(self,ctx):
         with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
             omikuji = json.load(omikuji_file)
-            cache = omikuji["userdata"]
+            usercache = omikuji["userdata"]
+            namecache = omikuji["namedata"]
             # guild = ctx.guild
             # channel = ctx.channel
             user = ctx.author.id
+            name = ctx.author
             #如果抽過了就回傳抽出結果
             if user in omikuji["userdata"]:
                 await ctx.send(f"[User :]({omikuji[f"{int(user)}"]}) <@{user}>\n你今天已經抽過了啦!")
@@ -41,11 +43,12 @@ class React(Cog_extension):
                 await asyncio.sleep (3)
                 await ctx.send(f"[User :]({random_pic}) <@{user}>\n抽出抽出結果了!!快看快看!!!")
                 #資料更新
-                cache.append (user)
-                omikuji_update = {"userdata":cache,f"{user}":random_pic}
+                usercache.append (user) 
+                namecache.append({f"{user}":f"{name}"})
+                omikuji_update = {"namedata":namecache,"userdata":usercache,f"{user}":random_pic}
                 omikuji.update(omikuji_update)
                 with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
-                    json.dump(omikuji,omikuji_file)
+                    json.dump(omikuji,omikuji_file,indent=4)
     #取得用戶ID
     @commands.command()
     async def myid(self,ctx):
