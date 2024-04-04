@@ -15,6 +15,7 @@ class Main(Cog_extension):
     #以梓喵身分發送訊息
     @commands.command()
     async def say(self,ctx, *,msg):
+        print(msg)
         await ctx.send(msg)
         await ctx.message.delete()
     #刪除訊息
