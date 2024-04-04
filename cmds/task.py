@@ -2,6 +2,8 @@ import discord
 from discord.ext import tasks, commands
 
 import json
+with open("setting.json","r",encoding="utf8") as setting_file:
+    setting = json.load(setting_file)
 import datetime,schedule
 from core.classes import Cog_extension
 
@@ -23,6 +25,8 @@ class Task(Cog_extension):
         channel_id = 1219180207534243894
         channel = self.bot.get_channel(channel_id)
         if Current_Time == setting["OmikujiTime"]:
+            print(f"{setting["OmikujiTime"]}")
+            print(f"{Current_Time}:{Current_seconds}")
             with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
                 omikuji = json.load(omikuji_file)
                 omikuji={"userdata": [],"namedata": []}
