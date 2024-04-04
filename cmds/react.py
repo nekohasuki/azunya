@@ -21,7 +21,7 @@ class React(Cog_extension):
         random_pic = random.choice(setting["Logo"])
         pic = discord.File(random_pic)
         await ctx.send(file = pic)
-    #抽籤/URL
+    #抽籤系統/URL
     @commands.command()
     async def omikuji(self,ctx):
         with open("setting.json","r",encoding="utf8") as setting_file:
@@ -55,7 +55,7 @@ class React(Cog_extension):
                 omikuji.update(omikuji_update)
                 with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
                     json.dump(omikuji,omikuji_file,indent=4)
-    #取得用戶ID
+   #取得用戶ID
     @commands.command()
     async def myid(self,ctx):
         id = ctx.author.id
