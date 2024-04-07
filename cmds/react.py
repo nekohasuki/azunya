@@ -55,7 +55,14 @@ class React(Cog_extension):
                 omikuji.update(omikuji_update)
                 with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
                     json.dump(omikuji,omikuji_file,indent=4)
-   #取得用戶ID
+    #抽籤系統更新時間
+    @commands.command()
+    async def omikujitime(self, ctx):
+        with open("setting.json","r",encoding="utf8") as setting_file:
+            setting = json.load(setting_file)
+        id = ctx.author.id
+        await ctx.send(f'User：<@{id}>\n目前抽籤系統是每天的__{setting["OmikujiTime"]}__更新呦!')
+    #取得用戶ID
     @commands.command()
     async def myid(self,ctx):
         id = ctx.author.id
