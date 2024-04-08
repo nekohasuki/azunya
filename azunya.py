@@ -9,6 +9,7 @@ import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 import os,asyncio,random,keep_alive
+from typing import Optional
 
 #機器人登陸通知
 @bot.event
@@ -20,14 +21,15 @@ async def on_ready():
     except Exception as e:
         print("命令同步時發生錯誤: ", e)
 #加載類別
-@bot.command()
-async def load(ctx,extension):
+@bot.hybrid_command(name='load', help='load extension')
+async def load(ctx,extension: Optional[str] = None):
     extension_list = []
     for allfile in os.listdir("./cmds"):
         if allfile.endswith(".py"):extension_list.append(allfile[:-3])
-    if extension == "all":
+    if extension == None:
+        await ctx.send("123")
+    elif extension == "all":
         for reload in extension_list:
-            await asyncio.sleep(.5)
             await bot.load_extension(f"cmds.{reload}")
         await ctx.send(f"Loaded {len(extension_list)} done.")
     else:
@@ -37,14 +39,15 @@ async def load(ctx,extension):
         else:
             await ctx.send(f"no extension '{extension}'")
 #重新加載類別
-@bot.command()
-async def reload(ctx,extension):
+@bot.hybrid_command(name='reload', help='reload extension')
+async def reload(ctx,extension: Optional[str] = None):
     extension_list = []
     for allfile in os.listdir("./cmds"):
         if allfile.endswith(".py"):extension_list.append(allfile[:-3])
-    if extension == "all":
+    if extension == None:
+        await ctx.send("123")
+    elif extension == "all":
         for reload in extension_list:
-            await asyncio.sleep(.5)
             await bot.reload_extension(f"cmds.{reload}")
         await ctx.send(f"Reloaded {len(extension_list)} done.")
     else:
@@ -54,14 +57,15 @@ async def reload(ctx,extension):
         else:
             await ctx.send(f"no extension '{extension}'")
 #取消加載類別
-@bot.command()
-async def unload(ctx,extension):
+@bot.hybrid_command(name='unload', help='unload extension')
+async def unload(ctx,extension: Optional[str] = None):
     extension_list = []
     for allfile in os.listdir("./cmds"):
         if allfile.endswith(".py"):extension_list.append(allfile[:-3])
-    if extension == "all":
+    if extension == None:
+        await ctx.send("123")
+    elif extension == "all":
         for reload in extension_list:
-            await asyncio.sleep(.5)
             await bot.unload_extension(f"cmds.{reload}")
         await ctx.send(f"Unloaded {len(extension_list)} done.")
     else:
