@@ -23,57 +23,60 @@ async def on_ready():
 #加載類別
 @bot.hybrid_command(name='load', help='load extension')
 async def load(ctx,extension: Optional[str] = None):
+    user = ctx.author.id
     extension_list = []
     for allfile in os.listdir("./cmds"):
         if allfile.endswith(".py"):extension_list.append(allfile[:-3])
     if extension == None:
-        await ctx.send("123")
+        await ctx.send(f"請輸入需要加載類別\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}")
     elif extension == "all":
         for reload in extension_list:
             await bot.load_extension(f"cmds.{reload}")
-        await ctx.send(f"Loaded {len(extension_list)} done.")
+        await ctx.send(f"已成功加載__{len(extension_list)}__項擴充類別")
     else:
         if extension in extension_list:
             await bot.load_extension(f"cmds.{extension}")
-            await ctx.send(f"Loaded {extension} done.")
+            await ctx.send(f"已成功加載擴充類別：__{extension}__")
         else:
-            await ctx.send(f"no extension '{extension}'")
+            await ctx.send(f"沒有擴充類別：'{extension}'")
 #重新加載類別
 @bot.hybrid_command(name='reload', help='reload extension')
 async def reload(ctx,extension: Optional[str] = None):
+    user = ctx.author.id
     extension_list = []
     for allfile in os.listdir("./cmds"):
         if allfile.endswith(".py"):extension_list.append(allfile[:-3])
     if extension == None:
-        await ctx.send("123")
+        await ctx.send(f"請輸入需要重新加載類別\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}")
     elif extension == "all":
         for reload in extension_list:
             await bot.reload_extension(f"cmds.{reload}")
-        await ctx.send(f"Reloaded {len(extension_list)} done.")
+        await ctx.send(f"已成功重新加載__{len(extension_list)}__項擴充類別")
     else:
         if extension in extension_list:
             await bot.reload_extension(f"cmds.{extension}")
-            await ctx.send(f"Reloaded {extension} done.")
+            await ctx.send(f"已成功重新加載擴充類別：__{extension}__")
         else:
-            await ctx.send(f"no extension '{extension}'")
+            await ctx.send(f"沒有擴充類別：'{extension}'")
 #取消加載類別
 @bot.hybrid_command(name='unload', help='unload extension')
 async def unload(ctx,extension: Optional[str] = None):
+    user = ctx.author.id
     extension_list = []
     for allfile in os.listdir("./cmds"):
         if allfile.endswith(".py"):extension_list.append(allfile[:-3])
     if extension == None:
-        await ctx.send("123")
+        await ctx.send(f"請輸入需要取消加載類別\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}")
     elif extension == "all":
         for reload in extension_list:
             await bot.unload_extension(f"cmds.{reload}")
-        await ctx.send(f"Unloaded {len(extension_list)} done.")
+        await ctx.send(f"已成功取消加載__{len(extension_list)}__項擴充類別")
     else:
         if extension in extension_list:
             await bot.unload_extension(f"cmds.{extension}")
-            await ctx.send(f"Unloaded {extension} done.")
+            await ctx.send(f"已成功取消重新加載擴充類別：__{extension}__")
         else:
-            await ctx.send(f"no extension '{extension}'")
+            await ctx.send(f"沒有擴充類別：'{extension}'")
 
 
 
