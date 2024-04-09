@@ -17,21 +17,23 @@ class Event(Cog_extension):
     async def on_member_join(self,member):
         print(f'User {member} 加入了伺服器!')
         channel = self.bot.get_channel(int(setting["WELCOME_CHANNEL_ID"]))
-        embed = discord.Embed(title="吉訊",url="https://www.jcolor.com.tw/jcolorfiles/release/product/pdt-868/pdt-8689539/medium.jpg",description="GOOD NEWS",colour=0xad0000,timestamp=now)
-        embed.add_field(name="#最新消息：",value=f"User：\"__**{member}**__\"於今天的{time}\n奇蹟般的降臨了這個伺服器\n\n讓我們熱烈的歡迎!!!!!!!\n將祝福賜予User：__**{member}**__\n\n\n** **",inline=False)
-        embed.add_field(name="#Latest News：",value=f"User：\"__**{member}**__\" in today's {time}\nMiraculously arrived at this server\n\nLet us give you a warm welcome!!!!!!!\nGive blessings to User: __**{member}**__",inline=False)
-        await channel.send(embed=embed)
-        await channel.send(f"歡!迎!{member}!!")
+        # embed = discord.Embed(title="吉訊",url="https://www.jcolor.com.tw/jcolorfiles/release/product/pdt-868/pdt-8689539/medium.jpg",description="GOOD NEWS",colour=0xad0000,timestamp=now)
+        # embed.add_field(name="#最新消息：",value=f"User：\"__**{member}**__\"於今天的{time}\n奇蹟般的降臨了這個伺服器\n\n讓我們熱烈的歡迎!!!!!!!\n將祝福賜予User：__**{member}**__\n\n\n** **",inline=False)
+        # embed.add_field(name="#Latest News：",value=f"User：\"__**{member}**__\" in today's {time}\nMiraculously arrived at this server\n\nLet us give you a warm welcome!!!!!!!\nGive blessings to User: __**{member}**__",inline=False)
+        # await channel.send(embed=embed)
+        # await channel.send(f"歡!迎!{member}!!")
+        print(f'User {member} 加入了{channel}伺服器!')
     #成員退出通知
     @commands.Cog.listener()
     async def on_member_remove(self,member):
         print(f'User {member} 離開了伺服器!')
         channel = self.bot.get_channel(int(setting["WELCOME_CHANNEL_ID"]))
-        embed = discord.Embed(title="悲報",url="https://img.soundofhope.org/2024-03/1709580096451.jpg",description="SAD NEWS",colour=0x787878,timestamp=now)
-        embed.add_field(name="#最新消息：",value=f"User：\"__**{member}**__\"於今天的{time}\n突然地離開了這個伺服器\n\n對此我們感到非常的難受\n願這伺服器，再無苦痛\n\n\n** **",inline=False)
-        embed.add_field(name="#Latest News：",value=f"User：\"__**{member}**__\" in today's {time}\nLeft this server suddenly\n\nWe feel very uncomfortable about this\nI wish this server would have no more pain",inline=False)
-        await channel.send(embed=embed)
-        await channel.send(f"再見{member}QAO")
+        # embed = discord.Embed(title="悲報",url="https://img.soundofhope.org/2024-03/1709580096451.jpg",description="SAD NEWS",colour=0x787878,timestamp=now)
+        # embed.add_field(name="#最新消息：",value=f"User：\"__**{member}**__\"於今天的{time}\n突然地離開了這個伺服器\n\n對此我們感到非常的難受\n願這伺服器，再無苦痛\n\n\n** **",inline=False)
+        # embed.add_field(name="#Latest News：",value=f"User：\"__**{member}**__\" in today's {time}\nLeft this server suddenly\n\nWe feel very uncomfortable about this\nI wish this server would have no more pain",inline=False)
+        # await channel.send(embed=embed)
+        # await channel.send(f"再見{member}QAO")
+        print(f'User {member} 離開了{channel}伺服器!')
     #"指令"錯誤報錯
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
@@ -133,7 +135,8 @@ class Event(Cog_extension):
                 setting = json.load(setting_file)
             with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
                 omikuji = json.load(omikuji_file)
-            Current_Time = datetime.datetime.now().strftime("%H:%M")
+            Current_hours = datetime.datetime.now().strftime("%H")
+            Current_minutes = datetime.datetime.now().strftime("%M")
             usercache = omikuji["userdata"]
             namecache = omikuji["namedata"]
             # guild = ctx.guild
@@ -141,7 +144,7 @@ class Event(Cog_extension):
             user = msg.author.id
             name = msg.author
             #如果當前時間等同於" setting["OmikujiTime"] "的設定時間
-            if Current_Time == str(setting["OmikujiTime"]):
+            if (f"{int(Current_hours)}:{int(Current_minutes)}") == setting["OmikujiTime"]:
                 await msg.channel.send("系統維護中，請稍等1分鐘")
             else:
                 #如果抽過了就回傳抽出結果
