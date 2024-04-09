@@ -1,12 +1,12 @@
 import discord
 from discord.ext import commands
-
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import datetime,random
-from core.classes import Cog_extension,Logger
+
+from core.classes import Cog_extension
 from core.error import Errors
+import datetime,random
 
 now = datetime.datetime.now()
 time = now.strftime("%H:%M")
