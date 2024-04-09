@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
-
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import datetime
+    
 from core.classes import Cog_extension
+import datetime
 
 Current_Time = datetime.datetime.now().strftime("%H:%M")
 Current_seconds = datetime.datetime.now().strftime("%S")
