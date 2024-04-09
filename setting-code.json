@@ -2,7 +2,6 @@
     "          ":"↓ True or False  ",
     "keep_alive":"False",
     
-    
     "prefix":"azu",
     "TOKEN":"YOU_TOKEN",
     "WELCOME_CHANNEL_ID":"YOU_CHANNEL_ID",
@@ -27,16 +26,7 @@
     "20":"",
     "21":"",
     "22":"",
-    "Omikuji":["https://www.illust-box.jp/db_img/sozai/00019/196972/watermark.jpg",
-                "https://www.illust-box.jp/db_img/sozai/00019/196975/watermark.jpg",
-                "https://www.illust-box.jp/db_img/sozai/00019/196973/watermark.jpg",
-                "https://www.illust-box.jp/db_img/sozai/00019/196976/watermark.jpg",
-                "https://www.illust-box.jp/db_img/sozai/00019/196978/watermark.jpg",
-                "https://www.illust-box.jp/db_img/sozai/00019/196979/watermark.jpg",
-                "https://www.illust-box.jp/db_img/sozai/00019/196980/watermark.jpg",
-                "https://globalimg.sucai999.com/preimg/DBC456/700/DBC456/105/f1f1a23fa164dec16277d548654b379.jpg",
-                "https://scontent.ftpe7-2.fna.fbcdn.net/v/t1.6435-9/105006116_188405425961951_8765528718209900162_n.jpg?stp=dst-jpg_p526x296&_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=XOH-_n8LMTsAX89KTZg&_nc_ht=scontent.ftpe7-2.fna&oh=00_AfBApIxuQFMGfCnyOiswawxrI4tALl7ouiXWgrXIjx3HQw&oe=661F94E3"
-            ],
+
     "OmikujiTime": "0:0",
     "Logo":["imege/logo/LOGO-1.png","imege/logo//Logo-2.png"],
     "Imege": "imege/imege/Imege-1.png",
