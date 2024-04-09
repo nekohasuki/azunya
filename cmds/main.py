@@ -6,7 +6,7 @@ with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
-import asyncio
+import asyncio,math
 from typing import Optional
 
 class Main(Cog_extension):
@@ -39,17 +39,46 @@ class Main(Cog_extension):
                 await asyncio.sleep(5)
                 await interaction.channel.purge(check=lambda m: m.id == int(message.id))
     #碼表
-    @commands.command()
-    async def stopwatch(self,ctx, t: int):
-        await ctx.send(f'好的User : {ctx.message.author.mention} !\n已將時間設定為**{t}**秒\n開始到計時')
-        message = await ctx.send(f'剩餘時間 : __ **{t}** __秒')
-        while t > 0:
-            t -=1
-            await asyncio.sleep(1)
-            await message.edit(content=f'剩餘時間 : __ **{t}** __秒')
-        await ctx.channel.purge(check=lambda m: m.id == int(message.id))
-        await ctx.send(f'User：{ctx.message.author.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
-
+    @app_commands.command(name = "stopwatch", description = "碼表")
+    @app_commands.describe(hours="輸入小時數",minutes="輸入分鐘數",seconds="輸入秒數")
+    async def stopwatch(self,interaction: discord.Interaction,hours: Optional[int] = None,minutes: Optional[int] = None,seconds: Optional[int] = None):
+        if hours == None:
+            hours=0
+        if minutes == None:
+            minutes=0
+        if seconds == None:
+            seconds=0
+        t = (hours*60*60)+(minutes*60)+(seconds)
+        if t >= 604800:
+            t = 604800
+        d = math.floor(t/60/60/24)
+        h = math.floor(t/60/60-d*24)
+        m = math.floor(t/60-h*60-d*60*24)
+        s = t-d*60*60*24-h*60*60-m*60
+        if d >= 1 :
+            await interaction.response.send_message(f'好的User : {interaction.user.mention} !\n已將時間設定為**{int(d)}**天**{h}**時**{m}**分**{s}**秒\n開始到計時')
+            message = await interaction.channel.send(f'剩餘時間 : **{int(d)}**天 **{h}**時**{m}**分**{s}**秒')
+            while t > 0:
+                t -=1
+                d = math.floor(t/60/60/24)
+                h = math.floor(t/60/60-d*24)
+                m = math.floor(t/60-h*60-d*60*24)
+                s = t-d*60*60*24-h*60*60-m*60
+                await asyncio.sleep(1)
+                await message.edit(content=f'剩餘時間 : **{int(d)}**天 **{h}**時**{m}**分**{s}**秒')
+        else:
+            await interaction.response.send_message(f'好的User : {interaction.user.mention} !\n已將時間設定為**{h}**時**{m}**分**{s}**秒\n開始到計時')
+            message = await interaction.channel.send(f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
+            while t > 0:
+                t -=1
+                h = math.floor(t/60/60)
+                m = math.floor(t/60-h*60)
+                s = t-h*60*60-m*60
+                await asyncio.sleep(1)
+                await message.edit(content=f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
+        await interaction.channel.purge(check=lambda m: m.id == int(message.id))
+        await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
+ 
 
 
 
@@ -70,7 +99,7 @@ class Main(Cog_extension):
 
 
 
-        
+
 
 
 
