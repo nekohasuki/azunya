@@ -22,22 +22,23 @@ class Main(Cog_extension):
         user = interaction.user.id
         if count == None:
             await interaction.response.send_message(f"請輸入需要刪除的訊息數量\n參考：\n```/clear 1```")
+        elif count > 200:
+             count = 200
+        if count == -402:
+            await interaction.response.send_message(f"請User：<@{user}>稍等片刻\n正在啟動執行402號刪除程序 ")
+            await asyncio.sleep(5)
+            await interaction.channel.purge(limit=1)
+            deleted = await interaction.channel.purge(limit=2147483648)
+            await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息')
         else:
-            if count == -402:
-                await interaction.response.send_message(f"請User：<@{user}>稍等片刻\n正在啟動執行402號刪除程序 ")
-                await asyncio.sleep(5)
-                await interaction.channel.purge(limit=1)
-                deleted = await interaction.channel.purge(limit=2147483648)
-                await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息')
-            else:
-                await interaction.response.send_message(f"請User：<@{user}>稍等片刻\n正在刪除{count}項訊息")
-                await asyncio.sleep(3)
-                await interaction.channel.purge(limit=1)
-                deleted = await interaction.channel.purge(limit=count)
-                await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息')
-            async for message in interaction.channel.history(limit=1):
-                await asyncio.sleep(5)
-                await interaction.channel.purge(check=lambda m: m.id == int(message.id))
+            await interaction.response.send_message(f"請User：<@{user}>稍等片刻\n正在刪除{count}項訊息")
+            await asyncio.sleep(3)
+            await interaction.channel.purge(limit=1)
+            deleted = await interaction.channel.purge(limit=count)
+            await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息')
+        async for message in interaction.channel.history(limit=1):
+            await asyncio.sleep(5)
+            await interaction.channel.purge(check=lambda m: m.id == int(message.id))
     #碼表
     @app_commands.command(name = "stopwatch", description = "碼表")
     @app_commands.describe(hours="輸入小時數",minutes="輸入分鐘數",seconds="輸入秒數")
