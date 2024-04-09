@@ -93,6 +93,7 @@ class Main(Cog_extension):
     @commands.command()
     async def say(self,ctx, *,msg):
         print(msg)
+        await ctx.channel.purge(limit=1)
         await ctx.send(msg)
 
 
