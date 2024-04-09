@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
-
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
-import asyncio,datetime,random
+
 from core.classes import Cog_extension
+import asyncio,datetime,random
 
 Current_Time = datetime.datetime.now().strftime("%H:%M")
 
