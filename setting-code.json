@@ -2,6 +2,8 @@
     "          ":"↓ True or False  ",
     "keep_alive":"False",
     
+    
+    "prefix":"azu",
     "TOKEN":"YOU_TOKEN",
     "WELCOME_CHANNEL_ID":"YOU_CHANNEL_ID",
     "ROLE_ID":"YOU_ROLE_ID",
