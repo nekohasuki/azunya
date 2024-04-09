@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
@@ -10,6 +11,12 @@ import asyncio,datetime,random
 Current_Time = datetime.datetime.now().strftime("%H:%M")
 
 class React(Cog_extension):
+    # #指定圖片
+    # @app_commands.command(name = "imege", description = "指定圖片")
+    # async def imege(self, interaction: discord.Interaction):
+    #     pic = discord.File(setting["Imege"])
+    #     await interaction.response.send_message("HI")
+    #     # await interaction.channel.send(file = pic)
     #指定圖片/PATH
     @commands.command()
     async def imege(self, ctx):
