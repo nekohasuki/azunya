@@ -6,7 +6,7 @@ with open("setting.json","r",encoding="utf8") as setting_file:
 
 from core.classes import Cog_extension
 from core.error import Errors
-import datetime,random
+import asyncio,datetime,os,random
 
 now = datetime.datetime.now()
 time = now.strftime("%H:%M")
@@ -127,9 +127,43 @@ class Event(Cog_extension):
                 await msg.channel.send("text")
             if (random_count) == "1" or (random_count) == "3" or (random_count) == "5" or (random_count) == "7" or (random_count) == "9":
                 await msg.channel.send("!!!")
-
-
-
+        #抽籤系統/URL
+        if any(word in msg.content for word in "抽") and any(word in msg.content for word in "籤") and any(word in msg.content for word in "我")and any(word in msg.content for word in "要"):
+            with open("setting.json","r",encoding="utf8") as setting_file:
+                setting = json.load(setting_file)
+            with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
+                omikuji = json.load(omikuji_file)
+            Current_Time = datetime.datetime.now().strftime("%H:%M")
+            usercache = omikuji["userdata"]
+            namecache = omikuji["namedata"]
+            # guild = ctx.guild
+            # channel = ctx.channel
+            user = msg.author.id
+            name = msg.author
+            #如果當前時間等同於" setting["OmikujiTime"] "的設定時間
+            if Current_Time == str(setting["OmikujiTime"]):
+                await msg.channel.send("系統維護中，請稍等1分鐘")
+            else:
+                #如果抽過了就回傳抽出結果
+                if user in omikuji["userdata"]:
+                    # pic = discord.File(f"imege\omikuji\{omikuji[f"{int(user)}"]}")
+                    pic = discord.File(f"{omikuji[f"{int(user)}"]}")
+                    await msg.channel.send(f"User : <@{user}>\n你今天已經抽過了啦!",file = pic)
+                #沒抽過就抽出結果後更新資料進"omikuji.json"
+                else:
+                    random_pic = random.choice(os.listdir("./imege/omikuji"))
+                    pic = discord.File(f"imege\omikuji\{random_pic}")
+                    await msg.channel.send("抽出的結果是!!!!\n(搖籤筒聲)")
+                    await asyncio.sleep (3)
+                    await msg.channel.send(f"User :<@{user}>\n抽出抽出結果了!!快看快看!!!",file=pic)
+                    #資料更新
+                    usercache.append (user) 
+                    namecache.append({f"{user}":f"{name}"})
+                    omikuji_update = {"namedata":namecache,"userdata":usercache,f"{user}":f"imege\omikuji\{random_pic}"}
+                    omikuji.update(omikuji_update)
+                    with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
+                        json.dump(omikuji,omikuji_file,indent=4)
+              
 
 
 
