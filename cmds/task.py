@@ -20,13 +20,14 @@ class Task(Cog_extension):
     async def omikujidataclear(self):
         with open("setting.json","r",encoding="utf8") as setting_file:
             setting = json.load(setting_file)
-        Current_Time = datetime.datetime.now().strftime("%H:%M")
+        Current_hours = datetime.datetime.now().strftime("%H")
+        Current_minutes = datetime.datetime.now().strftime("%M")
         Current_seconds = datetime.datetime.now().strftime("%S")
         channel_id = 1219180207534243894
         channel = self.bot.get_channel(channel_id)
-        if Current_Time == setting["OmikujiTime"]:
+        if (f"{int(Current_hours)}:{int(Current_minutes)}") == setting["OmikujiTime"]:
             print(f"{setting["OmikujiTime"]}")
-            print(f"{Current_Time}:{Current_seconds}")
+            print(f"{int(Current_hours)}:{int(Current_minutes)}:{int(Current_seconds)}")
             with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
                 omikuji = json.load(omikuji_file)
                 omikuji={"userdata": [],"namedata": []}
