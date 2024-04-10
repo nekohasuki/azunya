@@ -1,5 +1,4 @@
 import discord
-from discord import app_commands
 from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
@@ -136,7 +135,6 @@ class Event(Cog_extension):
                 await msg.channel.send("text")
             elif (random_count) not in count_list:
                 await msg.channel.send("!!!")
-        
         #抽籤系統/URL
         if any(word in msg.content for word in (dict_azunya)) and any(word in msg.content for word in (dict_my)) and any(word in msg.content for word in (dict_omikuji)):
             with open("setting.json","r",encoding="utf8") as setting_file:
