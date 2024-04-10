@@ -17,16 +17,51 @@ class Data(Cog_extension):
 #查詢梓守的資料
     @app_commands.command(name = "azudata", description = "查詢梓守的資料")
     async def azudata(self,interaction:discord.Integration):
-        await interaction.response.send_message(f"`梓守上線了__**${msToHMS(client.uptime)}**__這麼久\n`")
-
-
-
-
-
-
-
-
-
+        with open("setting.json","r",encoding="utf8") as setting_file:
+            setting = json.load(setting_file)
+        t = int(setting["onlinetime"])
+        d = math.floor(t/60/60/24)
+        H = math.floor(t/60/60-d*24)
+        M = math.floor(t/60-H*60-d*60*24)
+        S = t-M*60-H*60*60-d*60*60*24
+        HMS = f"{H}:{M}:{S}"
+        setuptime = "某天(set)"
+        channels = "2(set)"
+        count =10
+        await interaction.response.send_message(f"**__底下跑動時間僅顯示{count}秒__**")
+        message = await interaction.channel.send(f"梓守上線了**{d}:{HMS}**這麼久\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+        if d >= 1:
+            while count > 0:
+                count -= 1
+                with open("setting.json","r",encoding="utf8") as setting_file:
+                    setting = json.load(setting_file)
+                t = int(setting["onlinetime"])
+                d = math.floor(t/60/60/24)
+                H = math.floor(t/60/60-d*24)
+                M = math.floor(t/60-H*60-d*60*24)
+                S = t-M*60-H*60*60-d*60*60*24
+                HMS = f"{H}:{M}:{S}"
+                await asyncio.sleep(1)
+                await message.edit(content=f"梓守上線了**{d}:{HMS}**這麼久\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+        else:
+            while count > 0:
+                count -= 1
+                with open("setting.json","r",encoding="utf8") as setting_file:
+                    setting = json.load(setting_file)
+                t = int(setting["onlinetime"])
+                d = math.floor(t/60/60/24)
+                H = math.floor(t/60/60-d*24)
+                M = math.floor(t/60-H*60-d*60*24)
+                S = t-M*60-H*60*60-d*60*60*24
+                HMS = f"{H}:{M}:{S}"
+                await asyncio.sleep(1)
+                await message.edit(content=f"梓守上線了**{HMS}**這麼久\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+#查詢伺服器的資料
+    @app_commands.command(name = "serverdata", description = "查詢伺服器的資料")
+    async def serverdata(self,interaction:discord.Integration):
+        guild = interaction.guild
+        members = "未知(set)"
+        await interaction.response.send_message(f"伺服器名稱：**{guild}**\n用戶數：**{members}**人")
 #查詢用戶ID
     @app_commands.command(name = "myid", description = "查詢Discird的ID")
     async def myid(self,interaction:discord.Integration):
