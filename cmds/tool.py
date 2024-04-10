@@ -75,6 +75,16 @@ class Tool(Cog_extension):
                 await message.edit(content=f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
         await interaction.channel.purge(check=lambda m: m.id == int(message.id))
         await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
+
+
+
+
+
+
+
+
+
+
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #以梓喵身分發送訊息
     @commands.command()
@@ -82,6 +92,7 @@ class Tool(Cog_extension):
         print(msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(msg)
+
 
 
 
