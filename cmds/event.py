@@ -95,21 +95,29 @@ class Event(Cog_extension):
         #         print(reaction.emoji)
         #         print(f"{user} remove role")
         #         await user.remove_roles(role) 
-#偵測到任一訊息時...
+#訊息日誌
     @commands.Cog.listener()
     async def on_message(self,ctx):
         with open("setting.json","r",encoding="utf8") as setting_file:
-            setting = json.load(setting_file)
+            setting = json.load(setting_file) 
         guild = ctx.guild
         channel = ctx.channel
         name = ctx.author.mention
-        user = ctx.author.id
+        user = ctx.author.id     
         msg = ctx.content
         log_channel = self.bot.get_channel(int(setting["LOG_CHANNEL_ID"]))
         nowtime = datetime.datetime.now().strftime("%H:%M:%S")
         if channel.id != log_channel.id and guild.id == int(setting["LOG_GUILD_ID"]):
-            await log_channel.send(f"{nowtime}\n**[ {guild} ]**　|　{channel}\n{name.mention}(`ID:{user}`)：\n{msg}[`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})")
-        #字典
+            await log_channel.send(f"{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:{user}`)：\n{msg}[`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})")
+#對話
+    @commands.Cog.listener()
+    async def on_message(self,ctx):
+        with open("setting.json","r",encoding="utf8") as setting_file:
+            setting = json.load(setting_file) 
+        name = ctx.author.mention
+        user = ctx.author.id     
+        nowtime = datetime.datetime.now().strftime("%H:%M:%S")
+          #字典
         dict_my = dict["user_self-proclaimed"]
         dict_azunya = dict["azunya"]
         dict_omikuji = dict["omikuji"]
@@ -130,8 +138,7 @@ class Event(Cog_extension):
         #<and any(word in ctx.content for word in key)>
         #……以及訊息等於關鍵字(key)
         #<and ctx.content == key>
-#///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #問候
+       #問候
         if any(word in ctx.content for word in dict_azunya):
             #早上
             if any(word in ctx.content for word in dict_morning):
