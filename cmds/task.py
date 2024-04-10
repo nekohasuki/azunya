@@ -42,10 +42,10 @@ class Task(Cog_extension):
     async def onlinecount(self):
         with open("setting.json","r",encoding="utf8") as setting_file:
             setting = json.load(setting_file)
-            count = int(setting["onlinetime"])
-            count += 1
-            onlinetime = {"onlinetime":f"{count}"}
-            setting.update(onlinetime)
+        count = int(setting["onlinetime"])
+        count += 1
+        onlinetime = {"onlinetime":f"{count}"}
+        setting.update(onlinetime)
         with open("setting.json","w",encoding="utf8") as setting_file:
             json.dump(setting,setting_file,indent=0)
         
