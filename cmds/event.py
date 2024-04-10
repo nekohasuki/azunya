@@ -108,6 +108,9 @@ class Event(Cog_extension):
     #對話
     @commands.Cog.listener()
     async def on_message(self,msg):
+        dict_azunya =["azunya","AZUNYA","azu","AZU","梓守","阿梓","梓喵","梓貓"]
+        dict_my = ["我","咱","吾","在下","本人","kochira","KOCHIRA","こちら","此方","boku","BOKU","ぼく","僕","watashi","WATASHI","watasi","WATASI","わたし","私","jibun","JIBUN","じぶん","自分","ore","ORE","おれ","俺"]
+        dict_omikuji = ["籤","omikuji","OMIKUJI","御神籤","おみくじ"]
         #==:等於/!=:不等於
         #in:等於/not in:不等於
         #endswith:結束詞/startswith:開始詞
@@ -129,7 +132,7 @@ class Event(Cog_extension):
             if (random_count) == "1" or (random_count) == "3" or (random_count) == "5" or (random_count) == "7" or (random_count) == "9":
                 await msg.channel.send("!!!")
         #抽籤系統/URL
-        if any(word in msg.content for word in "抽") and any(word in msg.content for word in "籤") and any(word in msg.content for word in "我")and any(word in msg.content for word in "要"):
+        if any(word in msg.content for word in (dict_azunya)) and any(word in msg.content for word in (dict_my)) and any(word in msg.content for word in (dict_omikuji)):
             with open("setting.json","r",encoding="utf8") as setting_file:
                 setting = json.load(setting_file)
             with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
