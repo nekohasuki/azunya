@@ -110,10 +110,11 @@ class Event(Cog_extension):
     #對話
     @commands.Cog.listener()
     async def on_message(self,msg):
+        with open("setting.json","r",encoding="utf8") as setting_file:
+            setting = json.load(setting_file)
         dict_my = dict["user_self-proclaimed"]
         dict_azunya = dict["azunya"]
         dict_omikuji = dict["omikuji"]
-
         #==:等於/!=:不等於
         #in:等於/not in:不等於
         #endswith:結束詞/startswith:開始詞
@@ -129,11 +130,13 @@ class Event(Cog_extension):
 
         key= ["apple","banana"]
         if any(word in msg.content for word in (key)):
+            count_list =["0","2","4","6","8","10"]
             random_count = random.choice(setting["count"])
-            if (random_count) == "0" or (random_count) == "2" or (random_count) == "4" or (random_count) == "6" or (random_count) == "8":
+            if (random_count) in count_list:
                 await msg.channel.send("text")
-            if (random_count) == "1" or (random_count) == "3" or (random_count) == "5" or (random_count) == "7" or (random_count) == "9":
+            elif (random_count) not in count_list:
                 await msg.channel.send("!!!")
+        
         #抽籤系統/URL
         if any(word in msg.content for word in (dict_azunya)) and any(word in msg.content for word in (dict_my)) and any(word in msg.content for word in (dict_omikuji)):
             with open("setting.json","r",encoding="utf8") as setting_file:
