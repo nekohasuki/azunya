@@ -17,7 +17,7 @@ class Tool(Cog_extension):
     async def clear(self, interaction: discord.Interaction,count: Optional[int] = None):
         user = interaction.user.id
         if count == None:
-            await interaction.response.send_message(f"請輸入需要刪除的訊息數量\n參考：\n/clear 1")
+            await interaction.response.send_message(f"請輸入需要刪除的訊息數量\n參考：\n```/clear 1```")
         elif count > 200:
              count = 200
         if count == -402:
@@ -79,21 +79,31 @@ class Tool(Cog_extension):
     @app_commands.command(name = "myid", description = "查詢Discird的ID")
     async def myid(self,interaction:discord.Integration):
         user = interaction.user
-        await interaction.response.send_message(f"User：<@{user.id}>\n你的ID是__{user.id}__呦!")
+        # await interaction.response.send_message("好的!")
+        await interaction.response.send_message(f"好的!")
+        message = await interaction.channel.send(f"正在查詢User：{user.mention}的資料......")
+        await asyncio.sleep(3)
+        await message.edit(content=f"User：<@{user.id}>\n你的ID是__{user.id}__呦!")
 #test-1
     @app_commands.command(name = "test1", description = "test-1")
     async def test1(self,interaction:discord.Integration):
         await interaction.channel.send(f"{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **")
-#test-2
-    @app_commands.command(name = "test2", description = "test-2")
-    async def test2(self,interaction:discord.Integration):
-        B =1219645881838600293
-        A = interaction.guild.get_role(B)
-        await interaction.response.send_message(f"# color:\n   {A.color}\n# created_at:\n    {A.created_at}\n# id:\n   {A.id}\n# members:\n  {A.members}\n# permissions:\n    {A.permissions}")
-  
-# manage_guild
-# value
-# manage_messages
+#查身分資料
+    @app_commands.command(name = "checkrole", description = "查身分資料")
+    @app_commands.describe(role = "想查的身分")
+    async def checkrole(self,interaction:discord.Integration,role:Optional[str] = None):
+        if role == None:
+            await interaction.response.send_message("請輸入需要刪除的訊息數量\n參考：\n```/checkrole @新身分```")
+        if "@" in str(f"{role}"):
+            if "&" in str(f"{role}"):
+                A = interaction.guild.get_role(int(f"{role[3:-1]}"))
+                await interaction.response.send_message(f"# color:\n   {A.color}\n# created_at:\n    {A.created_at}\n# id:\n   {A.id}\n# members:\n  {A.members}\n# permissions:\n    {A.permissions}")
+            else:
+                await interaction.response.send_message(f"這好像是某位User並不是身分組")
+
+
+
+
 
 # permission
 # discord.Member
@@ -103,57 +113,57 @@ class Tool(Cog_extension):
     # created_at
     # id
     # members
-    # permissions
 
-# add_reactions
-# administrator
-# attach_files
-# ban_members
-# change_nickname
-# connect
-# create_expressions
-# create_instant_invite
-# create_private_threads
-# create_public_threads
-# deafen_members
-# embed_links
-# external_emojis
-# external_stickers
-# kick_members
-# manage_channels
-# manage_emojis
-# manage_emojis_and_stickers
-# manage_events
-# manage_expressions
-# manage_nicknames
-# manage_permissions
-# manage_roles
-# manage_threads
-# manage_webhooks
-# mention_everyone
-# moderate_members
-# move_members
-# mute_members
-# priority_speaker
-# read_message_history
-# read_messages
-# request_to_speak
-# send_messages
-# send_messages_in_threads
-# send_tts_messages
-# send_voice_messages
-# speak
-# stream
-# use_application_commands
-# use_embedded_activities
-# use_external_emojis
-# use_external_sounds
-# use_external_stickers
-# use_soundboard
-# use_voice_activation
-# view_audit_log
-# view_channel
-# view_guild_insights
+    # permissions. # manage_guild / value / manage_messages
+                                                            # add_reactions
+                                                            # administrator
+                                                            # attach_files
+                                                            # ban_members
+                                                            # change_nickname
+                                                            # connect
+                                                            # create_expressions
+                                                            # create_instant_invite
+                                                            # create_private_threads
+                                                            # create_public_threads
+                                                            # deafen_members
+                                                            # embed_links
+                                                            # external_emojis
+                                                            # external_stickers
+                                                            # kick_members
+                                                            # manage_channels
+                                                            # manage_emojis
+                                                            # manage_emojis_and_stickers
+                                                            # manage_events
+                                                            # manage_expressions
+                                                            # manage_nicknames
+                                                            # manage_permissions
+                                                            # manage_roles
+                                                            # manage_threads
+                                                            # manage_webhooks
+                                                            # mention_everyone
+                                                            # moderate_members
+                                                            # move_members
+                                                            # mute_members
+                                                            # priority_speaker
+                                                            # read_message_history
+                                                            # read_messages
+                                                            # request_to_speak
+                                                            # send_messages
+                                                            # send_messages_in_threads
+                                                            # send_tts_messages
+                                                            # send_voice_messages
+                                                            # speak
+                                                            # stream
+                                                            # use_application_commands
+                                                            # use_embedded_activities
+                                                            # use_external_emojis
+                                                            # use_external_sounds
+                                                            # use_external_stickers
+                                                            # use_soundboard
+                                                            # use_voice_activation
+                                                            # view_audit_log
+                                                            # view_channel
+                                                            # view_guild_insights
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #以梓喵身分發送訊息
