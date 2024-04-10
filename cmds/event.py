@@ -14,6 +14,16 @@ now = datetime.datetime.now()
 time = now.strftime("%H:%M")
 
 class Event(Cog_extension):
+    #"指令"錯誤報錯
+    @commands.Cog.listener()
+    async def on_command_error(self,ctx,error):
+        error_command = '{0}_error'.format(ctx.command)
+        if hasattr(Errors,error_command):      # 檢查是否有 Custom Error Handler
+            error_cmd = getattr(Errors,error_command)
+            await error_cmd(self,ctx,error)
+            return
+        else:       # 使用 Default Error Handler
+            await Errors.default_error(self,ctx,error)
     #成員加入通知
     @commands.Cog.listener()
     async def on_member_join(self,member):
@@ -34,16 +44,6 @@ class Event(Cog_extension):
         guild = channel.guild
         await channel.send(f"再見{member.mention}QAO",embed=embed)
         print(f'User:{member} 離開了[{guild}]伺服器!')
-    #"指令"錯誤報錯
-    @commands.Cog.listener()
-    async def on_command_error(self,ctx,error):
-        error_command = '{0}_error'.format(ctx.command)
-        if hasattr(Errors,error_command):      # 檢查是否有 Custom Error Handler
-            error_cmd = getattr(Errors,error_command)
-            await error_cmd(self,ctx,error)
-            return
-        else:       # 使用 Default Error Handler
-            await Errors.default_error(self,ctx,error)
     #添加身分組
     @commands.Cog.listener()
     async def on_raw_reaction_add(self,reaction):
@@ -55,20 +55,20 @@ class Event(Cog_extension):
                 role = guild.get_role(int(setting["ROLE_ID"]))
                 print(f"#|[{guild}] : User'{user}' add {reaction.emoji}-@{role}")
                 await user.add_roles(role,reason=f"已為User: ' {user} ' 增添了 ' @{role} ' 的身分^W^!!!")
-        #第二組
-        if str(reaction.message_id) == "1222165371705098250":
-            if str(reaction.emoji) == "✨":
-                role = guild.get_role(1219645880831971408)
-                print(reaction.emoji)
-                print(f"{user} add role")
-                await user.add_roles(role)
-        #第三組
-        if str(reaction.message_id) == "1222165371705098250":
-            if str(reaction.emoji) == "<:LOGO1:1221378614524641332>":
-                role = guild.get_role(1219645862502731876)
-                print(reaction.emoji)
-                print(f"{user} add role")
-                await user.add_roles(role)
+        # #第二組
+        # if str(reaction.message_id) == "1222165371705098250":
+        #     if str(reaction.emoji) == "✨":
+        #         role = guild.get_role(1219645880831971408)
+        #         print(reaction.emoji)
+        #         print(f"{user} add role")
+        #         await user.add_roles(role)
+        # #第三組
+        # if str(reaction.message_id) == "1222165371705098250":
+        #     if str(reaction.emoji) == "<:LOGO1:1221378614524641332>":
+        #         role = guild.get_role(1219645862502731876)
+        #         print(reaction.emoji)
+        #         print(f"{user} add role")
+        #         await user.add_roles(role)
     #移除身分組
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self,reaction):
@@ -81,34 +81,24 @@ class Event(Cog_extension):
                 role = guild.get_role(int(setting["ROLE_ID"]))
                 print(f"#|[{guild}] : User'{user}' remove {reaction.emoji}-@{role}")
                 await user.remove_roles(role,reason=f"User: ' {user} ' 不想要 ' @{role} ' 的身分了QQ")
-        #第二組
-        if str(reaction.message_id) == "1222165371705098250":
-            if str(reaction.emoji) == "✨":
-                role = guild.get_role(1219645880831971408)
-                print(reaction.emoji)
-                print(f"{user} remove role")
-                await user.remove_roles(role)
-        #第三組
-        if str(reaction.message_id) == "1222165371705098250":
-            if str(reaction.emoji) == "<:LOGO1:1221378614524641332>":
-                role = guild.get_role(1219645862502731876)
-                print(reaction.emoji)
-                print(f"{user} remove role")
-                await user.remove_roles(role) 
-    #"指令"錯誤報錯
-    @commands.Cog.listener()
-    async def on_command_error(self,ctx,error):
-        error_command = '{0}_error'.format(ctx.command)
-        if hasattr(Errors,error_command):      # 檢查是否有 Custom Error Handler
-            error_cmd = getattr(Errors,error_command)
-            await error_cmd(self,ctx,error)
-            return
-        else:       # 使用 Default Error Handler
-            await Errors.default_error(self,ctx,error)
-#///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    #對話
+        # #第二組
+        # if str(reaction.message_id) == "1222165371705098250":
+        #     if str(reaction.emoji) == "✨":
+        #         role = guild.get_role(1219645880831971408)
+        #         print(reaction.emoji)
+        #         print(f"{user} remove role")
+        #         await user.remove_roles(role)
+        # #第三組
+        # if str(reaction.message_id) == "1222165371705098250":
+        #     if str(reaction.emoji) == "<:LOGO1:1221378614524641332>":
+        #         role = guild.get_role(1219645862502731876)
+        #         print(reaction.emoji)
+        #         print(f"{user} remove role")
+        #         await user.remove_roles(role) 
+    #偵測到任一訊息時...
     @commands.Cog.listener()
     async def on_message(self,msg):
+        print(msg)
         with open("setting.json","r",encoding="utf8") as setting_file:
             setting = json.load(setting_file)
         dict_my = dict["user_self-proclaimed"]
@@ -127,15 +117,7 @@ class Event(Cog_extension):
         #……以及訊息等於關鍵字(key)
         #<and msg.content == key>
 
-        key= ["apple","banana"]
-        if any(word in msg.content for word in (key)):
-            count_list =["0","2","4","6","8","10"]
-            random_count = random.choice(setting["count"])
-            if (random_count) in count_list:
-                await msg.channel.send("text")
-            elif (random_count) not in count_list:
-                await msg.channel.send("!!!")
-        #抽籤系統/URL
+    #抽籤系統/URL
         if any(word in msg.content for word in (dict_azunya)) and any(word in msg.content for word in (dict_my)) and any(word in msg.content for word in (dict_omikuji)):
             with open("setting.json","r",encoding="utf8") as setting_file:
                 setting = json.load(setting_file)
@@ -172,14 +154,8 @@ class Event(Cog_extension):
                     omikuji.update(omikuji_update)
                     with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
                         json.dump(omikuji,omikuji_file,indent=4)
-              
-
-
-
-
-
-
-
+#///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #對話文本
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
