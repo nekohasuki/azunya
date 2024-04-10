@@ -80,13 +80,6 @@ async def unload(interaction: discord.Interaction,extension: Optional[str] = Non
 
 
 
-
-
-
-
-
-
-
 async def main():
     for Filename in os.listdir("./cmds"):
         if Filename.endswith("py"):
