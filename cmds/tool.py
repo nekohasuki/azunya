@@ -10,7 +10,7 @@ import asyncio,math
 from typing import Optional
 
 class Tool(Cog_extension):
-    #刪除訊息  
+#刪除訊息  
     @app_commands.command(name = "clear", description = "刪除訊息(需要權限)")
     @app_commands.describe(count="輸入數量")
     @app_commands.checks.has_permissions (administrator=True)
@@ -75,7 +75,12 @@ class Tool(Cog_extension):
                 await message.edit(content=f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
         await interaction.channel.purge(check=lambda m: m.id == int(message.id))
         await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
- 
+#取得用戶ID
+    @app_commands.command(name = "myid", description = "查詢自己的DiscordID")
+    async def myid(self, interaction: discord.Interaction):
+        id = interaction.user.id
+        await interaction.response.send_message(f'User：<@{id}>的ID是__{id}__呦!')
+
 
 
 
