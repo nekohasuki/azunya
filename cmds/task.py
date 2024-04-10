@@ -15,9 +15,8 @@ class Task(Cog_extension):
         self.omikujidataclear.start()
         self.onlinecount.start()
     def cog_unload(self):
-        self.omikujidataclear.cancel()
         self.onlinecount.cancel()
- 
+        self.omikujidataclear.cancel()
 #初始化"setting.json"
     @tasks.loop(seconds=1)
     async def omikujidataclear(self):
