@@ -4,6 +4,8 @@ from discord.ext import commands
 import json
 with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
+with open("dict.json","r",encoding="utf8") as dict_file:
+    dict = json.load(dict_file)
 
 from core.classes import Cog_extension
 from core.error import Errors
@@ -108,9 +110,10 @@ class Event(Cog_extension):
     #對話
     @commands.Cog.listener()
     async def on_message(self,msg):
-        dict_azunya =["azunya","AZUNYA","azu","AZU","梓守","阿梓","梓喵","梓貓"]
-        dict_my = ["我","咱","吾","在下","本人","kochira","KOCHIRA","こちら","此方","boku","BOKU","ぼく","僕","watashi","WATASHI","watasi","WATASI","わたし","私","jibun","JIBUN","じぶん","自分","ore","ORE","おれ","俺"]
-        dict_omikuji = ["籤","omikuji","OMIKUJI","御神籤","おみくじ"]
+        dict_my = dict["user_self-proclaimed"]
+        dict_azunya = dict["azunya"]
+        dict_omikuji = dict["omikuji"]
+
         #==:等於/!=:不等於
         #in:等於/not in:不等於
         #endswith:結束詞/startswith:開始詞
