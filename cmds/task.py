@@ -17,6 +17,7 @@ class Task(Cog_extension):
         self.omikujidataclear.cancel()
  
     @tasks.loop(seconds=1)
+#初始化"setting.json"
     async def omikujidataclear(self):
         with open("setting.json","r",encoding="utf8") as setting_file:
             setting = json.load(setting_file)
