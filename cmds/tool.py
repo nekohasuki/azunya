@@ -17,7 +17,7 @@ class Tool(Cog_extension):
     async def clear(self, interaction: discord.Interaction,count: Optional[int] = None):
         user = interaction.user.id
         if count == None:
-            await interaction.response.send_message(f"請輸入需要刪除的訊息數量\n參考：\n```/clear 1```")
+            await interaction.response.send_message(f"請輸入需要刪除的訊息數量\n參考：\n/clear 1")
         elif count > 200:
              count = 200
         if count == -402:
@@ -33,7 +33,7 @@ class Tool(Cog_extension):
             deleted = await interaction.channel.purge(limit=count)
             await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息')
         async for message in interaction.channel.history(limit=1):
-            await asyncio.sleep(5)
+            await asyncio.sleep(60)
             await interaction.channel.purge(check=lambda m: m.id == int(message.id))
 #碼表
     @app_commands.command(name = "stopwatch", description = "碼表")
@@ -75,15 +75,85 @@ class Tool(Cog_extension):
                 await message.edit(content=f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
         await interaction.channel.purge(check=lambda m: m.id == int(message.id))
         await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
+#查詢用戶ID
+    @app_commands.command(name = "myid", description = "查詢Discird的ID")
+    async def myid(self,interaction:discord.Integration):
+        user = interaction.user
+        await interaction.response.send_message(f"User：<@{user.id}>\n你的ID是__{user.id}__呦!")
+#test-1
+    @app_commands.command(name = "test1", description = "test-1")
+    async def test1(self,interaction:discord.Integration):
+        await interaction.channel.send(f"{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **")
+#test-2
+    @app_commands.command(name = "test2", description = "test-2")
+    async def test2(self,interaction:discord.Integration):
+        B =1219645881838600293
+        A = interaction.guild.get_role(B)
+        await interaction.response.send_message(f"# color:\n   {A.color}\n# created_at:\n    {A.created_at}\n# id:\n   {A.id}\n# members:\n  {A.members}\n# permissions:\n    {A.permissions}")
+  
+# manage_guild
+# value
+# manage_messages
 
+# permission
+# discord.Member
+# get_role("id")
 
+    # color
+    # created_at
+    # id
+    # members
+    # permissions
 
-
-
-
-
-
-
+# add_reactions
+# administrator
+# attach_files
+# ban_members
+# change_nickname
+# connect
+# create_expressions
+# create_instant_invite
+# create_private_threads
+# create_public_threads
+# deafen_members
+# embed_links
+# external_emojis
+# external_stickers
+# kick_members
+# manage_channels
+# manage_emojis
+# manage_emojis_and_stickers
+# manage_events
+# manage_expressions
+# manage_nicknames
+# manage_permissions
+# manage_roles
+# manage_threads
+# manage_webhooks
+# mention_everyone
+# moderate_members
+# move_members
+# mute_members
+# priority_speaker
+# read_message_history
+# read_messages
+# request_to_speak
+# send_messages
+# send_messages_in_threads
+# send_tts_messages
+# send_voice_messages
+# speak
+# stream
+# use_application_commands
+# use_embedded_activities
+# use_external_emojis
+# use_external_sounds
+# use_external_stickers
+# use_soundboard
+# use_voice_activation
+# view_audit_log
+# view_channel
+# view_guild_insights
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #以梓喵身分發送訊息
