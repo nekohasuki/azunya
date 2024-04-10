@@ -10,11 +10,11 @@ import asyncio,math
 from typing import Optional
 
 class Main(Cog_extension):
-    #查看延遲
+#查看延遲
     @app_commands.command(name = "ping", description = "查看延遲")
     async def ping(self, interaction: discord.Interaction):
         await interaction.response.send_message(f"{round(self.bot.latency)}/s\n"  f"{round(((self.bot.latency)-round(self.bot.latency))*1000)}/ms"),
-    #刪除訊息  
+#刪除訊息  
     @app_commands.command(name = "clear", description = "刪除訊息(需要權限)")
     @app_commands.describe(count="輸入數量")
     @app_commands.checks.has_permissions (administrator=True)
@@ -39,7 +39,7 @@ class Main(Cog_extension):
         async for message in interaction.channel.history(limit=1):
             await asyncio.sleep(5)
             await interaction.channel.purge(check=lambda m: m.id == int(message.id))
-    #碼表
+#碼表
     @app_commands.command(name = "stopwatch", description = "碼表")
     @app_commands.describe(hours="輸入小時數",minutes="輸入分鐘數",seconds="輸入秒數")
     async def stopwatch(self,interaction: discord.Interaction,hours: Optional[int] = None,minutes: Optional[int] = None,seconds: Optional[int] = None):
