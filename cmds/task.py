@@ -13,11 +13,13 @@ class Task(Cog_extension):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.omikujidataclear.start()
+        self.onlinecount.start()
     def cog_unload(self):
         self.omikujidataclear.cancel()
+        self.onlinecount.cancel()
  
-    @tasks.loop(seconds=1)
 #初始化"setting.json"
+    @tasks.loop(seconds=1)
     async def omikujidataclear(self):
         with open("setting.json","r",encoding="utf8") as setting_file:
             setting = json.load(setting_file)
@@ -35,8 +37,23 @@ class Task(Cog_extension):
                 omikuji.update(omikuji)
             with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
                 json.dump(omikuji,omikuji_file)
-
-
+#計數器
+    @tasks.loop(seconds=1)
+    async def onlinecount(self):
+        count = 1
+        await self.bot.wait_until_ready()
+        print(count)
+        while count >0():
+            count -= 1
+            print(count)
+            with open("setting.json","r",encoding="utf8") as setting_file:
+                setting = json.load(setting_file)
+                onlinetime = {"onlinetime":"0"}
+                setting.update(onlinetime)
+            with open("setting.json","w",encoding="utf8") as setting_file:
+                json.dump(setting,setting_file,indent=0)
+                
+        print(count)
 
 
 
