@@ -14,6 +14,19 @@ class Data(Cog_extension):
     @app_commands.command(name = "ping", description = "查看延遲")
     async def ping(self, interaction: discord.Interaction):
         await interaction.response.send_message(f"{round(self.bot.latency)}/s\n"  f"{round(((self.bot.latency)-round(self.bot.latency))*1000)}/ms"),
+#查詢梓守的資料
+    @app_commands.command(name = "azudata", description = "查詢梓守的資料")
+    async def azudata(self,interaction:discord.Integration):
+        await interaction.response.send_message(f"`梓守上線了__**${msToHMS(client.uptime)}**__這麼久\n`")
+
+
+
+
+
+
+
+
+
 #查詢用戶ID
     @app_commands.command(name = "myid", description = "查詢Discird的ID")
     async def myid(self,interaction:discord.Integration):
