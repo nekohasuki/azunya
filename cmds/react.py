@@ -22,13 +22,6 @@ class React(Cog_extension):
         random_pic = random.choice(setting["Logo"])
         pic = discord.File(random_pic)
         await interaction.response.send_message(file = pic)
-#抽籤系統更新時間
-    @app_commands.command(name = "omikujitime", description = "查詢抽籤系統更新時間")
-    async def omikujitime(self, interaction: discord.Interaction):
-        with open("setting.json","r",encoding="utf8") as setting_file:
-            setting = json.load(setting_file)
-        id = interaction.user.id
-        await interaction.response.send_message(f'User：<@{id}>\n目前抽籤系統是每天的__{setting["OmikujiTime"]}__更新呦!')
 
 
 
