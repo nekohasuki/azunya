@@ -1,5 +1,24 @@
 {
     "user_self-proclaimed": ["我","咱","吾","在下","本人","kochira","KOCHIRA","こちら","此方","boku","BOKU","ぼく","僕","watashi","WATASHI","watasi","WATASI","わたし","私","jibun","JIBUN","じぶん","自分","ore","ORE","おれ","俺","yo","YO","余"],
     "azunya": ["azunya","AZUNYA","azu","AZU","梓守","阿梓","梓喵","梓貓"],
-    "omikuji": ["籤","omikuji","OMIKUJI","御神籤","おみくじ"]
+    "omikuji": ["籤","omikuji","OMIKUJI","御神籤","おみくじ"],
+    "food":["草莓蛋糕","檸檬派"],
+    "morning":["yl3","早","ohayo","OHAYO","おはよ","oha","OHA","おは"],
+    "afternoon":["j30","午安","中午好"],
+    "evening":["j03g;4cl3","晚上好","konbanha","KONBANHA","こんばんは"],
+    "night":["j030","晚安","oyasumi","OYASUMI","おやすみ"],
+    "6":[],
+    "7":[],
+    "8":[],
+    "9":[],
+    "11":[],
+    "12":[],
+    "13":[],
+    "14":[],
+    "15":[],
+    "16":[],
+    "17":[],
+    "18":[],
+    "19":[]
+
 }
