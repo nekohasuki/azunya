@@ -14,7 +14,7 @@ now = datetime.datetime.now()
 time = now.strftime("%H:%M")
 
 class Event(Cog_extension):
-    #"指令"錯誤報錯
+#"指令"錯誤報錯
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
         error_command = '{0}_error'.format(ctx.command)
@@ -24,7 +24,7 @@ class Event(Cog_extension):
             return
         else:       # 使用 Default Error Handler
             await Errors.default_error(self,ctx,error)
-    #成員加入通知
+#成員加入通知
     @commands.Cog.listener()
     async def on_member_join(self,member):
         embed = discord.Embed(title="吉訊",url="https://www.jcolor.com.tw/jcolorfiles/release/product/pdt-868/pdt-8689539/medium.jpg",description="GOOD NEWS",colour=0xad0000,timestamp=now)
@@ -34,7 +34,7 @@ class Event(Cog_extension):
         guild = channel.guild
         await channel.send(f"歡!迎!{member.mention}!!",embed=embed)
         print(f'User:{member} 加入了[{guild}]伺服器!')
-    #成員退出通知
+#成員退出通知
     @commands.Cog.listener()
     async def on_member_remove(self,member):
         embed = discord.Embed(title="悲報",url="https://img.soundofhope.org/2024-03/1709580096451.jpg",description="SAD NEWS",colour=0x787878,timestamp=now)
@@ -44,7 +44,7 @@ class Event(Cog_extension):
         guild = channel.guild
         await channel.send(f"再見{member.mention}QAO",embed=embed)
         print(f'User:{member} 離開了[{guild}]伺服器!')
-    #添加身分組
+#添加身分組
     @commands.Cog.listener()
     async def on_raw_reaction_add(self,reaction):
         guild = self.bot.get_guild(reaction.guild_id)
@@ -69,7 +69,7 @@ class Event(Cog_extension):
         #         print(reaction.emoji)
         #         print(f"{user} add role")
         #         await user.add_roles(role)
-    #移除身分組
+#移除身分組
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self,reaction):
         guild = self.bot.get_guild(reaction.guild_id)
@@ -95,7 +95,7 @@ class Event(Cog_extension):
         #         print(reaction.emoji)
         #         print(f"{user} remove role")
         #         await user.remove_roles(role) 
-    #偵測到任一訊息時...
+#偵測到任一訊息時...
     @commands.Cog.listener()
     async def on_message(self,msg):
         print(msg)
@@ -156,6 +156,8 @@ class Event(Cog_extension):
                         json.dump(omikuji,omikuji_file,indent=4)
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #對話文本
+        if "A" == "A":
+            pass
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
