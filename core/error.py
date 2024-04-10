@@ -5,12 +5,12 @@ with open("setting.json","r",encoding="utf8") as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Logger
-from cmds.main import Main
+from cmds.tool import Tool
 
 class Errors():
     
     #個別"指令"錯誤報錯    
-    @Main.say.error
+    @Tool.say.error
     async def say_error(self,ctx,error):
         if isinstance(error,commands.errors.MissingRequiredArgument):
             await ctx.send(f"請輸入想要發送的訊息內文\n參考：\n```\n/say hellow```或是```{setting["prefix"]}-say hellow```")
