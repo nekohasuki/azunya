@@ -26,7 +26,10 @@ async def load(interaction: discord.Interaction,extension: Optional[str] = None)
     user = interaction.user.id
     extension_list = []
     for allfile in os.listdir("./cmds"):
-        if allfile.endswith(".py"):extension_list.append(allfile[:-3])
+        if "task.py" in allfile:
+            pass
+        else:
+            if allfile.endswith(".py"):extension_list.append(allfile[:-3])
     if extension == None:
         await interaction.response.send_message(f"請輸入需要加載類別\n參考：```/load data```\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}")
     elif extension == "all":
@@ -45,7 +48,10 @@ async def reload(interaction: discord.Interaction,extension: Optional[str] = Non
     user = interaction.user.id
     extension_list = []
     for allfile in os.listdir("./cmds"):
-        if allfile.endswith(".py"):extension_list.append(allfile[:-3])
+        if "task.py" in allfile:
+            pass
+        else:
+            if allfile.endswith(".py"):extension_list.append(allfile[:-3])
     if extension == None:
         await interaction.response.send_message(f"請輸入需要重新加載類別\n參考：```/reload data```\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}")
     elif extension == "all":
@@ -64,7 +70,10 @@ async def unload(interaction: discord.Interaction,extension: Optional[str] = Non
     user = interaction.user.id
     extension_list = []
     for allfile in os.listdir("./cmds"):
-        if allfile.endswith(".py"):extension_list.append(allfile[:-3])
+        if "task.py" in allfile:
+            pass
+        else:
+            if allfile.endswith(".py"):extension_list.append(allfile[:-3])
     if extension == None:
         await interaction.response.send_message(f"請輸入需要取消加載類別\n參考：```/unload data```\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}")
     elif extension == "all":
