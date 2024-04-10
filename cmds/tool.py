@@ -75,31 +75,10 @@ class Tool(Cog_extension):
                 await message.edit(content=f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
         await interaction.channel.purge(check=lambda m: m.id == int(message.id))
         await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
-#查詢用戶ID
-    @app_commands.command(name = "myid", description = "查詢Discird的ID")
-    async def myid(self,interaction:discord.Integration):
-        user = interaction.user
-        # await interaction.response.send_message("好的!")
-        await interaction.response.send_message(f"好的!")
-        message = await interaction.channel.send(f"正在查詢User：{user.mention}的資料......")
-        await asyncio.sleep(3)
-        await message.edit(content=f"User：<@{user.id}>\n你的ID是__{user.id}__呦!")
 #test-1
     @app_commands.command(name = "test1", description = "test-1")
     async def test1(self,interaction:discord.Integration):
         await interaction.channel.send(f"{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **")
-#查身分資料
-    @app_commands.command(name = "checkrole", description = "查身分資料")
-    @app_commands.describe(role = "想查的身分")
-    async def checkrole(self,interaction:discord.Integration,role:Optional[str] = None):
-        if role == None:
-            await interaction.response.send_message("請輸入需要刪除的訊息數量\n參考：\n```/checkrole @新身分```")
-        if "@" in str(f"{role}"):
-            if "&" in str(f"{role}"):
-                A = interaction.guild.get_role(int(f"{role[3:-1]}"))
-                await interaction.response.send_message(f"# color:\n   {A.color}\n# created_at:\n    {A.created_at}\n# id:\n   {A.id}\n# members:\n  {A.members}\n# permissions:\n    {A.permissions}")
-            else:
-                await interaction.response.send_message(f"這好像是某位User並不是身分組")
 
 
 
