@@ -75,21 +75,6 @@ class Tool(Cog_extension):
                 await message.edit(content=f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
         await interaction.channel.purge(check=lambda m: m.id == int(message.id))
         await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
-#取得用戶ID
-    @app_commands.command(name = "myid", description = "查詢自己的DiscordID")
-    async def myid(self, interaction: discord.Interaction):
-        id = interaction.user.id
-        await interaction.response.send_message(f'User：<@{id}>的ID是__{id}__呦!')
-
-
-
-
-
-
-
-
-
-
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #以梓喵身分發送訊息
     @commands.command()
@@ -97,7 +82,6 @@ class Tool(Cog_extension):
         print(msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(msg)
-
 
 
 
