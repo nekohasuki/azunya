@@ -132,7 +132,7 @@ class Event(Cog_extension):
         #……以及訊息等於關鍵字(key)
         #<and ctx.content == key>
 #問候
-        if any(word in ctx.content for word in dict_azunya):
+        if any(word in ctx.content for word in dict_azunya) and ctx.author.bot == False:
         #早上
             if any(word in ctx.content for word in dict_morning):
                 if nowtime > "06:00:00" and nowtime < "11:00:00":
@@ -158,12 +158,11 @@ class Event(Cog_extension):
                     await ctx.channel.send(f"{name}現在時間{nowtime}\n這時間可能不算晚喔?")
         #睡前
             elif any(word in ctx.content for word in dict_night):
-                if nowtime > "18:00:00" and nowtime < "21:00:00":
+                if nowtime > "19:00:00" and nowtime < "21:00:00":
                     await ctx.channel.send(f"{name}晚安,是說好早睡")
                 elif nowtime > "21:00:00" or nowtime < "03:00:00":
                     await ctx.channel.send(f"{name}晚安,祝好夢")
-                    await ctx.channel.send(f"{name}晚安,是說好早睡")
-                elif nowtime < "06:00:00":
+                elif nowtime > "03:00:00" and nowtime < "06:00:00":
                     await ctx.channel.send(f"晚安?\n{name}也太晚睡了吧???")
                 else:
                     await ctx.channel.send(f"蛤?晚安?")
