@@ -38,22 +38,16 @@ class Task(Cog_extension):
             with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
                 json.dump(omikuji,omikuji_file)
 #計數器
-    @tasks.loop(seconds=1)
+    @tasks.loop(seconds=1,count = 1)
     async def onlinecount(self):
-        count = 1
         await self.bot.wait_until_ready()
-        print(count)
-        while count >0():
-            count -= 1
-            print(count)
-            with open("setting.json","r",encoding="utf8") as setting_file:
-                setting = json.load(setting_file)
-                onlinetime = {"onlinetime":"0"}
-                setting.update(onlinetime)
-            with open("setting.json","w",encoding="utf8") as setting_file:
-                json.dump(setting,setting_file,indent=0)
-                
-        print(count)
+        with open("setting.json","r",encoding="utf8") as setting_file:
+            setting = json.load(setting_file)
+            onlinetime = {"onlinetime":"0"}
+            setting.update(onlinetime)
+        with open("setting.json","w",encoding="utf8") as setting_file:
+            json.dump(setting,setting_file,indent=0)
+
 
 
 
