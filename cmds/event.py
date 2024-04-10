@@ -120,12 +120,14 @@ class Event(Cog_extension):
           #字典
         dict_my = dict["user_self-proclaimed"]
         dict_azunya = dict["azunya"]
+        dict_azukira = dict["azukira"]
         dict_omikuji = dict["omikuji"]
         dict_food = dict["food"]
         dict_morning = dict["morning"]
         dict_afternoon = dict["afternoon"]
         dict_evening = dict["evening"]
         dict_night = dict["night"]
+        azunya = dict_azunya + dict_azukira
         #==:等於/!=:不等於
         #in:等於/not in:不等於
         #endswith:結束詞/startswith:開始詞
@@ -184,7 +186,7 @@ class Event(Cog_extension):
                 await ctx.channel.send(f"{name}안녕하세요")
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #抽籤系統/URL
-        if any(word in ctx.content for word in (dict_azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)):
+        if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)):
             with open("setting.json","r",encoding="utf8") as setting_file:
                 setting = json.load(setting_file)
             with open("cmds\data\omikuji.json","r",encoding="utf8") as omikuji_file:
@@ -217,9 +219,21 @@ class Event(Cog_extension):
                     with open("cmds\data\omikuji.json","w",encoding="utf8") as omikuji_file:
                         json.dump(omikuji,omikuji_file,indent=4)
         #不要用那個稱呼
-        if any(word in ctx.content for word in dict["???"] ) and ctx.author.bot == False:
-            await asyncio.sleep(1)
-            await ctx.channel.send(f"還有，{name}不要用那個稱呼叫我!!!\n我叫__梓守__!,或者也可以叫我__梓喵__")
+        if any(word in ctx.content for word in dict_azukira) and ctx.author.bot == False:
+            if user == (703238602586456114):
+                await asyncio.sleep(1)
+                await ctx.channel.send(f"嘴巴閉閉\n不會講話就不要講\n你是知道我有名字的")
+            elif user == (849505185364967475):
+                await asyncio.sleep(1)
+                await ctx.channel.send(f"不要用那個稱呼叫我!!!**あきら1966**\n我有名字的**あきら1966**\n叫__梓守__!,或者也可以叫我__梓喵__")
+                await asyncio.sleep(2)
+                await ctx.channel.send(f"聽懂了沒有**あきら1966**")
+            elif user == (697842681082281985) or user == (938100109240074310):
+                await asyncio.sleep(1)
+                await ctx.channel.send(f"不對吧,你叫錯就太誇張了吧QAQ")
+            else:
+                await asyncio.sleep(1)
+                await ctx.channel.send(f"還有，{name}不要用那個稱呼叫我!!!\n我叫__梓守__!,或者也可以叫我__梓喵__")
 
 
 
