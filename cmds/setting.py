@@ -13,12 +13,12 @@ Current_Time = datetime.datetime.now().strftime("%H:%M")
 Current_seconds = datetime.datetime.now().strftime("%S")
 
 class Setting(Cog_extension):
-    
+#設定頻道
     # @commands.command()
     # async def setchannel(self,ctx,channel:int):
     #     self.channel = self.bot.get_channel(channel)
     #     await ctx.send(f"set chammel:{self.channel.mention}")
-    #設定抽籤系統更新時間
+#設定抽籤系統更新時間
     @app_commands.command(name = "setomikujitime", description = "設定抽籤系統更新時間(需要權限)")
     @app_commands.describe(hours="輸入小時",minutes="輸入分鐘")
     @app_commands.checks.has_permissions (administrator=True)
