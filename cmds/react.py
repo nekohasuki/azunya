@@ -29,11 +29,6 @@ class React(Cog_extension):
             setting = json.load(setting_file)
         id = interaction.user.id
         await interaction.response.send_message(f'User：<@{id}>\n目前抽籤系統是每天的__{setting["OmikujiTime"]}__更新呦!')
-#取得用戶ID
-    @app_commands.command(name = "myid", description = "查詢自己的DiscordID")
-    async def myid(self, interaction: discord.Interaction):
-        id = interaction.user.id
-        await interaction.response.send_message(f'User：<@{id}>的ID是__{id}__呦!')
 
 
 
