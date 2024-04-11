@@ -34,7 +34,8 @@ async def load(interaction: discord.Interaction,extension: Optional[str] = None)
             if allfile.endswith('.py'):extension_list.append(allfile[:-3])
     if extension == None:
         await interaction.response.send_message(f'請輸入需要加載類別\n參考：```/load data```\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}')
-    elif extension == 'all':
+    elif extension == 'a' or extension == 'A' or extension == 'ALL' or extension == 'All' or extension == 'all':
+        extension = "all"
         for load in extension_list:
             await bot.load_extension(f'cmds.{load}')
         await interaction.response.send_message(f'已成功加載__{len(extension_list)}__項擴充類別')
@@ -57,7 +58,8 @@ async def reload(interaction: discord.Interaction,extension: Optional[str] = Non
             if allfile.endswith('.py'):extension_list.append(allfile[:-3])
     if extension == None:
         await interaction.response.send_message(f'請輸入需要重新加載類別\n參考：```/reload data```\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}')
-    elif extension == 'all':
+    elif extension == 'a' or extension == 'A' or extension == 'ALL' or extension == 'All' or extension == 'all':
+        extension = "all"
         for reload in extension_list:
             await bot.reload_extension(f'cmds.{reload}')
         await interaction.response.send_message(f'已成功重新加載__{len(extension_list)}__項擴充類別')
@@ -80,7 +82,8 @@ async def unload(interaction: discord.Interaction,extension: Optional[str] = Non
             if allfile.endswith('.py'):extension_list.append(allfile[:-3])
     if extension == None:
         await interaction.response.send_message(f'請輸入需要取消加載類別\n參考：```/unload data```\n如果User：<@{user}>不知道目前類別有哪些\n請參考：\n{extension_list}')
-    elif extension == 'all':
+    elif extension == 'a' or extension == 'A' or extension == 'ALL' or extension == 'All' or extension == 'all':
+        extension = "all"
         for unload in extension_list:
             await bot.unload_extension(f'cmds.{unload}')
         await interaction.response.send_message(f'已成功取消加載__{len(extension_list)}__項擴充類別')
