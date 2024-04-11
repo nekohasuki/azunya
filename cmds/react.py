@@ -8,16 +8,17 @@ with open('setting.json','r',encoding='utf8') as setting_file:
 from core.classes import Cog_extension
 import asyncio,datetime,os,random
 
-Current_Time = datetime.datetime.now().strftime('%H:%M')
-
+prefix = 'r-'
 class React(Cog_extension):
 #指定圖片
-    @app_commands.command(name = 'imege', description = '指定圖片')
+    commandname = (f'{prefix}imege')
+    @app_commands.command(name = commandname, description = '指定圖片')
     async def imege(self, interaction: discord.Interaction):
         pic = discord.File(setting['Imege'])
         await interaction.response.send_message(file = pic)
 #隨機圖片/PATH
-    @app_commands.command(name = 'logo', description = '隨機圖片')
+    commandname = (f'{prefix}logo')
+    @app_commands.command(name = commandname, description = '隨機圖片')
     async def logo(self, interaction: discord.Interaction):
         random_pic = random.choice(setting['Logo'])
         pic = discord.File(random_pic)
