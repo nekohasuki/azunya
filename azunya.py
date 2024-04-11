@@ -6,7 +6,7 @@ intents.presences = False
 import json
 with open('setting.json','r',encoding='utf8') as setting_file:
     setting = json.load(setting_file)
-bot = commands.Bot(command_prefix =[f'{setting['prefix']}-','/'],intents = intents)
+bot = commands.Bot(command_prefix =[f'{setting["prefix"]}-','/'],intents = intents)
 
 import asyncio,keep_alive,os
 from typing import Optional
