@@ -1,3 +1,4 @@
+
 {
     "          ":"↓ True or False  ",
     "keep_alive":"False",
@@ -5,7 +6,6 @@
     "prefix":"azu",
     "TOKEN":"YOU_TOKEN",
     "WELCOME_CHANNEL_ID":"YOU_CHANNEL_ID",
-
     "ROLE_ID":"YOU_ROLE_ID",
     "ROLE_MESSAGE_ID":"YOU_MESSAGE_ID",
     "LOG_GUILD_ID": "YOU_GUILD_ID",
@@ -14,26 +14,32 @@
     {"The following is the enbad storage image URL":"The following is the enbad storage image URL"}],
     "ROLE_MESSAGE_THUMBNAIL":["YOU_URL","YOU_URL"],
     "ROLE_MESSAGE_IMEGE":["YOU_URL","YOU_URL"],
+    "#################################################################################################": [
+    {"The following stores the identity group IDs of different permissions": "The following stores the identity group IDs of different permissions",
+    "(it has nothing to do with the identity group permissions of Discord itself)": "(it has nothing to do with the identity group permissions of Discord itself)"}],
     "manage_messages_role": ["YOU_MANAGE_MESSAGE_PERMISSIONS_ROLE_ID"],
     "count":["1","2","3","4","5","6","7","8","9","0"],
     "EMOJI_FREE":"🆓",
-    "12":"",
-    "13":"",
-    "14":"",
-    "15":"",
-    "16":"",
-    "17":"",
-    "18":"",
-    "19":"",
-    "20":"",
-    "21":"",
-    "22":"",
-    "onlinetime": "0",
+    "1": "",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": "",
+    "6": "",
+    "7": "",
+    "8": "",
+    "9": "",
+    "10": "",
+    "11": "",
+    "onlinetime": "588",
     "OmikujiTime": "0:0",
-    "Logo":["imege/logo/LOGO-1.png","imege/logo//Logo-2.png"],
+    "Logo": [
+    "imege/logo/Logo-1.png",
+    "imege/logo/Logo-2.png"
+    ],
     "Imege": "imege/imege/Imege-1.png",
     "##################################################################################################": [
     {"The following is the URL storage, it has no practical use": "The following is the URL storage, it has no practical use"}],
-    "Embed": "https://embed.dan.onl/",
-    "Datetime": "https://vocus.cc/article/64acdc25fd89780001fa4aa8"
-}
+        "Embed": "https://embed.dan.onl/",
+        "Datetime": "https://vocus.cc/article/64acdc25fd89780001fa4aa8"
+        }
