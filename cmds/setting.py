@@ -9,9 +9,7 @@ from core.classes import Cog_extension
 import datetime
 from typing import Optional
 
-Current_Time = datetime.datetime.now().strftime('%H:%M')
-Current_seconds = datetime.datetime.now().strftime('%S')
-
+prefix = 's-'
 class Setting(Cog_extension):
 #設定頻道
     # @commands.command()
@@ -19,11 +17,11 @@ class Setting(Cog_extension):
     #     self.channel = self.bot.get_channel(channel)
     #     await ctx.send(f'set chammel:{self.channel.mention}')
 #設定抽籤系統更新時間
-    @app_commands.command(name = 'omikujitime', description = '抽籤系統更新時間相關')
-    @app_commands.describe(mod = '模式(set模式需要權限)')
-    @app_commands.describe(hours='輸入小時(查閱模式不用輸入)',minutes='輸入分鐘(查閱模式不用輸入)')
+    commandname = (f'{prefix}omikujitime')
+    @app_commands.command(name = commandname, description = '抽籤系統更新時間相關')
+    @app_commands.describe(mod = '模式(set模式需要權限)',hours='輸入小時(查閱模式不用輸入)',minutes='輸入分鐘(查閱模式不用輸入)')
     @app_commands.choices(mod=[app_commands.Choice(name = 'check',value = 'check'),app_commands.Choice(name = 'set',value = 'set)')])
-    async def check(self, interaction: discord.Interaction,mod: app_commands.Choice[str],hours: Optional[int] = None,minutes: Optional[int] = None):
+    async def omikujitime(self, interaction: discord.Interaction,mod: app_commands.Choice[str],hours: Optional[int] = None,minutes: Optional[int] = None):
         name = interaction.user.mention
         if mod.name == 'check' :
             with open('setting.json','r',encoding='utf8') as setting_file:
