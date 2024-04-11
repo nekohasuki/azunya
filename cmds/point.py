@@ -7,7 +7,9 @@ with open('setting.json','r',encoding='utf8') as setting_file:
 
 from core.classes import Cog_extension
 
+prefix = 'p-'
 class Point(Cog_extension):
+    # addcmd
     pass
 async def setup(bot):
     await bot.add_cog(Point(bot))
