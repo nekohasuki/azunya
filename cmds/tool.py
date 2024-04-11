@@ -9,9 +9,11 @@ from core.classes import Cog_extension
 import asyncio,datetime,math,random
 from typing import Optional
 
+prefix = 't-'
 class Tool(Cog_extension):
-#刪除訊息  
-    @app_commands.command(name = 'clear', description = '刪除訊息(需要權限)')
+#刪除訊息
+    commandname = (f'{prefix}clear')
+    @app_commands.command(name = commandname,description = '刪除訊息(需要權限)')
     @app_commands.describe(count='輸入數量')
     @app_commands.checks.has_permissions (administrator=True)
     async def clear(self, interaction: discord.Interaction,count: Optional[int] = None):
@@ -36,7 +38,8 @@ class Tool(Cog_extension):
             await asyncio.sleep(60)
             await interaction.channel.purge(check=lambda m: m.id == int(message.id))
 #碼表
-    @app_commands.command(name = 'stopwatch', description = '碼表')
+    commandname = (f'{prefix}stopwatch')
+    @app_commands.command(name = commandname, description = '碼表')
     @app_commands.describe(hours='輸入小時數',minutes='輸入分鐘數',seconds='輸入秒數')
     async def stopwatch(self,interaction: discord.Interaction,hours: Optional[int] = None,minutes: Optional[int] = None,seconds: Optional[int] = None):
         if hours == None:
@@ -76,9 +79,11 @@ class Tool(Cog_extension):
         await interaction.channel.purge(check=lambda m: m.id == int(message.id))
         await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
 #test-1
-    @app_commands.command(name = 'test1', description = 'test-1')
+    commandname = (f'{prefix}test1')
+    @app_commands.command(name = commandname, description = 'test-1')
     async def test1(self,interaction:discord.Integration):
         await interaction.channel.send(f'{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **')
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #以梓喵身分發送訊息
     @commands.command()
     async def say(self,ctx, *,msg):
