@@ -95,7 +95,7 @@ async def unload(interaction: discord.Interaction,extension: Optional[str] = Non
             await interaction.response.send_message(f'沒有擴充類別："{extension}"')
 
 
-"123"
+
 async def main():
     for Filename in os.listdir('./cmds'):
         if Filename.endswith('py'):
