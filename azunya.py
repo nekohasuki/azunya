@@ -11,6 +11,7 @@ bot = commands.Bot(command_prefix =[f'{setting['prefix']}-','/'],intents = inten
 import asyncio,keep_alive,os
 from typing import Optional
 
+prefix = 'a-'
 #機器人登陸通知
 @bot.event
 async def on_ready():
@@ -21,7 +22,8 @@ async def on_ready():
     except Exception as e:
         print('命令同步時發生錯誤: ', e)
 #加載類別
-@bot.tree.command(name='load', description='加載擴充類別')
+commandname = (f'{prefix}load')
+@bot.tree.command(name = commandname, description = '加載擴充類別')
 async def load(interaction: discord.Interaction,extension: Optional[str] = None):
     user = interaction.user.id
     extension_list = []
@@ -43,7 +45,8 @@ async def load(interaction: discord.Interaction,extension: Optional[str] = None)
         else:
             await interaction.response.send_message(f'沒有擴充類別："{extension}"')
 #重新加載類別
-@bot.tree.command(name='reload', description='重新加載擴充類別')
+commandname = (f'{prefix}reload')
+@bot.tree.command(name = commandname, description = '重新加載擴充類別')
 async def reload(interaction: discord.Interaction,extension: Optional[str] = None):
     user = interaction.user.id
     extension_list = []
@@ -65,7 +68,8 @@ async def reload(interaction: discord.Interaction,extension: Optional[str] = Non
         else:
             await interaction.response.send_message(f'沒有擴充類別："{extension}"')
 #取消加載類別
-@bot.tree.command(name='unload', description='取消加載擴充類別')
+commandname = (f'{prefix}unload')
+@bot.tree.command(name = commandname, description = '取消加載擴充類別')
 async def unload(interaction: discord.Interaction,extension: Optional[str] = None):
     user = interaction.user.id
     extension_list = []
