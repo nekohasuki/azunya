@@ -2,24 +2,24 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import json
-with open("setting.json","r",encoding="utf8") as setting_file:
+with open('setting.json','r',encoding='utf8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
 import asyncio,datetime,os,random
 
-Current_Time = datetime.datetime.now().strftime("%H:%M")
+Current_Time = datetime.datetime.now().strftime('%H:%M')
 
 class React(Cog_extension):
 #指定圖片
-    @app_commands.command(name = "imege", description = "指定圖片")
+    @app_commands.command(name = 'imege', description = '指定圖片')
     async def imege(self, interaction: discord.Interaction):
-        pic = discord.File(setting["Imege"])
+        pic = discord.File(setting['Imege'])
         await interaction.response.send_message(file = pic)
 #隨機圖片/PATH
-    @app_commands.command(name = "logo", description = "隨機圖片")
+    @app_commands.command(name = 'logo', description = '隨機圖片')
     async def logo(self, interaction: discord.Interaction):
-        random_pic = random.choice(setting["Logo"])
+        random_pic = random.choice(setting['Logo'])
         pic = discord.File(random_pic)
         await interaction.response.send_message(file = pic)
 
