@@ -9,7 +9,7 @@ from core.classes import Cog_extension
 import asyncio,math
 from typing import Optional
 
-prefix = 'data-'
+prefix = 'd-'
 class Data(Cog_extension):
 #查詢梓守的資料
     commandname = (f'{prefix}azudata')
