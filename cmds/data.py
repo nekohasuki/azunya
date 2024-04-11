@@ -13,18 +13,48 @@ prefix = 'd-'
 class Data(Cog_extension):
 #查詢梓守的資料
     commandname = (f'{prefix}azudata')
-    @app_commands.command(name = commandname, description = '查詢梓守的資料')
+    @app_commands.command(name = commandname, description = "查詢梓守的資料")
     async def azudata(self,interaction:discord.Integration):
-        with open('setting.json','r',encoding='utf8') as setting_file:
+        with open("setting.json","r",encoding="utf8") as setting_file:
             setting = json.load(setting_file)
-        t = int(setting['onlinetime'])
+        t = int(setting["onlinetime"])
         d = math.floor(t/60/60/24)
         H = math.floor(t/60/60-d*24)
         M = math.floor(t/60-H*60-d*60*24)
         S = t-M*60-H*60*60-d*60*60*24
-        HMS = f'{H}:{M}:{S}'
-
-#查身分資料
+        HMS = f"{H}:{M}:{S}"
+        setuptime = "某天(set)"
+        channels = "2(set)"
+        count =10
+        await interaction.response.send_message(f"**__底下跑動時間僅顯示{count}秒__**")
+        message = await interaction.channel.send(f"梓守上線了**{d}:{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+        if d >= 1:
+            while count > 0:
+                count -= 1
+                with open("setting.json","r",encoding="utf8") as setting_file:
+                    setting = json.load(setting_file)
+                t = int(setting["onlinetime"])
+                d = math.floor(t/60/60/24)
+                H = math.floor(t/60/60-d*24)
+                M = math.floor(t/60-H*60-d*60*24)
+                S = t-M*60-H*60*60-d*60*60*24
+                HMS = f"{H}:{M}:{S}"
+                await asyncio.sleep(1)
+                await message.edit(content=f"梓守上線了**{d}:{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+        else:
+            while count > 0:
+                count -= 1
+                with open("setting.json","r",encoding="utf8") as setting_file:
+                    setting = json.load(setting_file)
+                t = int(setting["onlinetime"])
+                d = math.floor(t/60/60/24)
+                H = math.floor(t/60/60-d*24)
+                M = math.floor(t/60-H*60-d*60*24)
+                S = t-M*60-H*60*60-d*60*60*24
+                HMS = f"{H}:{M}:{S}"
+                await asyncio.sleep(1)
+                await message.edit(content=f"梓守上線了**{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+#查身分組資料
     commandname = (f'{prefix}checkrole')
     @app_commands.command(name = commandname, description = '查身分資料')
     @app_commands.describe(role = '想查的身分')
