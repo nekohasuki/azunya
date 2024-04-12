@@ -49,6 +49,7 @@ class Event(Cog_extension):
     async def on_raw_reaction_add(self,reaction):
         guild = self.bot.get_guild(reaction.guild_id)
         user = guild.get_member(reaction.user_id)
+        print(reaction.emoji)
         #第一組
         if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
             if str(reaction.emoji) == setting['EMOJI_FREE']:
@@ -62,17 +63,17 @@ class Event(Cog_extension):
                 print(f'#|[{guild}] : User"{user}" add {reaction.emoji}-@{role}')
                 await user.add_roles(role)
         # #第三組
-        # if str(reaction.message_id) == '1222165371705098250':
-        #     if str(reaction.emoji) == '<:LOGO1:1221378614524641332>':
-        #         role = guild.get_role(1219645862502731876)
-        #         print(reaction.emoji)
-        #         print(f'{user} add role')
-        #         await user.add_roles(role)
+        if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
+            if str(reaction.emoji) == setting['EMOII_SECRET']:
+                role = guild.get_role(int(setting['NSFW_ROLE_ID']))
+                print(f'#|[{guild}] : User"{user}" add {reaction.emoji}-@{role}')
+                await user.add_roles(role)
 #移除身分組
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self,reaction):
         guild = self.bot.get_guild(reaction.guild_id)
         user = guild.get_member(reaction.user_id)
+        print(reaction.emoji)
         #第一組
         if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
             if str(reaction.emoji) == setting['EMOJI_FREE']:
@@ -86,12 +87,11 @@ class Event(Cog_extension):
                 print(f'#|[{guild}] : User"{user}" remove {reaction.emoji}-@{role}')
                 await user.remove_roles(role)
         # #第三組
-        # if str(reaction.message_id) == '1222165371705098250':
-        #     if str(reaction.emoji) == '<:LOGO1:1221378614524641332>':
-        #         role = guild.get_role(1219645862502731876)
-        #         print(reaction.emoji)
-        #         print(f'{user} remove role')
-        #         await user.remove_roles(role) 
+        if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
+            if str(reaction.emoji) == setting['EMOII_SECRET']:
+                role = guild.get_role(int(setting['NSFW_ROLE_ID']))
+                print(f'#|[{guild}] : User"{user}" remove {reaction.emoji}-@{role}')
+                await user.remove_roles(role)
     @commands.Cog.listener()
     async def on_message(self,ctx):
 #前置設定
