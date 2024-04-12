@@ -131,6 +131,19 @@ class Tool(Cog_extension):
         embed.set_thumbnail(url=random.choice(setting['ROLE_MESSAGE_THUMBNAIL']))
         embed.set_footer(text='Copyright ⑨ 2024 N..S',icon_url='https://slate.dan.onl/slate.png')
         await msg.edit(embed = embed)
+    @commands.command()
+    async def embededit(self,ctx):
+        import datetime
+        now = datetime.datetime(2024,3,27,1,10)
+        time = "01:10"
+        member = ""
+        channelid = ""
+        msgid = ""
+        msg = self.bot.get_channel(channelid).get_partial_message(msgid)
+        embed = discord.Embed()
+        await msg.edit(embed=embed)
+
+
 
 
 
