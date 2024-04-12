@@ -20,7 +20,7 @@ class Tool(Cog_extension):
         user = interaction.user.id
         if count == None:
             await interaction.response.send_message(f'請輸入需要刪除的訊息數量\n參考：\n```/clear 1```')
-        elif count > 200:
+        elif count >200:
              count = 200
         if count == -402:
             await interaction.response.send_message(f'請User：<@{user}>稍等片刻\n正在啟動執行402號刪除程序 ')
@@ -58,7 +58,7 @@ class Tool(Cog_extension):
         if d >= 1 :
             await interaction.response.send_message(f'好的User : {interaction.user.mention} !\n已將時間設定為**{int(d)}**天**{h}**時**{m}**分**{s}**秒\n開始到計時')
             message = await interaction.channel.send(f'剩餘時間 : **{int(d)}**天 **{h}**時**{m}**分**{s}**秒')
-            while t > 0:
+            while t >0:
                 t -=1
                 d = math.floor(t/60/60/24)
                 h = math.floor(t/60/60-d*24)
@@ -69,7 +69,7 @@ class Tool(Cog_extension):
         else:
             await interaction.response.send_message(f'好的User : {interaction.user.mention} !\n已將時間設定為**{h}**時**{m}**分**{s}**秒\n開始到計時')
             message = await interaction.channel.send(f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
-            while t > 0:
+            while t >0:
                 t -=1
                 h = math.floor(t/60/60)
                 m = math.floor(t/60-h*60)
@@ -93,21 +93,44 @@ class Tool(Cog_extension):
 #身分領取embed
     @commands.command()
     async def rulemessage(self, ctx):
+        guild = ctx.guild
+        msg = self.bot.get_channel(int(setting['ROLE_MESSAGE_CHANNEL_ID'])).get_partial_message(setting['ROLE_MESSAGE_ID'])
+        #普通平民老百姓
+        role_01 = guild.get_role(965668031114129438).mention
+        #平民老百姓
+        role_02 = guild.get_role(958806085274316870).mention
+        #老百姓
+        role_03 = guild.get_role(958829885504237598).mention
+        #百姓
+        role_04 = guild.get_role(959015027787042856).mention
+        #永遠17的
+        role_05 = guild.get_role(958812521907765308).mention
+        #LOG
+        role_06 = guild.get_role(1228288640627642379).mention
+        #赫
+        role_07 = guild.get_role(958826888950874192).mention
+        #歌姬
+        role_08 = guild.get_role(1079982786926100571).mention
+        #不能說的秘密
+        role_09 = guild.get_role(1080316995448352868).mention
+        #無身份
+        role_10 = guild.get_role(958827709272821770).mention
         embed = discord.Embed(title='**__請按照規則領取身份__**',url='https://discord.com/channels/1219180207534243891/1219815148622057523',description='** **',color=0xaa095f,timestamp=datetime.datetime.now())
         embed.set_author(name='Azumari :',url='https://github.com/nekohasuki/azunya/blob/main/azunya.py')
-        embed.add_field(name='**現界[**一**]** - @普通平民老百姓',value='介紹：普通人\n條件：底下:free:按鈕領取\n** **',inline=True)
-        embed.add_field(name='**現界[**二**]** - @平民老百姓',value='介紹：有錢\n　　　但還是普通人\n條件：現界一級並至少■■■■\n(條件未開放)',inline=True)
-        embed.add_field(name='',value='** **',inline=False)
-        embed.add_field(name='**現界[**三**]** - @老百姓',value='介紹：有錢有閒\n　　　但依然還是普通人\n條件：獲得現界二級並至少■■■■\n(條件未開放)',inline=True)
-        embed.add_field(name='**現界[**四**]** - @百姓',value='介紹：有錢有閒有權\n　　　即使如此卻依舊還是普通人\n條件：獲得現界三級並至少■■■■\n(條件未開放)',inline=True)
-        embed.add_field(name='** **',value='**\n **',inline=False)
-        embed.add_field(name='**特殊現界** - @永遠17的',value='介紹：感覺18太老了所以是17www\n　　　(可以聊些有的沒的www)\n條件：請出示成年的證明\n\n** **',inline=False)
-        embed.add_field(name='**血族** - @赫',value='介紹：館館&偷摸她雞\n　　　且可繞\'@永遠17的&@百姓\'之條件享受權力\n條件：請先預約並於休息室(#會客室 )等候審核與評估\n\n** **',inline=False)
-        embed.add_field(name='**特殊身份(特殊狀況可取):**',value='@歌姬\n@不能說的秘密\n@無身份',inline=False)
+        embed.add_field(name=f'**現界[**一**]**',value=f'身分：{role_01}\n介紹：普通人\n條件：底下:free:按鈕領取\n** **',inline=True)
+        embed.add_field(name=f'**現界[**二**]**',value=f'身分：{role_02}\n介紹：有錢\n　　　但還是普通人\n條件：現界一級並至少■■■■\n(條件未開放)',inline=True)
+        embed.add_field(name=f'',value='** **',inline=False)
+        embed.add_field(name=f'**現界[**三**]**',value=f'身分：{role_03}\n介紹：有錢有閒\n　　　但依然還是普通人\n條件：獲得現界二級並至少■■■■\n(條件未開放)',inline=True)
+        embed.add_field(name=f'**現界[**四**]**',value=f'身分：{role_04}\n介紹：有錢有閒有權\n　　　即使如此卻依舊還是普通人\n條件：獲得現界三級並至少■■■■\n(條件未開放)',inline=True)
+        embed.add_field(name=f'** **',value='**\n **',inline=False)
+        embed.add_field(name=f'**特殊現界**',value=f'身分：{role_05}\n介紹：感覺18太老了所以是17www\n　　　(可以聊些有的沒的www)\n條件：底下:secret:按鈕領取\n\n** **',inline=False)
+        embed.add_field(name=f'**訊息紀錄**',value=f'身分：{role_06}\n介紹：用於查看[__訊息紀錄__](https://discord.com/channels/958801205776248833/1227498587890516009)\n條件：底下:glowing_star:按鈕領取\n** **',inline=False)
+        embed.add_field(name=f'**血族**',value=f'身分：{role_07}\n介紹：館館偷摸她雞\n　　　且可繞\'{role_05}&{role_04} \'之條件享受權力\n條件：請先預約並於[__休息室__](https://discord.com/channels/958801205776248833/958809630778195979)等候審核與評估\n\n** **',inline=False)
+        embed.add_field(name=f'**特殊身份\n(特殊狀況可取)**',value=f'{role_08}\n{role_09}\n{role_10}',inline=False)
         embed.set_image(url=random.choice(setting['ROLE_MESSAGE_IMEGE']))
         embed.set_thumbnail(url=random.choice(setting['ROLE_MESSAGE_THUMBNAIL']))
         embed.set_footer(text='Copyright ⑨ 2024 N..S',icon_url='https://slate.dan.onl/slate.png')
-        await ctx.send(embed=embed)
+        await msg.edit(embed = embed)
 
 
 
