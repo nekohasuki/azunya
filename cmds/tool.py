@@ -132,7 +132,7 @@ class Tool(Cog_extension):
         embed.set_footer(text='Copyright ⑨ 2024 N..S',icon_url='https://slate.dan.onl/slate.png')
         await msg.edit(embed = embed)
 
-1
+
 
 
 
