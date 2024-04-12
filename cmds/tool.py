@@ -78,11 +78,6 @@ class Tool(Cog_extension):
                 await message.edit(content=f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
         await interaction.channel.purge(check=lambda m: m.id == int(message.id))
         await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
-#test-1
-    commandname = (f'{prefix}test1')
-    @app_commands.command(name = commandname, description = 'test-1')
-    async def test1(self,interaction:discord.Integration):
-        await interaction.channel.send(f'{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **')
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #以梓喵身分發送訊息
     @commands.command()
@@ -131,6 +126,7 @@ class Tool(Cog_extension):
         embed.set_thumbnail(url=random.choice(setting['ROLE_MESSAGE_THUMBNAIL']))
         embed.set_footer(text='Copyright ⑨ 2024 N..S',icon_url='https://slate.dan.onl/slate.png')
         await msg.edit(embed = embed)
+#編輯Embad
     @commands.command()
     async def embededit(self,ctx):
         import datetime
