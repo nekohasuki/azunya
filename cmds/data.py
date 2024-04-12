@@ -130,19 +130,21 @@ class Data(Cog_extension):
     @app_commands.command(name = commandname, description = '查詢伺服器的資料')
     async def serverdata(self,interaction:discord.Integration):
         guild = interaction.guild
-
-#///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        members = '未知(set)'
-
-#///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        members = interaction.guild.member_count
         await interaction.response.send_message(f'伺服器名稱：**{guild}**\n用戶數：**{members}**人')
 
 
 
+    commandname = (f'{prefix}name')
+    @app_commands.command(name = commandname, description = 'description')
+    async def name(self,interaction:discord.Integration):
+        
+        # interaction.user.created_at
+        await interaction.response.send_message(f'{interaction.user.created_at}')
 
 
+
+        # await interaction.channel.send(f'{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **')
 
 
 
