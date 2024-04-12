@@ -8,8 +8,8 @@ from core.classes import Cog_extension
 import datetime,schedule
 
 class Task(Cog_extension):
-    tz = datetime.timezone(datetime.timedelta(hours = 8))
-    everyday_time = datetime.time(hour = 3, minute = 57, tzinfo = tz)
+    utc = datetime.timezone(datetime.timedelta(hours = 8))
+    everyday_time = datetime.time(hour = 3, minute = 57, tzinfo = utc)
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.omikujidataclear.start()
