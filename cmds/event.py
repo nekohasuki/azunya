@@ -211,7 +211,7 @@ class Event(Cog_extension):
                         await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!',file=pic)
                     #資料更新
                         usercache.append (user) 
-                        namecache.append({f'{user}':f'{name}'})
+                        namecache.append({f'{user}':f'{ctx.author}'})
                         omikuji_update = {'namedata':namecache,'userdata':usercache,f'{user}':f'imege\omikuji\{random_pic}'}
                         omikuji.update(omikuji_update)
                         with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
