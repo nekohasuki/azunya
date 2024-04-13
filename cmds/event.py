@@ -236,7 +236,7 @@ class Event(Cog_extension):
                     await ctx.channel.send(f'還有，{name}不要用那個稱呼叫我!!!\n我叫__梓守__!,或者也可以叫我__梓喵__')
 #訊息日誌
         if channel.id != log_channel.id and guild.id == int(setting['LOG_GUILD_ID']):
-            await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:||{user}||`)：\n{msg}[`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
+            await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
 
 
 
