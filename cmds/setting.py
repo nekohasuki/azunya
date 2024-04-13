@@ -6,7 +6,7 @@ with open('setting.json','r',encoding='utf8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
-import datetime
+import asyncio,datetime
 from typing import Optional
 
 prefix = 's-'
@@ -56,12 +56,85 @@ class Setting(Cog_extension):
                             await interaction.response.send_message(f'已將抽籤系統更新時間從__{oldtime}__調整為__{newtime}__')
                 else:
                     await interaction.response.send_message(f'User：{name}你沒有權限更改喔!')
-
-
-
-
-
-
+    commandname = (f'{prefix}role')
+    @app_commands.command(name = commandname, description = '添加/移除身分')
+    @app_commands.describe(mod = '模式(需要權限)',role='輸入身分',user='輸入用戶')
+    @app_commands.choices(mod=[app_commands.Choice(name = 'add',value = 'add'),app_commands.Choice(name = 'remove',value = 'remove)')])
+    async def relo(self,interaction:discord.Integration,mod: app_commands.Choice[str],role: Optional[str] = None,user: Optional[str] = None):
+        name = f'__`{interaction.user.global_name}`__'
+        role_id = role[3:-1]
+        user_id = user[2:-1]
+        if mod.name == "add":
+            if user == None and role == None:
+                await interaction.response.send_message(f'輸入想要給予的身分及提及該用戶\n參考：\n```/s-roleset add @新身分 @新用戶```')
+            elif role == None:
+                await interaction.response.send_message(f'請輸入要給予的身分')
+            elif user == None:
+                await interaction.response.send_message(f'請提及要給予身分的用戶')
+            else:    
+                if "@" not in str(role):
+                    await interaction.response.send_message(f'User：{name}請問...\nrole參數裡你放了甚麼??')
+                else:
+                    if "&" not in str(role):
+                        await interaction.response.send_message(f'這好像是某位User並不是身分組')
+                if "@" not in str(user):
+                    await interaction.response.send_message(f'User：{name}請問...\nuser參數裡你放了甚麼??')
+                else:
+                    if "&" in str(user):
+                        await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
+                    else:
+                        count = 0
+                        role_list = setting['MOD_role']
+                        id = interaction.user.id
+                        for role in role_list:
+                            if count == 1:
+                                break
+                            role_members = interaction.guild.get_role(int(f'{role}')).members
+                            if str(id) in str(role_members):
+                                user = interaction.guild.get_member(int(user_id))
+                                role = interaction.guild.get_role(int(role_id))
+                                msg = await user.add_roles(role)
+                                if msg == None:
+                                    count += 1
+                                    await interaction.response.send_message(f'已為__`{user.name}`__添加身分：@{role.name}')
+                        if count == 0:
+                            await interaction.response.send_message(f'沒有權限')
+        if mod.name == "remove":
+            if user == None and role == None:
+                await interaction.response.send_message(f'輸入想要移除的身分及提及該用戶\n參考：\n```/s-roleset remove @新身分 @新用戶```')
+            elif role == None:
+                await interaction.response.send_message(f'請輸入要移除的身分')
+            elif user == None:
+                await interaction.response.send_message(f'請提及要移除身分的用戶')
+            else:
+                if "@" not in str(role):
+                    await interaction.response.send_message(f'User：{name}請問...\nrole參數裡你放了甚麼??')
+                else:
+                    if "&" not in str(role):
+                        await interaction.response.send_message(f'這好像是某位User並不是身分組')
+                if "@" not in str(user):
+                    await interaction.response.send_message(f'User：{name}請問...\nuser參數裡你放了甚麼??')
+                else:
+                    count = 0
+                    if "&" in str(user):
+                        await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
+                    else:
+                        count = 0
+                        role_list = setting['MOD_role']
+                        id = interaction.user.id
+                        for role in role_list:
+                            if count == 1:
+                                break
+                            role_members = interaction.guild.get_role(int(f'{role}')).members
+                            if str(id) in str(role_members):
+                                user = interaction.guild.get_member(int(user_id))
+                                role = interaction.guild.get_role(int(role_id))
+                                msg = await user.remove_roles(role)
+                                if msg == None:
+                                    count += 1
+                                    await interaction.response.send_message(f'已為__`{user.name}`__移除身分：@{role.name}')
+                        if count == 0:
+                            await interaction.response.send_message(f'沒有權限')
 
 
 
