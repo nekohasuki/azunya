@@ -96,7 +96,7 @@ class Setting(Cog_extension):
                                 msg = await user.add_roles(role)
                                 if msg == None:
                                     count += 1
-                                    await interaction.response.send_message(f'已為__`{user.name}`__添加身分：@{role.name}')
+                                    await interaction.response.send_message(f'已為**`{user.name}`**添加身分：@{role.name}')
                         if count == 0:
                             await interaction.response.send_message(f'沒有權限')
         if mod.name == "remove":
