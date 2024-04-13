@@ -6,7 +6,7 @@ with open('setting.json','r',encoding='utf8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
-import asyncio,math
+import asyncio,datetime,math
 from typing import Optional
 
 prefix = 'd-'
@@ -23,10 +23,14 @@ class Data(Cog_extension):
         M = math.floor(t/60-H*60-d*60*24)
         S = t-M*60-H*60*60-d*60*60*24
         HMS = f"{H}:{M}:{S}"
+        created_at = self.bot.user.created_at + datetime.timedelta(hours=8)
+        y = created_at.strftime('%y')
+        m = created_at.strftime('%m')
+        d = created_at.strftime('%d')
+        setuptime = (f'{int(y)}年{int(m)}月{int(d)}日')
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        setuptime = "某天(set)"
         channels = "2(set)"
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,9 +142,8 @@ class Data(Cog_extension):
     commandname = (f'{prefix}name')
     @app_commands.command(name = commandname, description = 'description')
     async def name(self,interaction:discord.Integration):
-        
-        # interaction.user.created_at
-        await interaction.response.send_message(f'{interaction.user.created_at}')
+        channels = "2(set)"
+
 
 
 
