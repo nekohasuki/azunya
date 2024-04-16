@@ -6,7 +6,7 @@ with open('setting.json','r',encoding='utf8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
-import asyncio,datetime,math,random
+import asyncio,datetime,math,os,random
 from typing import Optional
 
 prefix = 't-'
@@ -140,12 +140,14 @@ class Tool(Cog_extension):
         await msg.edit(embed=embed)
 
 
-
-
-
-
-
-
+#暫時
+    commandname = (f'{prefix}pic')
+    @app_commands.command(name = commandname, description = 'description')
+    async def pic(self,interaction:discord.Integration):
+        random_pic = random.choice(os.listdir('./imege/omikuji'))
+        pic = discord.File(f'imege\omikuji\{random_pic}')
+        await interaction.response.send_message(file = pic)
+    
 
 
 async def setup(bot):
