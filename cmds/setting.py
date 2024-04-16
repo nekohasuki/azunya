@@ -83,22 +83,27 @@ class Setting(Cog_extension):
                     if "&" in str(user):
                         await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
                     else:
-                        count = 0
-                        role_list = setting['MOD_role']
-                        id = interaction.user.id
-                        for role in role_list:
-                            if count == 1:
-                                break
-                            role_members = interaction.guild.get_role(int(f'{role}')).members
-                            if str(id) in str(role_members):
-                                user = interaction.guild.get_member(int(user_id))
-                                role = interaction.guild.get_role(int(role_id))
-                                msg = await user.add_roles(role)
-                                if msg == None:
-                                    count += 1
-                                    await interaction.response.send_message(f'已為**`{user.name}`**添加身分：@{role.name}')
-                        if count == 0:
-                            await interaction.response.send_message(f'沒有權限')
+                        role = interaction.guild.get_role(int(role[3:-1])).position
+                        top_role = interaction.user.top_role.position
+                        if top_role > role:
+                            count = 0
+                            role_list = setting['MOD_role']
+                            id = interaction.user.id
+                            for role in role_list:
+                                if count == 1:
+                                    break
+                                role_members = interaction.guild.get_role(int(f'{role}')).members
+                                if str(id) in str(role_members):
+                                    user = interaction.guild.get_member(int(user_id))
+                                    role = interaction.guild.get_role(int(role_id))
+                                    msg = await user.add_roles(role)
+                                    if msg == None:
+                                        count += 1
+                                        await interaction.response.send_message(f'已為**`{user.global_name}`**添加身分：`@{role.name}`')
+                            if count == 0:
+                                await interaction.response.send_message(f'沒有權限')
+                        else:
+                           await interaction.response.send_message(f'沒有權限')
         if mod.name == "remove":
             if user == None and role == None:
                 await interaction.response.send_message(f'輸入想要移除的身分及提及該用戶\n參考：\n```/s-roleset remove @新身分 @新用戶```')
@@ -119,22 +124,41 @@ class Setting(Cog_extension):
                     if "&" in str(user):
                         await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
                     else:
-                        count = 0
-                        role_list = setting['MOD_role']
-                        id = interaction.user.id
-                        for role in role_list:
-                            if count == 1:
-                                break
-                            role_members = interaction.guild.get_role(int(f'{role}')).members
-                            if str(id) in str(role_members):
-                                user = interaction.guild.get_member(int(user_id))
-                                role = interaction.guild.get_role(int(role_id))
-                                msg = await user.remove_roles(role)
-                                if msg == None:
-                                    count += 1
-                                    await interaction.response.send_message(f'已為__`{user.name}`__移除身分：@{role.name}')
-                        if count == 0:
-                            await interaction.response.send_message(f'沒有權限')
+                        role = interaction.guild.get_role(int(role[3:-1])).position
+                        top_role = interaction.user.top_role.position
+                        if top_role > role:
+                            count = 0
+                            role_list = setting['MOD_role']
+                            id = interaction.user.id
+                            for role in role_list:
+                                if count == 1:
+                                    break
+                                role_members = interaction.guild.get_role(int(f'{role}')).members
+                                if str(id) in str(role_members):
+                                    user = interaction.guild.get_member(int(user_id))
+                                    role = interaction.guild.get_role(int(role_id))
+                                    msg = await user.remove_roles(role)
+                                    if msg == None:
+                                        count += 1
+                                        await interaction.response.send_message(f'已為__`{user.global_name}`__移除身分：`@{role.name}`')
+                            if count == 0:
+                                await interaction.response.send_message(f'沒有權限')
+                        else:
+                           await interaction.response.send_message(f'沒有權限')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
