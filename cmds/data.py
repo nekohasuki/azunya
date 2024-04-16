@@ -24,20 +24,14 @@ class Data(Cog_extension):
         S = t-M*60-H*60*60-d*60*60*24
         HMS = f"{H}:{M}:{S}"
         created_at = self.bot.user.created_at + datetime.timedelta(hours=8)
-        y = created_at.strftime('%y')
-        m = created_at.strftime('%m')
-        d = created_at.strftime('%d')
-        setuptime = (f'{int(y)}年{int(m)}月{int(d)}日')
-
-#///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        channels = "2(set)"
-
-#///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        created_at_y = created_at.strftime('%y')
+        created_at_m = created_at.strftime('%m')
+        created_at_d = created_at.strftime('%d')
+        setuptime = (f'{int(created_at_y)}年{int(created_at_m)}月{int(created_at_d)}日')
+        guilds = len(self.bot.guilds)
         count =10
         await interaction.response.send_message(f"**__底下跑動時間僅顯示{count}秒__**")
-        message = await interaction.channel.send(f"梓守上線了**{d}:{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+        message = await interaction.channel.send(f"梓守上線了**{d}:{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{guilds}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
         if d >= 1:
             while count > 0:
                 count -= 1
@@ -50,7 +44,7 @@ class Data(Cog_extension):
                 S = t-M*60-H*60*60-d*60*60*24
                 HMS = f"{H}:{M}:{S}"
                 await asyncio.sleep(1)
-                await message.edit(content=f"梓守上線了**{d}:{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+                await message.edit(content=f"梓守上線了**{d}:{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{guilds}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
         else:
             while count > 0:
                 count -= 1
@@ -63,7 +57,7 @@ class Data(Cog_extension):
                 S = t-M*60-H*60*60-d*60*60*24
                 HMS = f"{H}:{M}:{S}"
                 await asyncio.sleep(1)
-                await message.edit(content=f"梓守上線了**{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+                await message.edit(content=f"梓守上線了**{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{guilds}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
 #查身分組資料
     commandname = (f'{prefix}checkrole')
     @app_commands.command(name = commandname, description = '查身分資料')
@@ -92,43 +86,6 @@ class Data(Cog_extension):
     @app_commands.command(name = commandname, description = '查看延遲')
     async def ping(self, interaction: discord.Interaction):
         await interaction.response.send_message(f'{round(self.bot.latency)}/s\n'  f'{round(((self.bot.latency)-round(self.bot.latency))*1000)}/ms'),
-
-#///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        setuptime = '某天(set)'
-        channels = '2(set)'
-
-#///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        count =10
-        await interaction.response.send_message(f'**__底下跑動時間僅顯示{count}秒__**')
-        message = await interaction.channel.send(f'梓守上線了**{d}:{HMS}**這麼久\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)')
-        if d >= 1:
-            while count > 0:
-                count -= 1
-                with open('setting.json','r',encoding='utf8') as setting_file:
-                    setting = json.load(setting_file)
-                t = int(setting['onlinetime'])
-                d = math.floor(t/60/60/24)
-                H = math.floor(t/60/60-d*24)
-                M = math.floor(t/60-H*60-d*60*24)
-                S = t-M*60-H*60*60-d*60*60*24
-                HMS = f'{H}:{M}:{S}'
-                await asyncio.sleep(1)
-                await message.edit(content=f'梓守上線了**{d}:{HMS}**這麼久\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)')
-        else:
-            while count > 0:
-                count -= 1
-                with open('setting.json','r',encoding='utf8') as setting_file:
-                    setting = json.load(setting_file)
-                t = int(setting['onlinetime'])
-                d = math.floor(t/60/60/24)
-                H = math.floor(t/60/60-d*24)
-                M = math.floor(t/60-H*60-d*60*24)
-                S = t-M*60-H*60*60-d*60*60*24
-                HMS = f'{H}:{M}:{S}'
-                await asyncio.sleep(1)
-                await message.edit(content=f'梓守上線了**{HMS}**這麼久\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{channels}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)')
 #查詢伺服器的資料
     commandname = (f'{prefix}serverdata')
     @app_commands.command(name = commandname, description = '查詢伺服器的資料')
@@ -139,15 +96,28 @@ class Data(Cog_extension):
 
 
 
+
+
+
+
+
+
+
     commandname = (f'{prefix}name')
     @app_commands.command(name = commandname, description = 'description')
-    async def name(self,interaction:discord.Integration):
-        channels = "2(set)"
+    async def name(self,interaction:discord.Integration):  
+        await interaction.response.send_message("123")
+        print("1")
+        await asyncio.sleep(1)
+        print("2")
+        await interaction.response.edit_message(content="1234")
+        print("3")
+        # await interaction.response.send_message(f'{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **')
 
 
 
 
-        # await interaction.channel.send(f'{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **')
+
 
 
 
