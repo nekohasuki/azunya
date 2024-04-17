@@ -1,15 +1,34 @@
-
 {
     "          ":"↓ True or False  ",
     "keep_alive":"False",
-    
+
     "prefix":"azu",
     "TOKEN":"YOU_TOKEN",
     "WELCOME_CHANNEL_ID":"YOU_CHANNEL_ID",
-    "ROLE_ID":"YOU_ROLE_ID",
-    "ROLE_MESSAGE_ID":"YOU_MESSAGE_ID",
     "LOG_GUILD_ID": "YOU_GUILD_ID",
     "LOG_CHANNEL_ID": "YOU_LOG_CHANNEL_ID",
+    "ROLE_MESSAGE_ID":"YOU_MESSAGE_ID",
+    "ROLE_MESSAGE_CHANNEL_ID": "YOU_MESSAGE_CHANNEL_ID",
+    "################################################################################################": [
+    {"The following is the emoji reaction role ID": "The following is the emoji reaction role ID"}],
+    "DEFAULT_ROLE_ID": "YOU_DEFAULT_ROLE_ID",
+    "LOG_ROLE_ID": "YOU_LOG_ROLE_ID",
+    "NSFW_ROLE_ID": "YOU_NSFW_ROLE_ID",
+    "P_ROLE_ID": "YOU_P_ROLE_ID",
+    "####################################################################################################": [
+    {"The following are the corresponding emojis": "The following are the corresponding emojis",
+    "(Corresponding from top to bottom)":"(Corresponding from top to bottom)"}],
+    "EMOJI_FREE": "\ud83c\udd93",
+    "EMOJI_GLOWING_STAR": "\ud83c\udf1f",
+    "EMOII_SECRET": "\u3299\ufe0f",
+    "EMOII_P": "\ud83c\uddf5",
+    "###############################################################################################": [
+    {
+    "The following is the administrator role ID": "The following is the administrator role ID"
+    }
+    ],
+    "manage_messages_roles": ["","YOU_MANAGE_MESSAGE_PERMISSIONS_ROLE_ID",""],
+    "MOD_roles": ["","YOU_MOD_MESSAGE_PERMISSIONS_ROLE_ID",""],
     "###################################################################################################": [
     {"The following is the enbad storage image URL":"The following is the enbad storage image URL"}],
     "ROLE_MESSAGE_THUMBNAIL":["YOU_URL","YOU_URL"],
@@ -17,8 +36,6 @@
     "#################################################################################################": [
     {"The following stores the identity group IDs of different permissions": "The following stores the identity group IDs of different permissions",
     "(it has nothing to do with the identity group permissions of Discord itself)": "(it has nothing to do with the identity group permissions of Discord itself)"}],
-    "manage_messages_role": ["YOU_MANAGE_MESSAGE_PERMISSIONS_ROLE_ID"],
-    "EMOJI_FREE":"🆓",
     "1": "",
     "2": "",
     "3": "",
@@ -30,7 +47,7 @@
     "9": "",
     "10": "",
     "11": "",
-    "onlinetime": "588",
+    "onlinetime": "0",
     "OmikujiTime": "0:0",
     "Logo": [
     "imege/logo/Logo-1.png",
@@ -39,6 +56,6 @@
     "Imege": "imege/imege/Imege-1.png",
     "##################################################################################################": [
     {"The following is the URL storage, it has no practical use": "The following is the URL storage, it has no practical use"}],
-        "Embed": "https://embed.dan.onl/",
-        "Datetime": "https://vocus.cc/article/64acdc25fd89780001fa4aa8"
-        }
+    "Embed": "https://embed.dan.onl/",
+    "Datetime": "https://vocus.cc/article/64acdc25fd89780001fa4aa8"
+}
