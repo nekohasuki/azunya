@@ -30,7 +30,7 @@ class Setting(Cog_extension):
         elif mod.name == 'set':
             with open('setting.json','r',encoding='utf8') as setting_file:
                 setting = json.load(setting_file)
-            role_list = setting['manage_messages_role']
+            role_list = setting['manage_messages_roles']
             id = interaction.user.id
             for role in role_list:
                 role_members = interaction.guild.get_role(int(f'{role}')).members
@@ -87,7 +87,7 @@ class Setting(Cog_extension):
                         top_role = interaction.user.top_role.position
                         if top_role > role:
                             count = 0
-                            role_list = setting['MOD_role']
+                            role_list = setting['MOD_roles']
                             id = interaction.user.id
                             for role in role_list:
                                 if count == 1:
@@ -128,7 +128,7 @@ class Setting(Cog_extension):
                         top_role = interaction.user.top_role.position
                         if top_role > role:
                             count = 0
-                            role_list = setting['MOD_role']
+                            role_list = setting['MOD_roles']
                             id = interaction.user.id
                             for role in role_list:
                                 if count == 1:
