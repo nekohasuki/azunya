@@ -98,9 +98,9 @@ class Event(Cog_extension):
     async def on_message(self,ctx):
 #前置設定
         with open('setting.json','r',encoding='utf8') as setting_file:
-            setting = json.load(setting_file) 
+            setting = json.load(setting_file)
         name = ctx.author.mention
-        user = ctx.author.id     
+        user = ctx.author.id
         guild = ctx.guild
         channel = ctx.channel
         nowtime = datetime.datetime.now().strftime('%H:%M:%S')
@@ -131,45 +131,56 @@ class Event(Cog_extension):
         #……以及訊息等於關鍵字(key)
         #<and ctx.content == key>
 #問候
-        if any(word in ctx.content for word in dict_azunya) and ctx.author.bot == False:
+        if ctx.author.bot == False:
+            random_1_20 = ["1","","","","","","","","","","","","","","","","","","",""]
         #早上
             if any(word in ctx.content for word in dict_morning):
-                if nowtime > '06:00:00' and nowtime < '11:00:00':
-                    await ctx.channel.send(f'{name}也早安(≧ω≦)/\n{name}今天抽籤了嗎?')
-                else:
-                    await ctx.channel.send(f'早...安?')
+                choice = random.choice(random_1_20)
+                if choice == "1":
+                    if nowtime > '06:00:00' and nowtime < '11:00:00':
+                        await ctx.channel.send(f'{name}也早安(≧ω≦)/\n{name}今天抽籤了嗎?')
+                    else:
+                        await ctx.channel.send(f'早...安?')
         #中午~下午
             elif any(word in ctx.content for word in dict_afternoon):
-                if nowtime > '11:00:00' and nowtime < '13:00:00':
-                    food = random.choice(dict_food)
-                    await ctx.channel.send(f'{name}午餐吃什麼??\n順帶一題我剛吃了{food}')
-                elif nowtime > '13:00:00' and nowtime < '19:00:00':
-                    await ctx.channel.send(f'{name}下午好呀~~')
-                else:
-                    await ctx.channel.send('午...安?\n等等,我看一下時間')
-                    await asyncio.sleep(1)
-                    await ctx.channel.send(f'現在好像是{nowtime}ㄟ')  
+                choice = random.choice(random_1_20)
+                if choice == "1":
+                    if nowtime > '11:00:00' and nowtime < '13:00:00':
+                        food = random.choice(dict_food)
+                        await ctx.channel.send(f'{name}午餐吃什麼??\n順帶一題我剛吃了{food}')
+                    elif nowtime > '13:00:00' and nowtime < '19:00:00':
+                        await ctx.channel.send(f'{name}下午好呀~~')
+                    else:
+                        await ctx.channel.send('午...安?\n等等,我看一下時間')
+                        await asyncio.sleep(1)
+                        await ctx.channel.send(f'現在好像是{nowtime}ㄟ')  
         #晚上                  
             elif any(word in ctx.content for word in dict_evening):
-                if nowtime > '19:00:00' or nowtime < '03:00:00':
-                    await ctx.channel.send(f'{name}晚上好呀晚上好')
-                else:
-                    await ctx.channel.send(f'{name}現在時間{nowtime}\n這時間可能不算晚喔?')
+                choice = random.choice(random_1_20)
+                if choice == "1":
+                    if nowtime > '19:00:00' or nowtime < '03:00:00':
+                        await ctx.channel.send(f'{name}晚上好呀晚上好')
+                    else:
+                        await ctx.channel.send(f'{name}現在時間{nowtime}\n這時間可能不算晚喔?')
         #睡前
             elif any(word in ctx.content for word in dict_night):
-                if nowtime > '19:00:00' and nowtime < '21:00:00':
-                    await ctx.channel.send(f'{name}晚安,是說好早睡')
-                elif nowtime > '21:00:00' or nowtime < '03:00:00':
-                    await ctx.channel.send(f'{name}晚安,祝好夢')
-                elif nowtime > '03:00:00' and nowtime < '06:00:00':
-                    await ctx.channel.send(f'晚安?\n{name}也太晚睡了吧???')
-                else:
-                    await ctx.channel.send(f'蛤?晚安?')
-                    await asyncio.sleep(1)
-                    await ctx.channel.send(f'好吧...晚安...')
+                choice = random.choice(random_1_20)
+                if choice == "1":
+                    if nowtime > '19:00:00' and nowtime < '21:00:00':
+                        await ctx.channel.send(f'{name}晚安,是說好早睡')
+                    elif nowtime > '21:00:00' or nowtime < '03:00:00':
+                        await ctx.channel.send(f'{name}晚安,祝好夢')
+                    elif nowtime > '03:00:00' and nowtime < '06:00:00':
+                        await ctx.channel.send(f'晚安?\n{name}也太晚睡了吧???')
+                    else:
+                        await ctx.channel.send(f'蛤?晚安?')
+                        await asyncio.sleep(1)
+                        await ctx.channel.send(f'好吧...晚安...')
         #單純安安
             elif any(word in ctx.content for word in '安安'):
-                await ctx.channel.send(f'{name}安安呀 安安 安安')
+                choice = random.choice(random_1_20)
+                if choice == "1":
+                    await ctx.channel.send(f'{name}安安呀 安安 安安')
         #안녕하세요(你好)
             elif any(word in ctx.content for word in '安ニャー') and any(word in ctx.content for word in 'SAY') and any(word in ctx.content for word in '呦'):
                 await ctx.channel.send(f'{name}안녕하세요')
@@ -187,6 +198,8 @@ class Event(Cog_extension):
 #抽籤系統/URL
         if channel != log_channel:
             if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)):
+                if user == (697842681082281985):
+                    user = (938100109240074310)
                 with open('setting.json','r',encoding='utf8') as setting_file:
                     setting = json.load(setting_file)
                 with open('cmds\data\omikuji.json','r',encoding='utf8') as omikuji_file:
@@ -203,7 +216,7 @@ class Event(Cog_extension):
                     if user in omikuji['userdata']:
                         # pic = discord.File(f'imege\omikuji\{omikuji[f'{int(user)}']}')
                         pic = discord.File(f'{omikuji[f'{int(user)}']}')
-                        await ctx.channel.send(f'User : <@{user}>\n你今天已經抽過了啦!',file = pic)
+                        await ctx.channel.send(f'User : <@{ctx.author.id}>\n你今天已經抽過了啦!',file = pic)
                 #沒抽過就抽出結果後更新資料進'omikuji.json'
                     else:
                         random_pic = random.choice(os.listdir('./imege/omikuji'))
