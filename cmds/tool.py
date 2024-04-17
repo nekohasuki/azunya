@@ -144,9 +144,10 @@ class Tool(Cog_extension):
     commandname = (f'{prefix}pic')
     @app_commands.command(name = commandname, description = 'description')
     async def pic(self,interaction:discord.Integration):
-        random_pic = random.choice(os.listdir('./imege/omikuji'))
-        pic = discord.File(f'imege\omikuji\{random_pic}')
-        await interaction.response.send_message(file = pic)
+        msg = ["123","456"]
+        await interaction.response.send_message(f'{msg}')
+        choice_msg = random.choice(msg)
+        await interaction.channel.send(f'{choice_msg}')
     
 
 
