@@ -148,7 +148,12 @@ class Tool(Cog_extension):
         await interaction.response.send_message(f'{msg}')
         choice_msg = random.choice(msg)
         await interaction.channel.send(f'{choice_msg}')
-    
+        # await interaction.response.send_message(f'OK')
+        # for picdata in os.listdir('./imege/omikuji'):
+        #     if picdata.endswith('png'):
+        #         await asyncio.sleep(.5)
+        #         pic = discord.File(f'imege\omikuji\{picdata}')
+        #         await interaction.channel.send(file = pic)
 
 
 async def setup(bot):
