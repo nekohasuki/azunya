@@ -18,7 +18,6 @@
     {"The following stores the identity group IDs of different permissions": "The following stores the identity group IDs of different permissions",
     "(it has nothing to do with the identity group permissions of Discord itself)": "(it has nothing to do with the identity group permissions of Discord itself)"}],
     "manage_messages_role": ["YOU_MANAGE_MESSAGE_PERMISSIONS_ROLE_ID"],
-    "count":["1","2","3","4","5","6","7","8","9","0"],
     "EMOJI_FREE":"🆓",
     "1": "",
     "2": "",
