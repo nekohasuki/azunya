@@ -64,10 +64,16 @@ class Event(Cog_extension):
                 role = guild.get_role(int(setting['LOG_ROLE_ID']))
                 print(f'#|[{guild}] : User"{user}" add {reaction.emoji}-@{role}')
                 await user.add_roles(role)
-        # #第三組
+        #第三組
         if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
             if str(reaction.emoji) == setting['EMOII_SECRET']:
                 role = guild.get_role(int(setting['NSFW_ROLE_ID']))
+                print(f'#|[{guild}] : User"{user}" add {reaction.emoji}-@{role}')
+                await user.add_roles(role)
+        #第四組
+        if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
+            if str(reaction.emoji) == setting['EMOII_P']:
+                role = guild.get_role(int(setting['P_ROLE_ID']))
                 print(f'#|[{guild}] : User"{user}" add {reaction.emoji}-@{role}')
                 await user.add_roles(role)
 #移除身分組
@@ -88,10 +94,16 @@ class Event(Cog_extension):
                 role = guild.get_role(int(setting['LOG_ROLE_ID']))
                 print(f'#|[{guild}] : User"{user}" remove {reaction.emoji}-@{role}')
                 await user.remove_roles(role)
-        # #第三組
+        #第三組
         if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
             if str(reaction.emoji) == setting['EMOII_SECRET']:
                 role = guild.get_role(int(setting['NSFW_ROLE_ID']))
+                print(f'#|[{guild}] : User"{user}" remove {reaction.emoji}-@{role}')
+                await user.remove_roles(role)
+        #第四組
+        if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
+            if str(reaction.emoji) == setting['EMOII_P']:
+                role = guild.get_role(int(setting['P_ROLE_ID']))
                 print(f'#|[{guild}] : User"{user}" remove {reaction.emoji}-@{role}')
                 await user.remove_roles(role)
     @commands.Cog.listener()
