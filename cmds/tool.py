@@ -110,6 +110,8 @@ class Tool(Cog_extension):
         role_09 = guild.get_role(1080316995448352868).mention
         #無身份
         role_10 = guild.get_role(958827709272821770).mention
+        #P卡
+        role_11 = guild.get_role(1084440839767470201).mention
         embed = discord.Embed(title='**__請按照規則領取身份__**',url='https://discord.com/channels/1219180207534243891/1219815148622057523',description='** **',color=0xaa095f,timestamp=datetime.datetime.now())
         embed.set_author(name='Azumari :',url='https://github.com/nekohasuki/azunya/blob/main/azunya.py')
         embed.add_field(name=f'**現界[**一**]**',value=f'身分：{role_01}\n介紹：普通人\n條件：底下:free:按鈕領取\n** **',inline=True)
@@ -120,6 +122,7 @@ class Tool(Cog_extension):
         embed.add_field(name=f'** **',value='**\n **',inline=False)
         embed.add_field(name=f'**特殊現界**',value=f'身分：{role_05}\n介紹：感覺18太老了所以是17www\n　　　(可以聊些有的沒的www)\n條件：底下:secret:按鈕領取\n\n** **',inline=False)
         embed.add_field(name=f'**訊息紀錄**',value=f'身分：{role_06}\n介紹：用於查看[__訊息紀錄__](https://discord.com/channels/958801205776248833/1227498587890516009)\n條件：底下:glowing_star:按鈕領取\n** **',inline=False)
+        embed.add_field(name=f'**領取P卡**',value=f'身分：{role_11}\n介紹：用於(未知用途)\n條件：底下:regional_indicator_p:按鈕領取\n** **',inline=False)
         embed.add_field(name=f'**血族**',value=f'身分：{role_07}\n介紹：館館偷摸她雞\n　　　且可繞\'{role_05}&{role_04} \'之條件享受權力\n條件：請先預約並於[__休息室__](https://discord.com/channels/958801205776248833/958809630778195979)等候審核與評估\n\n** **',inline=False)
         embed.add_field(name=f'**特殊身份\n(特殊狀況可取)**',value=f'{role_08}\n{role_09}\n{role_10}',inline=False)
         embed.set_image(url=random.choice(setting['ROLE_MESSAGE_IMEGE']))
@@ -129,13 +132,10 @@ class Tool(Cog_extension):
 #編輯Embad
     @commands.command()
     async def embededit(self,ctx):
-        import datetime
-        now = datetime.datetime(2024,3,27,1,10)
-        time = "01:10"
-        member = ""
         channelid = ""
         msgid = ""
-        msg = self.bot.get_channel(channelid).get_partial_message(msgid)
+        msg = self.bot.get_channel(int(channelid)).get_partial_message(int(msgid))
+
         embed = discord.Embed()
         await msg.edit(embed=embed)
 
