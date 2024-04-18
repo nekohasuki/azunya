@@ -112,6 +112,7 @@ class Event(Cog_extension):
         with open('setting.json','r',encoding='utf8') as setting_file:
             setting = json.load(setting_file)
         name = ctx.author.mention
+        global_name = ctx.author.global_name
         user = ctx.author.id
         guild = ctx.guild
         channel = ctx.channel
@@ -144,19 +145,23 @@ class Event(Cog_extension):
         #<and ctx.content == key>
 #問候
         if ctx.author.bot == False:
-            random_1_20 = ["1","","","","","","","","","","","","","","","","","","",""]
+            random_1_10 = ["1","","","","","","","","",""]
         #早上
             if any(word in ctx.content for word in dict_morning):
-                choice = random.choice(random_1_20)
+                choice = random.choice(random_1_10)
                 if choice == "1":
+                    print(f'梓喵回應了User : "{global_name}"的早安')
                     if nowtime > '06:00:00' and nowtime < '11:00:00':
                         await ctx.channel.send(f'{name}也早安(≧ω≦)/\n{name}今天抽籤了嗎?')
                     else:
                         await ctx.channel.send(f'早...安?')
+                else:
+                    print(f'User : "{global_name}" 觸發了早安')
         #中午~下午
             elif any(word in ctx.content for word in dict_afternoon):
-                choice = random.choice(random_1_20)
+                choice = random.choice(random_1_10)
                 if choice == "1":
+                    print(f'梓喵回應了User : "{global_name}"的午安')
                     if nowtime > '11:00:00' and nowtime < '13:00:00':
                         food = random.choice(dict_food)
                         await ctx.channel.send(f'{name}午餐吃什麼??\n順帶一題我剛吃了{food}')
@@ -165,19 +170,25 @@ class Event(Cog_extension):
                     else:
                         await ctx.channel.send('午...安?\n等等,我看一下時間')
                         await asyncio.sleep(1)
-                        await ctx.channel.send(f'現在好像是{nowtime}ㄟ')  
+                        await ctx.channel.send(f'現在好像是**{nowtime[:-3]}**ㄟ')  
+                else:
+                    print(f'User : "{global_name}" 觸發了午安')
         #晚上                  
             elif any(word in ctx.content for word in dict_evening):
-                choice = random.choice(random_1_20)
+                choice = random.choice(random_1_10)
                 if choice == "1":
+                    print(f'梓喵回應了User : "{global_name}"的晚上好')
                     if nowtime > '19:00:00' or nowtime < '03:00:00':
                         await ctx.channel.send(f'{name}晚上好呀晚上好')
                     else:
-                        await ctx.channel.send(f'{name}現在時間{nowtime}\n這時間可能不算晚喔?')
+                        await ctx.channel.send(f'{name}現在時間**{nowtime[:-3]}**\n這時間可能不算晚喔?')
+                else:
+                    print(f'User : "{global_name}" 觸發了晚上好')
         #睡前
             elif any(word in ctx.content for word in dict_night):
-                choice = random.choice(random_1_20)
+                choice = random.choice(random_1_10)
                 if choice == "1":
+                    print(f'梓喵回應了User : "{global_name}"的晚安')
                     if nowtime > '19:00:00' and nowtime < '21:00:00':
                         await ctx.channel.send(f'{name}晚安,是說好早睡')
                     elif nowtime > '21:00:00' or nowtime < '03:00:00':
@@ -188,11 +199,16 @@ class Event(Cog_extension):
                         await ctx.channel.send(f'蛤?晚安?')
                         await asyncio.sleep(1)
                         await ctx.channel.send(f'好吧...晚安...')
+                else:
+                    print(f'User : "{global_name}" 觸發了晚安')
         #單純安安
             elif any(word in ctx.content for word in '安安'):
-                choice = random.choice(random_1_20)
+                choice = random.choice(random_1_10)
                 if choice == "1":
+                    print(f'梓喵回應了User : "{global_name}"的安安')
                     await ctx.channel.send(f'{name}安安呀 安安 安安')
+                else:
+                    print(f'User : "{global_name}" 觸發了安安')
         #안녕하세요(你好)
             elif any(word in ctx.content for word in '安ニャー') and any(word in ctx.content for word in 'SAY') and any(word in ctx.content for word in '呦'):
                 await ctx.channel.send(f'{name}안녕하세요')
