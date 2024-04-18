@@ -90,6 +90,8 @@ class Tool(Cog_extension):
     async def rulemessage(self, ctx):
         guild = ctx.guild
         msg = self.bot.get_channel(int(setting['ROLE_MESSAGE_CHANNEL_ID'])).get_partial_message(setting['ROLE_MESSAGE_ID'])
+        # The following is for reference
+        # role_00 = guild.get_role("YOU_ROLE_ID").mention
         #普通平民老百姓
         role_01 = guild.get_role(965668031114129438).mention
         #平民老百姓
@@ -121,8 +123,8 @@ class Tool(Cog_extension):
         embed.add_field(name=f'**現界[**四**]**',value=f'身分：{role_04}\n介紹：有錢有閒有權\n　　　即使如此卻依舊還是普通人\n條件：獲得現界三級並至少■■■■\n(條件未開放)',inline=True)
         embed.add_field(name=f'** **',value='**\n **',inline=False)
         embed.add_field(name=f'**特殊現界**',value=f'身分：{role_05}\n介紹：感覺18太老了所以是17www\n　　　(可以聊些有的沒的www)\n條件：底下:secret:按鈕領取\n\n** **',inline=False)
-        embed.add_field(name=f'**訊息紀錄**',value=f'身分：{role_06}\n介紹：用於查看[__訊息紀錄__](https://discord.com/channels/958801205776248833/1227498587890516009)\n條件：底下:glowing_star:按鈕領取\n** **',inline=False)
-        embed.add_field(name=f'**領取P卡**',value=f'身分：{role_11}\n介紹：用於(未知用途)\n條件：底下:regional_indicator_p:按鈕領取\n** **',inline=False)
+        embed.add_field(name=f'**訊息紀錄**',value=f'身分：{role_06}\n介紹：用於查看[__訊息紀錄__](https://discord.com/channels/958801205776248833/1227498587890516009)\n條件：底下:glowing_star:按鈕領取\n\n** **',inline=False)
+        embed.add_field(name=f'**領取P卡**',value=f'身分：{role_11}\n介紹：用於(未知用途)\n條件：底下:regional_indicator_p:按鈕領取\n\n** **',inline=False)
         embed.add_field(name=f'**血族**',value=f'身分：{role_07}\n介紹：館館偷摸她雞\n　　　且可繞\'{role_05}&{role_04} \'之條件享受權力\n條件：請先預約並於[__休息室__](https://discord.com/channels/958801205776248833/958809630778195979)等候審核與評估\n\n** **',inline=False)
         embed.add_field(name=f'**特殊身份\n(特殊狀況可取)**',value=f'{role_08}\n{role_09}\n{role_10}',inline=False)
         embed.set_image(url=random.choice(setting['ROLE_MESSAGE_IMEGE']))
