@@ -72,7 +72,7 @@ class Event(Cog_extension):
                 await user.add_roles(role)
         #第四組
         if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
-            if str(reaction.emoji) == setting['EMOII_P']:
+            if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
                 role = guild.get_role(int(setting['P_ROLE_ID']))
                 print(f'#|[{guild}] : User"{user}" add {reaction.emoji}-@{role}')
                 await user.add_roles(role)
@@ -102,7 +102,7 @@ class Event(Cog_extension):
                 await user.remove_roles(role)
         #第四組
         if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
-            if str(reaction.emoji) == setting['EMOII_P']:
+            if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
                 role = guild.get_role(int(setting['P_ROLE_ID']))
                 print(f'#|[{guild}] : User"{user}" remove {reaction.emoji}-@{role}')
                 await user.remove_roles(role)
