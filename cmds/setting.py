@@ -56,6 +56,7 @@ class Setting(Cog_extension):
                             await interaction.response.send_message(f'已將抽籤系統更新時間從__{oldtime}__調整為__{newtime}__')
                 else:
                     await interaction.response.send_message(f'User：{name}你沒有權限更改喔!')
+#設定用戶身分組
     commandname = (f'{prefix}role')
     @app_commands.command(name = commandname, description = '添加/移除身分')
     @app_commands.describe(mod = '模式(需要權限)',role='輸入身分',user='輸入用戶')
