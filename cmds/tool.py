@@ -140,22 +140,17 @@ class Tool(Cog_extension):
 
         embed = discord.Embed()
         await msg.edit(embed=embed)
-
-
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #暫時
     commandname = (f'{prefix}pic')
     @app_commands.command(name = commandname, description = 'description')
     async def pic(self,interaction:discord.Integration):
-        msg = ["123","456"]
-        await interaction.response.send_message(f'{msg}')
-        choice_msg = random.choice(msg)
-        await interaction.channel.send(f'{choice_msg}')
-        # await interaction.response.send_message(f'OK')
-        # for picdata in os.listdir('./imege/omikuji'):
-        #     if picdata.endswith('png'):
-        #         await asyncio.sleep(.5)
-        #         pic = discord.File(f'imege\omikuji\{picdata}')
-        #         await interaction.channel.send(file = pic)
+        await interaction.response.send_message(f'OK')
+        for picdata in os.listdir('./imege/omikuji'):
+            if picdata.endswith('png'):
+                await asyncio.sleep(0.5)
+                pic = discord.File(f'imege\omikuji\{picdata}')
+                await interaction.channel.send(file = pic)
 
 
 async def setup(bot):
