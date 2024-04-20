@@ -228,18 +228,18 @@ class Event(Cog_extension):
             if any(word in ctx.content for word in dict_morning):
                 choice = random.choice(random_1_10)
                 if choice == "1":
-                    print(f'梓喵回應了User : "{global_name}"的早安')
+                    print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的早安')
                     if nowtime > '06:00:00' and nowtime < '11:00:00':
                         await ctx.channel.send(random.choice(morning))
                     else:
                         await ctx.channel.send(random.choice(morning_Else))
                 else:
-                    print(f'User : "{global_name}" 觸發了早安')
+                    print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了早安')
         #中午~下午
             elif any(word in ctx.content for word in dict_afternoon):
                 choice = random.choice(random_1_10)
                 if choice == "1":
-                    print(f'梓喵回應了User : "{global_name}"的午安')
+                    print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的午安')
                     if nowtime > '11:00:00' and nowtime < '13:00:00':
                         await ctx.channel.send(random.choice(afternoon_A))
                     elif nowtime > '13:00:00' and nowtime < '19:00:00':
@@ -247,23 +247,23 @@ class Event(Cog_extension):
                     else:
                         await ctx.channel.send(random.choice(afternoon_Else))
                 else:
-                    print(f'User : "{global_name}" 觸發了午安')
+                    print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了午安')
         #晚上                  
             elif any(word in ctx.content for word in dict_evening):
                 choice = random.choice(random_1_10)
                 if choice == "1":
-                    print(f'梓喵回應了User : "{global_name}"的晚上好')
+                    print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的晚上好')
                     if nowtime > '19:00:00' or nowtime < '03:00:00':
                         await ctx.channel.send(random.choice(evening))
                     else:
                         await ctx.channel.send(random.choice(evening_Else))
                 else:
-                    print(f'User : "{global_name}" 觸發了晚上好')
+                    print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了晚上好')
         #睡前
             elif any(word in ctx.content for word in dict_night):
                 choice = random.choice(random_1_10)
                 if choice == "1":
-                    print(f'梓喵回應了User : "{global_name}"的晚安')
+                    print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的晚安')
                     if nowtime > '19:00:00' and nowtime < '21:00:00':
                         await ctx.channel.send(random.choice(night_A))
                     elif nowtime > '21:00:00' or nowtime < '03:00:00':
@@ -273,15 +273,15 @@ class Event(Cog_extension):
                     else:
                         await ctx.channel.send(random.choice(night_Else))
                 else:
-                    print(f'User : "{global_name}" 觸發了晚安')
+                    print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了晚安')
         #單純安安
             elif any(word in ctx.content for word in '安安'):
                 choice = random.choice(random_1_10)
                 if choice == "1":
-                    print(f'梓喵回應了User : "{global_name}"的安安')
+                    print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的安安')
                     await ctx.channel.send(f'{name}安安呀 安安 安安')
                 else:
-                    print(f'User : "{global_name}" 觸發了安安')
+                    print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了安安')
         #안녕하세요(你好)
             elif any(word in ctx.content for word in '安ニャー') and any(word in ctx.content for word in 'SAY') and any(word in ctx.content for word in '呦'):
                 await ctx.channel.send(f'{name}안녕하세요')
@@ -298,13 +298,13 @@ class Event(Cog_extension):
             # get_off_work = []
         #上班上學
             if any(word in ctx.content for word in dict_go_to_Work):
-                print(f'User : "{global_name}" 觸發了上班上學')
+                print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了上班上學')
         #下班放學
             if any(word in ctx.content for word in dict_get_off_work):
-                print(f'User : "{global_name}" 觸發了下班放學')
+                print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了下班放學')
         #週五
             if any(word in ctx.content for word in dict_Friday):
-                print(f'User : "{global_name}" 觸發了週五')
+                print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了週五')
                 weekday = datetime.datetime.now().weekday()+1
                 if weekday == 5:
                     await ctx.channel.send(random.choice(Friday_5))
