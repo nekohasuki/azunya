@@ -87,11 +87,11 @@ class Setting(Cog_extension):
                         role = interaction.guild.get_role(int(role[3:-1])).position
                         top_role = interaction.user.top_role.position
                         if top_role > role:
-                            count = 0
+                            counter = 0
                             role_list = setting['MOD_roles']
                             id = interaction.user.id
                             for role in role_list:
-                                if count == 1:
+                                if counter == 1:
                                     break
                                 role_members = interaction.guild.get_role(int(f'{role}')).members
                                 if str(id) in str(role_members):
@@ -99,9 +99,9 @@ class Setting(Cog_extension):
                                     role = interaction.guild.get_role(int(role_id))
                                     msg = await user.add_roles(role)
                                     if msg == None:
-                                        count += 1
+                                        counter += 1
                                         await interaction.response.send_message(f'已為**`{user.global_name}`**添加身分：`@{role.name}`')
-                            if count == 0:
+                            if counter == 0:
                                 await interaction.response.send_message(f'沒有權限')
                         else:
                            await interaction.response.send_message(f'沒有權限')
@@ -121,18 +121,18 @@ class Setting(Cog_extension):
                 if "@" not in str(user):
                     await interaction.response.send_message(f'User：{name}請問...\nuser參數裡你放了甚麼??')
                 else:
-                    count = 0
+                    counter = 0
                     if "&" in str(user):
                         await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
                     else:
                         role = interaction.guild.get_role(int(role[3:-1])).position
                         top_role = interaction.user.top_role.position
                         if top_role > role:
-                            count = 0
+                            counter = 0
                             role_list = setting['MOD_roles']
                             id = interaction.user.id
                             for role in role_list:
-                                if count == 1:
+                                if counter == 1:
                                     break
                                 role_members = interaction.guild.get_role(int(f'{role}')).members
                                 if str(id) in str(role_members):
@@ -140,9 +140,9 @@ class Setting(Cog_extension):
                                     role = interaction.guild.get_role(int(role_id))
                                     msg = await user.remove_roles(role)
                                     if msg == None:
-                                        count += 1
+                                        counter += 1
                                         await interaction.response.send_message(f'已為__`{user.global_name}`__移除身分：`@{role.name}`')
-                            if count == 0:
+                            if counter == 0:
                                 await interaction.response.send_message(f'沒有權限')
                         else:
                            await interaction.response.send_message(f'沒有權限')
