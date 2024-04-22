@@ -335,16 +335,16 @@ class Event(Cog_extension):
                     if user in omikuji['userdata']:
                         # pic = discord.File(f'imege\omikuji\{omikuji[f'{int(user)}']}')
                         pic = discord.File(f'{omikuji[f'{int(user)}']}')
-                        await ctx.channel.send(f'User : <@{ctx.author.id}>\n你今天已經抽過了啦!',file = pic)
+                        await ctx.channel.send(f'User : <@{ctx.author.id}>\n你今天已經抽過了啦!\n今日運勢：{f'{omikuji[f'{int(user)}']}'[13:-4]}',file = pic)
                 #沒抽過就抽出結果後更新資料進'omikuji.json'
                     else:
                         random_pic = random.choice(os.listdir('./imege/omikuji'))
                         pic = discord.File(f'imege\omikuji\{random_pic}')
                         await ctx.channel.send('抽出的結果是!!!!\n(搖籤筒聲)')
                         await asyncio.sleep (3)
-                        await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!',file=pic)
+                        await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!\n今日運勢：{random_pic[:-4]}',file=pic)
                     #資料更新
-                        usercache.append (user) 
+                        usercache.append(user) 
                         namecache.append({f'{user}':f'{ctx.author}'})
                         omikuji_update = {'namedata':namecache,'userdata':usercache,f'{user}':f'imege\omikuji\{random_pic}'}
                         omikuji.update(omikuji_update)
