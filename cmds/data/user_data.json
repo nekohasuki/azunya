@@ -1,20 +1,38 @@
 {
     "938100109240074310": {
-        "global_name": "",
-        "name": "",
-        "code": "",
-        "top_relo": "",
-        "name_card": "",
+        "global_name": "\u8c93\u7fbd\uff08\u516c\u4e8b\u5e33\uff09",
+        "naame": "matsumi_musu",
+        "code": "0-1",
+        "top_relo": "<@1012987733674827858>",
+        "name_card": "True",
         "point": {
-            "state": "",
-            "now_count": "",
-            "history_count": "",
-            "consumption": "",
-            "give": "",
-            "deprivation": ""
+            "state": "True",
+            "now_count": "2147483648",
+            "history_count": "2147483648",
+            "consumption": "2147483648",
+            "give": "0",
+            "deprivation": "0"
         },
-        "trade_count": "",
-        "VIP_tickets": "",
-        "VIP_chip": ""
+        "trade_count": "0",
+        "VIP_tickets": "0",
+        "VIP_chip": "0"
+    },
+    "697842681082281985": {
+        "global_name": "\u8c93\u7fbd\uff08\u751f\u6d3b\u5e33\uff09",
+        "name": "nekoha__suki",
+        "code": "0-2",
+        "top_relo": "<@1012987733674827858>",
+        "name_card": "True",
+        "point": {
+            "state": "True",
+            "now_count": "2147483648",
+            "history_count": "2147483648",
+            "consumption": "2147483648",
+            "give": "0",
+            "deprivation": "0"
+        },
+        "trade_count": "0",
+        "VIP_tickets": "0",
+        "VIP_chip": "0"
     }
 }
