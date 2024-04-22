@@ -14,43 +14,51 @@ class Point(Cog_extension):
     @app_commands.command(name = commandname, description = 'Ponit點數相關')
     @app_commands.describe(mod = '模式(需要權限)', user='輸入用戶', count='輸入數量')
     @app_commands.choices(mod=[app_commands.Choice(name = 'add',value = 'add'),app_commands.Choice(name = 'remove',value = 'remove)')])
-    async def point(self,interaction:discord.Integration,mod: app_commands.Choice[str],user: Optional[str] = None, count: Optional[int] = None):
+    async def point(self,interaction:discord.Integration,mod: app_commands.Choice[str],user: Optional[str] = None, count: Optional[int] = None):        
         role_list = ['1219645881838600293','1219645880831971408','1219645862502731876']
         id = interaction.user.id
         counter = 0
+        if count == None:
+            count = 0
         for role in role_list:
             if counter == 1:
                 break
             role_members = interaction.guild.get_role(int(f'{role}')).members
             if str(id) in str(role_members):
                 counter += 1
-                count = abs(count)
-                
-                
-                
-                
-                
-                
-                
-                if mod.name == "add":
-                    await interaction.response.send_message(f'為User：{user}添加了{count}點')
-                    
+                if "@" in user:
+                    if "&" not in user:
+                        user = interaction.guild.get_member(int(user[2:-1]))
+                        if interaction.user != user:
+                            if interaction.user.top_role.position >= user.top_role.position:
+                                count = abs(count)
+                                if mod.name == "add":
+                                    await interaction.response.send_message(f'為User：{user}添加了{count}點')
+                                    
 
 
-                if mod.name == "remove":
-                    await interaction.response.send_message(f'為User：{user}添加了{count}點')
-                    
 
+
+                                if mod.name == "remove":
+                                    await interaction.response.send_message(f'為User：{user}添加了{count}點')
 
 
 
 
 
+                            else:
+                                await interaction.response.send_message(f'沒有權限')
+                        else:
+                            await interaction.response.send_message(f'指令無法對自己使用')
+                    else:
+                        await interaction.response.send_message(f'這好像是某位User並不是身分組')
+                else:
+                    await interaction.response.send_message(f'User：__{interaction.user.global_name}__ 請問...\nuser參數裡你放了甚麼??')
 
 
 
         if counter == 0:
-            await interaction.channel.send(f'沒有權限')
+            await interaction.response.send_message(f'沒有權限')
             
             
             
