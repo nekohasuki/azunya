@@ -1,6 +1,20 @@
 {
-    "": {
-        "123": "",
-        "": ""
+    "938100109240074310": {
+        "global_name": "",
+        "name": "",
+        "code": "",
+        "top_relo": "",
+        "name_card": "",
+        "point": {
+            "state": "",
+            "now_count": "",
+            "history_count": "",
+            "consumption": "",
+            "give": "",
+            "deprivation": ""
+        },
+        "trade_count": "",
+        "VIP_tickets": "",
+        "VIP_chip": ""
     }
 }
