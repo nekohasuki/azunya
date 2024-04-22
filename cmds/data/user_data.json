@@ -1,38 +1,6 @@
 {
-    "938100109240074310":{
-        "global_name":"貓羽（公事帳）",
-        "naame":"matsumi_musu",
-        "code":"0-1",
-        "top_relo":"<@1012987733674827858>",
-        "name_card":"True",
-        "point":{
-            "state":"True",
-            "now_count":"2147483648",
-            "history_count":"2147483648",
-            "consumption":"2147483648",
-            "give":"0",
-            "deprivation":"0"
-        },
-        "trade_count":"0",
-        "VIP_tickets":"0",
-        "VIP_chip":"0"
-    },
-    "697842681082281985":{
-        "global_name":"貓羽（生活帳）",
-        "name":"nekoha__suki",
-        "code":"0-2",
-        "top_relo":"<@1012987733674827858>",
-        "name_card":"True",
-        "point":{
-            "state":"True",
-            "now_count":"2147483648",
-            "history_count":"2147483648",
-            "consumption":"2147483648",
-            "give":"0",
-            "deprivation":"0"
-        },
-        "trade_count":"0",
-        "VIP_tickets":"0",
-        "VIP_chip":"0"
+    "": {
+        "123": "",
+        "": ""
     }
 }
