@@ -32,7 +32,7 @@ class Task(Cog_extension):
             print(f'{int(Current_hours)}:{int(Current_minutes)}:{int(Current_seconds)}')
             with open('cmds\data\omikuji.json','r',encoding='utf8') as omikuji_file:
                 omikuji = json.load(omikuji_file)
-                omikuji={'userdata': [],'namedata': []}
+                omikuji={}
                 omikuji.update(omikuji)
             with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
                 json.dump(omikuji,omikuji_file)
