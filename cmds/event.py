@@ -155,7 +155,8 @@ class Event(Cog_extension):
         #<and ctx.content == key>
 #訊息日誌
         if channel.id != log_channel.id and guild.id == int(setting['LOG_GUILD_ID']):
-            await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
+            if ctx.author.bot == False:
+                await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
 #問候
         if ctx.author.bot == False:
             await asyncio.sleep(0.1)
