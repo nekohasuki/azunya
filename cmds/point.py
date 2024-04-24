@@ -67,8 +67,6 @@ class Point(Cog_extension):
                         await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
                 else:
                     await interaction.response.send_message(f'User：__{interaction.user.global_name}__ 請問...\nuser參數裡你放了甚麼??')
-
-        pass
 #給予指定用戶點數
     commandname = (f'{prefix}givepoint')
     @app_commands.command(name = commandname , description = '給予指定用戶點數')
