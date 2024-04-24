@@ -7,15 +7,15 @@
         "name_card": "True",
         "point": {
             "state": "True",
-            "now_count": 2147483648,
-            "history_count": 2147483648,
-            "consumption": "2147483648",
-            "give": "2147483648",
-            "deprivation": "2147483648"
+            "now_count": 4294967296,
+            "history_count": 4294967296,
+            "consumption": 4294967296,
+            "give": 4294967296,
+            "deprivation": 4294967296
         },
-        "trade_count": "2147483648",
-        "VIP_tickets": "2147483648",
-        "VIP_chip": "2147483648"
+        "trade_count": 4294967296,
+        "VIP_tickets": 4294967296,
+        "VIP_chip": 4294967296
     },
     "697842681082281985": {
         "global_name": "\u8c93\u7fbd\uff08\u751f\u6d3b\u5e33\uff09",
@@ -25,15 +25,15 @@
         "name_card": "True",
         "point": {
             "state": "True",
-            "now_count": 2147483648,
-            "history_count": 2147483648,
-            "consumption": "2147483648",
-            "give": "2147483648",
-            "deprivation": "2147483648"
+            "now_count": 4294967296,
+            "history_count": 4294967296,
+            "consumption": 4294967296,
+            "give": 4294967296,
+            "deprivation": 4294967296
         },
-        "trade_count": "2147483648",
-        "VIP_tickets": "2147483648",
-        "VIP_chip": "2147483648"
+        "trade_count": 4294967296,
+        "VIP_tickets": 4294967296,
+        "VIP_chip": 4294967296
     },
     "1140521596877013003": {
         "global_name": "\u55f7\u55daawou_ ",
@@ -143,18 +143,18 @@
         "VIP_tickets": "0",
         "VIP_chip": "0"
     },
-    "global_name": "\u8c93\u7fbd\uff08\u516c\u4e8b\u5e33\uff09",
-    "name": "matsumi_musu",
-    "code": "000-1",
+    "global_name": "\u8c93\u7fbd\uff08\u751f\u6d3b\u5e33\uff09",
+    "name": "nekoha__suki",
+    "code": "000-2",
     "top_role": "<@&1012987733674827858>",
     "name_card": "True",
     "point": {
         "state": "True",
-        "now_count": 35,
-        "history_count": 125,
-        "consumption": "70",
-        "give": "15",
-        "deprivation": "5"
+        "now_count": 2147483648,
+        "history_count": 2147483648,
+        "consumption": "2147483648",
+        "give": "2147483648",
+        "deprivation": "2147483648"
     },
     "trade_count": "2147483648",
     "VIP_tickets": "2147483648",
