@@ -280,7 +280,8 @@ class Event(Cog_extension):
                 else:
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了晚安')
         #單純安安
-            if any(word in ctx.content for word in '安安'):
+            key = ['安安']
+            if any(word in ctx.content for word in key):
                 choice = random.choice(random_1_10)
                 if choice == "1":
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的安安')
