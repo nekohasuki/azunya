@@ -90,7 +90,7 @@ async def unload(interaction: discord.Interaction,extension: Optional[str] = Non
     else:
         if extension in extension_list:
             await bot.unload_extension(f'cmds.{extension}')
-            await interaction.response.send_message(f'已成功取消重新加載擴充類別：__{extension}__')
+            await interaction.response.send_message(f'已成功取消加載擴充類別：__{extension}__')
         else:
             await interaction.response.send_message(f'沒有擴充類別："{extension}"')
 
