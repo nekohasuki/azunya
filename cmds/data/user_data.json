@@ -43,15 +43,15 @@
         "name_card": "True",
         "point": {
             "state": "True",
-            "now_count": "30",
-            "history_count": "30",
-            "consumption": "0",
-            "give": "0",
-            "deprivation": "0"
+            "now_count": 30,
+            "history_count": 30,
+            "consumption": 0,
+            "give": 0,
+            "deprivation": 0
         },
-        "trade_count": "0",
-        "VIP_tickets": "7",
-        "VIP_chip": "0"
+        "trade_count": 0,
+        "VIP_tickets": 7,
+        "VIP_chip": 0
     },
     "849505185364967475": {
         "global_name": "\u88ab\u8c93\u7fbd\u540c\u5316\u53c8\u9032\u5316\u7684\u9673\u662d ",
@@ -61,15 +61,15 @@
         "name_card": "False",
         "point": {
             "state": "True",
-            "now_count": "128",
-            "history_count": "184",
-            "consumption": "56",
-            "give": "0",
-            "deprivation": "0"
+            "now_count": 128,
+            "history_count": 184,
+            "consumption": 56,
+            "give": 0,
+            "deprivation": 0
         },
-        "trade_count": "0",
-        "VIP_tickets": "12",
-        "VIP_chip": "0"
+        "trade_count": 0,
+        "VIP_tickets": 12,
+        "VIP_chip": 0
     },
     "894563849804578878": {
         "global_name": "\u262f\u5996\u5922\u262fQWQ ",
@@ -79,15 +79,15 @@
         "name_card": "True",
         "point": {
             "state": "True",
-            "now_count": "30",
-            "history_count": "30",
-            "consumption": "0",
-            "give": "0",
-            "deprivation": "0"
+            "now_count": 40,
+            "history_count": 40,
+            "consumption": 0,
+            "give": 0,
+            "deprivation": 0
         },
-        "trade_count": "0",
-        "VIP_tickets": "0",
-        "VIP_chip": "0"
+        "trade_count": 0,
+        "VIP_tickets": 0,
+        "VIP_chip": 0
     },
     "703238602586456114": {
         "global_name": "\u300c\u9b77\u9b77\u662f\u5927boingboing\u300d\u7206\u5f1f ",
@@ -97,15 +97,15 @@
         "name_card": "True",
         "point": {
             "state": "True",
-            "now_count": "0",
-            "history_count": "0",
-            "consumption": "0",
-            "give": "0",
-            "deprivation": "0"
+            "now_count": 0,
+            "history_count": 0,
+            "consumption": 0,
+            "give": 0,
+            "deprivation": 0
         },
-        "trade_count": "0",
-        "VIP_tickets": "5",
-        "VIP_chip": "0"
+        "trade_count": 0,
+        "VIP_tickets": 5,
+        "VIP_chip": 0
     },
     "1073270545250009098": {
         "global_name": "\u96ea\u9748\ud83d\udc0d ",
@@ -115,15 +115,15 @@
         "name_card": "True",
         "point": {
             "state": "False",
-            "now_count": "0",
-            "history_count": "0",
-            "consumption": "0",
-            "give": "0",
-            "deprivation": "0"
+            "now_count": 22,
+            "history_count": 22,
+            "consumption": 0,
+            "give": 0,
+            "deprivation": 0
         },
-        "trade_count": "0",
-        "VIP_tickets": "0",
-        "VIP_chip": "0"
+        "trade_count": 0,
+        "VIP_tickets": 0,
+        "VIP_chip": 0
     },
     "619892110421655602": {
         "global_name": "Stars Shine ",
@@ -133,30 +133,30 @@
         "name_card": "True",
         "point": {
             "state": "None",
-            "now_count": "0",
-            "history_count": "0",
-            "consumption": "0",
-            "give": "0",
-            "deprivation": "0"
+            "now_count": 0,
+            "history_count": 0,
+            "consumption": 0,
+            "give": 0,
+            "deprivation": 0
         },
-        "trade_count": "0",
-        "VIP_tickets": "0",
-        "VIP_chip": "0"
+        "trade_count": 0,
+        "VIP_tickets": 0,
+        "VIP_chip": 0
     },
-    "global_name": "\u8c93\u7fbd\uff08\u751f\u6d3b\u5e33\uff09",
-    "name": "nekoha__suki",
-    "code": "000-2",
-    "top_role": "<@&1012987733674827858>",
+    "global_name": "\u96ea\u9748\ud83d\udc0d ",
+    "name": "snow_elf.2005",
+    "code": "005",
+    "top_role": "<@&965668031114129438>",
     "name_card": "True",
     "point": {
-        "state": "True",
-        "now_count": 2147483648,
-        "history_count": 2147483648,
-        "consumption": "2147483648",
-        "give": "2147483648",
-        "deprivation": "2147483648"
+        "state": "False",
+        "now_count": 22,
+        "history_count": 22,
+        "consumption": 0,
+        "give": 0,
+        "deprivation": 0
     },
-    "trade_count": "2147483648",
-    "VIP_tickets": "2147483648",
-    "VIP_chip": "2147483648"
+    "trade_count": 0,
+    "VIP_tickets": 0,
+    "VIP_chip": 0
 }
