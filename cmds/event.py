@@ -241,7 +241,7 @@ class Event(Cog_extension):
                 else:
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了早安')
         #中午~下午
-            elif any(word in ctx.content for word in dict_afternoon):
+            if any(word in ctx.content for word in dict_afternoon):
                 choice = random.choice(random_1_10)
                 if choice == "1":
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的午安')
@@ -254,7 +254,7 @@ class Event(Cog_extension):
                 else:
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了午安')
         #晚上                  
-            elif any(word in ctx.content for word in dict_evening):
+            if any(word in ctx.content for word in dict_evening):
                 choice = random.choice(random_1_10)
                 if choice == "1":
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的晚上好')
@@ -265,7 +265,7 @@ class Event(Cog_extension):
                 else:
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了晚上好')
         #睡前
-            elif any(word in ctx.content for word in dict_night):
+            if any(word in ctx.content for word in dict_night):
                 choice = random.choice(random_1_10)
                 if choice == "1":
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的晚安')
@@ -280,7 +280,7 @@ class Event(Cog_extension):
                 else:
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了晚安')
         #單純安安
-            elif any(word in ctx.content for word in '安安'):
+            if any(word in ctx.content for word in '安安'):
                 choice = random.choice(random_1_10)
                 if choice == "1":
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的安安')
@@ -288,7 +288,7 @@ class Event(Cog_extension):
                 else:
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了安安')
         #안녕하세요(你好)
-            elif any(word in ctx.content for word in '安ニャー') and any(word in ctx.content for word in 'SAY') and any(word in ctx.content for word in '呦'):
+            if any(word in ctx.content for word in '安ニャー') and any(word in ctx.content for word in 'SAY') and any(word in ctx.content for word in '呦'):
                 await ctx.channel.send(f'{name}안녕하세요')
 #對話
         if ctx.author.bot == False:
