@@ -145,18 +145,18 @@ class Tool(Cog_extension):
     commandname = (f'{prefix}pic')
     @app_commands.command(name = commandname, description = 'description')
     async def pic(self,interaction:discord.Integration):
-        with open('dict.json','r',encoding='utf8') as dict_file:
-            dict = json.load(dict_file)
-        dict_dessert = dict['dessert']
-        await interaction.response.send_message(f'要我列出甜點?\n讓我想想......\n那麼來嘍!')
-        for dessert in os.listdir(dict_dessert):
-            await interaction.channel.send(dessert)
-        # await interaction.response.send_message(f'OK')
-        # for picdata in os.listdir('./imege/omikuji'):
-        #     if picdata.endswith('png'):
-        #         await asyncio.sleep(0.5)
-        #         pic = discord.File(f'imege\omikuji\{picdata}')
-        #         await interaction.channel.send(file = pic)
+        # with open('dict.json','r',encoding='utf8') as dict_file:
+        #     dict = json.load(dict_file)
+        # dict_dessert = dict['dessert']
+        # await interaction.response.send_message(f'要我列出甜點?\n讓我想想......\n那麼來嘍!')
+        # for dessert in os.listdir(dict_dessert):
+        #     await interaction.channel.send(dessert)
+        await interaction.response.send_message(f'OK')
+        for picdata in os.listdir('./imege/omikuji'):
+            if picdata.endswith('png'):
+                await asyncio.sleep(0.5)
+                pic = discord.File(f'imege\omikuji\{picdata}')
+                await interaction.channel.send(file = pic)
 
 
 async def setup(bot):
