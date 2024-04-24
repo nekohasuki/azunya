@@ -64,7 +64,7 @@ class Tool(Cog_extension):
                 h = math.floor(t/60/60-d*24)
                 m = math.floor(t/60-h*60-d*60*24)
                 s = t-d*60*60*24-h*60*60-m*60
-                await asyncio.sleep(1)
+                await asyncio.sleep(.9)
                 await message.edit(content=f'剩餘時間 : **{int(d)}**天 **{h}**時**{m}**分**{s}**秒')
         else:
             await interaction.response.send_message(f'好的User : {interaction.user.mention} !\n已將時間設定為**{h}**時**{m}**分**{s}**秒\n開始到計時')
@@ -74,7 +74,7 @@ class Tool(Cog_extension):
                 h = math.floor(t/60/60)
                 m = math.floor(t/60-h*60)
                 s = t-h*60*60-m*60
-                await asyncio.sleep(1)
+                await asyncio.sleep(.9)
                 await message.edit(content=f'剩餘時間 :  **{h}**時**{m}**分**{s}**秒')
         await interaction.channel.purge(check=lambda m: m.id == int(message.id))
         await interaction.channel.send(f'User：{interaction.user.mention}!!!\n之前碼表設定的時間跑完啦啦啦!!!!!')
