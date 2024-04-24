@@ -9,3 +9,4 @@ rule.py
 /.vscode
 /node_modules
 權限.txt
+/cmds
