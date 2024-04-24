@@ -68,7 +68,7 @@ class Data(Cog_extension):
         if '@' in str(f'{role}'):
             if '&' in str(f'{role}'):
                 data = interaction.guild.get_role(int(f'{role[3:-1]}'))
-                await interaction.response.send_message(f'# color:\n   {data.color}\n# created_at:\n    {data.created_at}\n# id:\n   {data.id}\n# members:\n  {data.members}\n# permissions:\n    {data.permissions}')
+                await interaction.response.send_message(f'# color:\n   {data.color}\n# created_at:\n    {data.created_at}\n# id:\n   {data.id}\n# members:\n  {data.members}\n# position:\n    {data.position}')
             else:
                 await interaction.response.send_message(f'這好像是某位User並不是身分組')
 #查詢用戶ID
