@@ -91,30 +91,30 @@ class Tool(Cog_extension):
         guild = ctx.guild
         msg = self.bot.get_channel(int(setting['ROLE_MESSAGE_CHANNEL_ID'])).get_partial_message(setting['ROLE_MESSAGE_ID'])
         # The following is for reference
-        # role_00 = guild.get_role("YOU_ROLE_ID").mention
+        # role_00 = <@&"YOU_ROLE_ID">
         #普通平民老百姓
-        role_01 = guild.get_role(965668031114129438).mention
+        role_01 = '<@&965668031114129438>'
         #平民老百姓
-        role_02 = guild.get_role(958806085274316870).mention
+        role_02 = '<@&958806085274316870>'
         #老百姓
-        role_03 = guild.get_role(958829885504237598).mention
+        role_03 = '<@&958829885504237598>'
         #百姓
-        role_04 = guild.get_role(959015027787042856).mention
+        role_04 = '<@&959015027787042856>'
         #永遠17的
-        role_05 = guild.get_role(958812521907765308).mention
+        role_05 = '<@&958812521907765308>'
         #LOG
-        role_06 = guild.get_role(1228288640627642379).mention
+        role_06 = '<@&1228288640627642379>'
         #赫
-        role_07 = guild.get_role(958826888950874192).mention
+        role_07 = '<@&958826888950874192>'
         #歌姬
-        role_08 = guild.get_role(1079982786926100571).mention
+        role_08 = '<@&1079982786926100571>'
         #不能說的秘密
-        role_09 = guild.get_role(1080316995448352868).mention
+        role_09 = '<@&1080316995448352868>'
         #無身份
-        role_10 = guild.get_role(958827709272821770).mention
+        role_10 = '<@&958827709272821770>'
         #P卡
-        role_11 = guild.get_role(1084440839767470201).mention
-        embed = discord.Embed(title='**__請按照規則領取身份__**',url='https://discord.com/channels/1219180207534243891/1219815148622057523',description='** **',color=0xaa095f,timestamp=datetime.datetime.now())
+        role_11 = '<@&1084440839767470201>'
+        embed = discord.Embed(title='**__請按照規則領取身份__**',url='https://discord.com/channels/958801205776248833/958801907831410728',description='** **',color=0xaa095f,timestamp=datetime.datetime.now())
         embed.set_author(name='Azumari :',url='https://github.com/nekohasuki/azunya/blob/main/azunya.py')
         embed.add_field(name=f'**現界[**一**]**',value=f'身分：{role_01}\n介紹：普通人\n條件：底下:free:按鈕領取\n** **',inline=True)
         embed.add_field(name=f'**現界[**二**]**',value=f'身分：{role_02}\n介紹：有錢\n　　　但還是普通人\n條件：現界一級並至少■■■■\n(條件未開放)',inline=True)
