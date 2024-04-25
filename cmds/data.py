@@ -44,7 +44,7 @@ class Data(Cog_extension):
                 S = t-M*60-H*60*60-d*60*60*24
                 HMS = f"{H}:{M}:{S}"
                 await asyncio.sleep(1)
-                await message.edit(content=f"梓守上線了**{d}天又{HMS}**這麼久`({count}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{guilds}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
+                await message.edit(content=f"梓守上線了**{d}天又{HMS}**這麼久`({counter}/s)`\n梓守是在**{setuptime}**建立\n梓守是<@938100109240074310>寫的\n目前有**{guilds}**個伺服器能看到梓守\n[__**邀請梓守按這裡!!!**__](https://reurl.cc/MRknq3)")
         else:
             while counter > 0:
                 counter -= 1
