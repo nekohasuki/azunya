@@ -9,11 +9,8 @@ count = 1
 #---------------------------------------------
 
 # userdata_updata = {'display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'{(code)+1}','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}
-userdata_updata = {'123':112}
-print(userdata[f'{user}'])
+userdata_updata = {'13':112}
 userdata.update(userdata_updata)
-print(userdata[f'{user}'])
-
 
 
 
