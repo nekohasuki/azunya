@@ -158,11 +158,12 @@ class Event(Cog_extension):
             setting = json.load(setting_file)
         with open('dict.json','r',encoding='utf8') as dict_file:
             dict = json.load(dict_file)
-        name = ctx.author.mention
-        global_name = ctx.author.global_name
-        user = ctx.author.id
         guild = ctx.guild
         channel = ctx.channel
+        name = ctx.author.mention
+        user = ctx.author.id
+        global_name = guild.get_member(user).global_name
+        display_name = guild.get_member(user).display_name
         nowtime = datetime.datetime.now().strftime('%H:%M:%S')
         msg = ctx.content
         log_channel = self.bot.get_channel(int(setting['LOG_CHANNEL_ID']))
@@ -383,6 +384,7 @@ class Event(Cog_extension):
                     if counter == 1:
                         pic = discord.File(omikuji[f"{user}"]["pic"])
                         await ctx.channel.send(f'User : <@{ctx.author.id}>\n你今天已經抽過了啦!\n今日運勢：{omikuji[f"{user}"]["pic"][13:-4]}',file = pic)
+                        await ctx.channel.send(f'{display_name}')
                 #沒抽過就抽出結果後更新資料進'omikuji.json'
                     elif counter == 0:
                         random_pic = random.choice(os.listdir('./imege/omikuji'))
@@ -390,9 +392,10 @@ class Event(Cog_extension):
                         await ctx.channel.send('抽出的結果是!!!!\n(搖籤筒聲)')
                         await asyncio.sleep (3)
                         await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!\n今日運勢：{random_pic[:-4]}',file=pic)
+                        await ctx.channel.send(f'{display_name}')
                     #資料更新
                         omikuji_update = {f'{user}':{"name":"","pic":""}}
-                        omikuji_update[f'{user}']["name"] = f'{ctx.author}'
+                        omikuji_update[f'{user}']["name"] = f'{display_name}'
                         omikuji_update[f'{user}']["pic"] = f'imege\omikuji\{random_pic}'
                         omikuji.update(omikuji_update)
                         with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
