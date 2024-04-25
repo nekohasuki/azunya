@@ -84,12 +84,10 @@ class Event(Cog_extension):
                         if user.id == int(data):
                             counter += 1
                             userdata_update = userdata[f'{user.id}']
-                            print(userdata[f'{user.id}'])
                             userdata_update['point']['state'] = True
                             userdata_update['display_name'] = user.display_name
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
-                            print(userdata[f'{user.id}'])
                             userdata[f'{user.id}'].update(userdata_update)
                             with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
                                 json.dump(userdata , UserDataFile , indent=4)
@@ -139,14 +137,11 @@ class Event(Cog_extension):
                         if user.id == int(data):
                             counter += 1
                             userdata_update = userdata[f'{user.id}']
-                            print(userdata[f'{user.id}'])
                             userdata_update['point']['state'] = False
                             userdata_update['display_name'] = user.display_name
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
-                            print(userdata[f'{user.id}'])
                             userdata[f'{user.id}'].update(userdata_update)
-
                             with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
                                 json.dump(userdata , UserDataFile , indent=4)
                     if counter == 0:
