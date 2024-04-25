@@ -1,23 +1,24 @@
 import json
-with open('cmds\\data\\test.json','r',encoding='utf8') as UserDataFile:
+with open('cmds\\data\\user_data.json','r',encoding='utf8') as UserDataFile:
     userdata = json.load(UserDataFile)
 #抓取檔案用的不要理他
 
 #---------------------------------------------
-user = 938100109240074310
+user = 697842681082281985
 count = 1
 #---------------------------------------------
 
-userdata_updata = userdata[f"{user}"]
-print(userdata)
-now_count = userdata_updata['point']['now_count']
-history_count = userdata_updata['point']['history_count']
-userdata_updata['point']['now_count'] = int(now_count) + count
-userdata_updata['point']['history_count'] = int(history_count) + count
+# userdata_updata = {'display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'{(code)+1}','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}
+userdata_updata = {'123':112}
+print(userdata[f'{user}'])
+userdata.update(userdata_updata)
+print(userdata[f'{user}'])
 
 
-userdata[f"{user}"].update(userdata_updata)
-with open('cmds\\data\\test.json','w',encoding='utf8') as UserDataFile:
+
+
+
+with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
     json.dump(userdata,UserDataFile,indent=4)
 
 
