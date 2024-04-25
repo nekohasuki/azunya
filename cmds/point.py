@@ -7,7 +7,7 @@ with open('setting.json' , 'r' , encoding='utf8') as setting_file:
 
 from core.classes import Cog_extension
 from typing import Optional
-import datetime
+import asyncio,datetime
 
 prefix = 'p-'
 class Point(Cog_extension):
@@ -18,7 +18,7 @@ class Point(Cog_extension):
     async def checkpoint(self , interaction:discord.Integration , user: Optional[str] = None):
         if user == None:
             await interaction.response.send_message(f'請輸入用戶')
-        else:    
+        else:
             with open('setting.json' , 'r' , encoding='utf8') as setting_file:
                 setting = json.load(setting_file)
             role_list = setting['MOD_roles']
@@ -33,21 +33,29 @@ class Point(Cog_extension):
                     counter += 1
                     if "@" in user:
                         if "&" not in user:
+                            user = interaction.guild.get_member(int(user[2:-1]))
                             with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
                                 userdata = json.load(UserDataFile)
-                            state = userdata[f'{user[2:-1]}']['point']['state']
-                            now_count = userdata[f'{user[2:-1]}']['point']['now_count']
-                            history_count = userdata[f'{user[2:-1]}']['point']['history_count']
-                            consumption = userdata[f'{user[2:-1]}']['point']['consumption']
-                            give = userdata[f'{user[2:-1]}']['point']['give']
-                            deprivation = userdata[f'{user[2:-1]}']['point']['deprivation']
-                            trade_count = userdata[f'{user[2:-1]}']['trade_count']
-                            user = interaction.guild.get_member(int(user[2:-1]))
-                            if state == 'True':
+                            if user not in userdata:
+                                global_name = user.global_name
+                                if global_name == None:
+                                    global_name = f'name:{user.name}'
+                                userdata_update = {f'{user.id}':{'display_name':f'{user.display_name}','global_name':f'{global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':None,'point':{'state':None,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                                userdata.update(userdata_update)
+                                with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
+                                    json.dump(userdata , UserDataFile , indent=4)
+                            state = userdata[f'{user.id}']['point']['state']
+                            now_count = userdata[f'{user.id}']['point']['now_count']
+                            history_count = userdata[f'{user.id}']['point']['history_count']
+                            consumption = userdata[f'{user.id}']['point']['consumption']
+                            give = userdata[f'{user.id}']['point']['give']
+                            deprivation = userdata[f'{user.id}']['point']['deprivation']
+                            trade_count = userdata[f'{user.id}']['trade_count']
+                            if state == True:
                                 state = '已註冊'
-                            if state == 'False':
+                            if state == False:
                                 state = '已收回'
-                            if state == 'None':
+                            if state == None:
                                 state = '未註冊'
                             if now_count > 2147483648 :
                                 now_count = '無上限'
@@ -62,7 +70,7 @@ class Point(Cog_extension):
                             if trade_count > 2147483648 :
                                 trade_count = '無上限'
                             if interaction.user.top_role.position >= user.top_role.position:
-                                embed = discord.Embed(title=f'**"{user.global_name}"的點數資料 :**',url=f'https://discord.com/channels/{interaction.guild.id}/{interaction.channel.id}',description=f'**當前總量：    {now_count}**\n**歷史總量：    {history_count}**\n**總消耗：    {consumption}**\n**曾給出：    {give}**\n**被剝奪：    {deprivation}**\n**交易量：    {trade_count}**\n**註冊狀態：    __{state}__**',color=color)
+                                embed = discord.Embed(title=f'**"{user.display_name}"的點數資料 :**',url=f'https://discord.com/channels/{interaction.guild.id}/{interaction.channel.id}',description=f'**當前總量：    {now_count}**\n**歷史總量：    {history_count}**\n**總消耗：    {consumption}**\n**曾給出：    {give}**\n**被剝奪：    {deprivation}**\n**交易量：    {trade_count}**\n**註冊狀態：    __{state}__**',color=color)
                                 await interaction.response.send_message(embed=embed)
                             else:
                                 await interaction.response.send_message(f'沒有權限')
@@ -131,6 +139,14 @@ class Point(Cog_extension):
         color = interaction.user.color
         with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
             userdata = json.load(UserDataFile)
+        if f'{interaction.user.id}' not in userdata:
+            global_name = interaction.user.global_name
+            if global_name == None:
+                global_name = f'name:{interaction.user.name}'
+            userdata_update = {f'{interaction.user.id}':{'display_name':f'{interaction.user.display_name}','global_name':f'{global_name}','code':f'#NO','top_role':f'<@&{interaction.user.top_role.id}>','name_card':None,'point':{'state':None,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+            userdata.update(userdata_update)
+            with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
+                json.dump(userdata , UserDataFile , indent=4)
         state = userdata[f'{interaction.user.id}']['point']['state']
         now_count = userdata[f'{interaction.user.id}']['point']['now_count']
         history_count = userdata[f'{interaction.user.id}']['point']['history_count']
@@ -138,11 +154,11 @@ class Point(Cog_extension):
         give = userdata[f'{interaction.user.id}']['point']['give']
         deprivation = userdata[f'{interaction.user.id}']['point']['deprivation']
         trade_count = userdata[f'{interaction.user.id}']['trade_count']
-        if state == 'True':
+        if state == True:
             state = '已註冊'
-        if state == 'False':
+        if state == False:
             state = '已收回'
-        if state == 'None':
+        if state == None:
             state = '未註冊'
         if now_count > 2147483648 :
             now_count = '無上限'
@@ -156,7 +172,7 @@ class Point(Cog_extension):
             deprivation = '無上限'
         if trade_count > 2147483648 :
             trade_count = '無上限'
-        embed = discord.Embed(title=f'**"{interaction.user.global_name}"的點數資料 :**',url=f'https://discord.com/channels/{interaction.guild.id}/{interaction.channel.id}',description=f'**當前總量：    {now_count}**\n**歷史總量：    {history_count}**\n**總消耗：    {consumption}**\n**曾給出：    {give}**\n**被剝奪：    {deprivation}**\n**交易量：    {trade_count}**\n**註冊狀態：    __{state}__**',color=color)
+        embed = discord.Embed(title=f'**"{interaction.user.display_name}"的點數資料 :**',url=f'https://discord.com/channels/{interaction.guild.id}/{interaction.channel.id}',description=f'**當前總量：    {now_count}**\n**歷史總量：    {history_count}**\n**總消耗：    {consumption}**\n**曾給出：    {give}**\n**被剝奪：    {deprivation}**\n**交易量：    {trade_count}**\n**註冊狀態：    __{state}__**',color=color)
         await interaction.response.send_message(embed=embed)
 #添加點數給指定用戶
     commandname = (f'{prefix}point')
