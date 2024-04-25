@@ -225,15 +225,6 @@ class Point(Cog_extension):
                                         await interaction.response.send_message(f'可是User：{user.mention}\n還從未註冊過P卡\n請先讓{user.mention}回[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})註冊')
                                     else:
                                         await interaction.response.send_message(f'對方用戶資料損毀，請聯絡管理員檢查用戶資料')
-
-
-
-
-
-
-
-
-
                                 else:
                                     await interaction.response.send_message(f'權限不足')
                             else:
