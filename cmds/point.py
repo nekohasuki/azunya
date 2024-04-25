@@ -86,8 +86,8 @@ class Point(Cog_extension):
                 userB = interaction.guild.get_member(int(user[2:-1]))                       
                 with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
                     userdata = json.load(UserDataFile)
-                if userdata[f'{userA.id}']['point']['state'] == str(True):
-                    if userdata[f'{userB.id}']['point']['state'] == str(True) or userdata[f'{userB.id}']['point']['state'] == str(False):
+                if userdata[f'{userA.id}']['point']['state'] == True:
+                    if userdata[f'{userB.id}']['point']['state'] == True or userdata[f'{userB.id}']['point']['state'] == False:
                         if count <= userdata[f"{userA.id}"]['point']['now_count']:
                         #抓取資料
                             userdata_update_A = userdata[f"{userA.id}"]
@@ -110,13 +110,13 @@ class Point(Cog_extension):
                             await interaction.response.send_message(f'User：{userA.mention}給予了User：{userB.mention}**{count}**點')
                         else:
                             await interaction.response.send_message(f'User：{userA.mention}\n你的點數似乎不夠喔')
-                    elif userdata[f'{userB.id}']['point']['state'] == str(None):
+                    elif userdata[f'{userB.id}']['point']['state'] == None:
                         await interaction.response.send_message(f'可是User：{userB.mention}\n從未註冊過P卡\n請先讓{userB.mention}回[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})註冊')
                     else:
                         await interaction.response.send_message(f'對方用戶資料損毀，請聯絡管理員檢查用戶資料')
-                elif userdata[f'{userA.id}']['point']['state'] == str(False):
+                elif userdata[f'{userA.id}']['point']['state'] == False:
                     await interaction.response.send_message(f'User：{userA.mention}\n你的P卡註冊狀態為收回\n請先回[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新註冊')
-                elif userdata[f'{userA.id}']['point']['state'] == str(None):
+                elif userdata[f'{userA.id}']['point']['state'] == None:
                     await interaction.response.send_message(f'可是User：{userA.mention}\n你從未註冊過P卡\n請先回[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})註冊')
                 else:
                     await interaction.response.send_message(f'用戶資料損毀，請聯絡管理員檢查用戶資料')
@@ -189,7 +189,7 @@ class Point(Cog_extension):
                                 if interaction.user.top_role.position >= user.top_role.position:
                                     with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
                                         userdata = json.load(UserDataFile)
-                                    if userdata[f'{user.id}']['point']['state'] == str(True) or userdata[f'{user.id}']['point']['state'] == str(False):
+                                    if userdata[f'{user.id}']['point']['state'] == True or userdata[f'{user.id}']['point']['state'] == False:
                                         count = abs(count)
                                     #添加點數
                                         if mod.name == "add":
@@ -221,7 +221,7 @@ class Point(Cog_extension):
                                             with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
                                                 json.dump(userdata , UserDataFile , indent=4)
                                             await interaction.response.send_message(f'已為User：{user.mention}移除了**{count}**點\n原因：{reason}')
-                                    elif userdata[f'{user.id}']['point']['state'] == str(None):
+                                    elif userdata[f'{user.id}']['point']['state'] == None:
                                         await interaction.response.send_message(f'可是User：{user.mention}\n還從未註冊過P卡\n請先讓{user.mention}回[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})註冊')
                                     else:
                                         await interaction.response.send_message(f'對方用戶資料損毀，請聯絡管理員檢查用戶資料')
