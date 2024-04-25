@@ -90,21 +90,21 @@ class Point(Cog_extension):
                     if userdata[f'{userB.id}']['point']['state'] == str(True) or userdata[f'{userB.id}']['point']['state'] == str(False):
                         if count <= userdata[f"{userA.id}"]['point']['now_count']:
                         #抓取資料
-                            userdata_updata_A = userdata[f"{userA.id}"]
-                            now_count_A = userdata_updata_A['point']['now_count']
-                            history_count_A = userdata_updata_A['point']['history_count']
-                            history_count_A = userdata_updata_A['point']['give']
-                            userdata_updata_B = userdata[f"{userB.id}"]
-                            now_count_B = userdata_updata_B['point']['now_count']
-                            history_count_B = userdata_updata_B['point']['history_count']
+                            userdata_update_A = userdata[f"{userA.id}"]
+                            now_count_A = userdata_update_A['point']['now_count']
+                            history_count_A = userdata_update_A['point']['history_count']
+                            history_count_A = userdata_update_A['point']['give']
+                            userdata_update_B = userdata[f"{userB.id}"]
+                            now_count_B = userdata_update_B['point']['now_count']
+                            history_count_B = userdata_update_B['point']['history_count']
                         #刷入資料
-                            userdata_updata_A['point']['now_count'] = int(now_count_A) - count
-                            userdata_updata_A['point']['give'] = int(history_count_A) + count
-                            userdata_updata_B['point']['now_count'] = int(now_count_B) + count
-                            userdata_updata_B['point']['history_count'] = int(history_count_B) + count
+                            userdata_update_A['point']['now_count'] = int(now_count_A) - count
+                            userdata_update_A['point']['give'] = int(history_count_A) + count
+                            userdata_update_B['point']['now_count'] = int(now_count_B) + count
+                            userdata_update_B['point']['history_count'] = int(history_count_B) + count
                         #更新資料
-                            userdata[f'{userA.id}'].update(userdata_updata_A)
-                            userdata[f'{userB.id}'].update(userdata_updata_B)
+                            userdata[f'{userA.id}'].update(userdata_update_A)
+                            userdata[f'{userB.id}'].update(userdata_update_B)
                             with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
                                 json.dump(userdata , UserDataFile , indent=4)
                             await interaction.response.send_message(f'User：{userA.mention}給予了User：{userB.mention}**{count}**點')
@@ -194,14 +194,14 @@ class Point(Cog_extension):
                                     #添加點數
                                         if mod.name == "add":
                                         #抓取資料
-                                            userdata_updata = userdata[f"{user.id}"]
-                                            now_count = userdata_updata['point']['now_count']
-                                            history_count = userdata_updata['point']['history_count']
+                                            userdata_update = userdata[f"{user.id}"]
+                                            now_count = userdata_update['point']['now_count']
+                                            history_count = userdata_update['point']['history_count']
                                         #刷入資料
-                                            userdata_updata['point']['now_count'] = int(now_count) + count
-                                            userdata_updata['point']['history_count'] = int(history_count) + count
+                                            userdata_update['point']['now_count'] = int(now_count) + count
+                                            userdata_update['point']['history_count'] = int(history_count) + count
                                         #更新資料
-                                            userdata[f"{user.id}"].update(userdata_updata)
+                                            userdata[f"{user.id}"].update(userdata_update)
                                             with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
                                                 json.dump(userdata , UserDataFile , indent=4)
                                             await interaction.response.send_message(f'已為User：{user.mention}添加了**{count}**點\n原因：{reason}')
@@ -210,14 +210,14 @@ class Point(Cog_extension):
                                             with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
                                                 userdata = json.load(UserDataFile)
                                         #抓取資料
-                                            userdata_updata = userdata[f"{user.id}"]
-                                            now_count = userdata_updata['point']['now_count']
-                                            history_count = userdata_updata['point']['history_count']
+                                            userdata_update = userdata[f"{user.id}"]
+                                            now_count = userdata_update['point']['now_count']
+                                            history_count = userdata_update['point']['history_count']
                                         #刷入資料
-                                            userdata_updata['point']['now_count'] = int(now_count) - count
-                                            userdata_updata['point']['history_count'] = int(history_count) - count
+                                            userdata_update['point']['now_count'] = int(now_count) - count
+                                            userdata_update['point']['history_count'] = int(history_count) - count
                                         #更新資料
-                                            userdata[f"{user.id}"].update(userdata_updata)
+                                            userdata[f"{user.id}"].update(userdata_update)
                                             with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
                                                 json.dump(userdata , UserDataFile , indent=4)
                                             await interaction.response.send_message(f'已為User：{user.mention}移除了**{count}**點\n原因：{reason}')
