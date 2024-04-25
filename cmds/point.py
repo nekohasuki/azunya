@@ -33,7 +33,7 @@ class Point(Cog_extension):
                     counter += 1
                     if "@" in user:
                         if "&" not in user:
-                            with open('cmds\\data\\user_data.json') as UserDataFile:
+                            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
                                 userdata = json.load(UserDataFile)
                             state = userdata[f'{user[2:-1]}']['point']['state']
                             now_count = userdata[f'{user[2:-1]}']['point']['now_count']
@@ -129,7 +129,7 @@ class Point(Cog_extension):
     @app_commands.command(name = commandname , description = '查看自己點數')
     async def mypoint(self , interaction:discord.Integration):
         color = interaction.user.color
-        with open('cmds\\data\\user_data.json') as UserDataFile:
+        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
             userdata = json.load(UserDataFile)
         state = userdata[f'{interaction.user.id}']['point']['state']
         now_count = userdata[f'{interaction.user.id}']['point']['now_count']
