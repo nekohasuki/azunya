@@ -131,7 +131,7 @@ class Event(Cog_extension):
                     with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
                         userdata = json.load(UserDataFile)
                     counter = 0
-                    code = -3
+                    code = -2
                     for data in userdata:
                         code += 1
                         if user.id == int(data):
