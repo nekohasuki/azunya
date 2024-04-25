@@ -384,7 +384,6 @@ class Event(Cog_extension):
                     if counter == 1:
                         pic = discord.File(omikuji[f"{user}"]["pic"])
                         await ctx.channel.send(f'User : <@{ctx.author.id}>\n你今天已經抽過了啦!\n今日運勢：{omikuji[f"{user}"]["pic"][13:-4]}',file = pic)
-                        await ctx.channel.send(f'{display_name}')
                 #沒抽過就抽出結果後更新資料進'omikuji.json'
                     elif counter == 0:
                         random_pic = random.choice(os.listdir('./imege/omikuji'))
@@ -392,7 +391,6 @@ class Event(Cog_extension):
                         await ctx.channel.send('抽出的結果是!!!!\n(搖籤筒聲)')
                         await asyncio.sleep (3)
                         await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!\n今日運勢：{random_pic[:-4]}',file=pic)
-                        await ctx.channel.send(f'{display_name}')
                     #資料更新
                         omikuji_update = {f'{user}':{"name":"","pic":""}}
                         omikuji_update[f'{user}']["name"] = f'{display_name}'
