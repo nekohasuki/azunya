@@ -79,32 +79,25 @@ class Event(Cog_extension):
                         userdata = json.load(UserDataFile)
                     counter = 0
                     code = -3
-                    # for data in userdata:
-                    #     code += 1
-                    #     if user.id == int(data):
-                    #         counter += 1
-                    #         userdata_updata = userdata[f'{user.id}']
-                    #         print(userdata[f'{user.id}'])
-                    #         userdata_updata['point']['state'] = True
-                    #         userdata_updata['display_name'] = user.display_name
-                    #         userdata_updata['global_name'] = user.global_name
-                    #         userdata_updata['top_role'] = f'<@&{user.top_role.id}>'
-                    #         print(userdata[f'{user.id}'])
-                    #         userdata.updata(userdata_updata)
-
-                    #         # with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
-                    #         #     json.dump(userdata , UserDataFile , indent=4)
+                    for data in userdata:
+                        code += 1
+                        if user.id == int(data):
+                            counter += 1
+                            userdata_update = userdata[f'{user.id}']
+                            print(userdata[f'{user.id}'])
+                            userdata_update['point']['state'] = True
+                            userdata_update['display_name'] = user.display_name
+                            userdata_update['global_name'] = user.global_name
+                            userdata_update['top_role'] = f'<@&{user.top_role.id}>'
+                            print(userdata[f'{user.id}'])
+                            userdata[f'{user.id}'].update(userdata_update)
+                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
+                                json.dump(userdata , UserDataFile , indent=4)
                     if counter == 0:
-                        userdata_update = {'display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'{(code)+1}','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}
-                        print(userdata[f'{user.id}'])
+                        userdata_update = {f'{user.id}':{'display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'{(code)+1}','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                         userdata.update(userdata_update)
-                        print(userdata[f'{user.id}'])
-                    
-
-                        # with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
-                        #     json.dump(update , UserDataFile , indent=4)
-
-
+                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
+                            json.dump(userdata , UserDataFile , indent=4)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"add {reaction.emoji}-@{role}')
                     await user.add_roles(role)
@@ -141,30 +134,26 @@ class Event(Cog_extension):
                         userdata = json.load(UserDataFile)
                     counter = 0
                     code = -3
-                    # for data in userdata:
-                    #     code += 1
-                    #     if user.id == int(data):
-                    #         counter += 1
-                    #         # userdata_updata = userdata[f'{user.id}']
-                    #         # print(userdata[f'{user.id}'])
-                    #         # userdata_updata['point']['state'] = False
-                    #         # userdata_updata['display_name'] = user.display_name
-                    #         # userdata_updata['global_name'] = user.global_name
-                    #         # userdata_updata['top_role'] = f'<@&{user.top_role.id}>'
-                    #         # print(userdata[f'{user.id}'])
-                    #         # userdata.updata(userdata_updata)
+                    for data in userdata:
+                        code += 1
+                        if user.id == int(data):
+                            counter += 1
+                            userdata_update = userdata[f'{user.id}']
+                            print(userdata[f'{user.id}'])
+                            userdata_update['point']['state'] = False
+                            userdata_update['display_name'] = user.display_name
+                            userdata_update['global_name'] = user.global_name
+                            userdata_update['top_role'] = f'<@&{user.top_role.id}>'
+                            print(userdata[f'{user.id}'])
+                            userdata[f'{user.id}'].update(userdata_update)
 
-                    #         # with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
-                    #         #     json.dump(userdata , UserDataFile , indent=4)
+                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
+                                json.dump(userdata , UserDataFile , indent=4)
                     if counter == 0:
-                        userdata_updata = {'display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'{(code)+1}','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(False)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}
-                        print(userdata[f'{user.id}'])
-                        userdata.updata(userdata_updata)
-                        print(userdata[f'{user.id}'])
-                    
-
-                        # with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
-                        #     json.dump(userdata , UserDataFile , indent=4)
+                        userdata_update = {f'{user.id}':{'display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'{(code)+1}','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                        userdata.update(userdata_update)
+                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
+                            json.dump(userdata , UserDataFile , indent=4)
 
 
                     role = guild.get_role(int(setting['P_ROLE_ID']))
