@@ -95,7 +95,7 @@ async def unload(interaction: discord.Interaction,extension: Optional[str] = Non
             await interaction.response.send_message(f'沒有擴充類別："{extension}"')
 
 commandname = (f'{prefix}name')
-@bot.tree.command(name = commandname, description = 'description')
+@bot.tree.command(name = commandname, description = '這是一段描述')
 async def name(interaction:discord.Integration):  
     msg = await interaction.channel.send("123")
     print("1")
