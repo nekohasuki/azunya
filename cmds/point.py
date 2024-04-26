@@ -31,7 +31,7 @@ class Point(Cog_extension):
                 role_members = interaction.guild.get_role(int(f'{role}')).members
                 if str(id) in str(role_members):
                     counter += 1
-                    if "@" in user:
+                    if "<@" in user:
                         if "&" not in user:
                             with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
                                 userdata = json.load(UserDataFile)
@@ -77,7 +77,7 @@ class Point(Cog_extension):
                         else:
                             await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
                     else:
-                        await interaction.response.send_message(f'User：__{interaction.user.global_name}__ 請問...\nuser參數裡你放了甚麼??')
+                        await interaction.response.send_message(f'User：**{interaction.user.global_name}** 請問...\nuser參數裡你放了甚麼??')
 #給予指定用戶點數
     commandname = (f'{prefix}givepoint')
     @app_commands.command(name = commandname , description = '給予指定用戶點數')
@@ -87,7 +87,7 @@ class Point(Cog_extension):
             user = f'<@{interaction.user.id}>'
         if count == None:
             count = 0
-        if "@" in user:
+        if "<@" in user:
             if "&" not in user:
                 count = abs(count)
                 userA = interaction.user
