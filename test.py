@@ -105,6 +105,6 @@ while a <10:
     if a >10:
         break
 with open('cmds\\data\\test.json','w',encoding='utf8') as TestFile:
-test = json.dump(test,TestFile,indent=4)
+    test = json.dump(test,TestFile,indent=4)
 
 print("程式已執行完畢")
