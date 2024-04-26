@@ -5,6 +5,7 @@ cmds/data/omikuji.json
 cmds/data/user_data.json
 
 /cmds/__pycache__
+/cmds/data/user_data_history
 /core/__pycache__
 /__pycache__
 /.vscode
