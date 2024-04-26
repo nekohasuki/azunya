@@ -46,7 +46,7 @@ class Task(Cog_extension):
         onlinetime = {'onlinetime':f'{counter}'}
         setting.update(onlinetime)
         with open('setting.json','w',encoding='utf8') as setting_file:
-            json.dump(setting,setting_file,indent=0)
+            json.dump(setting,setting_file,indent=4)
         
     @onlinecount.before_loop
     async def onlinecount_before(self):
