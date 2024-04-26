@@ -40,7 +40,7 @@ class Point(Cog_extension):
                                 global_name = user.global_name
                                 if global_name == None:
                                     global_name = f'name:{user.name}'
-                                userdata_update = {f'{user.id}':{'display_name':f'{user.display_name}','global_name':f'{global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':None,'point':{'state':None,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                                userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':None,'point':{'state':None,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                                 userdata.update(userdata_update)
                                 with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
                                     json.dump(userdata , UserDataFile , indent=4)
@@ -143,7 +143,7 @@ class Point(Cog_extension):
             global_name = interaction.user.global_name
             if global_name == None:
                 global_name = f'name:{interaction.user.name}'
-            userdata_update = {f'{interaction.user.id}':{'display_name':f'{interaction.user.display_name}','global_name':f'{global_name}','code':f'#NO','top_role':f'<@&{interaction.user.top_role.id}>','name_card':None,'point':{'state':None,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+            userdata_update = {f'{interaction.user.id}':{'name':f'{interaction.user.name}','display_name':f'{interaction.user.display_name}','global_name':f'{global_name}','code':f'#NO','top_role':f'<@&{interaction.user.top_role.id}>','name_card':None,'point':{'state':None,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
             userdata.update(userdata_update)
             with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
                 json.dump(userdata , UserDataFile , indent=4)
