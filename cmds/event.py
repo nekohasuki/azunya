@@ -83,6 +83,7 @@ class Event(Cog_extension):
                             counter += 1
                             userdata_update = userdata[f'{user.id}']
                             userdata_update['point']['state'] = True
+                            userdata_update['name'] = user.name
                             userdata_update['display_name'] = user.display_name
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
@@ -90,7 +91,7 @@ class Event(Cog_extension):
                             with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
                                 json.dump(userdata , UserDataFile , indent=4)
                     if counter == 0:
-                        userdata_update = {f'{user.id}':{'display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                        userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                         userdata.update(userdata_update)
                         with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
                             json.dump(userdata , UserDataFile , indent=4)
@@ -134,6 +135,7 @@ class Event(Cog_extension):
                             counter += 1
                             userdata_update = userdata[f'{user.id}']
                             userdata_update['point']['state'] = False
+                            userdata_update['name'] = user.name
                             userdata_update['display_name'] = user.display_name
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
@@ -141,11 +143,10 @@ class Event(Cog_extension):
                             with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
                                 json.dump(userdata , UserDataFile , indent=4)
                     if counter == 0:
-                        userdata_update = {f'{user.id}':{'display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                        userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                         userdata.update(userdata_update)
                         with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
                             json.dump(userdata , UserDataFile , indent=4)
-
 
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"remove {reaction.emoji}-@{role}')
