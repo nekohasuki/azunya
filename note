@@ -20,5 +20,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @commands.has_any_role("身份組")
 @commands.has_permissions(administrator=True)
