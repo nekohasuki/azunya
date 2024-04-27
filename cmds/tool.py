@@ -82,7 +82,8 @@ class Tool(Cog_extension):
 #以梓喵身分發送訊息
     @commands.command()
     async def say(self,ctx, *,msg):
-        print(msg)
+        nowtime = datetime.datetime.now().strftime('%H:%M')
+        print(f'{nowtime} | {ctx.author.display_name} say:{msg}')
         await ctx.channel.purge(limit=1)
         await ctx.send(msg)
 #身分領取embed
