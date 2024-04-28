@@ -145,7 +145,7 @@ class Tool(Cog_extension):
 #暫時
     commandname = (f'{prefix}name')
     @app_commands.command(name = commandname, description = '這是一段描述')
-    async def name(self,interaction:discord.Integration):
+    async def name(self,interaction:discord.Interaction):
         # with open('dict.json','r',encoding='utf8') as dict_file:
         #     dict = json.load(dict_file)
         # dict_dessert = dict['dessert']
