@@ -94,15 +94,13 @@ async def unload(interaction: discord.Interaction,extension: Optional[str] = Non
         else:
             await interaction.response.send_message(f'沒有擴充類別："{extension}"')
 
-commandname = (f'{prefix}name')
-@bot.tree.command(name = commandname, description = '這是一段描述')
-async def name(interaction:discord.Integration):  
-    msg = await interaction.channel.send("<:LOGO1:1221378614524641332>")
-    print("1")
-    await asyncio.sleep(1)
-    print("2")
-    await msg.edit(content="1234")
-    print("3")
+
+
+
+
+
+
+
 
 
 async def main():
