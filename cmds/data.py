@@ -14,7 +14,7 @@ class Data(Cog_extension):
 #查詢梓守的資料
     commandname = (f'{prefix}azudata')
     @app_commands.command(name = commandname, description = "查詢梓守的資料")
-    async def azudata(self,interaction:discord.Integration):
+    async def azudata(self,interaction:discord.Interaction):
         with open("setting.json","r",encoding="utf8") as setting_file:
             setting = json.load(setting_file)
         t = int(setting["onlinetime"])
@@ -62,7 +62,7 @@ class Data(Cog_extension):
     commandname = (f'{prefix}checkrole')
     @app_commands.command(name = commandname, description = '查身分資料')
     @app_commands.describe(role = '想查的身分')
-    async def checkrole(self,interaction:discord.Integration,role:Optional[str] = None):
+    async def checkrole(self,interaction:discord.Interaction,role:Optional[str] = None):
         if role == None:
             await interaction.response.send_message('請輸入需要查詢的訊息數量\n參考：\n```/checkrole @新身分```')
         if '@' in str(f'{role}'):
@@ -74,7 +74,7 @@ class Data(Cog_extension):
 #查詢用戶ID
     commandname = (f'{prefix}myid')
     @app_commands.command(name = commandname, description = '查詢Discird的ID')
-    async def myid(self,interaction:discord.Integration):
+    async def myid(self,interaction:discord.Interaction):
         user = interaction.user
         # await interaction.response.send_message('好的!')
         await interaction.response.send_message(f'好的!')
@@ -89,7 +89,7 @@ class Data(Cog_extension):
 #查詢伺服器的資料
     commandname = (f'{prefix}serverdata')
     @app_commands.command(name = commandname, description = '查詢伺服器的資料')
-    async def serverdata(self,interaction:discord.Integration):
+    async def serverdata(self,interaction:discord.Interaction):
         guild = interaction.guild
         members = interaction.guild.member_count
         await interaction.response.send_message(f'伺服器名稱：**{guild}**\n用戶數：**{members}**人')
@@ -105,7 +105,7 @@ class Data(Cog_extension):
 
     commandname = (f'{prefix}name')
     @app_commands.command(name = commandname, description = '這是一段描述')
-    async def name(self,interaction:discord.Integration):  
+    async def name(self,interaction:discord.Interaction):  
          await interaction.response.send_message(f'{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **')
 
 
