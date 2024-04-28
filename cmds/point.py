@@ -15,7 +15,7 @@ class Point(Cog_extension):
     commandname = (f'{prefix}checkpoint')
     @app_commands.command(name = commandname , description = '查看指定用戶點數')
     @app_commands.describe(user='輸入用戶')
-    async def checkpoint(self , interaction:discord.Integration , user: Optional[str] = None):
+    async def checkpoint(self , interaction:discord.Interaction , user: Optional[str] = None):
         if user == None:
             await interaction.response.send_message(f'請輸入用戶')
         else:
@@ -82,7 +82,7 @@ class Point(Cog_extension):
     commandname = (f'{prefix}givepoint')
     @app_commands.command(name = commandname , description = '給予指定用戶點數')
     @app_commands.describe(user='輸入用戶' , count='輸入數量')
-    async def givepoint(self , interaction:discord.Integration , user: Optional[str] = None , count: Optional[int] = None):
+    async def givepoint(self , interaction:discord.Interaction , user: Optional[str] = None , count: Optional[int] = None):
         if user == None:
             user = f'<@{interaction.user.id}>'
         if count == None:
@@ -137,7 +137,7 @@ class Point(Cog_extension):
 #查看自己點數
     commandname = (f'{prefix}mypoint')
     @app_commands.command(name = commandname , description = '查看自己點數')
-    async def mypoint(self , interaction:discord.Integration):
+    async def mypoint(self , interaction:discord.Interaction):
         color = interaction.user.color
         with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
             userdata = json.load(UserDataFile)
@@ -181,7 +181,7 @@ class Point(Cog_extension):
     @app_commands.command(name = commandname , description = '添加點數給指定用戶')
     @app_commands.describe(mod = '模式(需要權限)' , user='輸入用戶' , count='輸入數量' , reason = '輸入原因')
     @app_commands.choices(mod=[app_commands.Choice(name = 'add' , value = 'add') , app_commands.Choice(name = 'remove' , value = 'remove')])
-    async def point(self , interaction:discord.Integration , mod: app_commands.Choice[str] , user: Optional[str] = None , count: Optional[int] = None , reason: Optional[str] = None):        
+    async def point(self , interaction:discord.Interaction , mod: app_commands.Choice[str] , user: Optional[str] = None , count: Optional[int] = None , reason: Optional[str] = None):        
         if count == None:
             count = 0
         if reason == None:
