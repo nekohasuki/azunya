@@ -61,7 +61,7 @@ class Setting(Cog_extension):
     @app_commands.command(name = commandname, description = '添加/移除身分')
     @app_commands.describe(mod = '模式(需要權限)',role='輸入身分',user='輸入用戶')
     @app_commands.choices(mod=[app_commands.Choice(name = 'add',value = 'add'),app_commands.Choice(name = 'remove',value = 'remove)')])
-    async def relo(self,interaction:discord.Integration,mod: app_commands.Choice[str],role: Optional[str] = None,user: Optional[str] = None):
+    async def relo(self,interaction:discord.Interaction,mod: app_commands.Choice[str],role: Optional[str] = None,user: Optional[str] = None):
         name = f'__`{interaction.user.global_name}`__'
         role_id = role[3:-1]
         user_id = user[2:-1]
