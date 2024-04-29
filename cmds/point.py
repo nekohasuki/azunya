@@ -15,7 +15,7 @@ class Point(Cog_extension):
     commandname = (f'{prefix}checkpoint')
     @app_commands.command(name = commandname , description = '查看指定用戶點數')
     @app_commands.describe(user='輸入用戶')
-    async def checkpoint(self , interaction:discord.Integration , user: Optional[str] = None):
+    async def checkpoint(self , interaction:discord.Interaction , user: Optional[str] = None):
         if user == None:
             await interaction.response.send_message(f'請輸入用戶')
         else:
@@ -31,15 +31,15 @@ class Point(Cog_extension):
                 role_members = interaction.guild.get_role(int(f'{role}')).members
                 if str(id) in str(role_members):
                     counter += 1
-                    if "@" in user:
+                    if "<@" in user:
                         if "&" not in user:
-                            user = interaction.guild.get_member(int(user[2:-1]))
                             with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
                                 userdata = json.load(UserDataFile)
-                            if user not in userdata:
+                            user = interaction.guild.get_member(int(user[2:-1]))
+                            if f'{user.id}' not in userdata:
                                 global_name = user.global_name
                                 if global_name == None:
-                                    global_name = f'name:{user.name}'
+                                    global_name = f'"name":/{user.name}/'
                                 userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':None,'point':{'state':None,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                                 userdata.update(userdata_update)
                                 with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
@@ -57,17 +57,17 @@ class Point(Cog_extension):
                                 state = '已收回'
                             if state == None:
                                 state = '未註冊'
-                            if now_count > 2147483648 :
+                            if now_count > 2147483647 :
                                 now_count = '無上限'
-                            if history_count > 2147483648 :
+                            if history_count > 2147483647 :
                                 history_count = '無上限'
-                            if consumption > 2147483648 :
+                            if consumption > 2147483647 :
                                 consumption = '無上限'
-                            if give > 2147483648 :
+                            if give > 2147483647 :
                                 give = '無上限'
-                            if deprivation > 2147483648 :
+                            if deprivation > 2147483647 :
                                 deprivation = '無上限'
-                            if trade_count > 2147483648 :
+                            if trade_count > 2147483647 :
                                 trade_count = '無上限'
                             if interaction.user.top_role.position >= user.top_role.position:
                                 embed = discord.Embed(title=f'**"{user.display_name}"的點數資料 :**',url=f'https://discord.com/channels/{interaction.guild.id}/{interaction.channel.id}',description=f'**當前總量：    {now_count}**\n**歷史總量：    {history_count}**\n**總消耗：    {consumption}**\n**曾給出：    {give}**\n**被剝奪：    {deprivation}**\n**交易量：    {trade_count}**\n**註冊狀態：    __{state}__**',color=color)
@@ -77,17 +77,17 @@ class Point(Cog_extension):
                         else:
                             await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
                     else:
-                        await interaction.response.send_message(f'User：__{interaction.user.global_name}__ 請問...\nuser參數裡你放了甚麼??')
+                        await interaction.response.send_message(f'User：**{interaction.user.global_name}** 請問...\nuser參數裡你放了甚麼??')
 #給予指定用戶點數
     commandname = (f'{prefix}givepoint')
     @app_commands.command(name = commandname , description = '給予指定用戶點數')
     @app_commands.describe(user='輸入用戶' , count='輸入數量')
-    async def givepoint(self , interaction:discord.Integration , user: Optional[str] = None , count: Optional[int] = None):
+    async def givepoint(self , interaction:discord.Interaction , user: Optional[str] = None , count: Optional[int] = None):
         if user == None:
             user = f'<@{interaction.user.id}>'
         if count == None:
             count = 0
-        if "@" in user:
+        if "<@" in user:
             if "&" not in user:
                 count = abs(count)
                 userA = interaction.user
@@ -96,18 +96,20 @@ class Point(Cog_extension):
                     userdata = json.load(UserDataFile)
                 if userdata[f'{userA.id}']['point']['state'] == True:
                     if userdata[f'{userB.id}']['point']['state'] == True or userdata[f'{userB.id}']['point']['state'] == False:
-                        if count <= userdata[f"{userA.id}"]['point']['now_count']:
-                        #抓取資料
-                            userdata_update_A = userdata[f"{userA.id}"]
-                            now_count_A = userdata_update_A['point']['now_count']
-                            history_count_A = userdata_update_A['point']['history_count']
-                            history_count_A = userdata_update_A['point']['give']
-                            userdata_update_B = userdata[f"{userB.id}"]
-                            now_count_B = userdata_update_B['point']['now_count']
-                            history_count_B = userdata_update_B['point']['history_count']
+                    #抓取資料
+                        userdata_update_A = userdata[f"{userA.id}"]
+                        now_count_A = userdata_update_A['point']['now_count']
+                        give_A = userdata_update_A['point']['give']
+                        if int(now_count_A) > 2147483647:
+                            now_count_A = int(now_count_A)+count
+                        userdata_update_B = userdata[f"{userB.id}"]
+                        now_count_B = userdata_update_B['point']['now_count'] 
+                        history_count_B = userdata_update_B['point']['history_count']
+                        if count <= now_count_A:
                         #刷入資料
                             userdata_update_A['point']['now_count'] = int(now_count_A) - count
-                            userdata_update_A['point']['give'] = int(history_count_A) + count
+                            userdata_update_A['point']['give'] = int(give_A) + count
+
                             userdata_update_B['point']['now_count'] = int(now_count_B) + count
                             userdata_update_B['point']['history_count'] = int(history_count_B) + count
                         #更新資料
@@ -135,7 +137,7 @@ class Point(Cog_extension):
 #查看自己點數
     commandname = (f'{prefix}mypoint')
     @app_commands.command(name = commandname , description = '查看自己點數')
-    async def mypoint(self , interaction:discord.Integration):
+    async def mypoint(self , interaction:discord.Interaction):
         color = interaction.user.color
         with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
             userdata = json.load(UserDataFile)
@@ -160,17 +162,17 @@ class Point(Cog_extension):
             state = '已收回'
         if state == None:
             state = '未註冊'
-        if now_count > 2147483648 :
+        if now_count > 2147483647 :
             now_count = '無上限'
-        if history_count > 2147483648 :
+        if history_count > 2147483647 :
             history_count = '無上限'
-        if consumption > 2147483648 :
+        if consumption > 2147483647 :
             consumption = '無上限'
-        if give > 2147483648 :
+        if give > 2147483647 :
             give = '無上限'
-        if deprivation > 2147483648 :
+        if deprivation > 2147483647 :
             deprivation = '無上限'
-        if trade_count > 2147483648 :
+        if trade_count > 2147483647 :
             trade_count = '無上限'
         embed = discord.Embed(title=f'**"{interaction.user.display_name}"的點數資料 :**',url=f'https://discord.com/channels/{interaction.guild.id}/{interaction.channel.id}',description=f'**當前總量：    {now_count}**\n**歷史總量：    {history_count}**\n**總消耗：    {consumption}**\n**曾給出：    {give}**\n**被剝奪：    {deprivation}**\n**交易量：    {trade_count}**\n**註冊狀態：    __{state}__**',color=color)
         await interaction.response.send_message(embed=embed)
@@ -179,7 +181,7 @@ class Point(Cog_extension):
     @app_commands.command(name = commandname , description = '添加點數給指定用戶')
     @app_commands.describe(mod = '模式(需要權限)' , user='輸入用戶' , count='輸入數量' , reason = '輸入原因')
     @app_commands.choices(mod=[app_commands.Choice(name = 'add' , value = 'add') , app_commands.Choice(name = 'remove' , value = 'remove')])
-    async def point(self , interaction:discord.Integration , mod: app_commands.Choice[str] , user: Optional[str] = None , count: Optional[int] = None , reason: Optional[str] = None):        
+    async def point(self , interaction:discord.Interaction , mod: app_commands.Choice[str] , user: Optional[str] = None , count: Optional[int] = None , reason: Optional[str] = None):        
         if count == None:
             count = 0
         if reason == None:
