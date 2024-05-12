@@ -110,7 +110,7 @@ class Data(Cog_extension):
     async def name(self,interaction:discord.Interaction):  
         await interaction.response.send_message(f'123')
         asyncio.sleep(1)
-        await interaction.edit_original_response(content=f'123456789')
+        await interaction.edit_original_response(content=f'1234567890')
         # await interaction.response.send_message(f'{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **')
 
 
