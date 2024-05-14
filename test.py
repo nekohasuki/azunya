@@ -209,7 +209,4 @@ else:
     print(f'{A_USER}勝利')
 
 
-
-
-
 # MATK/ATK 以裝備決定
