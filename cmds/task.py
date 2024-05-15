@@ -34,7 +34,7 @@ class Task(Cog_extension):
                 userdata = json.load(UserDataFile)
     #於後台印出用戶及抽取內容
             for user in omikuji:
-                print(omikuji[user]['name'],':\n    ',omikuji[user]['pic'][14:-4])
+                print(f'"{omikuji[user]['name']}":\n    {omikuji[user]['pic'][14:-4]}')
     #檔名處理為純數字
             for user in omikuji:
                 user_pic = omikuji[user]['pic'][14:-4]
@@ -70,7 +70,7 @@ class Task(Cog_extension):
                     elif 'omikuji' not in userdata[user]:
                         userdata[user].update({'omikuji':{'badluck':0,'today':today}})
             user ={}
-    #比較數字大小
+    #比較數字最小壞運氣值+1
             for user_a in userdata:
                 for user_b in userdata:
                     if 'omikuji' in userdata[user_a] and 'omikuji' in userdata[user_b] and user_a != user_b:
@@ -99,9 +99,27 @@ class Task(Cog_extension):
                 await channel.send(f'難道今天沒有人抽籤嗎?QQ')
                 await asyncio.sleep(1)
                 await channel.send(f'梓守我不被需要了嗎Q^O')
+    #每月固定日期
+            add_ponit_count = int(setting['add_ponit_count'])
+            today =  datetime.datetime.now().strftime('%d')
+            if today == setting['userdata_omikuji_badluck_reload']:
+        #比較壞運氣值最大的人除外
+                for user_a in userdata:
+                    for user_b in userdata:
+                        if 'omikuji' in userdata[user_a] and 'omikuji' in userdata[user_b] and user_a != user_b:
+                            if userdata[user_a]['omikuji']['badluck'] != userdata[user_b]['omikuji']['badluck'] and userdata[user_a]['omikuji']['badluck'] != None and userdata[user_b]['omikuji']['badluck'] != None :
+                                if userdata[user_a]['omikuji']['badluck'] > userdata[user_b]['omikuji']['badluck']:
+                                    userdata[user_b]['omikuji'].update({'badluck':None})
+        #給予P點並重置所有人壞運氣值
+                for user in userdata:
+                    if 'omikuji' in userdata[user]:
+                        if userdata[user]['omikuji']['badluck'] != None:
+                            userdata[user]['point'].update({'now_count':userdata[user]['point']['now_count']+add_ponit_count})
+                            userdata[user]['point'].update({'history_count':userdata[user]['point']['history_count']+add_ponit_count})
+                        userdata[user]['omikuji'].update({'badluck':0})
+                with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
+                    json.dump(userdata , UserDataFile , indent=4)
     #重置'omikuji.json'資料
-            print(f'{setting['OmikujiTime']}')
-            print(f'{int(Current_hours)}:{int(Current_minutes)}:{int(Current_seconds)}')
             omikuji={}
             omikuji.update(omikuji)
             with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
