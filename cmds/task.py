@@ -5,7 +5,7 @@ with open('setting.json','r',encoding='utf8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
-import datetime,schedule
+import asyncio,datetime,schedule
 
 class Task(Cog_extension):
     utc = datetime.timezone(datetime.timedelta(hours = 8))
@@ -14,9 +14,11 @@ class Task(Cog_extension):
         self.bot = bot
         self.omikujidatareload.start()
         self.onlinecount.start()
+        self.test.start()
     def cog_unload(self):
         self.onlinecount.cancel()
         self.omikujidatareload.cancel()
+        self.test.cancel()
 #初始化'setting.json'
     @tasks.loop(seconds=1)
     async def omikujidatareload(self):
@@ -78,11 +80,25 @@ class Task(Cog_extension):
                                 user[user_a]['omikuji'].update({'today':None})
                             else:
                                 user[user_b]['omikuji'].update({'today':None})
+            bad_luck_user = []
             for user_a in user:
                 if user[user_a]['omikuji']['today'] != None:
+                    bad_luck_user.append(f'**`{userdata[user_a]['display_name']}`**')
                     userdata[user_a].update({'omikuji':{'badluck':user[user_a]['omikuji']['badluck']+1,'today':None}})
                 with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
                     json.dump(userdata , UserDataFile , indent=4)
+    #聊天室留言
+            channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['MESSAGE_CHANNEL_ID']))
+            if bad_luck_user != []:
+                await channel.send(f'今天運氣最差的是 :\n{((str(bad_luck_user).replace("'", '')[1:-1]).replace(',','、'))}')
+            else:
+                await channel.send(f'今天運氣最差的是!!')
+                await asyncio.sleep(.5)
+                await channel.send(f'???')
+                await asyncio.sleep(2)
+                await channel.send(f'難道今天沒有人抽籤嗎?QQ')
+                await asyncio.sleep(1)
+                await channel.send(f'梓守我不被需要了嗎Q^O')
     #重置'omikuji.json'資料
             print(f'{setting['OmikujiTime']}')
             print(f'{int(Current_hours)}:{int(Current_minutes)}:{int(Current_seconds)}')
@@ -90,11 +106,9 @@ class Task(Cog_extension):
             omikuji.update(omikuji)
             with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
                 json.dump(omikuji,omikuji_file)
-
-
-
-
-
+    @omikujidatareload.before_loop
+    async def omikujidatareload_before(self):
+        await self.bot.wait_until_ready()
 #計數器
     @tasks.loop(seconds=1)
     async def onlinecount(self):
@@ -116,7 +130,13 @@ class Task(Cog_extension):
         with open('setting.json','w',encoding='utf8') as setting_file:
             json.dump(setting,setting_file,indent=0)
         await self.bot.wait_until_ready()
-
+#測試用
+    @tasks.loop(seconds=1)
+    async def test(self):
+        pass
+    @test.before_loop
+    async def test_before(self):
+        pass
 
 
 
