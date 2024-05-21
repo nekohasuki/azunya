@@ -197,7 +197,7 @@ class Event(Cog_extension):
         #……以及訊息等於關鍵字(key)
         #<and ctx.content == key>
 #訊息日誌
-        if channel.id != log_channel.id and guild.id == int(setting['LOG_GUILD_ID']):
+        if channel.id != log_channel.id and guild.id == int(setting['GUILD_ID']):
             if ctx.author.bot == False:
                 await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
 #問候
