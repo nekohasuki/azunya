@@ -1,8 +1,19 @@
 
 
 
-# import json,datetime
-# userdata = {"user_a" : {"count":1},"user_b" : {"count":-1},"user_c" : {"count":-1}}
+
+
+
+
+
+
+
+
+
+
+
+
+# userdata = {"user_a" : {"count":1},"user_b" : {"count":0},"user_c" : {"count":-1}}
 # userlist = []
 # for user in userdata:
 #     if "count" in userdata[user] and userdata[user]['count'] != None:
@@ -13,6 +24,7 @@
 
 
 # #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 # #比較數字最小壞運氣值+1
 # for user_a in userdata:
@@ -31,6 +43,26 @@
 #         userdata[user_a].update({'omikuji':{'badluck':user[user_a]['omikuji']['badluck']+1,'today':None}})
 #     with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
 #         json.dump(userdata , UserDataFile , indent=4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # #聊天室留言
 # channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['MESSAGE_CHANNEL_ID']))
 # if bad_luck_user != []:
