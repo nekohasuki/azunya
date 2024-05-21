@@ -35,6 +35,20 @@ class Task(Cog_extension):
     #於後台印出用戶及抽取內容
             for user in omikuji:
                 print(f'"{omikuji[user]['name']}":\n    {omikuji[user]['pic'][14:-4]}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
     #檔名處理為純數字
             for user in omikuji:
                 user_pic = omikuji[user]['pic'][14:-4]
@@ -69,22 +83,32 @@ class Task(Cog_extension):
                             userdata[user]['omikuji'].update({'badluck':userdata[user]['omikuji']['badluck'],'today':today})
                     elif 'omikuji' not in userdata[user]:
                         userdata[user].update({'omikuji':{'badluck':0,'today':today}})
-            user ={}
-    #比較數字最小壞運氣值+1
-            for user_a in userdata:
-                for user_b in userdata:
-                    if 'omikuji' in userdata[user_a] and 'omikuji' in userdata[user_b] and user_a != user_b:
-                        user.update({user_a:userdata[user_a],user_b:userdata[user_b]})
-                        if user[user_a]['omikuji']['today'] != None and user[user_b]['omikuji']['today'] != None and user[user_a]['omikuji']['today'] != user[user_b]['omikuji']['today']:
-                            if user[user_a]['omikuji']['today'] > user[user_b]['omikuji']['today']:
-                                user[user_a]['omikuji'].update({'today':None})
-                            else:
-                                user[user_b]['omikuji'].update({'today':None})
-            bad_luck_user = []
-            for user_a in user:
-                if user[user_a]['omikuji']['today'] != None:
-                    bad_luck_user.append(f'**`{userdata[user_a]['display_name']}`**')
-                    userdata[user_a].update({'omikuji':{'badluck':user[user_a]['omikuji']['badluck']+1,'today':None}})
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #找出運氣最差的人
+            userlist = []
+            for user in userdata:
+                if "today" in userdata[user]['omikuji'] and userdata[user]['omikuji']['today'] != None:
+                    userlist.append(userdata[user]['omikuji']['today'])
+            bad_luck_user = []   
+            for user in userdata:
+                if "today" in userdata[user]['omikuji'] and userdata[user]['omikuji']['today'] == (min(userlist)):
+                    bad_luck_user.append(f'**`{userdata[user]['display_name']}`**')
+                    userdata[user].update({'omikuji':{'badluck':user[user]['omikuji']['badluck']+1,'today':None}})
                 with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
                     json.dump(userdata , UserDataFile , indent=4)
     #聊天室留言
