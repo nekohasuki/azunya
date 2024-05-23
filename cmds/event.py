@@ -353,14 +353,14 @@ class Event(Cog_extension):
         #下班放學
             if any(word in ctx.content for word in dict_get_off_work):
                 print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了下班放學')
-        #週五
-            if any(word in ctx.content for word in dict_Friday):
-                print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了週五')
-                weekday = datetime.datetime.now().weekday()+1
-                if weekday == 5:
-                    await ctx.channel.send(random.choice(Friday_5))
-                elif weekday == 4:
-                    await ctx.channel.send(random.choice(Friday_4))
+        # #週五
+        #     if any(word in ctx.content for word in dict_Friday):
+        #         print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了週五')
+        #         weekday = datetime.datetime.now().weekday()+1
+        #         if weekday == 5:
+        #             await ctx.channel.send(random.choice(Friday_5))
+        #         elif weekday == 4:
+        #             await ctx.channel.send(random.choice(Friday_4))
 
 
 
@@ -392,8 +392,8 @@ class Event(Cog_extension):
                     omikuji = json.load(omikuji_file)
                 Current_hours = datetime.datetime.now().strftime('%H')
                 Current_minutes = datetime.datetime.now().strftime('%M')
-            #如果當前時間等同於' setting['OmikujiTime'] '的設定時間
-                if (f'{int(Current_hours)}:{int(Current_minutes)}') == setting['OmikujiTime']:
+            #如果當前時間等同於' setting['omikuji_reload_time'] '的設定時間
+                if (f'{int(Current_hours)}:{int(Current_minutes)}') == setting['omikuji_reload_time']:
                     await ctx.channel.send('系統維護中，請稍等1分鐘')
                 else:
                 #抓資料
