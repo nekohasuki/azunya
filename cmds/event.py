@@ -159,6 +159,8 @@ class Event(Cog_extension):
             setting = json.load(setting_file)
         with open('dict.json','r',encoding='utf8') as dict_file:
             dict = json.load(dict_file)
+        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
+            userdata = json.load(UserDataFile)
         guild = ctx.guild
         channel = ctx.channel
         name = ctx.author.mention
@@ -359,6 +361,26 @@ class Event(Cog_extension):
                     await ctx.channel.send(random.choice(Friday_5))
                 elif weekday == 4:
                     await ctx.channel.send(random.choice(Friday_4))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #抽籤系統/URL
         if channel != log_channel:
             if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)):
@@ -374,6 +396,7 @@ class Event(Cog_extension):
                 if (f'{int(Current_hours)}:{int(Current_minutes)}') == setting['OmikujiTime']:
                     await ctx.channel.send('系統維護中，請稍等1分鐘')
                 else:
+                #抓資料
                     counter = 0
                     for userid in omikuji:
                         if counter == 1:
@@ -382,16 +405,50 @@ class Event(Cog_extension):
                             counter += 1
                         else:
                             pass
+                #如果抽過了就告訴用戶抽出結果
                     if counter == 1:
                         pic = discord.File(omikuji[f"{user}"]["pic"])
                         await ctx.channel.send(f'User : <@{ctx.author.id}>\n你今天已經抽過了啦!\n今日運勢：{omikuji[f"{user}"]["pic"][13:-4]}',file = pic)
-                #沒抽過就抽出結果後更新資料進'omikuji.json'
+                #沒抽過就抽出結果後告訴用戶抽出結果
                     elif counter == 0:
                         random_pic = random.choice(os.listdir('./imege/omikuji'))
                         pic = discord.File(f'imege\omikuji\{random_pic}')
                         await ctx.channel.send('抽出的結果是!!!!\n(搖籤筒聲)')
                         await asyncio.sleep (3)
                         await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!\n今日運勢：{random_pic[:-4]}',file=pic)
+                    #檔案處理維純數字格式
+                        user_pic = random_pic[:-4]
+                        if '¤' in user_pic:
+                            if 'omikuji' in userdata[f'{user}']:
+                                userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':0})
+                            elif 'omikuji' not in userdata[f'{user}']:
+                                userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':0,}})
+                        if '★' in user_pic:
+                            counter = 0
+                            while '★' in user_pic:
+                                counter += 1
+                                user_pic=user_pic[1:]
+                            if 'x' in user_pic:
+                                today = int(user_pic[1:])-1+counter
+                            else:
+                                today = counter
+                            if 'omikuji' in userdata[f'{user}']:
+                                    userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
+                            elif 'omikuji' not in userdata[f'{user}']:
+                                userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
+                        if '☆' in user_pic:
+                            counter = 0
+                            while '☆' in user_pic:
+                                counter += 1
+                                user_pic=user_pic[1:]
+                            if 'x' in user_pic:
+                                today = (int(user_pic[1:])-1+counter)*-1
+                            else:
+                                today = counter*-1
+                            if 'omikuji' in userdata[f'{user}']:
+                                    userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
+                            elif 'omikuji' not in userdata[f'{user}']:
+                                userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
                     #資料更新
                         omikuji_update = {f'{user}':{"name":"","pic":""}}
                         omikuji_update[f'{user}']["name"] = f'{display_name}'
@@ -399,11 +456,15 @@ class Event(Cog_extension):
                         omikuji.update(omikuji_update)
                         with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
                             json.dump(omikuji,omikuji_file,indent=4)
+                        with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
+                            json.dump(userdata , UserDataFile , indent=4)
+
     #不要用那個稱呼
             if any(word in ctx.content for word in dict_azukira) and ctx.author.bot == False:
                 if user == (703238602586456114):
                     await asyncio.sleep(1)
-                    await ctx.channel.send(f'嘴巴閉閉\n不會講話就不要講\n你是知道我有名字的')
+                    pass
+                    # await ctx.channel.send(f'嘴巴閉閉\n不會講話就不要講\n你是知道我有名字的')
                 elif user == (849505185364967475):
                     await asyncio.sleep(1)
                     await ctx.channel.send(f'不要用那個稱呼叫我!!!**あきら1966**\n我有名字的**あきら1966**\n叫__梓守__!,或者也可以叫我__梓喵__')
