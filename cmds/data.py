@@ -97,7 +97,7 @@ class Data(Cog_extension):
         await interaction.edit_original_response(content=f'伺服器名稱：**{guild}**\n用戶數：**{members}**人')
 #查詢用戶頭像
     commandname = (f'{prefix}myavatar')
-    @app_commands.command(name = commandname, description = '查詢Discird的ID')
+    @app_commands.command(name = commandname, description = '查詢Discird的頭像')
     async def myavatar(self,interaction:discord.Interaction):
         user = interaction.user
         await interaction.response.send_message(f'正在查詢User：{user.mention}的資料......')
@@ -113,10 +113,17 @@ class Data(Cog_extension):
 
     commandname = (f'{prefix}name')
     @app_commands.command(name = commandname, description = '這是一段描述')
-    async def name(self,interaction:discord.Interaction):  
-        await interaction.response.send_message(f'123')
-        asyncio.sleep(1)
-        await interaction.edit_original_response(content=f'1234567890')
+    async def name(self,interaction:discord.Interaction):
+        user = interaction.guild.get_member(1010770145150517278)
+        # await interaction.response.send_message(f'正在查詢User：{user}的資料......')
+        await interaction.response.send_message(f'正在查詢User：{user.mention}的資料......')
+        await asyncio.sleep(1)
+        await interaction.edit_original_response(content=f'User：<@{user.id}>\n你的頭像是__(這個)[{user.display_avatar}]__呦!')
+
+  
+        # await interaction.response.send_message(f'123')
+        # asyncio.sleep(1)
+        # await interaction.edit_original_response(content=f'1234567890')
         # await interaction.response.send_message(f'{interaction.guild.create_category_channel}\n ** **\n** ** create_category_channel\n ** **\n** **{interaction.guild.id}\n ** **\n** ** id\n ** **\n** **{interaction.guild.members}\n ** **\n** ** members\n ** **\n** **{interaction.guild.member_count}\n ** **\n** ** member_count\n ** **\n** **{interaction.guild.owner_id}\n ** **\n** ** owner_id\n ** **\n** **{interaction.guild.preferred_locale}\n ** **\n** ** preferred_locale\n ** **\n** **{interaction.guild.roles}\n ** **\n** ** roles\n ** **\n** **')
 
 
