@@ -45,9 +45,9 @@ class Setting(Cog_extension):
                         minutes = 0
                     elif minutes >= 59 :
                         minutes = 59
-                    oldtime = setting['OmikujiTime']
-                    setting['OmikujiTime'] = f'{hours}:{minutes}'
-                    newtime = setting['OmikujiTime']
+                    oldtime = setting['omikuji_reload_time']
+                    setting['omikuji_reload_time'] = f'{hours}:{minutes}'
+                    newtime = setting['omikuji_reload_time']
                     if oldtime == newtime:
                         await interaction.response.send_message(f'QAQ\n可是抽籤系統更新時間本來就是__{newtime}__了阿QQ')
                     else:
