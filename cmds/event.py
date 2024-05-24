@@ -75,8 +75,8 @@ class Event(Cog_extension):
             #第四組
             if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
-                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
-                        userdata = json.load(UserDataFile)
+                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                        userdata = json.load(userdata_file)
                     counter = 0
                     for data in userdata:
                         if user.id == int(data):
@@ -88,13 +88,13 @@ class Event(Cog_extension):
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
                             userdata[f'{user.id}'].update(userdata_update)
-                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
-                                json.dump(userdata , UserDataFile , indent=4)
+                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                                json.dump(userdata , userdata_file , indent=4)
                     if counter == 0:
                         userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                         userdata.update(userdata_update)
-                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
-                            json.dump(userdata , UserDataFile , indent=4)
+                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                            json.dump(userdata , userdata_file , indent=4)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"add {reaction.emoji}-@{role}')
                     await user.add_roles(role)
@@ -127,8 +127,8 @@ class Event(Cog_extension):
             #第四組
             if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
-                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
-                        userdata = json.load(UserDataFile)
+                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                        userdata = json.load(userdata_file)
                     counter = 0
                     for data in userdata:
                         if user.id == int(data):
@@ -140,13 +140,13 @@ class Event(Cog_extension):
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
                             userdata[f'{user.id}'].update(userdata_update)
-                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
-                                json.dump(userdata , UserDataFile , indent=4)
+                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                                json.dump(userdata , userdata_file , indent=4)
                     if counter == 0:
                         userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                         userdata.update(userdata_update)
-                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as UserDataFile:
-                            json.dump(userdata , UserDataFile , indent=4)
+                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                            json.dump(userdata , userdata_file , indent=4)
 
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"remove {reaction.emoji}-@{role}')
@@ -159,8 +159,8 @@ class Event(Cog_extension):
             setting = json.load(setting_file)
         with open('dict.json','r',encoding='utf8') as dict_file:
             dict = json.load(dict_file)
-        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
-            userdata = json.load(UserDataFile)
+        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+            userdata = json.load(userdata_file)
         guild = ctx.guild
         channel = ctx.channel
         name = ctx.author.mention
@@ -456,8 +456,8 @@ class Event(Cog_extension):
                         omikuji.update(omikuji_update)
                         with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
                             json.dump(omikuji,omikuji_file,indent=4)
-                        with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
-                            json.dump(userdata , UserDataFile , indent=4)
+                        with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                            json.dump(userdata , userdata_file , indent=4)
 
     #不要用那個稱呼
             if any(word in ctx.content for word in dict_azukira) and ctx.author.bot == False:
