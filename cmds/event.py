@@ -169,7 +169,7 @@ class Event(Cog_extension):
         display_name = guild.get_member(user).display_name
         nowtime = datetime.datetime.now().strftime('%H:%M:%S')
         msg = ctx.content
-        log_channel = self.bot.get_channel(int(setting['LOG_CHANNEL_ID']))
+        log_channel = self.bot.get_channel(int(setting['MESSAGE_LOG_CHANNEL_ID']))
         nowtime = datetime.datetime.now().strftime('%H:%M:%S')
     #字典
         dict_my = dict['user_self-proclaimed']
