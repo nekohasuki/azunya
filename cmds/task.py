@@ -24,94 +24,34 @@ class Task(Cog_extension):
     async def omikujidatareload(self):
         with open('setting.json','r',encoding='utf8') as setting_file:
             setting = json.load(setting_file)
+        today =  datetime.datetime.now().strftime('%d')
         Current_hours = datetime.datetime.now().strftime('%H')
         Current_minutes = datetime.datetime.now().strftime('%M')
         Current_seconds = datetime.datetime.now().strftime('%S')
-        if (f'{int(Current_hours)}:{int(Current_minutes)}') == setting['OmikujiTime'] and int(Current_seconds) == 1:
+        if (f'{int(Current_hours)}:{int(Current_minutes)}') == setting['omikuji_reload_time'] and int(Current_seconds) == 1:
             with open('cmds\data\omikuji.json','r',encoding='utf8') as omikuji_file:
                 omikuji = json.load(omikuji_file)
-            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
-                userdata = json.load(UserDataFile)
+            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                userdata = json.load(userdata_file)
     #於後台印出用戶及抽取內容
             for user in omikuji:
                 print(f'"{omikuji[user]['name']}":\n    {omikuji[user]['pic'][14:-4]}')
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
-    #檔名處理為純數字
-            for user in omikuji:
-                user_pic = omikuji[user]['pic'][14:-4]
-                if '¤' in user_pic:
-                    if 'omikuji' in userdata[user]:
-                        userdata[user]['omikuji'].update({'badluck':userdata[user]['omikuji']['badluck'],'today':0})
-                    elif 'omikuji' not in userdata[user]:
-                        userdata[user].update({'omikuji':{'badluck':0,'today':0,}})
-                if '★' in user_pic:
-                    counter = 0
-                    while '★' in user_pic:
-                        counter += 1
-                        user_pic=user_pic[1:]
-                    if 'x' in user_pic:
-                        today = int(user_pic[1:])-1+counter
-                    else:
-                        today = counter
-                    if 'omikuji' in userdata[user]:
-                            userdata[user]['omikuji'].update({'badluck':userdata[user]['omikuji']['badluck'],'today':today})
-                    elif 'omikuji' not in userdata[user]:
-                        userdata[user].update({'omikuji':{'badluck':0,'today':today}})
-                if '☆' in user_pic:
-                    counter = 0
-                    while '☆' in user_pic:
-                        counter += 1
-                        user_pic=user_pic[1:]
-                    if 'x' in user_pic:
-                        today = (int(user_pic[1:])-1+counter)*-1
-                    else:
-                        today = counter*-1
-                    if 'omikuji' in userdata[user]:
-                            userdata[user]['omikuji'].update({'badluck':userdata[user]['omikuji']['badluck'],'today':today})
-                    elif 'omikuji' not in userdata[user]:
-                        userdata[user].update({'omikuji':{'badluck':0,'today':today}})
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     #找出運氣最差的人
-            userlist = []
+            min_number = []
             for user in userdata:
-                if "today" in userdata[user]['omikuji'] and userdata[user]['omikuji']['today'] != None:
-                    userlist.append(userdata[user]['omikuji']['today'])
-            bad_luck_user = []   
+                if "omikuji" in userdata[user] and userdata[user]['omikuji']['today'] != None:
+                    min_number.append(userdata[user]['omikuji']['today'])
+            bad_luck_user = []
             for user in userdata:
-                if "today" in userdata[user]['omikuji'] and userdata[user]['omikuji']['today'] == (min(userlist)):
-                    bad_luck_user.append(f'**`{userdata[user]['display_name']}`**')
-                    userdata[user].update({'omikuji':{'badluck':user[user]['omikuji']['badluck']+1,'today':None}})
-                with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
-                    json.dump(userdata , UserDataFile , indent=4)
-    #聊天室留言
+                if "omikuji" in userdata[user]:
+                    if userdata[user]['omikuji']['today'] == (min(min_number)):
+                        bad_luck_user.append(f'**`{userdata[user]['display_name']}`**')
+                        userdata[user].update({'omikuji':{'badluck':userdata[user]['omikuji']['badluck']+1,'today':None}})
+                    else:
+                        userdata[user].update({'omikuji':{'badluck':userdata[user]['omikuji']['badluck'],'today':None}})
+            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                json.dump(userdata , userdata_file , indent=4)
+        #聊天室留言
             channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['MESSAGE_CHANNEL_ID']))
             if bad_luck_user != []:
                 await channel.send(f'今天運氣最差的是 :\n{((str(bad_luck_user).replace("'", '')[1:-1]).replace(',','、'))}')
@@ -123,28 +63,25 @@ class Task(Cog_extension):
                 await channel.send(f'難道今天沒有人抽籤嗎?QQ')
                 await asyncio.sleep(1)
                 await channel.send(f'梓守我不被需要了嗎Q^O')
-    #每月固定日期
+        #每月固定日期
             add_ponit_count = int(setting['add_ponit_count'])
-            today =  datetime.datetime.now().strftime('%d')
-            if today == setting['userdata_omikuji_badluck_reload']:
-        #比較壞運氣值最大的人除外
-                for user_a in userdata:
-                    for user_b in userdata:
-                        if 'omikuji' in userdata[user_a] and 'omikuji' in userdata[user_b] and user_a != user_b:
-                            if userdata[user_a]['omikuji']['badluck'] != userdata[user_b]['omikuji']['badluck'] and userdata[user_a]['omikuji']['badluck'] != None and userdata[user_b]['omikuji']['badluck'] != None :
-                                if userdata[user_a]['omikuji']['badluck'] > userdata[user_b]['omikuji']['badluck']:
-                                    userdata[user_b]['omikuji'].update({'badluck':None})
-        #給予P點並重置所有人壞運氣值
-                add_ponit_user = []
+            max_number = []
+            add_ponit_user = []
+            add_ponit_user_mention = []
+            if today == setting['omikuji_reload_day']:
+        #比較壞運氣值最大的人給予P點並重置所有人壞運氣值
+                for user in userdata:
+                    if 'omikuji' in userdata[user] and userdata[user]['omikuji']['badluck'] != None:
+                        max_number.append(userdata[user]['omikuji']['badluck'])
                 for user in userdata:
                     if 'omikuji' in userdata[user]:
-                        if userdata[user]['omikuji']['badluck'] != None:
+                        if userdata[user]['omikuji']['badluck'] == max(max_number):
                             add_ponit_user.append(f'**`{userdata[user]['display_name']}`**')
-                            userdata[user]['point'].update({'now_count':userdata[user]['point']['now_count']+add_ponit_count})
-                            userdata[user]['point'].update({'history_count':userdata[user]['point']['history_count']+add_ponit_count})
+                            add_ponit_user_mention.append(f'<@`{user}`>')
+                            userdata[user]['point'].update({'now_count':userdata[user]['point']['now_count']+add_ponit_count,'history_count':userdata[user]['point']['history_count']+add_ponit_count})
                         userdata[user]['omikuji'].update({'badluck':0})
-                with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as UserDataFile:
-                    json.dump(userdata , UserDataFile , indent=4)
+                with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                    json.dump(userdata , userdata_file , indent=4)
             #聊天室留言
                 channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['MESSAGE_CHANNEL_ID']))
                 await channel.send(f'**__本月運氣最差的人__**結果出來了!!!')
@@ -155,6 +92,8 @@ class Task(Cog_extension):
                     await channel.send(f'雖然命運很坎坷，但請不要放棄生活的希望\n說不定前方等著你的是~~ ||更加黑暗|| ~~一片大好前程呢~')
                     await asyncio.sleep(12)
                     await channel.send(f'不過運氣不好確實不怎麼開心La，嗯...<:KANGAERU:1147177506294730752>\n這樣!這裡的{add_ponit_count}點P點就收下吧!\n怎麼樣有稍微開心點了嗎?\n未來也要好好ˇ哦打起精神窩=W=')
+                    channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['POINT_LOG_CHANNEL_ID']))
+                    await channel.send('已為User：<@1073270545250009098>、<@894563849804578878>添加了**35**點\n原因：本月運氣太差，給予慰問金')
                 else:
                     await asyncio.sleep(3)
                     await channel.send(f'本月運氣最差的人居然沒有嗎...')
