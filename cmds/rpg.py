@@ -6,7 +6,7 @@ import random,numpy
 
 prefix = 'r-'
 
-test = True
+test = False
 #      True or False
 if test == False:
     from core.classes import Cog_extension
@@ -42,8 +42,8 @@ elif test == True:
         Shielder_spd=10
         Shielder_luk=5
     class RPG():
-        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as UserDataFile:
-            userdata = json.load(UserDataFile)
+        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+            userdata = json.load(userdata_file)
         A_user = '938100109240074310'
         B_user = '697842681082281985'
         if 'RPG' in userdata[A_user] and 'RPG' in userdata[B_user]:
