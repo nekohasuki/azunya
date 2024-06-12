@@ -102,7 +102,7 @@ class Data(Cog_extension):
         user = interaction.user
         await interaction.response.send_message(f'正在查詢User：{user.mention}的資料......')
         await asyncio.sleep(1)
-        await interaction.edit_original_response(content=f'User：<@{user.id}>\n你的頭像是__(這個)[{user.display_avatar}]__呦!')
+        await interaction.edit_original_response(content=f'User：<@{user.id}>\n你的頭像是__[這個]({user.display_avatar})__呦!')
 
 
 
