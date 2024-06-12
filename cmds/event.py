@@ -416,48 +416,59 @@ class Event(Cog_extension):
                         await ctx.channel.send('抽出的結果是!!!!\n(搖籤筒聲)')
                         await asyncio.sleep (3)
                         await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!\n今日運勢：{random_pic[:-4]}',file=pic)
-                    #檔案處理維純數字格式
-                        user_pic = random_pic[:-4]
-                        if '¤' in user_pic:
-                            if 'omikuji' in userdata[f'{user}']:
-                                userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':0})
-                            elif 'omikuji' not in userdata[f'{user}']:
-                                userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':0,}})
-                        if '★' in user_pic:
-                            counter = 0
-                            while '★' in user_pic:
-                                counter += 1
-                                user_pic=user_pic[1:]
-                            if 'x' in user_pic:
-                                today = int(user_pic[1:])-1+counter
-                            else:
-                                today = counter
-                            if 'omikuji' in userdata[f'{user}']:
-                                    userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
-                            elif 'omikuji' not in userdata[f'{user}']:
-                                userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
-                        if '☆' in user_pic:
-                            counter = 0
-                            while '☆' in user_pic:
-                                counter += 1
-                                user_pic=user_pic[1:]
-                            if 'x' in user_pic:
-                                today = (int(user_pic[1:])-1+counter)*-1
-                            else:
-                                today = counter*-1
-                            if 'omikuji' in userdata[f'{user}']:
-                                    userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
-                            elif 'omikuji' not in userdata[f'{user}']:
-                                userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
-                    #資料更新
+                    #omikuji資料更新
                         omikuji_update = {f'{user}':{"name":"","pic":""}}
                         omikuji_update[f'{user}']["name"] = f'{display_name}'
                         omikuji_update[f'{user}']["pic"] = f'imege\omikuji\{random_pic}'
                         omikuji.update(omikuji_update)
                         with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
                             json.dump(omikuji,omikuji_file,indent=4)
-                        with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
-                            json.dump(userdata , userdata_file , indent=4)
+                    #如果用戶有在'user_data.json'裡就存進去,否則聊天室回復訊息
+                        counter = 0
+                        for userid in userdata:
+                            if counter == 1:
+                                break
+                            if str(user) == str(userid):
+                                counter += 1
+                            else:
+                                pass
+                        if counter  == 1:
+                            user_pic = random_pic[:-4]
+                            if '¤' in user_pic:
+                                if 'omikuji' in userdata[f'{user}']:
+                                    userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':0})
+                                elif 'omikuji' not in userdata[f'{user}']:
+                                    userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':0,}})
+                            if '★' in user_pic:
+                                counter = 0
+                                while '★' in user_pic:
+                                    counter += 1
+                                    user_pic=user_pic[1:]
+                                if 'x' in user_pic:
+                                    today = int(user_pic[1:])-1+counter
+                                else:
+                                    today = counter
+                                if 'omikuji' in userdata[f'{user}']:
+                                        userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
+                                elif 'omikuji' not in userdata[f'{user}']:
+                                    userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
+                            if '☆' in user_pic:
+                                counter = 0
+                                while '☆' in user_pic:
+                                    counter += 1
+                                    user_pic=user_pic[1:]
+                                if 'x' in user_pic:
+                                    today = (int(user_pic[1:])-1+counter)*-1
+                                else:
+                                    today = counter*-1
+                                if 'omikuji' in userdata[f'{user}']:
+                                        userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
+                                elif 'omikuji' not in userdata[f'{user}']:
+                                    userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
+                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                                json.dump(userdata , userdata_file , indent=4)
+                        else:
+                            await ctx.channel.send(f'是說 User :<@{user}>\n你好像沒有註冊P卡喔\n沒有註冊的話是不能參與比賽的\n現在去註冊的話今天00:00一過再抽籤就可以比賽嘍^W^')
 
     #不要用那個稱呼
             if any(word in ctx.content for word in dict_azukira) and ctx.author.bot == False:
