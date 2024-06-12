@@ -116,7 +116,7 @@ class Data(Cog_extension):
     async def name(self,interaction:discord.Interaction):
         user = interaction.guild.get_member(1010770145150517278)
         # await interaction.response.send_message(f'正在查詢User：{user}的資料......')
-        await interaction.response.send_message(f'正在查詢User：{user.mention}的資料......')
+        await interaction.response.send_message(f'正在查詢User：{user.mention}的資料.....')
         await asyncio.sleep(1)
         await interaction.edit_original_response(content=f'User：<@{user.id}>\n你的頭像是__[這個]({user.display_avatar})__呦!')
 
