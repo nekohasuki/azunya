@@ -42,6 +42,8 @@ class Task(Cog_extension):
                 if "omikuji" in userdata[user] and userdata[user]['omikuji']['today'] != None:
                     min_number.append(userdata[user]['omikuji']['today'])
             bad_luck_user = []
+            if min_number == []:
+                min_number.append(0)
             for user in userdata:
                 if "omikuji" in userdata[user]:
                     if userdata[user]['omikuji']['today'] == (min(min_number)):
@@ -73,15 +75,18 @@ class Task(Cog_extension):
                 for user in userdata:
                     if 'omikuji' in userdata[user] and userdata[user]['omikuji']['badluck'] != None:
                         max_number.append(userdata[user]['omikuji']['badluck'])
-                for user in userdata:
-                    if 'omikuji' in userdata[user]:
-                        if userdata[user]['omikuji']['badluck'] == max(max_number):
-                            add_ponit_user.append(f'**`{userdata[user]['display_name']}`**')
-                            add_ponit_user_mention.append(f'<@`{user}`>')
-                            userdata[user]['point'].update({'now_count':userdata[user]['point']['now_count']+add_ponit_count,'history_count':userdata[user]['point']['history_count']+add_ponit_count})
-                        userdata[user]['omikuji'].update({'badluck':0})
-                with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
-                    json.dump(userdata , userdata_file , indent=4)
+                if max_number == []:
+                    max_number.append(0)
+                if max(max_number) != 0:
+                    for user in userdata:
+                        if 'omikuji' in userdata[user]:
+                            if userdata[user]['omikuji']['badluck'] == max(max_number):
+                                add_ponit_user.append(f'**`{userdata[user]['display_name']}`**')
+                                add_ponit_user_mention.append(f'<@{str(user).replace('`','')}>')
+                                userdata[user]['point'].update({'now_count':userdata[user]['point']['now_count']+add_ponit_count,'history_count':userdata[user]['point']['history_count']+add_ponit_count})
+                            userdata[user]['omikuji'].update({'badluck':0})
+                    with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                        json.dump(userdata , userdata_file , indent=4)
             #聊天室留言
                 channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['MESSAGE_CHANNEL_ID']))
                 await channel.send(f'**__本月運氣最差的人__**結果出來了!!!')
@@ -93,7 +98,7 @@ class Task(Cog_extension):
                     await asyncio.sleep(12)
                     await channel.send(f'不過運氣不好確實不怎麼開心La，嗯...<:KANGAERU:1147177506294730752>\n這樣!這裡的{add_ponit_count}點P點就收下吧!\n怎麼樣有稍微開心點了嗎?\n未來也要好好ˇ哦打起精神窩=W=')
                     channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['POINT_LOG_CHANNEL_ID']))
-                    await channel.send('已為User：<@1073270545250009098>、<@894563849804578878>添加了**35**點\n原因：本月運氣太差，給予慰問金')
+                    await channel.send(f'已為User：{str(add_ponit_user_mention).replace("'",'').replace('[','').replace(']','').replace(',','、')}添加了**35**點\n原因：本月運氣太差，給予慰問金')
                 else:
                     await asyncio.sleep(3)
                     await channel.send(f'本月運氣最差的人居然沒有嗎...')
