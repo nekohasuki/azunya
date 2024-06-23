@@ -96,7 +96,7 @@ class Task(Cog_extension):
                     await asyncio.sleep(8)
                     await channel.send(f'雖然命運很坎坷，但請不要放棄生活的希望\n說不定前方等著你的是~~ ||更加黑暗|| ~~一片大好前程呢~')
                     await asyncio.sleep(12)
-                    await channel.send(f'不過運氣不好確實不怎麼開心La，嗯...<:KANGAERU:1147177506294730752>\n這樣!這裡的{add_ponit_count}點P點就收下吧!\n怎麼樣有稍微開心點了嗎?\n未來也要好好ˇ哦打起精神窩=W=')
+                    await channel.send(f'不過運氣不好確實不怎麼開心La，嗯...<:KANGAERU:1147177506294730752>\n這樣!這裡的{add_ponit_count}點P點就收下吧!\n怎麼樣有稍微開心點了嗎?\n未來也要好好打起精神窩=W=')
                     channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['POINT_LOG_CHANNEL_ID']))
                     await channel.send(f'已為User：{str(add_ponit_user_mention).replace("'",'').replace('[','').replace(']','').replace(',','、')}添加了**35**點\n原因：本月運氣太差，給予慰問金')
                 else:
