@@ -205,7 +205,7 @@ class Event(Cog_extension):
 #問候
         if ctx.author.bot == False:
             await asyncio.sleep(0.1)
-            random_1_10 = ["1","","","","","","","","",""]
+            random_1_5 = ['1','','','','']
             morning = [
                 f'{name}也早安(≧ω≦]/\n{name}今天抽籤了嗎?',
                 f'(火焰燃燒聲)(鍋具碰撞聲)\n哎呀~{name}起床啦~\n梓喵我正在幫自己做早餐呢\n{name}你也要吃嗎?是{dessert}呦~!',
@@ -276,8 +276,8 @@ class Event(Cog_extension):
 
         #早上
             if any(word in ctx.content for word in dict_morning):
-                choice = random.choice(random_1_10)
-                if choice == "1":
+                choice = random.choice(random_1_5)
+                if choice == '1':
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的早安')
                     if nowtime > '06:00:00' and nowtime < '11:00:00':
                         await ctx.channel.send(random.choice(morning))
@@ -287,8 +287,8 @@ class Event(Cog_extension):
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了早安')
         #中午~下午
             if any(word in ctx.content for word in dict_afternoon):
-                choice = random.choice(random_1_10)
-                if choice == "1":
+                choice = random.choice(random_1_5)
+                if choice == '1':
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的午安')
                     if nowtime > '11:00:00' and nowtime < '13:00:00':
                         await ctx.channel.send(random.choice(afternoon_A))
@@ -300,8 +300,8 @@ class Event(Cog_extension):
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了午安')
         #晚上                  
             if any(word in ctx.content for word in dict_evening):
-                choice = random.choice(random_1_10)
-                if choice == "1":
+                choice = random.choice(random_1_5)
+                if choice == '1':
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的晚上好')
                     if nowtime > '19:00:00' or nowtime < '03:00:00':
                         await ctx.channel.send(random.choice(evening))
@@ -311,8 +311,8 @@ class Event(Cog_extension):
                     print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了晚上好')
         #睡前
             if any(word in ctx.content for word in dict_night):
-                choice = random.choice(random_1_10)
-                if choice == "1":
+                choice = random.choice(random_1_5)
+                if choice == '1':
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的晚安')
                     if nowtime > '19:00:00' and nowtime < '21:00:00':
                         await ctx.channel.send(random.choice(night_A))
@@ -327,8 +327,8 @@ class Event(Cog_extension):
         #單純安安
             key = ['安安']
             if any(word in ctx.content for word in key):
-                choice = random.choice(random_1_10)
-                if choice == "1":
+                choice = random.choice(random_1_5)
+                if choice == '1':
                     print(f'{nowtime[:-3]} | 梓喵回應了User : "{global_name}"的安安')
                     await ctx.channel.send(f'{name}安安呀 安安 安安')
                 else:
@@ -383,7 +383,7 @@ class Event(Cog_extension):
 
 #抽籤系統/URL
         if channel != log_channel:
-            if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)):
+            if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
                 if user == (697842681082281985):
                     user = (938100109240074310)
                 with open('setting.json','r',encoding='utf8') as setting_file:
@@ -407,8 +407,8 @@ class Event(Cog_extension):
                             pass
                 #如果抽過了就告訴用戶抽出結果
                     if counter == 1:
-                        pic = discord.File(omikuji[f"{user}"]["pic"])
-                        await ctx.channel.send(f'User : <@{ctx.author.id}>\n你今天已經抽過了啦!\n今日運勢：{omikuji[f"{user}"]["pic"][13:-4]}',file = pic)
+                        pic = discord.File(omikuji[f'{user}']['pic'])
+                        await ctx.channel.send(f'User : <@{ctx.author.id}>\n你今天已經抽過了啦!\n今日運勢：{omikuji[f'{user}']['pic'][13:-4]}',file = pic)
                 #沒抽過就抽出結果後告訴用戶抽出結果
                     elif counter == 0:
                         random_pic = random.choice(os.listdir('./imege/omikuji'))
@@ -417,9 +417,9 @@ class Event(Cog_extension):
                         await asyncio.sleep (3)
                         await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!\n今日運勢：{random_pic[:-4]}',file=pic)
                     #omikuji資料更新
-                        omikuji_update = {f'{user}':{"name":"","pic":""}}
-                        omikuji_update[f'{user}']["name"] = f'{display_name}'
-                        omikuji_update[f'{user}']["pic"] = f'imege\omikuji\{random_pic}'
+                        omikuji_update = {f'{user}':{'name':'','pic':''}}
+                        omikuji_update[f'{user}']['name'] = f'{display_name}'
+                        omikuji_update[f'{user}']['pic'] = f'imege\omikuji\{random_pic}'
                         omikuji.update(omikuji_update)
                         with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
                             json.dump(omikuji,omikuji_file,indent=4)
