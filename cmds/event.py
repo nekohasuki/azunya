@@ -383,19 +383,25 @@ class Event(Cog_extension):
 
 #抽籤系統/URL
         if channel != log_channel:
-            if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
+            if any(word in ctx.content for word in (dict_azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
+            # if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
                 if user == (697842681082281985):
                     user = (938100109240074310)
                 with open('setting.json','r',encoding='utf8') as setting_file:
                     setting = json.load(setting_file)
-                with open('cmds\data\omikuji.json','r',encoding='utf8') as omikuji_file:
-                    omikuji = json.load(omikuji_file)
                 Current_hours = datetime.datetime.now().strftime('%H')
                 Current_minutes = datetime.datetime.now().strftime('%M')
             #如果當前時間等同於' setting['omikuji_reload_time'] '的設定時間
                 if (f'{int(Current_hours)}:{int(Current_minutes)}') == setting['omikuji_reload_time']:
                     await ctx.channel.send('系統維護中，請稍等1分鐘')
                 else:
+                #防覆寫
+                    await asyncio.sleep(random.uniform(random.uniform(0,0.1),1))
+                    while os.path.exists('cmds\data\omikuji.lock') == True:
+                        await asyncio.sleep(1)
+                    open('cmds\data\omikuji.lock', 'w').close()
+                    with open('cmds\data\omikuji.json','r',encoding='utf8') as omikuji_file:
+                        omikuji = json.load(omikuji_file)
                 #抓資料
                     counter = 0
                     for userid in omikuji:
@@ -413,15 +419,13 @@ class Event(Cog_extension):
                     elif counter == 0:
                         random_pic = random.choice(os.listdir('./imege/omikuji'))
                         pic = discord.File(f'imege\omikuji\{random_pic}')
-                        await ctx.channel.send('抽出的結果是!!!!\n(搖籤筒聲)')
+                        await ctx.channel.send(f'為User :<@{user}>抽出的結果是!!!!\n(搖籤筒聲)')
                         await asyncio.sleep (3)
-                        await ctx.channel.send(f'User :<@{user}>\n抽出抽出結果了!!快看快看!!!\n今日運勢：{random_pic[:-4]}',file=pic)
+                        await ctx.channel.send(f'抽出抽出結果了!!快看快看!!!\n今日運勢：{random_pic[:-4]}',file=pic)                       
                     #omikuji資料更新
-                        omikuji_update = {f'{user}':{'name':'','pic':''}}
-                        omikuji_update[f'{user}']['name'] = f'{display_name}'
-                        omikuji_update[f'{user}']['pic'] = f'imege\omikuji\{random_pic}'
+                        omikuji_update = {f'{user}':{'name':f'{display_name}','pic':f'imege\omikuji\{random_pic}'}}
                         omikuji.update(omikuji_update)
-                        with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
+                        with open('cmds\data\omikuji.json','w+',encoding='utf8') as omikuji_file:
                             json.dump(omikuji,omikuji_file,indent=4)
                     #如果用戶有在'user_data.json'裡就存進去,否則聊天室回復訊息
                         counter = 0
@@ -469,24 +473,23 @@ class Event(Cog_extension):
                                 json.dump(userdata , userdata_file , indent=4)
                         else:
                             await ctx.channel.send(f'是說 User :<@{user}>\n你好像沒有註冊P卡喔\n沒有註冊的話是不能參與比賽的\n現在去註冊的話今天00:00一過再抽籤就可以比賽嘍^W^')
-
-    #不要用那個稱呼
-            if any(word in ctx.content for word in dict_azukira) and ctx.author.bot == False:
-                if user == (703238602586456114):
-                    await asyncio.sleep(1)
-                    pass
-                    # await ctx.channel.send(f'嘴巴閉閉\n不會講話就不要講\n你是知道我有名字的')
-                elif user == (849505185364967475):
-                    await asyncio.sleep(1)
-                    await ctx.channel.send(f'不要用那個稱呼叫我!!!**あきら1966**\n我有名字的**あきら1966**\n叫__梓守__!,或者也可以叫我__梓喵__')
-                    await asyncio.sleep(2)
-                    await ctx.channel.send(f'聽懂了沒有**あきら1966**')
-                elif user == (697842681082281985) or user == (938100109240074310):
-                    await asyncio.sleep(1)
-                    await ctx.channel.send(f'不對吧,你叫錯就太誇張了吧QAQ')
-                else:
-                    await asyncio.sleep(1)
-                    await ctx.channel.send(f'還有，{name}不要用那個稱呼叫我!!!\n我叫__梓守__!,或者也可以叫我__梓喵__')
+                    os.remove('cmds\data\omikuji.lock')
+    # #不要用那個稱呼
+    #         if any(word in ctx.content for word in dict_azukira) and ctx.author.bot == False:
+    #             if user == (703238602586456114):
+    #                 await asyncio.sleep(1)
+    #                 await ctx.channel.send(f'嘴巴閉閉\n不會講話就不要講\n你是知道我有名字的')
+    #             elif user == (849505185364967475):
+    #                 await asyncio.sleep(1)
+    #                 await ctx.channel.send(f'不要用那個稱呼叫我!!!**あきら1966**\n我有名字的**あきら1966**\n叫__梓守__!,或者也可以叫我__梓喵__')
+    #                 await asyncio.sleep(2)
+    #                 await ctx.channel.send(f'聽懂了沒有**あきら1966**')
+    #             elif user == (697842681082281985) or user == (938100109240074310):
+    #                 await asyncio.sleep(1)
+    #                 await ctx.channel.send(f'不對吧,你叫錯就太誇張了吧QAQ')
+    #             else:
+    #                 await asyncio.sleep(1)
+    #                 await ctx.channel.send(f'還有，{name}不要用那個稱呼叫我!!!\n我叫__梓守__!,或者也可以叫我__梓喵__')
 
 
 
