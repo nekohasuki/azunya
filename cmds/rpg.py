@@ -6,16 +6,16 @@ import random,numpy
 
 prefix = 'r-'
 
-test = False
+Test_mod = False
 #      True or False
-if test == False:
+if Test_mod == False:
     from core.classes import Cog_extension
     class RPG(Cog_extension):
         pass
     async def setup(bot):
         await bot.add_cog(RPG(bot))
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-elif test == True:
+elif Test_mod == True:
     if '這裡是' != '職業基礎屬性':
     #'戰士'
         Warrior_hp =15
