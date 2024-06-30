@@ -65,6 +65,8 @@ class Task(Cog_extension):
                 await channel.send(f'難道今天沒有人抽籤嗎?QQ')
                 await asyncio.sleep(1)
                 await channel.send(f'梓守我不被需要了嗎Q^O')
+            await channel.send(f'對了')
+            await channel.send(f'去投票！')
         #每月固定日期
             add_ponit_count = int(setting['add_ponit_count'])
             max_number = []
@@ -107,9 +109,7 @@ class Task(Cog_extension):
                     await asyncio.sleep(2)
                     await channel.send(f'梓守我不信，難道沒有人想抽籤嗎?')
                     await asyncio.sleep(1)
-                    await channel.send(f'看來這個伺服器不需要我了...')
-
-
+                    await channel.send(f'看來這個伺服器不需要我了...')                
     #重置'omikuji.json'資料
             omikuji={}
             omikuji.update(omikuji)
