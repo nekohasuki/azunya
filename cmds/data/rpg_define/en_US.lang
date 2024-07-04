@@ -1,0 +1,124 @@
+language=en_Us
+Race=Race
+Human=Human
+Elf=Elf
+Fairy=Fairy
+Giant=Giant
+MoonRabbit=MoonRabbit
+Asian=Asian
+
+Main_profession=Main profession
+Warrior=Warrior
+Archer=Archer
+Shielder=Shielder
+Thief=Thief
+Mage=Mage
+
+Sub_profession=Sub profession
+Merchant=Merchant
+Pharmacist=Pharmacist
+Jeweler=Jeweler
+Floriculturist=Floriculturist
+Chef=Chef
+Armourer=Armourer
+Hammersmith=Hammersmith
+
+Weapon=Weapon
+Claw=Claw
+Hammer=Hammer
+Spear=Spear
+Blade=Blade
+Sword=Sword
+Axe=Axe
+Bow=Bow
+Staff=Staff
+
+Weapon_II=Weapon II
+Double-headed_spear=Double-headed spear
+Double-headed_blade=Double-headed blade
+Double-headed_sword=Double-headed sword
+Double-headed_axe=Double-headed axe
+Double-headed_maul=Double-headed maul
+Clawed_bow=Clawed bow
+Staff-sword=Staff-sword
+Staff-blade=Staff-blade
+Spear-staff=Spear-staff
+Spear-mace=Spear-mace
+Spear-axe=Spear-axe
+Axe-maul=Axe-maul
+
+Weapon_III=Weapon III
+Double-headed_maul_with_Spikes=Double-headed maul with Spikes
+Double-headed_Axe_with_Spikes=Double-headed Axe with Spikes
+Axe-mace_with_Spikes=Axe-mace with Spikes
+Bident=Bident
+Jagged_Claw=Jagged Claw
+
+Armor=Armor
+Cloak=Cloak
+Light_armor=Light armor
+Leather_armor=Leather armor
+Scale_armor=Scale armor
+Chainmail=Chainmail
+Heavy_armor=Heavy armor
+Plate_armor=Plate armor
+
+Enchanting=Enchanting
+Runes=Runes
+Spell_Seal(T)=Spell_Seal(T)
+Spell_Seal(M)=Spell_Seal(M)
+Spell_Seal(V)=Spell_Seal(V)
+Spell_Seal(P)=Spell_Seal(P)
+Spell_Seal(B)=Spell_Seal(B)
+
+
+
+Emblazoning=Emblazoning
+Flowers=Flowers
+Forget-me-nots=Forget-me-nots
+Baby's-breath=Baby
+Lavender=Lavender
+Plumbago-auriculata=Plumbago-auriculata
+Agave=Agave
+Oxalis=Oxalis
+violet=violet
+Hyacinth=Hyacinth
+Cestrum-nocturnum=Cestrum-nocturnum
+Star-Gazer-Lily=Star-Gazer-Lily
+
+Studding=Studding
+Gemstones=Gemstones
+Jadeite=Jadeite
+Amethyst=Amethyst
+Niter=Niter
+Sky-Blue-Sapphire=Sky-Blue-Sapphire
+Clear_Quartz=Clear Quartz
+Aquamarine=Aquamarine
+Coloured-glaze=Coloured-glaze
+Ruby=Ruby
+Feldspar=Feldspar
+Starlight_Stone=Starlight Stone
+Rainbow_Fluorite=Rainbow Fluorite
+Starburst_Quartz=Starburst Quartz
+Phosphosiderite=Phosphosiderite
+Labradorite=Labradorite
+Phantom_Quartz=Phantom Quartz
+Sun_stone=Sun stone
+Moon_stone=Moon stone
+Nebula_Stone=Nebula Stone
+Phantom_Stone=Phantom Stone
+Violet-Serenity-Calcite=Violet-Serenity-Calcite
+Crimson-Phoenix=Crimson-Phoenix
+Dream_stone=Dream stone
+Celestial-Radiance-Pearl=Celestial-Radiance-Pearl
+NectarJade=NectarJade
+Restless_Crystal=Restless Crystal
+
+Cooking=Cooking
+Cuisine=Cuisine
+
+
+
+Hostile=Hostile
+
+
