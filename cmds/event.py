@@ -361,6 +361,18 @@ class Event(Cog_extension):
         #             await ctx.channel.send(random.choice(Friday_5))
         #         elif weekday == 4:
         #             await ctx.channel.send(random.choice(Friday_4))
+        
+        # #暫時
+        #     if any(word in ctx.content for word in (['嗨梓喵'])):
+        #         await ctx.channel.send('你又想做什麼...')
+        #     if any(word in ctx.content for word in (['幫你自己寫個RPG的遊戲'])):
+        #         await ctx.channel.send('??????')
+        #         await asyncio.sleep(1)
+        #         await ctx.channel.send('我的開發者腦袋終於壞掉了嗎??')
+        #     if any(word in ctx.content for word in (['所以不行嗎?'])):
+        #         await ctx.channel.send('廢話，我又不是AI')
+        #     if any(word in ctx.content for word in (['那你怎麼回我的'])):
+        #         await ctx.channel.send('這不是你設定的指定文句觸發回復嗎?')
 
 
 
