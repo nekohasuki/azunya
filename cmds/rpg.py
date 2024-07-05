@@ -57,7 +57,7 @@ if Test_mod == True:
         commandname = (f'{prefix}interface')
         @app_commands.command(name = commandname, description = '叫出介面')
         async def interface(self,interaction:discord.Interaction):
-            await interaction.channel.send(f'```{interaction.user.display_name}・{main_profession['class']} Lv.{main_profession['level']}/{sub_profession['class']} Lv.{sub_profession['level']}\n種族 : {Race}　　EXP : {EXP['now']}/{EXP['max']}\n---------------------------\n(attributes is Null)```',view = Button_config.Character_Sheet())
+            await interaction.channel.send(f'```{interaction.user.display_name}・{main_profession['class']} Lv.{main_profession['level']}/{sub_profession['class']} Lv.{sub_profession['level']}\n種族 : {Race}　　EXP : {EXP['now']}/{EXP['max']}\n---------------------------\nH P:70　　SAN:200\nS P:100　 M P:200\nATK:9　 　MATK:15\nDEF:18    MDEF:8\nLUK:32    SPD:8\nAGI:17    CHR:9```',view = Button_config.Character_Sheet())
     async def setup(bot):
         await bot.add_cog(RPG(bot))
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

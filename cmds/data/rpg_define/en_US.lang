@@ -1,4 +1,12 @@
 language=en_Us
+first_online_time=first online time
+coins=coins
+level=level
+EXP=EXP
+now=now
+max=max
+class=class
+
 Race=Race
 Human=Human
 Elf=Elf
@@ -22,6 +30,23 @@ Floriculturist=Floriculturist
 Chef=Chef
 Armourer=Armourer
 Hammersmith=Hammersmith
+
+attributes=attributes
+HP=H P
+SP=S P
+MP=M P
+ATK=ATK
+MATK=MATK
+DEF=DEF
+MDEF=MDEF
+SPD=SPD
+AGI=AGI
+LUK=LUK
+CHR=CHR
+SAN=SAN
+
+item=item
+handbook=handbook
 
 Weapon=Weapon
 Claw=Claw
@@ -66,12 +91,15 @@ Plate_armor=Plate armor
 Enchanting=Enchanting
 Runes=Runes
 Spell_Seal(T)=Spell_Seal(T)
+#Thermal
 Spell_Seal(M)=Spell_Seal(M)
+#Moistrue
 Spell_Seal(V)=Spell_Seal(V)
+#Vegatation
 Spell_Seal(P)=Spell_Seal(P)
+#Photon
 Spell_Seal(B)=Spell_Seal(B)
-
-
+#Blessing
 
 Emblazoning=Emblazoning
 Flowers=Flowers
@@ -122,3 +150,9 @@ Cuisine=Cuisine
 Hostile=Hostile
 
 
+
+battle=戰鬥
+PVP=玩家對戰
+win=勝
+lose=敗
+tie=平
