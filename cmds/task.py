@@ -67,6 +67,7 @@ class Task(Cog_extension):
                 await channel.send(f'梓守我不被需要了嗎Q^O')
             await channel.send(f'對了')
             await channel.send(f'去投票！')
+            await channel.send(f'當然，也要投稿')
         #每月固定日期
             add_ponit_count = int(setting['add_ponit_count'])
             max_number = []
