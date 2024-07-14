@@ -5,11 +5,10 @@ with open('setting.json','r',encoding='utf8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
-import asyncio,datetime,schedule
+import asyncio,datetime,schedule,shutil
 
 class Task(Cog_extension):
     utc = datetime.timezone(datetime.timedelta(hours = 8))
-    everyday_time = datetime.time(hour = 3, minute = 57, tzinfo = utc)
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.omikujidatareload.start()
@@ -110,7 +109,8 @@ class Task(Cog_extension):
                     await asyncio.sleep(2)
                     await channel.send(f'梓守我不信，難道沒有人想抽籤嗎?')
                     await asyncio.sleep(1)
-                    await channel.send(f'看來這個伺服器不需要我了...')                
+                    await channel.send(f'看來這個伺服器不需要我了...')      
+                shutil.copy('cmds/data/user_data.json',f'cmds/data/user_data_history/{datetime.datetime.now().strftime('%Y-%m-%d')}.json')          
     #重置'omikuji.json'資料
             omikuji={}
             omikuji.update(omikuji)
