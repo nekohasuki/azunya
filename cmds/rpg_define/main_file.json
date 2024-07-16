@@ -1,0 +1,14 @@
+{
+    "Race":["Human","Elf","Fairy","Giant","MoonRabbit","Asian"],
+    "Main_profession":["Warrior","Archer","Shielder","Thief","Mage"],
+    "Sub_profession":["Merchant","Pharmacist","Jeweler","Floriculturist","Chef","Armourer","Hammersmith"],
+    "Weapon":["Claw","Hammer","Spear","Blade","Sword","Axe","Bow","Staff"],
+    "Weapon_II":["Double-headed_spear","Double-headed_blade","Double-headed_sword","Double-headed_axe","Double-headed_maul","Clawed_bow","Staff_sword","Staff_blade","Spear_staff","Spear_mace","Spear_axe","Axe_maul"],
+    "Weapon_III":["Double-headed_maul_with_Spikes","Double-headed_Axe_with_Spikes","Axe_mace_with_Spikes","Lance_of_Longinus","Jagged_Claw"],
+    "Armor":["Cloak","Light_armor","Leather_armor","Scale_armor","Chainmail","Heavy_armor","Plate_armor"],
+    "Runes":["Spell_Seal(T)","Spell_Seal(M)","Spell_Seal(V)","Spell_Seal(P)","Spell_Seal(B)"],
+    "Flowers":["Forget_me_nots","Baby's_breath","Lavender","Plumbago_auriculata","Agave","Oxalis","violet","Hyacinth","Cestrum_nocturnum","Star_Gazer_Lily","Calendula_officinalis"],
+    "Gemstones":["Jadeite","Amethyst","Niter","Sky_Blue_Sapphire","Clear_Quartz","Aquamarine","Coloured_glaze","Ruby","Feldspar","Starlight_Stone","Rainbow_Fluorite","Starburst_Quartz","Phosphosiderite","Labradorite","Phantom_Quartz","Sun_stone","Moon_stone","Nebula_Stone","Phantom_Stone","Violet_Serenity_Calcite","Crimson_Phoenix","Dream_stone","Celestial_Radiance_Pearl","NectarJade","Restless_Crystal"],
+    "Cuisine":[""],
+    "Hostile":[""]
+}
