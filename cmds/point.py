@@ -213,19 +213,23 @@ class Point(Cog_extension):
                                             userdata = json.load(userdata_file)
                                         if userdata[f'{user.id}']['point']['state'] == True or userdata[f'{user.id}']['point']['state'] == False:
                                             count = abs(count)
-                                        #添加移除點數
-                                            if mod.name == "add":
-                                                userlist['mod'] = '添加'
-                                            elif mod.name == "remove":
-                                                userlist['mod']
-                                                count = count*-1
                                         #抓取資料
                                             userdata_update = userdata[f"{user.id}"]
                                             now_count = userdata_update['point']['now_count']
                                             history_count = userdata_update['point']['history_count']
-                                        #刷入資料
-                                            userdata_update['point']['now_count'] = int(now_count) + count
-                                            userdata_update['point']['history_count'] = int(history_count) + count
+                                            consumption = userdata_update['point']['consumption']
+                                        #添加點數
+                                            if mod.name == "add":
+                                                userlist['mod'] = '添加'
+                                            #刷入資料
+                                                userdata_update['point']['now_count'] = int(now_count) + count
+                                                userdata_update['point']['history_count'] = int(history_count) + count
+                                        #移除點數
+                                            elif mod.name == "remove":
+                                                userlist['mod'] = '移除'
+                                            #刷入資料
+                                                userdata_update['point']['now_count'] = int(now_count) - count
+                                                userdata_update['point']['consumption'] = int(consumption) + count
                                         #更新資料
                                             userdata[f"{user.id}"].update(userdata_update)
                                             with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
@@ -243,7 +247,6 @@ class Point(Cog_extension):
                                 userlist['role'].append(user)
                         else:
                                 userlist['unknown'].append(f'"{user}"')
-                    print(userlist)
                     succeeded = '、'.join(userlist['succeeded'])
                     role = '、'.join(userlist['role'])
                     state_None = '、'.join(userlist['state_None'])
@@ -267,8 +270,6 @@ class Point(Cog_extension):
                     await asyncio.sleep(1)
                     if state_None != '':
                         await interaction.channel.send(f'{state_None}\n以上User還從未註冊過P卡\n請以上提到的User\n自行回[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})註冊')
-
-
             if counter == 0:
                 await interaction.response.send_message(f'沒有任何一個可以加減點數的權限')
                 
