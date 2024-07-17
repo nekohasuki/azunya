@@ -25,18 +25,15 @@ class Tool(Cog_extension):
         if count == -402:
             await interaction.response.send_message(f'請User：<@{user}>稍等片刻\n正在啟動執行402號刪除程序 ')
             await asyncio.sleep(5)
-            await interaction.channel.purge(limit=1)
             deleted = await interaction.channel.purge(limit=2147483648)
-            await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息')
         else:
             await interaction.response.send_message(f'請User：<@{user}>稍等片刻\n正在刪除{count}項訊息')
             await asyncio.sleep(3)
-            await interaction.channel.purge(limit=1)
-            deleted = await interaction.channel.purge(limit=count)
-            await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息')
-        async for message in interaction.channel.history(limit=1):
-            await asyncio.sleep(60)
-            await interaction.channel.purge(check=lambda m: m.id == int(message.id))
+            deleted = await interaction.channel.purge(limit=count+1)
+        await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息',delete_after=60)
+        # async for message in interaction.channel.history(limit=1):
+        #     await asyncio.sleep(60)
+        #     await interaction.channel.purge(check=lambda m: m.id == int(message.id))
 #碼表
     commandname = (f'{prefix}stopwatch')
     @app_commands.command(name = commandname, description = '碼表')
