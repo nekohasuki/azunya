@@ -179,16 +179,17 @@ class Point(Cog_extension):
 #添加點數給指定用戶
     commandname = (f'{prefix}point')
     @app_commands.command(name = commandname , description = '添加點數給指定用戶')
-    @app_commands.describe(mod = '模式(需要權限)' , user='輸入用戶' , count='輸入數量' , reason = '輸入原因')
+    @app_commands.describe(mod = '模式(需要權限)' , users='輸入用戶' , count='輸入數量' , reason = '輸入原因')
     @app_commands.choices(mod=[app_commands.Choice(name = 'add' , value = 'add') , app_commands.Choice(name = 'remove' , value = 'remove')])
-    async def point(self , interaction:discord.Interaction , mod: app_commands.Choice[str] , user: Optional[str] = None , count: Optional[int] = None , reason: Optional[str] = None):        
+    async def point(self , interaction:discord.Interaction , mod: app_commands.Choice[str] , users: Optional[str] = None , count: Optional[int] = None , reason: Optional[str] = None):        
         if count == None:
             count = 0
         if reason == None:
             reason = '沒什麼特別的原因'
-        if user == None:
+        if users == None:
             await interaction.response.send_message(f'請輸入使用者')
         else:
+        
             with open('setting.json' , 'r' , encoding='utf8') as setting_file:
                 setting = json.load(setting_file)
             role_list = setting['MOD_roles']
@@ -200,17 +201,24 @@ class Point(Cog_extension):
                 role_members = interaction.guild.get_role(int(f'{role}')).members
                 if str(id) in str(role_members):
                     counter += 1
-                    if "<@" in user:
-                        if "&" not in user:
-                            user = interaction.guild.get_member(int(user[2:-1]))
-                            if interaction.user != user:
-                                if interaction.user.top_role.position >= user.top_role.position:
-                                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
-                                        userdata = json.load(userdata_file)
-                                    if userdata[f'{user.id}']['point']['state'] == True or userdata[f'{user.id}']['point']['state'] == False:
-                                        count = abs(count)
-                                    #添加點數
-                                        if mod.name == "add":
+                    user = (users.replace('>','> ')).split()
+                    userlist = {'mod':mod.name,'role':[],'succeeded':[],'state_None':[],'state_corruption':[],'insufficient':[],'unknown':[],'author':None}
+                    for user in user:
+                        if "<@" in user:
+                            if "&" not in user:
+                                user = interaction.guild.get_member(int(user[2:-1]))
+                                if interaction.user != user:
+                                    if interaction.user.top_role.position >= user.top_role.position:
+                                        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                                            userdata = json.load(userdata_file)
+                                        if userdata[f'{user.id}']['point']['state'] == True or userdata[f'{user.id}']['point']['state'] == False:
+                                            count = abs(count)
+                                        #添加移除點數
+                                            if mod.name == "add":
+                                                userlist['mod'] = '添加'
+                                            elif mod.name == "remove":
+                                                userlist['mod']
+                                                count = count*-1
                                         #抓取資料
                                             userdata_update = userdata[f"{user.id}"]
                                             now_count = userdata_update['point']['now_count']
@@ -222,37 +230,47 @@ class Point(Cog_extension):
                                             userdata[f"{user.id}"].update(userdata_update)
                                             with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
                                                 json.dump(userdata , userdata_file , indent=4)
-                                            await interaction.response.send_message(f'已為User：{user.mention}添加了**{count}**點\n原因：{reason}')
-                                    #移除點數                                
-                                        if mod.name == "remove":
-                                            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
-                                                userdata = json.load(userdata_file)
-                                        #抓取資料
-                                            userdata_update = userdata[f"{user.id}"]
-                                            now_count = userdata_update['point']['now_count']
-                                            history_count = userdata_update['point']['history_count']
-                                        #刷入資料
-                                            userdata_update['point']['now_count'] = int(now_count) - count
-                                            userdata_update['point']['history_count'] = int(history_count) - count
-                                        #更新資料
-                                            userdata[f"{user.id}"].update(userdata_update)
-                                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
-                                                json.dump(userdata , userdata_file , indent=4)
-                                            await interaction.response.send_message(f'已為User：{user.mention}移除了**{count}**點\n原因：{reason}')
-                                    elif userdata[f'{user.id}']['point']['state'] == None:
-                                        await interaction.response.send_message(f'可是User：{user.mention}\n還從未註冊過P卡\n請先讓{user.mention}回[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})註冊')
+                                            userlist['succeeded'].append(user.mention)
+                                        elif userdata[f'{user.id}']['point']['state'] == None:
+                                            userlist['state_None'].append(user.mention)
+                                        else:
+                                            userlist['state_corruption'].append(user.mention)
                                     else:
-                                        await interaction.response.send_message(f'對方用戶資料損毀，請聯絡管理員檢查用戶資料')
+                                        userlist['insufficient'].append(user.mention)
                                 else:
-                                    await interaction.response.send_message(f'權限不足')
+                                    userlist['author']=True
                             else:
-                                await interaction.response.send_message(f'指令無法對自己使用')
+                                userlist['role'].append(user)
                         else:
-                            await interaction.response.send_message(f'這好像是某個身分組並不是某位User')
-                    else:
-                            await interaction.response.send_message(f'User：**{interaction.user.global_name}** 請問...\nuser參數裡你放了甚麼??')
+                                userlist['unknown'].append(f'"{user}"')
+                    print(userlist)
+                    succeeded = '、'.join(userlist['succeeded'])
+                    role = '、'.join(userlist['role'])
+                    state_None = '、'.join(userlist['state_None'])
+                    state_corruption = '、'.join(userlist['state_corruption'])
+                    insufficient = '、'.join(userlist['insufficient'])
+                    unknown = '、'.join(userlist['unknown'])
+                    message = []
+                    if succeeded != '':
+                        message.append(f'已為User：{succeeded}{userlist['mod']}了**{count}**點\n原因：{reason}\n')
+                    if insufficient != '':
+                        message.append(f'權限不足，無法為{insufficient}進行點數的加減')
+                    if role != '':
+                        message.append(f'\n{role}\n以上好像是身分組而不是User')
+                    if state_corruption != '':
+                        message.append(f'用戶{state_corruption}資料損毀，請聯絡管理員檢查用戶資料')
+                    if unknown != '':
+                        message.append(f'無法理解{unknown}代表的對象')
+                    if userlist['author'] == True:
+                        message.append(f'> `注意:指令無法對自己使用`')
+                    await interaction.response.send_message('\n'.join(message))
+                    await asyncio.sleep(1)
+                    if state_None != '':
+                        await interaction.channel.send(f'{state_None}\n以上User還從未註冊過P卡\n請以上提到的User\n自行回[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})註冊')
+
+
             if counter == 0:
-                await interaction.response.send_message(f'沒有權限')
+                await interaction.response.send_message(f'沒有任何一個可以加減點數的權限')
                 
 
 
