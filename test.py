@@ -1,20 +1,23 @@
+# print(0.000000488189952757858304)
 from PIL import Image
 import os,random
-directory = r'imege\color'
+directory = r'imege\rpg\color'
 os.makedirs(directory, exist_ok=True)
 width = 192
 height = 108
 
-R = random.randint(0xaf,0xff)
-G = random.randint(0xaf,0xff)
-B = random.randint(0xaf,0xff)
-file_path = os.path.join(directory, f'0x{R:02x}{G:02x}{B:02x}.png')
-if not os.path.exists(file_path):
-    image = Image.new('RGB', (width, height), (R, G, B))
-    image.save(file_path, format='PNG')
-else:
-    n+=1
-    print(f'第{n}次重複')
+n=5000000
+while n != 0:
+    R = random.randint(0x80,0xff)
+    G = random.randint(0x80,0xff)
+    B = random.randint(0x80,0xff)
+    n-=1
+    file_path = os.path.join(directory, f'0x{R:02x}{G:02x}{B:02x}.png')
+    if not os.path.exists(file_path):
+        image = Image.new('RGB', (width, height), (R, G, B))
+        image.save(file_path, format='PNG')
+    else:
+        print(f'重複')
 # #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
