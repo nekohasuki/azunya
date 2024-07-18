@@ -1,7 +1,8 @@
 setting.json
 setting copy.json
 
-not.pytxt
+imege/color/*
+權限.txt
 rule.py
 cmds/data/omikuji.json
 cmds/data/user_data.json
@@ -12,4 +13,3 @@ core/__pycache__
 __pycache__
 .vscode
 node_modules
-權限.txt
