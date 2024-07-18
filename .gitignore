@@ -1,7 +1,7 @@
 setting.json
 setting copy.json
 
-imege/color/123.png
+imege/color/*.png
 權限.txt
 cmds/data/omikuji.json
 cmds/data/user_data.json
