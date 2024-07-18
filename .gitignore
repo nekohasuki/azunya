@@ -1,7 +1,6 @@
 setting.json
 setting copy.json
 
-imege/color/*.png
 權限.txt
 cmds/data/omikuji.json
 cmds/data/user_data.json
@@ -9,6 +8,8 @@ cmds/data/user_data.json
 cmds/__pycache__
 cmds/data/user_data_history
 core/__pycache__
+imege/color
+
 __pycache__
 .vscode
 node_modules
