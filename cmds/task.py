@@ -65,8 +65,7 @@ class Task(Cog_extension):
                 await asyncio.sleep(1)
                 await channel.send(f'梓守我不被需要了嗎Q^O')
             await channel.send(f'對了')
-            await channel.send(f'去投票！')
-            await channel.send(f'當然，也要投稿')
+            await channel.send(f'去投稿')
         #每月固定日期
             add_ponit_count = int(setting['add_ponit_count'])
             max_number = []
@@ -111,6 +110,7 @@ class Task(Cog_extension):
                     await asyncio.sleep(1)
                     await channel.send(f'看來這個伺服器不需要我了...')      
                 shutil.copy('cmds/data/user_data.json',f'cmds/data/user_data_history/{datetime.datetime.now().strftime('%Y-%m-%d')}.json')          
+                await channel.send(f'<@&1079939318371582043>\n記得拔管')      
     #重置'omikuji.json'資料
             omikuji={}
             omikuji.update(omikuji)
