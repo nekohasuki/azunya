@@ -3,7 +3,6 @@ setting copy.json
 
 imege/color/*
 權限.txt
-rule.py
 cmds/data/omikuji.json
 cmds/data/user_data.json
 
