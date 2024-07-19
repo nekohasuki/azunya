@@ -1,20 +1,30 @@
 
-# from PIL import Image
-# import os,random
-# directory = r'imege\rpg\color'
+from PIL import Image
+import os,random,shutil,asyncio
+directory = r'imege\rpg\color'
+shutil.rmtree(directory)
 # os.makedirs(directory, exist_ok=True)
 # width = 192
 # height = 108
-# R = random.randint(0x00,0x00)
-# G = random.randint(0x00,0x00)
-# B = random.randint(0x00,0x00)
-# file_path = os.path.join(directory, f'0x{R:02x}{G:02x}{B:02x}.png')
-# if not os.path.exists(file_path):
-#     image = Image.new('RGB', (width, height), (R, G, B))
-#     image.save(file_path, format='PNG')
-#     print(f'0x{R:02x}{G:02x}{B:02x}')
-# else:
-#     print(f'重複')
+
+# async def tset():
+#     listdir=os.listdir(directory)
+#     for A in range(0x000000,0xffffff+1):
+#         A1=(f'0x{(A):06x}.png')
+#         if A1 not in listdir:
+#             R = (A >> 16) & 0xff
+#             G = (A >> 8) & 0xff
+#             B = A & 0xff
+#             file_path = os.path.join(directory, f'0x{R:02x}{G:02x}{B:02x}.png')
+#             if not os.path.exists(file_path):
+#                 image = Image.new('RGB', (width, height), (R, G, B))
+#                 image.save(file_path, format='PNG')
+#                 print(f'0x{R:02x}{G:02x}{B:02x}')
+#             else:
+#                 print(f'0x{R:02x}{G:02x}{B:02x}(重複)')
+
+# asyncio.run(tset())
+
 # #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
