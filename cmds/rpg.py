@@ -137,7 +137,7 @@ if Test_mod == True:
                 file_path = f'imege/rpg/color/{user_color}.png'
                 file = discord.File(file_path, filename=f'{user_color}.png')
                 embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{'random_color'}__',colour=int(user_color,16),timestamp=datetime.datetime.now())
-                embed.add_field(name='',value=f'顏色 :\nR `{str(R).zfill(3)}` , G `{str(G).zfill(3)}` , B `{str(B).zfill(3)}`\nHEX `#{user_color}`',inline=False)
+                embed.add_field(name='',value=f'**顏色 :**\n> RGB  `{str(R).zfill(3)} , {str(G).zfill(3)} , {str(B).zfill(3)}`\n> HEX `#{user_color}`',inline=False)
                 embed.set_image(url=f'attachment://{user_color}.png')
                 await interaction.response.edit_message(attachments=[file],embed=embed,view=Button_config.color())
                 
@@ -273,7 +273,7 @@ if Test_mod == True:
                 delay = ''.join(delay)
                 file = discord.File(file_path, filename=f'{user_color}.png')
                 embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{'random_color'}__',colour=int(user_color,16),timestamp=datetime.datetime.now())
-                embed.add_field(name='',value=f'耗時:\n`{delay}`\n\n顏色 :\nR `{str(R).zfill(3)}` , G `{str(G).zfill(3)}` , B `{str(B).zfill(3)}`\nHEX `#{str(user_color)[2:]}`',inline=False)
+                embed.add_field(name='',value=f'**耗時 :**\n> `{delay}`\n\n**顏色 :**\n> RGB  `{str(R).zfill(3)} , {str(G).zfill(3)} , {str(B).zfill(3)}`\n> HEX `#{str(user_color)[2:]}`',inline=False)
                 embed.set_image(url=f'attachment://{user_color}.png')
                 await interaction.response.edit_message(attachments=[file],embed=embed,view=Button_config.color())
                 
