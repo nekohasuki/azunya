@@ -17,7 +17,7 @@ Test_mod = True
 data = {
     "RPG":{
         "language":"zh_TW",
-        "first_online_time":"2024-00-00 00:00:00.00000000",
+        "first_online_time":"2024-00-00 00:00:00.000000",
         "color":"0x000000",
         "coins":0,
         "Race":"MoonRabbit",
@@ -81,6 +81,8 @@ data = {
         }
     }
 }
+first_online_time=data['RPG']['first_online_time']
+language=data['RPG']['language']
 Race = data['RPG']['Race']
 EXP=data['RPG']['EXP']
 EXP_bar=['/|','/|','/|','/|','/|','.:','.:','.:','.:','.:','.:','.:','.:','.:','.:']
@@ -152,6 +154,11 @@ if Test_mod == True:
                 Character_Sheet_button = Button(label=Character_Sheet)
                 Character_Sheet_button.callback = self.Character_Sheet_button_callback
                 self.add_item(Character_Sheet_button)
+
+                test_button = Button(label='test',row=4)
+                test_button.callback = self.test_button_callback
+                self.add_item(test_button)
+
                 random_color_button = Button(label='random_color')
                 random_color_button.callback = self.random_color_button_callback
                 self.add_item(random_color_button)
@@ -174,6 +181,10 @@ if Test_mod == True:
                 embed.add_field(name='',value=f'{'名稱':<3}: **{interaction.user.display_name}**\n{'職業':<3}: {main_profession['class']:<5}Lv.{main_profession['level']:<3}{'/':<2}{top_sub_profession['class']:<4}Lv.{top_sub_profession['level']:<5}\n{'種族':<3}: {Race}\n{'EXP':<4}: {EXP['now']} / {EXP['max']}\n`{str(EXP_bar)[1:-1].replace(',','').replace(' ','').replace("'",'')}`',inline=False)
                 embed.add_field(name='__**-------------------------------------**__',value=(f'|!__**H~P**__!| :_`{200:>4}`_\u3000|!__**S!A!N**__!| :_`{0:>4}`_\u3000\n|!__**S~P**__!| :_`{0:>4}`_\u3000|!__**M~P**__!| :_`{0:>4}`_\u3000\n|!__**A!T!K**__!| :_`{0:>4}`_\u3000|!__**MATK**__!| :_`{0:>4}`_\u3000\n|!__**D!E!F**__!| :_`{0:>4}`_\u3000|!__**MDEF**__!| :_`{0:>4}`_\u3000\n|!__**L!U!K**__!| :_`{0:>4}`_\u3000|!__**S!P!D**__!| :_`{0:>4}`_\u3000\n|!__**A!G!\u200BI\u2009**__!| :_`{0:>4}`_\u3000|!__**C!H!R**__!| :_`{0:>4}`_\u3000').replace('~','\u2009\u3000').replace('!','\u200A\u2004').replace(' ','\u2007\u200A'),inline=False)
                 await interaction.response.edit_message(embed=embed,view=Button_config.Character_Sheet())
+             
+            async def test_button_callback(self,interaction:discord.Interaction):
+                await interaction.response.edit_message(content=(f'```{first_online_time}\n{datetime.datetime.now()}```\n{language}'))
+
             async def random_color_button_callback(self,interaction:discord.Interaction):
                 directory = r'imege\rpg\color'
                 os.makedirs(directory, exist_ok=True)
@@ -193,7 +204,7 @@ if Test_mod == True:
                 embed.add_field(name='',value=f'**顏色 :**\n> RGB  `{str(R).zfill(3)} , {str(G).zfill(3)} , {str(B).zfill(3)}`\n> HEX `#{user_color}`',inline=False)
                 embed.set_image(url=f'attachment://{user_color}.png')
                 await interaction.response.edit_message(attachments=[file],embed=embed,view=Button_config.first_online.color())
-                
+              
         class Character_Sheet(View):
             def __init__(self):
                 super().__init__(timeout=None)
