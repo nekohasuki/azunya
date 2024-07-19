@@ -93,6 +93,59 @@ Character_Sheet = '角色卡'
 
 if Test_mod == True:
     class Button_config:
+        class first_online():
+            class color(View):
+                def __init__(self):
+                    super().__init__(timeout=None)
+                    decided_button = Button(label='decided',style=discord.ButtonStyle.green)
+                    decided_button.callback = self.decided_button_callback
+                    self.add_item(decided_button)
+                    random_color_button = Button(label='random_color')
+                    random_color_button.callback = self.random_color_button_callback
+                    self.add_item(random_color_button)
+                    back_button = Button(label='返回',style=discord.ButtonStyle.red)
+                    back_button.callback = self.back_button_callback
+                    self.add_item(back_button)
+                async def decided_button_callback(self,interaction:discord.Interaction):
+                    await interaction.response.edit_message(attachments=[],embed=None,view=Button_config.Start_Screen())
+
+                async def random_color_button_callback(self,interaction:discord.Interaction):
+                    start = datetime.datetime.now().strftime('(int("%H")*3600)+(int("%M")*60)+int("%S")+float(int(str("%f")[:3])/1000)')
+                    directory = r'imege\rpg\color'
+                    os.makedirs(directory, exist_ok=True)
+                    width = 192
+                    height = 108
+                    R = random.randint(0x80,0xff)
+                    G = random.randint(0x80,0xff)
+                    B = random.randint(0x80,0xff)
+                    file_path = os.path.join(directory, f'0x{R:02x}{G:02x}{B:02x}.png')
+
+                    if not os.path.exists(file_path):
+                        image = Image.new('RGB', (width, height), (R, G, B))
+                        image.save(file_path, format='PNG')
+                        print(f'User:{interaction.user.display_name} adding 0x{R:02x}{G:02x}{B:02x}.png')
+                    user_color = f'0x{R:02x}{G:02x}{B:02x}'
+                    file_path = f'imege/rpg/color/{user_color}.png'
+                    while not os.path.isfile(file_path):
+                        await asyncio.sleep(2)
+                    end = datetime.datetime.now().strftime('(int("%H")*3600)+(int("%M")*60)+int("%S")+float(int(str("%f")[:3])/1000)')
+                    h,r = divmod(int(eval(end)-eval(start)),3600)
+                    m,s = divmod(r,60)
+                    ms = str(int((eval(end)-eval(start)-int(eval(end)-eval(start)))*1000)).zfill(3)
+                    delay = []
+                    if (h or m) != 0:
+                        delay.append(f'{str(h).zfill(2)}:{str(m).zfill(2)}\n')
+                    delay.append(f'{s}.{ms}/s')
+                    delay = ''.join(delay)
+                    file = discord.File(file_path, filename=f'{user_color}.png')
+                    embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{'random_color'}__',colour=int(user_color,16),timestamp=datetime.datetime.now())
+                    embed.add_field(name='',value=f'**耗時 :**\n> `{delay}`\n\n**顏色 :**\n> RGB  `{str(R).zfill(3)} , {str(G).zfill(3)} , {str(B).zfill(3)}`\n> HEX `#{str(user_color)[2:]}`',inline=False)
+                    embed.set_image(url=f'attachment://{user_color}.png')
+                    await interaction.response.edit_message(attachments=[file],embed=embed,view=Button_config.first_online.color())
+                    
+                async def back_button_callback(self,interaction:discord.Interaction):
+                    await interaction.response.edit_message(attachments=[],embed=None,view=Button_config.Start_Screen())
+
         class Start_Screen(View):
             def __init__(self):
                 super().__init__(timeout=None)
@@ -139,7 +192,7 @@ if Test_mod == True:
                 embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{'random_color'}__',colour=int(user_color,16),timestamp=datetime.datetime.now())
                 embed.add_field(name='',value=f'**顏色 :**\n> RGB  `{str(R).zfill(3)} , {str(G).zfill(3)} , {str(B).zfill(3)}`\n> HEX `#{user_color}`',inline=False)
                 embed.set_image(url=f'attachment://{user_color}.png')
-                await interaction.response.edit_message(attachments=[file],embed=embed,view=Button_config.color())
+                await interaction.response.edit_message(attachments=[file],embed=embed,view=Button_config.first_online.color())
                 
         class Character_Sheet(View):
             def __init__(self):
@@ -218,67 +271,6 @@ if Test_mod == True:
                 self.add_item(back_button)
             async def back_button_callback(self,interaction:discord.Interaction):
                 await interaction.response.edit_message('',view=Button_config.Start_Screen())
-
-        class name(View):
-            def __init__(self):
-                super().__init__(timeout=None)
-                back_button = Button(label='返回',style=discord.ButtonStyle.red)
-                back_button.callback = self.back_button_callback
-                self.add_item(back_button)
-            async def back_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message('',view=Button_config.Start_Screen())
-
-        class color(View):
-            def __init__(self):
-                super().__init__(timeout=None)
-                decided_button = Button(label='decided',style=discord.ButtonStyle.green)
-                decided_button.callback = self.decided_button_callback
-                self.add_item(decided_button)
-                random_color_button = Button(label='random_color')
-                random_color_button.callback = self.random_color_button_callback
-                self.add_item(random_color_button)
-                back_button = Button(label='返回',style=discord.ButtonStyle.red)
-                back_button.callback = self.back_button_callback
-                self.add_item(back_button)
-            async def decided_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message(attachments=[],embed=None,view=Button_config.Start_Screen())
-
-            async def random_color_button_callback(self,interaction:discord.Interaction):
-                start = datetime.datetime.now().strftime('(int("%H")*3600)+(int("%M")*60)+int("%S")+float(int(str("%f")[:3])/1000)')
-                directory = r'imege\rpg\color'
-                os.makedirs(directory, exist_ok=True)
-                width = 192
-                height = 108
-                R = random.randint(0x80,0xff)
-                G = random.randint(0x80,0xff)
-                B = random.randint(0x80,0xff)
-                file_path = os.path.join(directory, f'0x{R:02x}{G:02x}{B:02x}.png')
-
-                if not os.path.exists(file_path):
-                    image = Image.new('RGB', (width, height), (R, G, B))
-                    image.save(file_path, format='PNG')
-                    print(f'User:{interaction.user.display_name} adding 0x{R:02x}{G:02x}{B:02x}.png')
-                user_color = f'0x{R:02x}{G:02x}{B:02x}'
-                file_path = f'imege/rpg/color/{user_color}.png'
-                while not os.path.isfile(file_path):
-                    await asyncio.sleep(2)
-                end = datetime.datetime.now().strftime('(int("%H")*3600)+(int("%M")*60)+int("%S")+float(int(str("%f")[:3])/1000)')
-                h,r = divmod(int(eval(end)-eval(start)),3600)
-                m,s = divmod(r,60)
-                ms = str(int((eval(end)-eval(start)-int(eval(end)-eval(start)))*1000)).zfill(3)
-                delay = []
-                if (h or m) != 0:
-                    delay.append(f'{str(h).zfill(2)}:{str(m).zfill(2)}\n')
-                delay.append(f'{s}.{ms}/s')
-                delay = ''.join(delay)
-                file = discord.File(file_path, filename=f'{user_color}.png')
-                embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{'random_color'}__',colour=int(user_color,16),timestamp=datetime.datetime.now())
-                embed.add_field(name='',value=f'**耗時 :**\n> `{delay}`\n\n**顏色 :**\n> RGB  `{str(R).zfill(3)} , {str(G).zfill(3)} , {str(B).zfill(3)}`\n> HEX `#{str(user_color)[2:]}`',inline=False)
-                embed.set_image(url=f'attachment://{user_color}.png')
-                await interaction.response.edit_message(attachments=[file],embed=embed,view=Button_config.color())
-                
-            async def back_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message(attachments=[],embed=None,view=Button_config.Start_Screen())
 
         class test:
             class A(View):
