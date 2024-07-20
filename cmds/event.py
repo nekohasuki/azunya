@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
 import json
-with open('setting.json','r',encoding='utf8') as setting_file:
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
-with open('dict.json','r',encoding='utf8') as dict_file:
+with open('dict.json','r',encoding='utf-8') as dict_file:
     dict = json.load(dict_file)
 
 from core.classes import Cog_extension
@@ -75,7 +75,7 @@ class Event(Cog_extension):
             #第四組
             if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
-                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                         userdata = json.load(userdata_file)
                     counter = 0
                     for data in userdata:
@@ -88,7 +88,7 @@ class Event(Cog_extension):
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
                             userdata[f'{user.id}'].update(userdata_update)
-                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                            with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                                 json.dump(userdata , userdata_file , indent=4)
                     if counter == 0:
                         if user.bot == False:
@@ -103,7 +103,7 @@ class Event(Cog_extension):
                         else:
                             userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{}}}
                         userdata.update(userdata_update)
-                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                        with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                             json.dump(userdata , userdata_file , indent=4)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"add {reaction.emoji}-@{role}')
@@ -137,7 +137,7 @@ class Event(Cog_extension):
             #第四組
             if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
-                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                         userdata = json.load(userdata_file)
                     counter = 0
                     for data in userdata:
@@ -150,7 +150,7 @@ class Event(Cog_extension):
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
                             userdata[f'{user.id}'].update(userdata_update)
-                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                            with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                                 json.dump(userdata , userdata_file , indent=4)
                     if counter == 0:
                         if user.bot == False:
@@ -165,7 +165,7 @@ class Event(Cog_extension):
                         else:
                             userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{}}}
                         userdata.update(userdata_update)
-                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                        with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                             json.dump(userdata , userdata_file , indent=4)
 
                     role = guild.get_role(int(setting['P_ROLE_ID']))
@@ -175,11 +175,11 @@ class Event(Cog_extension):
     @commands.Cog.listener()
     async def on_message(self,ctx):
 #前置設定
-        with open('setting.json','r',encoding='utf8') as setting_file:
+        with open('setting.json','r',encoding='utf-8') as setting_file:
             setting = json.load(setting_file)
-        with open('dict.json','r',encoding='utf8') as dict_file:
+        with open('dict.json','r',encoding='utf-8') as dict_file:
             dict = json.load(dict_file)
-        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
             userdata = json.load(userdata_file)
         guild = ctx.guild
         channel = ctx.channel
@@ -419,7 +419,7 @@ class Event(Cog_extension):
             # if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
                 if user == (697842681082281985):
                     user = (938100109240074310)
-                with open('setting.json','r',encoding='utf8') as setting_file:
+                with open('setting.json','r',encoding='utf-8') as setting_file:
                     setting = json.load(setting_file)
                 Current_hours = datetime.datetime.now().strftime('%H')
                 Current_minutes = datetime.datetime.now().strftime('%M')
@@ -432,7 +432,7 @@ class Event(Cog_extension):
                     while os.path.exists('cmds\data\omikuji.lock') == True:
                         await asyncio.sleep(1)
                     open('cmds\data\omikuji.lock', 'w').close()
-                    with open('cmds\data\omikuji.json','r',encoding='utf8') as omikuji_file:
+                    with open('cmds\data\omikuji.json','r',encoding='utf-8') as omikuji_file:
                         omikuji = json.load(omikuji_file)
                 #抓資料
                     counter = 0
@@ -457,7 +457,7 @@ class Event(Cog_extension):
                     #omikuji資料更新
                         omikuji_update = {f'{user}':{'name':f'{display_name}','pic':f'imege\omikuji\{random_pic}'}}
                         omikuji.update(omikuji_update)
-                        with open('cmds\data\omikuji.json','w+',encoding='utf8') as omikuji_file:
+                        with open('cmds\data\omikuji.json','w+',encoding='utf-8') as omikuji_file:
                             json.dump(omikuji,omikuji_file,indent=4)
                     #如果用戶有在'user_data.json'裡就存進去,否則聊天室回復訊息
                         counter = 0
@@ -501,7 +501,7 @@ class Event(Cog_extension):
                                         userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
                                 elif 'omikuji' not in userdata[f'{user}']:
                                     userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
-                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf-8') as userdata_file:
                                 json.dump(userdata , userdata_file , indent=4)
                         else:
                             await ctx.channel.send(f'是說 User :<@{user}>\n你好像沒有註冊P卡喔\n沒有註冊的話是不能參與比賽的\n現在去註冊的話今天00:00一過再抽籤就可以比賽嘍^W^')
