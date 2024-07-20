@@ -70,14 +70,14 @@ Clawed_bow=爪弓
 Staff_sword=杖中刃
 Staff_blade=杖中刀
 Spear_staff=刺杖
-Spear_mace=刺錘
+Spear_maul=刺錘
 Spear_axe=刺斧
 Axe_maul=斧錘
 
 Weapon_III=三重複合武器
 Double-headed_maul_with_Spikes=帶刺雙頭錘
 Double-headed_Axe_with_Spikes=帶刺雙頭斧
-Axe_mace_with_Spikes=帶刺斧錘
+Axe_maul_with_Spikes=帶刺斧錘
 Lance_of_Longinus=朗基努斯之槍
 Jagged_Claw=反齒爪
 
@@ -145,7 +145,7 @@ Celestial_Radiance_Pearl=天輝寶珠
 NectarJade=甘露玉石
 Restless_Crystal=躁動水晶
 
-Cooking=料理
+Cooking=烹飪
 Cuisine=料理
 
 
