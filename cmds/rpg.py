@@ -379,7 +379,7 @@ if Test_mod == True:
             test = 'No'
             #A or B or No
             if test =='No':
-                with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                     userdata = json.load(userdata_file)
                 author_id = interaction.user.id
                 if author_id == int('697842681082281985'):
