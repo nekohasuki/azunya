@@ -190,7 +190,6 @@ class Event(Cog_extension):
         nowtime = datetime.datetime.now().strftime('%H:%M:%S')
         msg = ctx.content
         log_channel = self.bot.get_channel(int(setting['MESSAGE_LOG_CHANNEL_ID']))
-        nowtime = datetime.datetime.now().strftime('%H:%M:%S')
     #字典
         dict_my = dict['user_self-proclaimed']
         dict_azunya = dict['azunya']
@@ -259,9 +258,6 @@ class Event(Cog_extension):
             userdata.update(userdata_update)
             with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                 json.dump(userdata , userdata_file , indent=4)
-
-
-            
             if channel.id != log_channel.id:
                 if ctx.author.bot == False:
                     await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
