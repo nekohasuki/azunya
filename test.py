@@ -65,12 +65,17 @@ data={
         }
     }
 }
-import json
-# print(data['RPG']['language'])
-with open(r'cmds\rpg_define\en_US.lang','r','utf-8') as Lang_fill:
-    lang = Lang_fill.read()
-    # lang = json.load(Lang_fill)
-    print((lang))
+
+
+lang = {}
+with open(f'cmds/rpg_define/{data['RPG']['language']}.lang', 'r', encoding='utf-8') as Lang_file:
+    for line in Lang_file:
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        key, value = line.split('=', 1)
+        lang[key] = value
+print(lang)
 
 
 # from PIL import Image
