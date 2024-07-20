@@ -5,7 +5,7 @@ from discord.ui import Button, View
 
 from core.classes import Cog_extension
 
-import asyncio,datetime,os,random
+import asyncio,datetime,json,os,random
 from PIL import Image
 
 prefix = 'rpg-'
@@ -379,7 +379,23 @@ if Test_mod == True:
             test = 'No'
             #A or B or No
             if test =='No':
-                await interaction.response.send_message(view=Button_config.Start_Screen())
+                with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                    userdata = json.load(userdata_file)
+                author_id = interaction.user.id
+                if author_id == int('697842681082281985'):
+                    author_id = 938100109240074310
+                if 'RPG' not in userdata[str(author_id)]:
+                    await interaction.response.send_message(content='# 歡迎遊玩',view=Button_config.Start_Screen())
+                else:
+                    await interaction.response.send_message(view=Button_config.Start_Screen())
+           
+           
+           
+           
+           
+           
+           
+           
             else:
                 embed = discord.Embed(title='請選擇',description=f'您好{interaction.user.mention}，請選擇 A 或 B',color=discord.Color.purple(),timestamp=datetime.datetime.now())
                 if test == 'A':
