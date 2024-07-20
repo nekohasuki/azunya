@@ -91,7 +91,7 @@ class Event(Cog_extension):
                             with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
                                 json.dump(userdata , userdata_file , indent=4)
                     if counter == 0:
-                        userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                        userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                         userdata.update(userdata_update)
                         with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
                             json.dump(userdata , userdata_file , indent=4)
@@ -143,7 +143,7 @@ class Event(Cog_extension):
                             with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
                                 json.dump(userdata , userdata_file , indent=4)
                     if counter == 0:
-                        userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                        userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
                         userdata.update(userdata_update)
                         with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
                             json.dump(userdata , userdata_file , indent=4)
