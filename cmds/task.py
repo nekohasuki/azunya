@@ -1,7 +1,7 @@
 import discord
 from discord.ext import tasks, commands
 import json
-with open('setting.json','r',encoding='utf8') as setting_file:
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
@@ -21,16 +21,16 @@ class Task(Cog_extension):
 #初始化'setting.json'
     @tasks.loop(seconds=1)
     async def omikujidatareload(self):
-        with open('setting.json','r',encoding='utf8') as setting_file:
+        with open('setting.json','r',encoding='utf-8') as setting_file:
             setting = json.load(setting_file)
         today =  datetime.datetime.now().strftime('%d')
         Current_hours = datetime.datetime.now().strftime('%H')
         Current_minutes = datetime.datetime.now().strftime('%M')
         Current_seconds = datetime.datetime.now().strftime('%S')
         if (f'{int(Current_hours)}:{int(Current_minutes)}') == setting['omikuji_reload_time'] and int(Current_seconds) == 1:
-            with open('cmds\data\omikuji.json','r',encoding='utf8') as omikuji_file:
+            with open('cmds\data\omikuji.json','r',encoding='utf-8') as omikuji_file:
                 omikuji = json.load(omikuji_file)
-            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                 userdata = json.load(userdata_file)
     #於後台印出用戶及抽取內容
             for user in omikuji:
@@ -50,7 +50,7 @@ class Task(Cog_extension):
                         userdata[user].update({'omikuji':{'badluck':userdata[user]['omikuji']['badluck']+1,'today':None}})
                     else:
                         userdata[user].update({'omikuji':{'badluck':userdata[user]['omikuji']['badluck'],'today':None}})
-            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf-8') as userdata_file:
                 json.dump(userdata , userdata_file , indent=4)
         #聊天室留言
             channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['MESSAGE_CHANNEL_ID']))
@@ -86,7 +86,7 @@ class Task(Cog_extension):
                                 add_ponit_user_mention.append(f'<@{str(user).replace('`','')}>')
                                 userdata[user]['point'].update({'now_count':userdata[user]['point']['now_count']+add_ponit_count,'history_count':userdata[user]['point']['history_count']+add_ponit_count})
                             userdata[user]['omikuji'].update({'badluck':0})
-                    with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                    with open('cmds\\data\\user_data.json' , 'w' , encoding='utf-8') as userdata_file:
                         json.dump(userdata , userdata_file , indent=4)
             #聊天室留言
                 channel = self.bot.get_guild(int(setting['GUILD_ID'])).get_channel(int(setting['MESSAGE_CHANNEL_ID']))
@@ -114,7 +114,7 @@ class Task(Cog_extension):
     #重置'omikuji.json'資料
             omikuji={}
             omikuji.update(omikuji)
-            with open('cmds\data\omikuji.json','w',encoding='utf8') as omikuji_file:
+            with open('cmds\data\omikuji.json','w',encoding='utf-8') as omikuji_file:
                 json.dump(omikuji,omikuji_file)
     @omikujidatareload.before_loop
     async def omikujidatareload_before(self):
@@ -122,22 +122,22 @@ class Task(Cog_extension):
 #計數器
     @tasks.loop(seconds=1)
     async def onlinecount(self):
-        with open('setting.json','r',encoding='utf8') as setting_file:
+        with open('setting.json','r',encoding='utf-8') as setting_file:
             setting = json.load(setting_file)
         counter = int(setting['onlinetime'])
         counter += 1
         onlinetime = {'onlinetime':f'{counter}'}
         setting.update(onlinetime)
-        with open('setting.json','w',encoding='utf8') as setting_file:
+        with open('setting.json','w',encoding='utf-8') as setting_file:
             json.dump(setting,setting_file,indent=4)
 
     @onlinecount.before_loop
     async def onlinecount_before(self):
-        with open('setting.json','r',encoding='utf8') as setting_file:
+        with open('setting.json','r',encoding='utf-8') as setting_file:
             setting = json.load(setting_file)
             onlinetime = {'onlinetime':'0'}
             setting.update(onlinetime)
-        with open('setting.json','w',encoding='utf8') as setting_file:
+        with open('setting.json','w',encoding='utf-8') as setting_file:
             json.dump(setting,setting_file,indent=0)
         await self.bot.wait_until_ready()
 #測試用
