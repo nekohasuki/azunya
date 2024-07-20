@@ -1,8 +1,8 @@
 
-from PIL import Image
-import os,random,shutil,asyncio
-directory = r'imege\rpg\color'
-shutil.rmtree(directory)
+# from PIL import Image
+# import os,random,shutil,asyncio
+# directory = r'imege\rpg\color'
+# shutil.rmtree(directory)
 # os.makedirs(directory, exist_ok=True)
 # width = 192
 # height = 108
