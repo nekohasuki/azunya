@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import json
-with open('setting.json' , 'r' , encoding='utf8') as setting_file:
+with open('setting.json' , 'r' , encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
@@ -19,7 +19,7 @@ class Point(Cog_extension):
         if user == None:
             await interaction.response.send_message(f'請輸入用戶')
         else:
-            with open('setting.json' , 'r' , encoding='utf8') as setting_file:
+            with open('setting.json' , 'r' , encoding='utf-8') as setting_file:
                 setting = json.load(setting_file)
             role_list = setting['MOD_roles']
             id = interaction.user.id
@@ -33,7 +33,7 @@ class Point(Cog_extension):
                     counter += 1
                     if "<@" in user:
                         if "&" not in user:
-                            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                                 userdata = json.load(userdata_file)
                             user = interaction.guild.get_member(int(user[2:-1]))
                             if f'{user.id}' not in userdata:
@@ -49,7 +49,7 @@ class Point(Cog_extension):
                                 else:
                                     userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{}}}
                                 userdata.update(userdata_update)
-                                with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+                                with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                                     json.dump(userdata , userdata_file , indent=4)
                             state = userdata[f'{user.id}']['point']['state']
                             now_count = userdata[f'{user.id}']['point']['now_count']
@@ -99,7 +99,7 @@ class Point(Cog_extension):
                 count = abs(count)
                 userA = interaction.user
                 userB = interaction.guild.get_member(int(user[2:-1]))                       
-                with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                     userdata = json.load(userdata_file)
                 if userdata[f'{userA.id}']['point']['state'] == True:
                     if userdata[f'{userB.id}']['point']['state'] == True or userdata[f'{userB.id}']['point']['state'] == False:
@@ -122,7 +122,7 @@ class Point(Cog_extension):
                         #更新資料
                             userdata[f'{userA.id}'].update(userdata_update_A)
                             userdata[f'{userB.id}'].update(userdata_update_B)
-                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf-8') as userdata_file:
                                 json.dump(userdata , userdata_file , indent=4)
                             await interaction.response.send_message(f'User：{userA.mention}給予了User：{userB.mention}**{count}**點')
                         else:
@@ -146,7 +146,7 @@ class Point(Cog_extension):
     @app_commands.command(name = commandname , description = '查看自己點數')
     async def mypoint(self , interaction:discord.Interaction):
         color = interaction.user.color
-        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
             userdata = json.load(userdata_file)
         if f'{interaction.user.id}' not in userdata:
             global_name = interaction.user.global_name
@@ -154,7 +154,7 @@ class Point(Cog_extension):
                 global_name = f'name:{interaction.user.name}'
             userdata_update = {f'{interaction.user.id}':{'name':f'{interaction.user.name}','display_name':f'{interaction.user.display_name}','global_name':f'{global_name}','code':f'#NO','top_role':f'<@&{interaction.user.top_role.id}>','name_card':None,'point':{'state':None,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
             userdata.update(userdata_update)
-            with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
+            with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                 json.dump(userdata , userdata_file , indent=4)
         state = userdata[f'{interaction.user.id}']['point']['state']
         now_count = userdata[f'{interaction.user.id}']['point']['now_count']
@@ -197,7 +197,7 @@ class Point(Cog_extension):
             await interaction.response.send_message(f'請輸入使用者')
         else:
         
-            with open('setting.json' , 'r' , encoding='utf8') as setting_file:
+            with open('setting.json' , 'r' , encoding='utf-8') as setting_file:
                 setting = json.load(setting_file)
             role_list = setting['MOD_roles']
             id = interaction.user.id
@@ -216,7 +216,7 @@ class Point(Cog_extension):
                                 user = interaction.guild.get_member(int(user[2:-1]))
                                 if interaction.user != user:
                                     if interaction.user.top_role.position >= user.top_role.position:
-                                        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                                        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                                             userdata = json.load(userdata_file)
                                         if userdata[f'{user.id}']['point']['state'] == True or userdata[f'{user.id}']['point']['state'] == False:
                                             count = abs(count)
@@ -239,7 +239,7 @@ class Point(Cog_extension):
                                                 userdata_update['point']['consumption'] = int(consumption) + count
                                         #更新資料
                                             userdata[f"{user.id}"].update(userdata_update)
-                                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf-8') as userdata_file:
                                                 json.dump(userdata , userdata_file , indent=4)
                                             userlist['succeeded'].append(user.mention)
                                         elif userdata[f'{user.id}']['point']['state'] == None:
