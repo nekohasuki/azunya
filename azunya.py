@@ -4,7 +4,7 @@ intents = discord.Intents.all()
 intents.typing = False
 intents.presences = False
 import json
-with open('setting.json','r',encoding='utf8') as setting_file:
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 bot = commands.Bot(command_prefix =[f'{setting["prefix"]}-','/'],intents = intents)
 
