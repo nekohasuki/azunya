@@ -1,3 +1,77 @@
+data={
+    "RPG":{
+        "language":"zh_TW",
+        "first_online_time":"2024-00-00 00:00:00.00000000",
+        "color":"0x000000",
+        "coins":0,
+        "Race":"MoonRabbit",
+        "EXP":{
+            "now":0,
+            "max":10
+        },
+        "Main_profession":{
+            "class":"Thief",
+            "level":0
+        },
+        "Sub_profession":{
+            "Merchant":0,
+            "Pharmacist":0,
+            "Jeweler":0,
+            "Floriculturist":1,
+            "Chef":0,
+            "Armourer":0,
+            "Hammersmith":0
+        },
+        "attributes":{
+            "HP":0,
+            "SP":0,
+            "MP":0,
+            "ATK":0,
+            "MATK":0,
+            "DEF":0,
+            "MDEF":0,
+            "SPD":0,
+            "AGI":0,
+            "LUK":0,
+            "CHR":0,
+            "SAN":0
+        },
+        "item":{
+            "Weapon":["Claw"],
+            "Weapon_II":[""],
+            "Weapon_III":[""],
+            "Armor":["Leather_armor"],
+            "Runes":[],
+            "Flowers":[],
+            "Gemstones":[],
+            "Cuisine":[]
+            },
+        "handbook":{
+            "Weapon":["Claw"],
+            "Weapon_II":[""],
+    
+            "Weapon_III":[""],
+            "Armor":["Leather_armor"],
+            "Runes":[],
+            "Flowers":[],
+            "Gemstones":[],
+            "Cuisine":[],
+            "Hostile":[]
+        },
+        "PVP":{
+            "win":0,
+            "lose":0,
+            "tie":0
+        }
+    }
+}
+import json
+# print(data['RPG']['language'])
+with open(r'cmds\rpg_define\en_US.lang','r','utf-8') as Lang_fill:
+    lang = Lang_fill.read()
+    # lang = json.load(Lang_fill)
+    print((lang))
+
 
 # from PIL import Image
 # import os,random,shutil,asyncio
@@ -635,7 +709,7 @@
 # intents.typing = False
 # intents.presences = False
 # import json,asyncio
-# with open('setting.json','r',encoding='utf8') as setting_file:
+# with open('setting.json','r',encoding='utf-8') as setting_file:
 #     setting = json.load(setting_file)
 # bot = commands.Bot(command_prefix =[f'{setting["prefix"]}-','/'],intents = intents)
 # prefix = 'a-'
