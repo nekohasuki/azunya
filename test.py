@@ -1,81 +1,102 @@
-data={
-    "RPG":{
-        "language":"zh_TW",
-        "first_online_time":"2024-00-00 00:00:00.00000000",
-        "color":"0x000000",
-        "coins":0,
-        "Race":"MoonRabbit",
-        "EXP":{
-            "now":0,
-            "max":10
-        },
-        "Main_profession":{
-            "class":"Thief",
-            "level":0
-        },
-        "Sub_profession":{
-            "Merchant":0,
-            "Pharmacist":0,
-            "Jeweler":0,
-            "Floriculturist":1,
-            "Chef":0,
-            "Armourer":0,
-            "Hammersmith":0
-        },
-        "attributes":{
-            "HP":0,
-            "SP":0,
-            "MP":0,
-            "ATK":0,
-            "MATK":0,
-            "DEF":0,
-            "MDEF":0,
-            "SPD":0,
-            "AGI":0,
-            "LUK":0,
-            "CHR":0,
-            "SAN":0
-        },
-        "item":{
-            "Weapon":["Claw"],
-            "Weapon_II":[""],
-            "Weapon_III":[""],
-            "Armor":["Leather_armor"],
-            "Runes":[],
-            "Flowers":[],
-            "Gemstones":[],
-            "Cuisine":[]
-            },
-        "handbook":{
-            "Weapon":["Claw"],
-            "Weapon_II":[""],
-    
-            "Weapon_III":[""],
-            "Armor":["Leather_armor"],
-            "Runes":[],
-            "Flowers":[],
-            "Gemstones":[],
-            "Cuisine":[],
-            "Hostile":[]
-        },
-        "PVP":{
-            "win":0,
-            "lose":0,
-            "tie":0
+
+# /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if ('此處用於測試時代替真實玩家資料' == "with open('uesr_data.json','r',encoding='utf-8')") == False:
+    data={
+        "123": {
+            "name": "nekoha__suki",
+            "display_name": "\u8c93\u7fbd",
+            "global_name": "nekoha__suki",
+            "RPG":{
+                "language":"zh_TW",
+                "first_online_time":"2024-00-00 00:00:00.00000000",
+                "color":"0x000000",
+                "coins":0,
+                "Race":"MoonRabbit",
+                "EXP":{
+                    "now":0,
+                    "max":10
+                },
+                "Main_profession":{
+                    "class":"Thief",
+                    "level":0
+                },
+                "Sub_profession":{
+                    "Merchant":0,
+                    "Pharmacist":0,
+                    "Jeweler":0,
+                    "Floriculturist":1,
+                    "Chef":0,
+                    "Armourer":0,
+                    "Hammersmith":0
+                },
+                "attributes":{
+                    "HP":0,
+                    "SP":0,
+                    "MP":0,
+                    "ATK":0,
+                    "MATK":0,
+                    "DEF":0,
+                    "MDEF":0,
+                    "SPD":0,
+                    "AGI":0,
+                    "LUK":0,
+                    "CHR":0,
+                    "SAN":0
+                },
+                "item":{
+                    "Weapon":["Claw"],
+                    "Weapon_II":[""],
+                    "Weapon_III":[""],
+                    "Armor":["Leather_armor"],
+                    "Runes":[],
+                    "Flowers":[],
+                    "Gemstones":[],
+                    "Cuisine":[]
+                    },
+                "handbook":{
+                    "Weapon":["Claw"],
+                    "Weapon_II":[""],
+            
+                    "Weapon_III":[""],
+                    "Armor":["Leather_armor"],
+                    "Runes":[],
+                    "Flowers":[],
+                    "Gemstones":[],
+                    "Cuisine":[],
+                    "Hostile":[]
+                },
+                "PVP":{
+                    "win":0,
+                    "lose":0,
+                    "tie":0
+                }
+            }
         }
     }
-}
-
-
+    user = data['123']
+user['RPG']['language'] = 'zh_TW'
 lang = {}
-with open(f'cmds/rpg_define/{data['RPG']['language']}.lang', 'r', encoding='utf-8') as Lang_file:
+with open(f'cmds/rpg_define/{user['RPG']['language']}.lang','r',encoding='utf-8') as Lang_file:
     for line in Lang_file:
         line = line.strip()
         if not line or line.startswith('#'):
             continue
         key, value = line.split('=', 1)
         lang[key] = value
-print(lang)
+
+first_online_time=user['RPG']['first_online_time']
+language=user['RPG']['language']
+Race = lang[user['RPG']['Race']]
+EXP = lang[user['RPG']['EXP']]
+main_profession = lang[user['RPG']['Main_profession']]
+sub_professions = lang[user['RPG']['Sub_profession']]
+user_color = lang[user['RPG']['color']]
+
+EXP_bar=['/|','/|','/|','/|','/|','.:','.:','.:','.:','.:','.:','.:','.:','.:','.:']
+Character_Sheet = '角色卡'
+# /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+print(Race)
 
 
 # from PIL import Image
