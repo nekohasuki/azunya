@@ -218,10 +218,54 @@ class Event(Cog_extension):
         #<and any(word in ctx.content for word in key)>
         #……以及訊息等於關鍵字(key)
         #<and ctx.content == key>
+
+
 #訊息日誌
-        if channel.id != log_channel.id and guild.id == int(setting['GUILD_ID']):
-            if ctx.author.bot == False:
-                await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
+        if guild.id == int(setting['GUILD_ID']):
+            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
+                userdata = json.load(userdata_file)
+            url = f'https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id}'
+            if str(user) not in userdata:
+                if global_name == None:
+                    global_name = f'"name":/{ctx.author}/'
+                if ctx.author.bot == False:
+                    code=[]
+                    if userdata != {}:
+                        for data in userdata:
+                            if userdata[data]['code'] != "#NO":
+                                code.append(userdata[data]['code'])
+                    else:
+                        code = '000'
+                    userdata_update = {
+                        f'{user}':{
+                            'name':f'{ctx.author.name}',
+                            'display_name':f'{display_name}',
+                            'global_name':f'{global_name}',
+                            'code':str(int(max(code))+1).zfill(3),
+                            'top_role':f'<@&{ctx.author.top_role.id}>',
+                            'name_card':True,
+                            'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},
+                            'trade_count': 0,
+                            'VIP_tickets': 0,
+                            'VIP_chip': 0,
+                            "omikuji": {"badluck": 0,"today": None},
+                            "RPG":{},
+                            "recent_messages":{"url":url,"time":f'{datetime.datetime.now()}'}
+                        }}
+            else:
+                userdata_update = userdata
+                userdata_update[str(user)]['recent_messages']['url'] = url
+                userdata_update[str(user)]['recent_messages']['time'] = f'{datetime.datetime.now()}'
+                print(datetime.datetime.now())
+            userdata.update(userdata_update)
+            with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
+                json.dump(userdata , userdata_file , indent=4)
+
+
+            
+            if channel.id != log_channel.id:
+                if ctx.author.bot == False:
+                    await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
 #問候
         if ctx.author.bot == False:
             await asyncio.sleep(0.1)
