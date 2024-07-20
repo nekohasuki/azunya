@@ -256,7 +256,6 @@ class Event(Cog_extension):
                 userdata_update = userdata
                 userdata_update[str(user)]['recent_messages']['url'] = url
                 userdata_update[str(user)]['recent_messages']['time'] = f'{datetime.datetime.now()}'
-                print(datetime.datetime.now())
             userdata.update(userdata_update)
             with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                 json.dump(userdata , userdata_file , indent=4)
