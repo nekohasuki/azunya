@@ -75,6 +75,8 @@ if ('此處用於測試時代替真實玩家資料' == "with open('uesr_data.jso
     }
     user = data['123']
 user['RPG']['language'] = 'zh_TW'
+# user['RPG']['language'] = 'en_Us'
+# user['RPG']['language'] = 'ja_JP'
 lang = {}
 with open(f'cmds/rpg_define/{user['RPG']['language']}.lang','r',encoding='utf-8') as Lang_file:
     for line in Lang_file:
@@ -84,19 +86,30 @@ with open(f'cmds/rpg_define/{user['RPG']['language']}.lang','r',encoding='utf-8'
         key, value = line.split('=', 1)
         lang[key] = value
 
-first_online_time=user['RPG']['first_online_time']
-language=user['RPG']['language']
-Race = lang[user['RPG']['Race']]
-EXP = lang[user['RPG']['EXP']]
-main_profession = lang[user['RPG']['Main_profession']]
-sub_professions = lang[user['RPG']['Sub_profession']]
-user_color = lang[user['RPG']['color']]
+first_online_time=lang['first_online_time']
+user_first_online_time=user['RPG']['first_online_time']
+language=lang['language']
+user_language=user['RPG']['language']
+Race = lang['Race']
+user_Race = lang[user['RPG']['Race']]
 
-EXP_bar=['/|','/|','/|','/|','/|','.:','.:','.:','.:','.:','.:','.:','.:','.:','.:']
-Character_Sheet = '角色卡'
+EXP = lang['EXP']
+user_EXP = {lang['max']:user['RPG']['EXP']['max'],lang['now']:user['RPG']['EXP']['now']}
+main_profession = lang['Main_profession']
+user_main_profession = {f'{lang['Main_profession']}{lang['class']}':lang[user['RPG']['Main_profession']['class']],lang['level']:user['RPG']['Main_profession']['level']}
+sub_professions = lang['Sub_profession']
+user_sub_professions = {lang['Merchant']:user['RPG']['Sub_profession']['Merchant'],lang['Pharmacist']:user['RPG']['Sub_profession']['Pharmacist'],lang['Jeweler']:user['RPG']['Sub_profession']['Jeweler'],lang['Floriculturist']:user['RPG']['Sub_profession']['Floriculturist'],lang['Chef']:user['RPG']['Sub_profession']['Chef'],lang['Armourer']:user['RPG']['Sub_profession']['Armourer'],lang['Hammersmith']:user['RPG']['Sub_profession']['Hammersmith']
+}
+
+
+
+# user_color = lang[user['RPG']['color']]
+
+# EXP_bar=['/|','/|','/|','/|','/|','.:','.:','.:','.:','.:','.:','.:','.:','.:','.:']
+# Character_Sheet = lang['Character_Sheet']
 # /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-print(Race)
+print(sub_professions,lang['character_sheet'])
 
 
 # from PIL import Image
