@@ -92,9 +92,6 @@ import json
 #         else:
 #             lang[key] = f'"{value}"'
 
-A={}
-A[123]={"456":"789"}
-print(A)
 # introduce
 # print(format[lang['profession']])
 # print(lang)
