@@ -77,20 +77,43 @@ class Event(Cog_extension):
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
                     with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                         userdata = json.load(userdata_file)
-                    counter = 0
-                    for data in userdata:
-                        if user.id == int(data):
-                            counter += 1
-                            userdata_update = userdata[f'{user.id}']
+                    if str(user.id) in userdata:
+                        full_keys=['name', 'display_name', 'global_name', 'code', 'top_role', 'name_card', 'point', 'trade_count', 'VIP_tickets', 'VIP_chip', 'omikuji', 'RPG', 'recent_messages']
+                        if list(userdata[str(user.id)].keys()) != full_keys:
+                            userdata_update = {}
+                            for key in full_keys:
+                                if key in userdata[str(user.id)]:
+                                    userdata_update[key] = userdata[str(user.id)][key]
+                                else:
+                                    code=[]
+                                    if userdata != {}:
+                                        for data in userdata:
+                                            if 'code' in userdata[data] and userdata[data]['code'] != "#NO":
+                                                code.append(userdata[data]['code'])
+                                    code.append('000')
+                                    if key == 'name':userdata_update[key] = user.name
+                                    if key == 'display_name':userdata_update[key] = user.display_name
+                                    if key == 'global_name':userdata_update[key] = user.global_name
+                                    if key == 'code':userdata_update[key] = str(int(max(code))+1).zfill(3)
+                                    if key == 'top_role':userdata_update[key] = f'<@&{user.top_role.id}>'
+                                    if key == 'name_card':userdata_update[key] = None
+                                    if key == 'point':userdata_update[key] = {"state": True,"now_count": 0,"history_count": 0,"consumption": 0,"give": 0,"deprivation": 0}
+                                    if key == 'trade_count':userdata_update[key] = 0
+                                    if key == 'VIP_tickets':userdata_update[key] = 0
+                                    if key == 'VIP_chip':userdata_update[key] = 0
+                                    if key == 'omikuji':userdata_update[key] = {"badluck": 0,"today": None}
+                                    if key == 'RPG':userdata_update[key] = {}
+                                    if key == 'recent_messages':userdata_update[key] = {"url": "","time": ""}
+                            userdata[str(user.id)]=userdata_update
+                        else:
+                            userdata_update = userdata[str(user.id)]
                             userdata_update['point']['state'] = True
                             userdata_update['name'] = user.name
                             userdata_update['display_name'] = user.display_name
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
-                            userdata[f'{user.id}'].update(userdata_update)
-                            with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
-                                json.dump(userdata , userdata_file , indent=4)
-                    if counter == 0:
+                            userdata[str(user.id)].update(userdata_update)
+                    else:
                         if user.bot == False:
                             code=[]
                             if userdata == {}:
@@ -103,8 +126,8 @@ class Event(Cog_extension):
                         else:
                             userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
                         userdata.update(userdata_update)
-                        with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
-                            json.dump(userdata , userdata_file , indent=4)
+                    with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
+                        json.dump(userdata , userdata_file , indent=4)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"add {reaction.emoji}-@{role}')
                     await user.add_roles(role)
@@ -139,20 +162,43 @@ class Event(Cog_extension):
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
                     with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                         userdata = json.load(userdata_file)
-                    counter = 0
-                    for data in userdata:
-                        if user.id == int(data):
-                            counter += 1
-                            userdata_update = userdata[f'{user.id}']
+                    if str(user.id) in userdata:
+                        full_keys=['name', 'display_name', 'global_name', 'code', 'top_role', 'name_card', 'point', 'trade_count', 'VIP_tickets', 'VIP_chip', 'omikuji', 'RPG', 'recent_messages']
+                        if list(userdata[str(user.id)].keys()) != full_keys:
+                            userdata_update = {}
+                            for key in full_keys:
+                                if key in userdata[str(user.id)]:
+                                    userdata_update[key] = userdata[str(user.id)][key]
+                                else:
+                                    code=[]
+                                    if userdata != {}:
+                                        for data in userdata:
+                                            if 'code' in userdata[data] and userdata[data]['code'] != "#NO":
+                                                code.append(userdata[data]['code'])
+                                    code.append('000')
+                                    if key == 'name':userdata_update[key] = user.name
+                                    if key == 'display_name':userdata_update[key] = user.display_name
+                                    if key == 'global_name':userdata_update[key] = user.global_name
+                                    if key == 'code':userdata_update[key] = str(int(max(code))+1).zfill(3)
+                                    if key == 'top_role':userdata_update[key] = f'<@&{user.top_role.id}>'
+                                    if key == 'name_card':userdata_update[key] = None
+                                    if key == 'point':userdata_update[key] = {"state": False,"now_count": 0,"history_count": 0,"consumption": 0,"give": 0,"deprivation": 0}
+                                    if key == 'trade_count':userdata_update[key] = 0
+                                    if key == 'VIP_tickets':userdata_update[key] = 0
+                                    if key == 'VIP_chip':userdata_update[key] = 0
+                                    if key == 'omikuji':userdata_update[key] = {"badluck": 0,"today": None}
+                                    if key == 'RPG':userdata_update[key] = {}
+                                    if key == 'recent_messages':userdata_update[key] = {"url": "","time": ""}
+                            userdata[str(user.id)]=userdata_update
+                        else:
+                            userdata_update = userdata[str(user.id)]
                             userdata_update['point']['state'] = False
                             userdata_update['name'] = user.name
                             userdata_update['display_name'] = user.display_name
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
-                            userdata[f'{user.id}'].update(userdata_update)
-                            with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
-                                json.dump(userdata , userdata_file , indent=4)
-                    if counter == 0:
+                            userdata[str(user.id)].update(userdata_update)
+                    else:
                         if user.bot == False:
                             code=[]
                             if userdata == {}:
@@ -161,13 +207,12 @@ class Event(Cog_extension):
                                 for data in userdata:
                                     if userdata[data]['code'] != "#NO":
                                         code.append(userdata[data]['code'])
-                            userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':str(int(max(code))+1).zfill(3),'top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
+                            userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':str(int(max(code))+1).zfill(3),'top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':False,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
                         else:
-                            userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
+                            userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':False,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
                         userdata.update(userdata_update)
-                        with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
-                            json.dump(userdata , userdata_file , indent=4)
-
+                    with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
+                        json.dump(userdata , userdata_file , indent=4)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"remove {reaction.emoji}-@{role}')
                     await user.remove_roles(role)
