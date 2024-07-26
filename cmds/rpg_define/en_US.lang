@@ -1,6 +1,11 @@
+language-Type=English
+gamename=noname
 language=language
-name=name
+choice=choice
+back=back
+name=Name
 first_online_time=first online time
+color=color
 coins=coins
 level=level
 EXP=EXP
@@ -17,12 +22,14 @@ Giant=Giant
 MoonRabbit=MoonRabbit
 Asian=Asian
 
+profession=Profession
 Main_profession=Main profession
 Warrior=Warrior
 Archer=Archer
 Shielder=Shielder
 Thief=Thief
 Mage=Mage
+full_equilibrium=full equilibrium
 
 Sub_profession=Sub profession
 Merchant=Merchant
@@ -92,19 +99,25 @@ Plate_armor=Plate armor
 
 Enchanting=Enchanting
 Runes=Runes
-Spell_Seal(T)=Spell_Seal(T)
+incantation_runes(T)=incantation runes(T)
 #Thermal
-Spell_Seal(M)=Spell_Seal(M)
+incantation_runes(M)=incantation runes(M)
 #Moistrue
-Spell_Seal(V)=Spell_Seal(V)
+incantation_runes(V)=incantation runes(V)
 #Vegatation
-Spell_Seal(P)=Spell_Seal(P)
+incantation_runes(P)=incantation runes(P)
 #Photon
-Spell_Seal(B)=Spell_Seal(B)
+incantation_runes(B)=incantation runes(B)
 #Blessing
+upgrade_runes=Upgrade runes
+upgrade_incantation_runes(T)=upgrade incantation runes(T)
+upgrade_incantation_runes(M)=upgrade incantation runes(M)
+upgrade_incantation_runes(V)=upgrade incantation runes(V)
+upgrade_incantation_runes(P)=upgrade incantation runes(P)
+upgrade_incantation_runes(B)=upgrade incantation runes(B)
 
 Emblazoning=Emblazoning
-Flowers=Flowers
+Faiths=Faiths
 Forget_me_nots=Forget me nots
 Baby's_breath=Baby's breath
 Lavender=Lavender
@@ -154,8 +167,8 @@ Hostile=Hostile
 
 
 
-battle=戰鬥
-PVP=玩家對戰
-win=勝
-lose=敗
-tie=平
+battle=battle
+PVP=PVP
+win=win
+lose=lose
+tie=tie
