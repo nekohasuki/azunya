@@ -1,11 +1,24 @@
 import discord
 from discord.ext import commands
 import json
+open_file='''
 with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 with open('dict.json','r',encoding='utf-8') as dict_file:
     dict = json.load(dict_file)
-
+with open('cmds/data/user_data.json' , 'r' , encoding='utf-8') as userdata_file:
+    userdata = json.load(userdata_file)
+with open('cmds/data/omikuji.json','r',encoding='utf-8') as omikuji_file:
+    omikuji = json.load(omikuji_file)
+'''
+dump_userdata='''
+with open('cmds/data/user_data.json' , 'w' , encoding='utf-8') as userdata_file:
+    json.dump(userdata , userdata_file , indent=4)
+'''
+dump_omikuji='''
+with open('cmds/data/omikuji.json','w+',encoding='utf-8') as omikuji_file:
+    json.dump(omikuji,omikuji_file,indent=4)
+'''
 from core.classes import Cog_extension
 from core.error import Errors
 import asyncio,datetime,os,random
@@ -27,6 +40,9 @@ class Event(Cog_extension):
 #成員加入通知
     @commands.Cog.listener()
     async def on_member_join(self,member):
+        variable={}
+        exec(open_file,globals(),variable)
+        setting=variable.get('setting')
         now = datetime.datetime.now()
         embed = discord.Embed(title='吉訊',url='https://www.jcolor.com.tw/jcolorfiles/release/product/pdt-868/pdt-8689539/medium.jpg',description='GOOD NEWS',colour=0xad0000,timestamp=now)
         embed.add_field(name='#最新消息：',value=f'User：\"__**{member.mention}**__\"於今天的{time}\n奇蹟般的降臨了這個伺服器\n\n讓我們熱烈的歡迎!!!!!!!\n將祝福賜予User：__**{member.mention}**__\n\n\n** **',inline=False)
@@ -38,6 +54,9 @@ class Event(Cog_extension):
 #成員退出通知
     @commands.Cog.listener()
     async def on_member_remove(self,member):
+        variable={}
+        exec(open_file,globals(),variable)
+        setting=variable.get('setting')
         now = datetime.datetime.now()
         embed = discord.Embed(title='悲報',url='https://img.soundofhope.org/2024-03/1709580096451.jpg',description='SAD NEWS',colour=0x787878,timestamp=now)
         embed.add_field(name='#最新消息：',value=f'User：\"__**{member.mention}**__\"於今天的{time}\n突然地離開了這個伺服器\n\n對此我們感到非常的難受\n願這伺服器，再無苦痛\n\n\n** **',inline=False)
@@ -49,6 +68,10 @@ class Event(Cog_extension):
 #添加身分組
     @commands.Cog.listener()
     async def on_raw_reaction_add(self,reaction):
+        variable={}
+        exec(open_file,globals(),variable)
+        setting=variable.get('setting')
+        userdata=variable.get('userdata')
         nowtime = datetime.datetime.now().strftime('%H:%M')
         guild = self.bot.get_guild(reaction.guild_id)
         user = guild.get_member(reaction.user_id)
@@ -75,8 +98,6 @@ class Event(Cog_extension):
             #第四組
             if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
-                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
-                        userdata = json.load(userdata_file)
                     if str(user.id) in userdata:
                         full_keys=['name', 'display_name', 'global_name', 'code', 'top_role', 'name_card', 'point', 'trade_count', 'VIP_tickets', 'VIP_chip', 'omikuji', 'RPG', 'recent_messages']
                         if list(userdata[str(user.id)].keys()) != full_keys:
@@ -126,14 +147,17 @@ class Event(Cog_extension):
                         else:
                             userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
                         userdata.update(userdata_update)
-                    with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
-                        json.dump(userdata , userdata_file , indent=4)
+                    exec(dump_userdata)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"add {reaction.emoji}-@{role}')
                     await user.add_roles(role)
 #移除身分組
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self,reaction):
+        variable={}
+        exec(open_file,globals(),variable)
+        setting=variable.get('setting')
+        userdata=variable.get('userdata')
         nowtime = datetime.datetime.now().strftime('%H:%M')
         guild = self.bot.get_guild(reaction.guild_id)
         user = guild.get_member(reaction.user_id)
@@ -160,8 +184,6 @@ class Event(Cog_extension):
             #第四組
             if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
-                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
-                        userdata = json.load(userdata_file)
                     if str(user.id) in userdata:
                         full_keys=['name', 'display_name', 'global_name', 'code', 'top_role', 'name_card', 'point', 'trade_count', 'VIP_tickets', 'VIP_chip', 'omikuji', 'RPG', 'recent_messages']
                         if list(userdata[str(user.id)].keys()) != full_keys:
@@ -211,8 +233,7 @@ class Event(Cog_extension):
                         else:
                             userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':False,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
                         userdata.update(userdata_update)
-                    with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
-                        json.dump(userdata , userdata_file , indent=4)
+                    exec(dump_userdata)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"remove {reaction.emoji}-@{role}')
                     await user.remove_roles(role)
@@ -220,12 +241,12 @@ class Event(Cog_extension):
     @commands.Cog.listener()
     async def on_message(self,ctx):
 #前置設定
-        with open('setting.json','r',encoding='utf-8') as setting_file:
-            setting = json.load(setting_file)
-        with open('dict.json','r',encoding='utf-8') as dict_file:
-            dict = json.load(dict_file)
-        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
-            userdata = json.load(userdata_file)
+        variable={}
+        exec(open_file,globals(),variable)
+        setting=variable.get('setting')
+        dict=variable.get('dict')
+        userdata=variable.get('userdata')
+        
         guild = ctx.guild
         channel = ctx.channel
         name = ctx.author.mention
@@ -266,8 +287,6 @@ class Event(Cog_extension):
 
 #訊息日誌
         if guild.id == int(setting['GUILD_ID']):
-            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
-                userdata = json.load(userdata_file)
             url = f'https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id}'
             if str(user) not in userdata:
                 if global_name == None:
@@ -301,8 +320,7 @@ class Event(Cog_extension):
                 userdata_update[str(user)]['recent_messages']['url'] = url
                 userdata_update[str(user)]['recent_messages']['time'] = f'{datetime.datetime.now()}'
             userdata.update(userdata_update)
-            with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
-                json.dump(userdata , userdata_file , indent=4)
+            exec(dump_userdata)   
             if channel.id != log_channel.id:
                 if ctx.author.bot == False:
                     await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
@@ -503,8 +521,6 @@ class Event(Cog_extension):
             # if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
                 if user == (697842681082281985):
                     user = (938100109240074310)
-                with open('setting.json','r',encoding='utf-8') as setting_file:
-                    setting = json.load(setting_file)
                 Current_hours = datetime.datetime.now().strftime('%H')
                 Current_minutes = datetime.datetime.now().strftime('%M')
             #如果當前時間等同於' setting['omikuji_reload_time'] '的設定時間
@@ -516,8 +532,9 @@ class Event(Cog_extension):
                     while os.path.exists('cmds\data\omikuji.lock') == True:
                         await asyncio.sleep(1)
                     open('cmds\data\omikuji.lock', 'w').close()
-                    with open('cmds\data\omikuji.json','r',encoding='utf-8') as omikuji_file:
-                        omikuji = json.load(omikuji_file)
+                    variable={}
+                    exec(open_file,globals(),variable)
+                    omikuji=variable.get('omikuji')
                 #抓資料
                     counter = 0
                     for userid in omikuji:
@@ -541,8 +558,7 @@ class Event(Cog_extension):
                     #omikuji資料更新
                         omikuji_update = {f'{user}':{'name':f'{display_name}','pic':f'imege\omikuji\{random_pic}'}}
                         omikuji.update(omikuji_update)
-                        with open('cmds\data\omikuji.json','w+',encoding='utf-8') as omikuji_file:
-                            json.dump(omikuji,omikuji_file,indent=4)
+                        exec(dump_omikuji)
                     #如果用戶有在'user_data.json'裡就存進去,否則聊天室回復訊息
                         counter = 0
                         for userid in userdata:
@@ -585,8 +601,7 @@ class Event(Cog_extension):
                                         userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
                                 elif 'omikuji' not in userdata[f'{user}']:
                                     userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
-                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf-8') as userdata_file:
-                                json.dump(userdata , userdata_file , indent=4)
+                            exec(dump_userdata)        
                         else:
                             await ctx.channel.send(f'是說 User :<@{user}>\n你好像沒有註冊P卡喔\n沒有註冊的話是不能參與比賽的\n現在去註冊的話今天00:00一過再抽籤就可以比賽嘍^W^')
                     os.remove('cmds\data\omikuji.lock')
