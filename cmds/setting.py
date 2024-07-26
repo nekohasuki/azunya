@@ -2,8 +2,14 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import json
+open_file='''
 with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
+'''
+dump_setting="""
+with open('setting.json','w',encoding='utf-8') as setting_file:
+    json.dump(setting,setting_file,indent=4)
+"""
 
 from core.classes import Cog_extension
 import asyncio,datetime
@@ -22,21 +28,18 @@ class Setting(Cog_extension):
     @app_commands.describe(mod = '模式(set模式需要權限)',hours='輸入小時(查閱模式不用輸入)',minutes='輸入分鐘(查閱模式不用輸入)')
     @app_commands.choices(mod=[app_commands.Choice(name = 'check',value = 'check'),app_commands.Choice(name = 'set',value = 'set)')])
     async def omikujitime(self, interaction: discord.Interaction,mod: app_commands.Choice[str],hours: Optional[int] = None,minutes: Optional[int] = None):
+        variable={}
+        exec(open_file,globals(),variable)
+        setting=variable.get('setting')
         name = interaction.user.mention
         if mod.name == 'check' :
-            with open('setting.json','r',encoding='utf-8') as setting_file:
-                setting = json.load(setting_file)
             await interaction.response.send_message(f'User：{name}\n目前抽籤系統是每天的__{setting['OmikujiTime']}__更新呦!')
         elif mod.name == 'set':
-            with open('setting.json','r',encoding='utf-8') as setting_file:
-                setting = json.load(setting_file)
             role_list = setting['manage_messages_roles']
             id = interaction.user.id
             for role in role_list:
                 role_members = interaction.guild.get_role(int(f'{role}')).members
                 if str(id) in str(role_members):
-                    with open('setting.json','r',encoding='utf-8') as setting_file:
-                        setting = json.load(setting_file)
                     if hours == None:
                         hours = 0
                     elif hours >= 23:
@@ -51,9 +54,8 @@ class Setting(Cog_extension):
                     if oldtime == newtime:
                         await interaction.response.send_message(f'QAQ\n可是抽籤系統更新時間本來就是__{newtime}__了阿QQ')
                     else:
-                        with open('setting.json','w',encoding='utf-8') as setting_file:
-                            json.dump(setting,setting_file,indent=4)
-                            await interaction.response.send_message(f'已將抽籤系統更新時間從__{oldtime}__調整為__{newtime}__')
+                        exec(dump_setting)
+                        await interaction.response.send_message(f'已將抽籤系統更新時間從__{oldtime}__調整為__{newtime}__')
                 else:
                     await interaction.response.send_message(f'User：{name}你沒有權限更改喔!')
 #設定用戶身分組
