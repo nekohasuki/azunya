@@ -1,0 +1,42 @@
+{
+    "zh_TW":{
+        "introduce":"這裡是用來放中文-台灣的格式化設定的地方。",
+        "lang":{
+            "職業":"'職9業3'.replace('9', '\u2003').replace('3', '\u2009')",
+            "經驗值":"'經驗值3'.replace('3', '\u2009')",
+            "種族":"'種9族3'.replace('9', '\u2003').replace('3', '\u2009')"
+        },
+        "additional":{}
+    },
+    "en_US":{
+        "introduce":"This is where the English-US formatting settings are placed.",
+        "lang":{
+            "Name":"'N81a81m81e3'.replace('3','\u2009').replace('81','\u2007\u200a')",
+            "EXP":"'E941X941P3'.replace('941','\u2003\u2008\u200a').replace('3','\u2009')",
+            "Race":"'R82a82c82e3'.replace('3','\u2009').replace('82','\u2007\u2006')",
+            "Profession":"'Profession3'.replace('3','\u2009')",
+            "Main profession":"'Main profession3'.replace('3','\u2009')",
+            "Warrior":"'Warrior3'.replace('3','\u2009')",
+            "Archer":"'Archer3'.replace('3','\u2009')",
+            "Shielder":"'Shielder3'.replace('3','\u2009')",
+            "Thief":"'Thief3'.replace('3','\u2009')",
+            "Mage":"'Mage3'.replace('3','\u2009')",
+            "full equilibrium":"'full equilibrium3'.replace('3','\u2009')",
+            "Sub profession":"'Sub profession3'.replace('3','\u2009')",
+            "Merchant":"'Merchant3'.replace('3','\u2009')",
+            "Pharmacist":"'Pharmacist3'.replace('3','\u2009')",
+            "Jeweler":"'Jeweler3'.replace('3','\u2009')",
+            "Floriculturist":"'Floriculturist3'.replace('3','\u2009')",
+            "Chef":"'Chef3'.replace('3','\u2009')",
+            "Armourer":"'Armourer3'.replace('3','\u2009')",
+            "Hammersmith":"'Hammersmith3'.replace('3','\u2009')"
+        },
+        "additional":{}
+    },
+    "ja_JP":{
+        "introduce":"ここに日本語の書式設定が配置されます。",
+        "lang":{},
+        "additional":{}
+    
+    }
+}
