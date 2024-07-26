@@ -2,9 +2,10 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import json
-with open('setting.json' , 'r' , encoding='utf-8') as setting_file:
+open_file='''
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
-
+'''
 from core.classes import Cog_extension
 from typing import Optional
 import asyncio,datetime
@@ -16,6 +17,9 @@ class Point(Cog_extension):
     @app_commands.command(name = commandname , description = '查看指定用戶點數')
     @app_commands.describe(user='輸入用戶')
     async def checkpoint(self , interaction:discord.Interaction , user: Optional[str] = None):
+        variable={}
+        exec(open_file,globals(),variable)
+        setting =variable.get('setting')
         if user == None:
             await interaction.response.send_message(f'請輸入用戶')
         else:
@@ -90,6 +94,9 @@ class Point(Cog_extension):
     @app_commands.command(name = commandname , description = '給予指定用戶點數')
     @app_commands.describe(user='輸入用戶' , count='輸入數量')
     async def givepoint(self , interaction:discord.Interaction , user: Optional[str] = None , count: Optional[int] = None):
+        variable={}
+        exec(open_file,globals(),variable)
+        setting =variable.get('setting')
         if user == None:
             user = f'<@{interaction.user.id}>'
         if count == None:
