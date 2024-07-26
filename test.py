@@ -1,5 +1,16 @@
-import json
-# /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import json,os
+from discord import SelectOption
+B=True
+A="""
+with open('setting.json','r',encoding='utf-8') as setting_file:
+    setting = json.load(setting_file)
+"""
+setting={}
+exec(A,globals(),setting)
+setting=setting.get('setting')
+print(setting)
+
+# # # /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # if ('此處用於測試時代替真實玩家資料' == "with open('uesr_data.json','r',encoding='utf-8')") == False:
 #     data={
 #         "123": {
@@ -74,12 +85,13 @@ import json
 #         }
 #     }
 #     user = data['123']
-# user['RPG']['language'] = 'zh_TW'
-# # user['RPG']['language'] = 'en_Us'
-# # # user['RPG']['language'] = 'ja_JP'
+# # user['RPG']['language'] = 'zh_TW'
+# # user['RPG']['language'] = 'en_US'
+# # user['RPG']['language'] = 'ja_JP'
 # with open('cmds/rpg_define/format.json','r',encoding='utf-8') as Format_file:
 #     format = json.load(Format_file)
 # lang=format[user['RPG']['language']]["additional"]
+
 # with open(f'cmds/rpg_define/{user['RPG']['language']}.lang','r',encoding='utf-8') as Lang_file:
 #     for line in Lang_file:
 #         line = line.strip()
@@ -92,6 +104,10 @@ import json
 #         else:
 #             lang[key] = f'"{value}"'
 
+
+
+            
+# print(lang)
 # introduce
 # print(format[lang['profession']])
 # print(lang)
