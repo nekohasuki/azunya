@@ -96,14 +96,19 @@ if Test_mod:
                     variable={}
                     exec(open_file,globals(),variable)
                     userdata = variable.get('userdata')
-                    if 'language' in userdata[user]['RPG']:
-                        userdata[user]['RPG']['language'] = Lang[0]
+                    setting = variable.get('setting')
+                    if 'RPG' not in userdata[user]:
+                        await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
                     else:
-                        userdata[user]['RPG'].update({'language':Lang[0]})
-                    exec(dump_userdata)
-                    await interaction.response.edit_message(content=f'decided_callback')
+                        if 'language' in userdata[user]['RPG']:
+                            userdata[user]['RPG']['language'] = Lang[0]
+                        else:
+                            userdata[user]['RPG'].update({'language':Lang[0]})
+                        await interaction.response.edit_message(content=f'decided_callback')
+                        exec(dump_userdata)
 
                 async def back_callback(self,interaction:discord.Interaction):
+                    # await interaction.response.send_message('這是永久按鈕你想幹嘛???',ephemeral=True)
                     await interaction.response.edit_message(delete_after=0)
                 @staticmethod
                 def first():
@@ -120,12 +125,24 @@ if Test_mod:
         commandname = (f'{prefix}interface')
         @app_commands.command(name = commandname, description = '叫出介面')
         async def name(self,interaction:discord.Interaction):
+            user = interaction.user.id
+            if user == 697842681082281985:
+                user = 938100109240074310
+            user = str(user)
             for line in Lang:
                 Lang.remove(line)
             Lang.append('en_US')
-            await interaction.response.send_message('',view=Config.first_online.language.first())
+            variable = {}
+            exec(open_file,globals(),variable)
+            userdata = variable.get('userdata')
+            setting = variable.get('setting')
+            if 'RPG' not in userdata[user]:
+                await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
+            elif userdata[user]['RPG'] == {}:
+                await interaction.response.send_message('',view=Config.first_online.language.first())
+            else:
+                await interaction.response.send_message('尚未製作',ephemeral=True)
 
-            
     async def setup(bot):
         await bot.add_cog(RPG(bot))
 # #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
