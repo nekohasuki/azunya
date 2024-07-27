@@ -3,6 +3,7 @@ gamename=noname
 language=言語
 choice=選択
 back=戻る
+decided=決めた
 name=名前
 first_online_time=初回オンライン時間
 color=色
