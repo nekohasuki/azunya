@@ -172,3 +172,5 @@ PVP=PVP
 win=win
 lose=lose
 tie=tie
+
+decided=decided
