@@ -2,10 +2,9 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import json
-open_file='''
 with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
-'''
+
 from core.classes import Cog_extension
 import asyncio,datetime,math,os,random
 from typing import Optional
@@ -31,7 +30,7 @@ class Tool(Cog_extension):
             await interaction.response.send_message(f'請User：<@{user}>稍等片刻\n正在刪除{count}項訊息')
             await asyncio.sleep(3)
             deleted = await interaction.channel.purge(limit=count+1)
-        await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)-1}條訊息',delete_after=60)
+        await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息',delete_after=60)
         # async for message in interaction.channel.history(limit=1):
         #     await asyncio.sleep(60)
         #     await interaction.channel.purge(check=lambda m: m.id == int(message.id))
@@ -87,9 +86,6 @@ class Tool(Cog_extension):
 #身分領取embed
     @commands.command()
     async def rulemessage(self, ctx):
-        variable={}
-        exec(open_file,globals(),variable)
-        setting=variable.get('setting')
         guild = ctx.guild
         msg = self.bot.get_channel(int(setting['ROLE_MESSAGE_CHANNEL_ID'])).get_partial_message(setting['ROLE_MESSAGE_ID'])
         # The following is for reference
@@ -147,9 +143,8 @@ class Tool(Cog_extension):
     commandname = (f'{prefix}name')
     @app_commands.command(name = commandname, description = '這是一段描述')
     async def name(self,interaction:discord.Interaction):
-        # variable={}
-        # exec(open_file,globals(),variable)
-        # setting=variable.get('setting')
+        # with open('dict.json','r',encoding='utf-8') as dict_file:
+        #     dict = json.load(dict_file)
         # dict_dessert = dict['dessert']
         # await interaction.response.send_message(f'要我列出甜點?\n讓我想想......\n那麼來嘍!')
         # for dessert in os.listdir(dict_dessert):
