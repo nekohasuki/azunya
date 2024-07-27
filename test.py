@@ -1,14 +1,47 @@
-import json,os
-from discord import SelectOption
-B=True
-A="""
-with open('setting.json','r',encoding='utf-8') as setting_file:
-    setting = json.load(setting_file)
-"""
-setting={}
-exec(A,globals(),setting)
-setting=setting.get('setting')
-print(setting)
+# lang_code='en_US'
+# def load_language(lang_code):
+#     variable = {}
+#     exec(open(f'cmds/rpg_define/{lang_code}.lang').read(),globals(),variable)
+#     return variable.get('lang',{})
+
+# print(load_language(lang_code))
+
+
+from discord import app_commands,SelectOption
+import os,json
+
+
+
+
+
+
+
+
+# import json,os
+# from discord import SelectOption
+
+# choice_language='en_US'
+# open_file='''
+# with open('setting.json','r',encoding='utf-8') as setting_file:
+#     setting = json.load(setting_file)
+# with open('cmds/data/user_data.json' , 'r' , encoding='utf-8') as userdata_file:
+#     userdata = json.load(userdata_file)
+# with open('cmds/rpg_define/format.json','r',encoding='utf-8') as Format_file:
+#     format = json.load(Format_file)
+
+# lang = {}
+# with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
+#     for line in Lang_file:
+#         line = line.strip()
+#         if not line or line.startswith('#'):
+#             continue
+#         key,value = line.split('=',1)
+#         lang[key] = value
+# '''
+# variable={}
+# exec(open_file,globals(),variable)
+# lang=variable.get('lang')
+# print(lang)
 
 # # # /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # if ('此處用於測試時代替真實玩家資料' == "with open('uesr_data.json','r',encoding='utf-8')") == False:
