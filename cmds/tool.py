@@ -31,7 +31,7 @@ class Tool(Cog_extension):
             await interaction.response.send_message(f'請User：<@{user}>稍等片刻\n正在刪除{count}項訊息')
             await asyncio.sleep(3)
             deleted = await interaction.channel.purge(limit=count+1)
-        await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)}條訊息',delete_after=60)
+        await interaction.channel.send(f'已為USER : <@{user}>刪除{len(deleted)-1}條訊息',delete_after=60)
         # async for message in interaction.channel.history(limit=1):
         #     await asyncio.sleep(60)
         #     await interaction.channel.purge(check=lambda m: m.id == int(message.id))
