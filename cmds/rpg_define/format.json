@@ -4,7 +4,8 @@
         "lang":{
             "職業":"'職9業3'.replace('9', '\u2003').replace('3', '\u2009')",
             "經驗值":"'經驗值3'.replace('3', '\u2009')",
-            "種族":"'種9族3'.replace('9', '\u2003').replace('3', '\u2009')"
+            "種族":"'種9族3'.replace('9', '\u2003').replace('3', '\u2009')",
+            "名稱":"名9稱3.replace('9', '\u2003').replace('3', '\u2009')"
         },
         "additional":{}
     },
@@ -29,7 +30,9 @@
             "Floriculturist":"'Floriculturist3'.replace('3','\u2009')",
             "Chef":"'Chef3'.replace('3','\u2009')",
             "Armourer":"'Armourer3'.replace('3','\u2009')",
-            "Hammersmith":"'Hammersmith3'.replace('3','\u2009')"
+            "Hammersmith":"'Hammersmith3'.replace('3','\u2009')",
+            "choice":"'choice3'.replace('3','\u2009')",
+            "language":"'language3'.replace('3','\u2009')"
         },
         "additional":{}
     },
