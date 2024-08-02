@@ -1,29 +1,27 @@
 # from discord import app_commands,SelectOption
 # import json,os
 
-# choice_language='zh_TW'
+choice_language='zh_TW'
 
-# page=1
-# lang = {}
-# with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
-#     for line in Lang_file:
-#         line = line.strip()
-#         if not line or line.startswith('#'):
-#             continue
-#         key,value = line.split('=',1)
-#         lang[key] = value
-# print(f'{lang['Player_Guidelines']}\n{eval(f'"{lang[f'Player_Guideline_{page}']}"')}')
-# page=1
-# lang = {}
-# with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
-#     for line in Lang_file:
-#         line = line.strip()
-#         if line.startswith(f'User_Terms_{page}'):
-#             key,value = line.split('=',1)
-#             lang[key] = value
+page=5
+lang = {}
+with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
+    for line in Lang_file:
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        key,value = line.split('=',1)
+        lang[key] = value
+
+
+
+List = []
 # for line in lang:
-#         print(lang[line])
-        
+#     if str(line).startswith(f'User_Terms_{page}') and not str(line).endswith('0'):
+#         list.append(f'- {line[-1:]}. {lang[line]}')
+# list = '\n\n'.join(list) 
+# print(f'{lang[f'User_Terms_{page}.0']}')
+print(len(List)+1)
 # # # /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # if ('此處用於測試時代替真實玩家資料' == "with open('uesr_data.json','r',encoding='utf-8')") == False:
 #     data={
@@ -98,50 +96,37 @@
 #             }
 #         }
 #     }
-#--------------------------------------------------------------------------------------------------------
-if '這裡是自動處理*.ling的代碼':
-    lang=[]
-    with open(f'cmds/rpg_define/zh_TW.lang','r',encoding='utf-8') as Lang_file:
-        for zh_line in Lang_file:
-            zh_line = zh_line.strip()
-            if not zh_line or zh_line.startswith('#'):
-                zh_key = zh_line
-            else:
-                zh_key, zh_value = zh_line.split('=', 1)
-            lang.append(zh_key)
-            with open(f'cmds/rpg_define/ja_JP.lang','r',encoding='utf-8') as Lang_file:
-                for line in Lang_file:
-                    line = line.strip()
-                    value=None
-                    if not line or line.startswith('#'):
-                        continue
-                    key, value = line.split('=', 1)
-                    if value == '':
-                        value = '"error401"'
-                    if key in lang:
-                        lang.remove(key)
-                        if f'key' not in lang:
-                            lang.append(f'{key}={value}')
-
-    print(str(lang)[2:-2].replace('", "','\n').replace("', '",'\n').replace('\\\\','\\').replace('\\\'','\''))
-#--------------------------------------------------------------------------------------------------------
-        
-
-            
-# print(lang)
-# introduce
-# print(format[lang['profession']])
-# print(lang)
-# A ={
-#     "RPG":{}
-# }
-# languge = {'languge':'zh_TW'}
-# A['RPG'].update(languge)
-# print(A['RPG'])
-# languge = {'languge':'ja_JP'}
-# A['RPG'].update(languge)
-# print(A['RPG'])
-
+# #--------------------------------------------------------------------------------------------------------
+# if '這裡是自動處理*.ling的代碼':
+#     Lang='ja_JP.lang'
+#     Lang='en_US.lang'
+#     lang=[]
+#     with open(f'cmds/rpg_define/zh_TW.lang','r',encoding='utf-8') as Lang_file:
+#         for zh_line in Lang_file:
+#             zh_line = zh_line.strip()
+#             if not zh_line or zh_line.startswith('#'):
+#                 zh_key = zh_line
+#             else:
+#                 zh_key, zh_value = zh_line.split('=', 1)
+#             lang.append(zh_key)
+    
+#             with open(f'cmds/rpg_define/{Lang}','r',encoding='utf-8') as Lang_file:
+#                 for line in Lang_file:
+#                     line = line.strip()
+#                     value=None
+#                     if not line or line.startswith('#'):
+#                         continue
+#                     key, value = line.split('=', 1)
+#                     if value == '':
+#                         value = '"error401"'
+#                     if key in lang:
+#                         lang.remove(key)
+#                         if f'key' not in lang:
+#                             lang.append(f'{key}={value}')
+#     lang='\n'.join(lang)
+#     print(lang)
+#     #日文要檢查空白符號,因未知原因會自動卡一個空格
+# #--------------------------------------------------------------------------------------------------------
 
 # first_online_time=lang['first_online_time']
 # user_first_online_time=user['RPG']['first_online_time']
