@@ -1,34 +1,9 @@
-# lang_code='en_US'
-# def load_language(lang_code):
-#     variable = {}
-#     exec(open(f'cmds/rpg_define/{lang_code}.lang').read(),globals(),variable)
-#     return variable.get('lang',{})
-
-# print(load_language(lang_code))
-
-
-from discord import app_commands,SelectOption
-import os,json
-
-
-
-
-
-
-
-
+# from discord import app_commands,SelectOption
 # import json,os
-# from discord import SelectOption
 
-# choice_language='en_US'
-# open_file='''
-# with open('setting.json','r',encoding='utf-8') as setting_file:
-#     setting = json.load(setting_file)
-# with open('cmds/data/user_data.json' , 'r' , encoding='utf-8') as userdata_file:
-#     userdata = json.load(userdata_file)
-# with open('cmds/rpg_define/format.json','r',encoding='utf-8') as Format_file:
-#     format = json.load(Format_file)
+# choice_language='zh_TW'
 
+# page=1
 # lang = {}
 # with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
 #     for line in Lang_file:
@@ -37,12 +12,18 @@ import os,json
 #             continue
 #         key,value = line.split('=',1)
 #         lang[key] = value
-# '''
-# variable={}
-# exec(open_file,globals(),variable)
-# lang=variable.get('lang')
-# print(lang)
-
+# print(f'{lang['Player_Guidelines']}\n{eval(f'"{lang[f'Player_Guideline_{page}']}"')}')
+# page=1
+# lang = {}
+# with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
+#     for line in Lang_file:
+#         line = line.strip()
+#         if line.startswith(f'User_Terms_{page}'):
+#             key,value = line.split('=',1)
+#             lang[key] = value
+# for line in lang:
+#         print(lang[line])
+        
 # # # /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # if ('此處用於測試時代替真實玩家資料' == "with open('uesr_data.json','r',encoding='utf-8')") == False:
 #     data={
@@ -117,27 +98,30 @@ import os,json
 #             }
 #         }
 #     }
-#     user = data['123']
-# # user['RPG']['language'] = 'zh_TW'
-# # user['RPG']['language'] = 'en_US'
-# # user['RPG']['language'] = 'ja_JP'
-# with open('cmds/rpg_define/format.json','r',encoding='utf-8') as Format_file:
-#     format = json.load(Format_file)
-# lang=format[user['RPG']['language']]["additional"]
+lang=[]
+with open(f'cmds/rpg_define/zh_TW.lang','r',encoding='utf-8') as Lang_file:
+    for zh_line in Lang_file:
+        zh_line = zh_line.strip()
+        if not zh_line or zh_line.startswith('#'):
+            zh_key = zh_line
+        else:
+            zh_key, zh_value = zh_line.split('=', 1)
+        lang.append(zh_key)
+        with open(f'cmds/rpg_define/ja_JP.lang','r',encoding='utf-8') as Lang_file:
+            for line in Lang_file:
+                line = line.strip()
+                value=None
+                if not line or line.startswith('#'):
+                    continue
+                key, value = line.split('=', 1)
 
-# with open(f'cmds/rpg_define/{user['RPG']['language']}.lang','r',encoding='utf-8') as Lang_file:
-#     for line in Lang_file:
-#         line = line.strip()
-#         if not line or line.startswith('#'):
-#             continue
-#         key, value = line.split('=', 1)
-#         if value in format[user['RPG']['language']]["lang"]:
-#             pass
-#             lang[key] = format[user['RPG']['language']]["lang"][value]
-#         else:
-#             lang[key] = f'"{value}"'
-
-
+                if key in lang:
+                    lang.remove(key)
+                    if f'key' not in lang:
+                        lang.append(f'{key}={value}')
+print(lang)
+            
+        
 
             
 # print(lang)
