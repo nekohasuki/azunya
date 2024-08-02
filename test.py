@@ -98,29 +98,33 @@
 #             }
 #         }
 #     }
-lang=[]
-with open(f'cmds/rpg_define/zh_TW.lang','r',encoding='utf-8') as Lang_file:
-    for zh_line in Lang_file:
-        zh_line = zh_line.strip()
-        if not zh_line or zh_line.startswith('#'):
-            zh_key = zh_line
-        else:
-            zh_key, zh_value = zh_line.split('=', 1)
-        lang.append(zh_key)
-        with open(f'cmds/rpg_define/ja_JP.lang','r',encoding='utf-8') as Lang_file:
-            for line in Lang_file:
-                line = line.strip()
-                value=None
-                if not line or line.startswith('#'):
-                    continue
-                key, value = line.split('=', 1)
+#--------------------------------------------------------------------------------------------------------
+if '這裡是自動處理*.ling的代碼':
+    lang=[]
+    with open(f'cmds/rpg_define/zh_TW.lang','r',encoding='utf-8') as Lang_file:
+        for zh_line in Lang_file:
+            zh_line = zh_line.strip()
+            if not zh_line or zh_line.startswith('#'):
+                zh_key = zh_line
+            else:
+                zh_key, zh_value = zh_line.split('=', 1)
+            lang.append(zh_key)
+            with open(f'cmds/rpg_define/ja_JP.lang','r',encoding='utf-8') as Lang_file:
+                for line in Lang_file:
+                    line = line.strip()
+                    value=None
+                    if not line or line.startswith('#'):
+                        continue
+                    key, value = line.split('=', 1)
+                    if value == '':
+                        value = '"error401"'
+                    if key in lang:
+                        lang.remove(key)
+                        if f'key' not in lang:
+                            lang.append(f'{key}={value}')
 
-                if key in lang:
-                    lang.remove(key)
-                    if f'key' not in lang:
-                        lang.append(f'{key}={value}')
-print(lang)
-            
+    print(str(lang)[2:-2].replace('", "','\n').replace("', '",'\n').replace('\\\\','\\').replace('\\\'','\''))
+#--------------------------------------------------------------------------------------------------------
         
 
             
