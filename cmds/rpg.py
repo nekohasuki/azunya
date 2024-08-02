@@ -38,56 +38,219 @@ Test_mod = True
 
 if Test_mod:
     Lang=['en_US']
-    class Config:
-        @staticmethod
-        def decided_callback():
-            variable={}
-            exec(open_file,globals(),variable)
-            lang = variable.get('lang')
-            return Button(label=f'{eval(lang.get('decided','"eerror402"'))}',style=discord.ButtonStyle.green)
-        @staticmethod
-        def back_callback():
-            variable={}
-            exec(open_file,globals(),variable)
-            lang = variable.get('lang')
-            return Button(label=f'{eval(lang.get('back','"eerror402"'))}',style=discord.ButtonStyle.red)
-        
-        class setting:
-            class language(Select):
-                def __init__(self):
-                    options=[]
-                    for language in os.listdir('cmds/rpg_define'):
-                        if language.endswith('lang'):
-                            with open(f'cmds/rpg_define/{language}','r',encoding='utf-8') as Lang_file:
-                                for line in Lang_file:
-                                    if line.strip().startswith('language-Type'):
-                                        line = line.strip().split('=',1)[1]
-                                        options.append(SelectOption(label=line,value=language[:-5]))
-                    variable={}
-                    exec(open_file,globals(),variable)
-                    lang = variable.get('lang')
-                    super().__init__(placeholder=f'{eval(lang.get('language','"rerror402"'))}...',options=options)
-                async def callback(self,interaction:discord.Interaction):
-                    for line in Lang:
-                        Lang.remove(line)
-                    Lang.append(self.values[0])
-                    variable={}
-                    exec(open_file,globals(),variable)
-                    lang = variable.get('lang')
-                    await interaction.response.edit_message(content=f'{eval(lang.get('language','"rerror402"'))} : {eval(lang.get('language-Type','"rerror402"'))}',view=Config.first_online.language.subsequent())
+    class Default:
+        class Buttons:
+            @staticmethod
+            def decided():
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                return Button(label=f'{eval(lang.get('decided','"error402"'))}',style=discord.ButtonStyle.green)
+            @staticmethod
+            def back():
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                return Button(label=f'{eval(lang.get('back','"error402"'))}',style=discord.ButtonStyle.red)
+            @staticmethod
+            def previous():
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                return Button(label=f'{eval(lang.get('previous','"error402"'))}')
+            @staticmethod
+            def next():
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                return Button(label=f'{eval(lang.get('next','"error402"'))}')
+        class language(View,Select):
+            def __init__(self):
+                super().__init__()
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                options=[]
+                for language in os.listdir('cmds/rpg_define'):
+                    if language.endswith('lang'):
+                        with open(f'cmds/rpg_define/{language}','r',encoding='utf-8') as Lang_file:
+                            for line in Lang_file:
+                                if line.strip().startswith('language-Type'):
+                                    line = line.strip().split('=',1)[1]
+                                    options.append(SelectOption(label=line,value=language[:-5]))
+                options = Select(placeholder=f'{eval(lang.get('language','"rerror402"'))}...',options=options)
+                options.callback = self.options_callback
+                self.add_item(options)
+                decided = Default.Buttons.decided()
+                decided.callback = self.decided_callback
+                self.add_item(decided)
+                back = Default.Buttons.back()
+                back.callback = self.back_callback
+                self.add_item(back)
+            async def options_callback(self,interaction:discord.Interaction):
+                user = interaction.user.id
+                if user == 697842681082281985:
+                    user = 938100109240074310
+                user = str(user)
+                variable={}
+                exec(open_file,globals(),variable)
+                userdata = variable.get('userdata')
+                setting = variable.get('setting')
+                if 'RPG' not in userdata[user]:
+                    await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
+                else:
+                    if 'language' in userdata[user]['RPG']:
+                        userdata[user]['RPG']['language'] = interaction.data['values'][0]
+                    else:
+                        userdata[user]['RPG'].update({'language':interaction.data['values'][0]})
+                    exec(dump_userdata)
+                for line in Lang:
+                    Lang.remove(line)
+                Lang.append(userdata[user]['RPG']['language'])
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                await interaction.response.edit_message(content=f'{eval(lang.get('language','"rerror402"'))} : {eval(lang.get('language-Type','"rerror402"'))}',view=Interface_Config.first_online.language())
+            async def decided_callback(self,interaction:discord.Interaction):
+                await interaction.response.edit_message(delete_after=0)
+            async def back_callback(self,interaction:discord.Interaction):
+                # await interaction.response.send_message('這是永久按鈕你想幹嘛???',ephemeral=True)
+                await interaction.response.edit_message(delete_after=0)
+        class Player_Guidelines(View):
+            def __init__(self,Page=1):
+                super().__init__(timeout=None)  
+                self.page = Page
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
 
+                previous = Default.Buttons.previous()
+                previous.callback = self.previous_callback
+                self.add_item(previous)
+                page = Button(label=f'{Page}/7',disabled=True)
+                page.callback = self.page_callback
+                self.add_item(page)
+                next = Default.Buttons.next()
+                next.callback = self.next_callback
+                self.add_item(next)
+
+                User_Terms = Button(label=eval(lang.get('User_Terms','"rerror402"')),style=discord.ButtonStyle.blurple,row=1)
+                User_Terms.callback = self.User_Terms_callback
+                self.add_item(User_Terms)
+
+                decided = Default.Buttons.decided()
+                decided.callback = self.decided_callback
+                decided.row = 2
+                self.add_item(decided)
+                back = Default.Buttons.back()
+                back.row = 2
+                back.callback = self.back_callback
+                self.add_item(back)
+
+            async def previous_callback(self,interaction:discord.Interaction):
+                Page = self.page - 1
+                if Page < 1:
+                    Page = 1
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                embed=None
+                await interaction.response.edit_message(content=None,embed=embed,view=Default.Player_Guidelines(Page))
+            async def page_callback():
+                pass
+            async def next_callback(self,interaction:discord.Interaction):
+                Page = self.page + 1
+                if Page > 7:
+                    Page = 7
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                embed=None
+                await interaction.response.edit_message(content=None,embed=embed,view=Default.Player_Guidelines(Page))
+
+            async def User_Terms_callback(self,interaction:discord.Interaction):
+                await interaction.response.edit_message(content='',view=Interface_Config.first_online.User_Terms())
+
+            async def decided_callback(self,interaction:discord.Interaction):
+                await interaction.response.edit_message(content='',view=Interface_Config.first_online.Player_Guidelines())
+            async def back_callback(self,interaction:discord.Interaction):
+                user = interaction.user.id
+                if user == 697842681082281985:
+                    user = 938100109240074310
+                user = str(user)
+                variable={}
+                exec(open_file,globals(),variable)
+                userdata = variable.get('userdata')
+                # setting = variable.get('setting')
+                if userdata[user]['RPG']['setting_mod']:
+                    embed=None
+                    await interaction.response.edit_message(content='',embed=None,view=Interface_Config.first_online.language())
+                else:
+                    await interaction.response.edit_message(delete_after=0)
+
+        class User_Terms(View):
+            def __init__(self, Page=1):
+                super().__init__(timeout=None)
+                self.page = Page
+                
+                previous = Default.Buttons.previous()
+                previous.callback = self.previous_callback
+                self.add_item(previous)
+                page = Button(label=f'{Page}/9', disabled=True)
+                page.callback = self.page_callback
+                self.add_item(page)
+                next = Default.Buttons.next()
+                next.callback = self.next_callback
+                self.add_item(next)
+                
+                back = Default.Buttons.back()
+                back.row = 1
+                back.callback = self.back_callback
+                self.add_item(back)
+
+            async def previous_callback(self, interaction: discord.Interaction):
+                Page = self.page-1
+                if Page < 1:
+                    Page = 1
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                embed=None
+                await interaction.response.edit_message(content=None,embed=embed,view=Default.User_Terms(Page))
+
+            async def page_callback(self, interaction: discord.Interaction):
+                pass
+
+            async def next_callback(self, interaction: discord.Interaction):
+                Page = self.page+1
+                if Page > 9:
+                    Page = 9
+                variable={}
+                exec(open_file,globals(),variable)
+                lang = variable.get('lang')
+                embed=None
+                await interaction.response.edit_message(content=None,embed=embed,view=Default.User_Terms(Page))
+
+            async def back_callback(self, interaction: discord.Interaction):
+                user = interaction.user.id
+                if user == 697842681082281985:
+                    user = 938100109240074310
+                user = str(user)
+                variable={}
+                exec(open_file,globals(),variable)
+                userdata = variable.get('userdata')
+                # setting = variable.get('setting')
+                if userdata[user]['RPG']['setting_mod']:
+                    embed=None
+                    await interaction.response.edit_message(content=None,embed=embed,view=Interface_Config.first_online.Player_Guidelines())
+                else:
+                    await interaction.response.edit_message(delete_after=0)
+
+
+    
+    class Interface_Config:
         class first_online:
-            class language(View):
-                def __init__(self,First=True):
-                    super().__init__(timeout=None)
-                    self.add_item(Config.setting.language())
-                    if not First:
-                        decided = Config.decided_callback()
-                        decided.callback = self.decided_callback
-                        self.add_item(decided)
-                    back = Config.back_callback()
-                    back.callback = self.back_callback
-                    self.add_item(back)
+            class language(Default.language):
                 async def decided_callback(self,interaction:discord.Interaction):
                     user = interaction.user.id
                     if user == 697842681082281985:
@@ -104,23 +267,24 @@ if Test_mod:
                             userdata[user]['RPG']['language'] = Lang[0]
                         else:
                             userdata[user]['RPG'].update({'language':Lang[0]})
-                        await interaction.response.edit_message(content=f'decided_callback')
                         exec(dump_userdata)
-
+                        if userdata[user]['RPG']['setting_mod']:
+                            await interaction.response.edit_message(content='123',view=Interface_Config.first_online.Player_Guidelines())
+                        else:
+                            await interaction.response.edit_message(content='OK',view=None)
                 async def back_callback(self,interaction:discord.Interaction):
-                    # await interaction.response.send_message('這是永久按鈕你想幹嘛???',ephemeral=True)
-                    await interaction.response.edit_message(delete_after=0)
-                @staticmethod
-                def first():
-                    return Config.first_online.language(First = True)
-                @staticmethod
-                def subsequent():
-                    return Config.first_online.language(First = False)
-            class Player_Guidelines():
-                pass
-            class User_Terms():
-                pass
+                    await interaction.response.edit_message(content='** **',embed=None,view=None)
 
+            class Player_Guidelines(Default.Player_Guidelines):
+                async def back_callback(self,interaction:discord.Interaction):
+                    await interaction.response.edit_message(content='',embed=None,view=Interface_Config.first_online.language())
+
+            class User_Terms(Default.User_Terms):
+                async def back_callback(self, interaction: discord.Interaction):
+                    embed=None
+                    await interaction.response.edit_message(content=None,embed=embed,view=Interface_Config.first_online.Player_Guidelines())
+
+            
     class RPG(Cog_extension):
         commandname = (f'{prefix}interface')
         @app_commands.command(name = commandname, description = '叫出介面')
@@ -129,24 +293,40 @@ if Test_mod:
             if user == 697842681082281985:
                 user = 938100109240074310
             user = str(user)
-            for line in Lang:
-                Lang.remove(line)
-            Lang.append('en_US')
             variable = {}
             exec(open_file,globals(),variable)
             userdata = variable.get('userdata')
             setting = variable.get('setting')
+            for line in Lang:
+                Lang.remove(line)
+            if 'language' in userdata[user]['RPG'] and 'RPG'in userdata[user]:
+                Lang.append(userdata[user]['RPG']['language'])
+            else:
+                Lang.append('en_US')
+            
             if 'RPG' not in userdata[user]:
                 await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
-            elif userdata[user]['RPG'] == {}:
-                await interaction.response.send_message('',view=Config.first_online.language.first())
             else:
-                await interaction.response.send_message('尚未製作',ephemeral=True)
+                Setting = ['language','first_online_time']
+                setting_mod = False
+                for line in Setting:
+                    if line not in userdata[user]['RPG']:
+                        setting_mod = True
+                if setting_mod:
+                    if 'setting_mod' in userdata[user]['RPG']:
+                            userdata[user]['RPG']['setting_mod'] = setting_mod
+                    else:
+                        userdata[user]['RPG'].update({'setting_mod':setting_mod})
+                    exec(dump_userdata)
+                    # await interaction.response.send_message('',view=Interface_Config.first_online.language())
+                    await interaction.response.send_message('',view=Interface_Config.first_online.Player_Guidelines())
+                else:
+                    await interaction.response.send_message('OK')
 
     async def setup(bot):
         await bot.add_cog(RPG(bot))
 # #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-# elif"A"!="A":pass
+# elif Test_mod == "A":
 # #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 else:
     User=[]
@@ -460,113 +640,9 @@ else:
             async def back_button_callback(self,interaction:discord.Interaction):
                 await interaction.response.edit_message(content='',embed=None,view=Config.Start_Screen())
 
-        class name(View):
-            def __init__(self):
-                super().__init__(timeout=None)
-                back_button = Button(label='返回',style=discord.ButtonStyle.red)
-                back_button.callback = self.back_button_callback
-                self.add_item(back_button)
-            async def back_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message('',view=Config.Start_Screen())
-
-            def __init__(self):
-                super().__init__(timeout=None)
-                back_button = Button(label='返回',style=discord.ButtonStyle.red)
-                back_button.callback = self.back_button_callback
-                self.add_item(back_button)
-            async def back_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message('',view=Config.Start_Screen())
-
 
 
         class test:
-            class A(View):
-                class Route_A(View):
-                    def __init__(self):
-                        super().__init__(timeout=None)
-                        A1_button = Button(label='A1')
-                        A1_button.callback = self.A1_button_callback
-                        self.add_item(A1_button)
-                        A2_button = Button(label='A2')
-                        A2_button.callback = self.A2_button_callback
-                        self.add_item(A2_button)
-                        back_button = Button(label='返回',style=discord.ButtonStyle.red)
-                        back_button.callback = self.back_button_callback
-                        self.add_item(back_button)
-                    async def A1_button_callback(self,interaction:discord.Interaction):
-                        if interaction.user == interaction.message.interaction.user:
-                            embed = discord.Embed(title='結果',description=f'雖然 {interaction.user.mention} 選擇了 A1，但還是會回到 B，因為這就是命運石之門的選擇。',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                            await interaction.response.edit_message(embed=embed,view=Config.test.A())
-                        else:
-                            await interaction.response.send_message(f'這不是你的選項。',ephemeral=True)
-                    async def A2_button_callback(self,interaction:discord.Interaction):
-                        if interaction.user == interaction.message.interaction.user:
-                            embed = discord.Embed(title='結果',description=f'雖然 {interaction.user.mention} 選擇了 A2，但還是會回到 B，因為這就是命運石之門的選擇。',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                            await interaction.response.edit_message(embed=embed,view=Config.test.A())
-                        else:
-                            await interaction.response.send_message(f'這不是你的選項。',ephemeral=True)
-                    async def back_button_callback(self,interaction:discord.Interaction):
-                        if interaction.user == interaction.message.interaction.user:
-                            embed = discord.Embed(title='請選擇',description=f'您好{interaction.user.mention}，請選擇 A 或 B',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                            await interaction.response.edit_message(embed=embed,view=Config.test.A())
-                        else:
-                            await interaction.response.send_message(f'這不是你的選項。',ephemeral=True)
-                def __init__(self):
-                    super().__init__(timeout=None)
-                    A_button = Button(label='A')
-                    A_button.callback = self.A_button_callback
-                    self.add_item(A_button)
-                    B_button = Button(label='B')
-                    B_button.callback = self.B_button_callback
-                    self.add_item(B_button)
-                async def A_button_callback(self,interaction:discord.Interaction):
-                    if interaction.user == interaction.message.interaction.user:
-                        embed = discord.Embed(title='請選擇',description=f'{interaction.user.mention}，請選擇 1 或 2',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                        await interaction.response.edit_message(embed=embed,view=Config.test.A.Route_A())
-                    else:
-                        await interaction.response.send_message(f'這不是你的選項。',ephemeral=True)
-                async def B_button_callback(self,interaction:discord.Interaction):
-                    if interaction.user == interaction.message.interaction.user:
-                        embed = discord.Embed(title='結果',description=f'選了B的你\n命運終究是沒辦法跳出的。',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                        await interaction.response.edit_message(embed=embed,view=Config.test.A())
-                    else:
-                        await interaction.response.send_message(f'這不是你的選項。',ephemeral=True)
-            class B(View):
-                class Route_A(View):
-                    def __init__(self):
-                        super().__init__(timeout=None)
-                        A1_button = Button(label='A1')
-                        A1_button.callback = self.A1_button_callback
-                        self.add_item(A1_button)
-                        A2_button = Button(label='A2')
-                        A2_button.callback = self.A2_button_callback
-                        self.add_item(A2_button)
-                        back_button = Button(label='返回',style=discord.ButtonStyle.red)
-                        back_button.callback = self.back_button_callback
-                        self.add_item(back_button)
-                    async def A1_button_callback(self,interaction:discord.Interaction):
-                        embed = discord.Embed(title='結果',description=f'雖然 {interaction.user.mention} 選擇了 A1，但還是會回到 B，因為這就是命運石之門的選擇。',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                        await interaction.response.edit_message(embed=embed,view=Config.test.B())
-                    async def A2_button_callback(self,interaction:discord.Interaction):
-                        embed = discord.Embed(title='結果',description=f'雖然 {interaction.user.mention} 選擇了 A2，但還是會回到 B，因為這就是命運石之門的選擇。',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                        await interaction.response.edit_message(embed=embed,view=Config.test.B())
-                    async def back_button_callback(self,interaction:discord.Interaction):
-                        embed = discord.Embed(title='請選擇',description=f'您好{interaction.user.mention}，請選擇 A 或 B',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                        await interaction.response.edit_message(embed=embed,view=Config.test.B())
-                def __init__(self):
-                    super().__init__(timeout=None)
-                    A_button = Button(label='A')
-                    A_button.callback = self.A_button_callback
-                    self.add_item(A_button)
-                    B_button = Button(label='B')
-                    B_button.callback = self.B_button_callback
-                    self.add_item(B_button)
-                async def A_button_callback(self,interaction:discord.Interaction):
-                    embed = discord.Embed(title='請選擇',description=f'{interaction.user.mention}，請選擇 1 或 2',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                    await interaction.response.edit_message(embed=embed,view=Config.test.B.Route_A())
-                async def B_button_callback(self,interaction:discord.Interaction):
-                    embed = discord.Embed(title='結果',description=f'選了B的你\n命運終究是沒辦法跳出的。',color=discord.Color.purple(),timestamp=datetime.datetime.now())
-                    await interaction.response.edit_message(embed=embed,view=Config.test.B())
             class name(View):
                 def __init__(self):
                     super().__init__(timeout=None)
