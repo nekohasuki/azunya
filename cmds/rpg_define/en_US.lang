@@ -233,12 +233,12 @@ next=next
 
 
 Player_Guidelines=PlayerGuidelines
-Player_Guideline_1=Welcome to {gamename}! Before you embark on your adventure, please read the following “rules” to ensure your journey is fun and worry-free!
-Player_Guideline_2=The world of {gamename} is filled with monsters and unknowns!\nIt is said that you have to be 2000 years old to join this feast.\nSo if one day you find an adventurer sneaking in despite everything,\njust turn a blind eye.
-Player_Guideline_3=Your Discord account is your only ticket to becoming an adventurer in {gamename}.\nPlease protect it well and don't let it fall into the wrong hands.\nPasswords are not meant to be shared with friends!\nKeep it secret, just like you would with your diary.
+Player_Guideline_1=Welcome to __{gamename}__! Before you embark on your adventure, please read the following “rules” to ensure your journey is fun and worry-free!
+Player_Guideline_2=The world of __{gamename}__ is filled with monsters and unknowns!\nIt is said that you have to be 2000 years old to join this feast.\nSo if one day you find an adventurer sneaking in despite everything,\njust turn a blind eye.
+Player_Guideline_3=Your Discord account is your only ticket to becoming an adventurer in __{gamename}__.\nPlease protect it well and don't let it fall into the wrong hands.\nPasswords are not meant to be shared with friends!\nKeep it secret, just like you would with your diary.
 Player_Guideline_4=Although adventure is full of unknowns and exploration, if your character encounters any trouble along the way, don't be discouraged, because your unique story is also part of the game. Let's stay happy together!
 Player_Guideline_5=We hope you have a pleasant time while playing. Therefore, interact harmoniously with other players and remain calm if any disputes arise. We believe that every interaction and journey can compose a unique melody.
-Player_Guideline_6=Although the world of {gamename} has many item, really many—\nbut please avoid engaging in any real-world monetary transactions.\nBecause the experience of the journey cannot be bought with money.
+Player_Guideline_6=Although the world of __{gamename}__ has many item, really many—\nbut please avoid engaging in any real-world monetary transactions.\nBecause the experience of the journey cannot be bought with money.
 Player_Guideline_7=If you find any bugs in this world,\nwe encourage you to explore as much as possible and share with other adventurers.\nOnly when more people notice will the gods extend their invisible hands.
 
 User_Terms=UserTerms
