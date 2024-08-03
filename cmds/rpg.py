@@ -49,6 +49,12 @@ if Test_mod:
                     lang = variable.get('lang')
                     return Button(label=f'{eval(lang.get('decided','"error402"'))}',style=discord.ButtonStyle.green)
                 @staticmethod
+                def random():
+                    variable={}
+                    exec(open_file,globals(),variable)
+                    lang = variable.get('lang')
+                    return Button(label=f'{eval(lang.get('random','"error402"'))}',style=discord.ButtonStyle.blurple)
+                @staticmethod
                 def back():
                     variable={}
                     exec(open_file,globals(),variable)
@@ -66,7 +72,7 @@ if Test_mod:
                     exec(open_file,globals(),variable)
                     lang = variable.get('lang')
                     return Button(label=f'{eval(lang.get('next','"error402"'))}')
-            class language(View,Select):
+            class Language(View,Select):
                 def __init__(self):
                     super().__init__()
                     variable={}
@@ -112,7 +118,7 @@ if Test_mod:
                     variable={}
                     exec(open_file,globals(),variable)
                     lang = variable.get('lang')
-                    await interaction.response.edit_message(content=f'{eval(lang.get('language','"rerror402"'))} : {eval(lang.get('language-Type','"rerror402"'))}',view=Interface_Config.first_online.language())
+                    await interaction.response.edit_message(content=f'{eval(lang.get('language','"rerror402"'))} : {eval(lang.get('language-Type','"rerror402"'))}',view=Interface_Config.first_online.Language())
                 async def decided_callback(self,interaction:discord.Interaction):
                     await interaction.response.edit_message(delete_after=0)
                 async def back_callback(self,interaction:discord.Interaction):
@@ -125,30 +131,29 @@ if Test_mod:
                     variable={}
                     exec(open_file,globals(),variable)
                     lang = variable.get('lang')
-
-                    previous = Default.Buttons.previous()
-                    previous.callback = self.previous_callback
-                    self.add_item(previous)
-                    page = Button(label=f'{Page}/7',disabled=True)
-                    page.callback = self.page_callback
-                    self.add_item(page)
-                    next = Default.Buttons.next()
-                    next.callback = self.next_callback
-                    self.add_item(next)
-                    if Page == 7:
-                        decided = Default.Buttons.decided()
-                        decided.callback = self.decided_callback
-                        self.add_item(decided)
-
-                    User_Terms = Button(label=eval(lang.get('User_Terms','"rerror402"')),style=discord.ButtonStyle.blurple,row=1)
-                    User_Terms.callback = self.User_Terms_callback
-                    self.add_item(User_Terms)
-
-                    back = Default.Buttons.back()
-                    back.row = 1
-                    back.callback = self.back_callback
-                    self.add_item(back)
-
+                    if 'row-1' != 0:
+                        previous = Default.Buttons.previous()
+                        previous.callback = self.previous_callback
+                        self.add_item(previous)
+                        page = Button(label=f'{Page}/7',disabled=True)
+                        page.callback = self.page_callback
+                        self.add_item(page)
+                        next = Default.Buttons.next()
+                        next.callback = self.next_callback
+                        self.add_item(next)
+                        if Page == 7:
+                            decided = Default.Buttons.decided()
+                            decided.callback = self.decided_callback
+                            self.add_item(decided)
+                    if 'row-2' != 0:
+                        User_Terms = Button(label=eval(lang.get('User_Terms','"rerror402"')),style=discord.ButtonStyle.blurple,row=1)
+                        User_Terms.callback = self.User_Terms_callback
+                        self.add_item(User_Terms)
+                    if 'row-3' != 0:
+                        back = Default.Buttons.back()
+                        back.row = 1
+                        back.callback = self.back_callback
+                        self.add_item(back)
                 async def previous_callback(self,interaction:discord.Interaction):
                     Page = self.page - 1
                     if Page < 1:
@@ -217,7 +222,6 @@ if Test_mod:
                     List = '\n\n'.join(List)                    
                     embed=discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{eval(lang.get(f'User_Terms','"error402"'))}__\n**- {eval(lang.get(f'User_Terms_{Page}.0','"error402"'))} :**\n{List}',colour=user_color,timestamp=datetime.datetime.now())
                     await interaction.response.edit_message(content=None,embed=embed,view=Default.User_Terms(Page))
-
                 async def decided_callback(self,interaction:discord.Interaction):
                     user = interaction.user.id
                     if user == 697842681082281985:
@@ -227,14 +231,27 @@ if Test_mod:
                     exec(open_file,globals(),variable)
                     userdata = variable.get('userdata')
                     setting = variable.get('setting')
+                    lang = variable.get('lang')
                     if 'RPG' not in userdata[user]:
                         await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
                     elif 'first_online_time' not in userdata[user]['RPG']:
                         userdata[user]['RPG'].update({'first_online_time':f'{datetime.datetime.now()}'})
                         exec(dump_userdata)
                     if userdata[user]['RPG']['setting_mod']:
-                        embed=None
-                        await interaction.response.edit_message(content='OK',view=Interface_Config.first_online.Player_Guidelines(7))
+                        if 'color' in userdata[user]['RPG']:
+                            user_color = int(userdata[user]['RPG']['color'],16)
+                            color = userdata[user]['RPG']['color']
+                        else:
+                            user_color = Color
+                            color = hex(Color)
+                        R = int(color[2:-4],16)
+                        G = int(color[4:-2],16)
+                        B = int(color[-2:],16)
+                        embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{eval(lang.get('random','"error402"'))}{eval(lang.get('color','"error402"'))}__',color=user_color,timestamp=datetime.datetime.now())
+                        embed.add_field(name='',value=f'**{eval(lang.get('color','"error402"'))} :**\n> RGB  `{str(R).zfill(3)},{str(G).zfill(3)},{str(B).zfill(3)}`\n> HEX `#{color[2:]}`',inline=False)
+                        embed.set_image(url=f'attachment://{color}.png')
+                        file = discord.File(f'imege/rpg/color/{color}.png',filename=f'{color}.png')
+                        await interaction.response.edit_message(content=None,attachments=[file],embed=embed,view=Interface_Config.first_online.Color())
                     else:
                         await interaction.response.edit_message(content=None,embed=None,view=None)
                 async def back_callback(self,interaction:discord.Interaction):
@@ -245,33 +262,30 @@ if Test_mod:
                     variable={}
                     exec(open_file,globals(),variable)
                     userdata = variable.get('userdata')
-                    # setting = variable.get('setting')
                     if userdata[user]['RPG']['setting_mod']:
                         embed=None
-                        await interaction.response.edit_message(content='',embed=None,view=Interface_Config.first_online.language())
+                        await interaction.response.edit_message(content='',embed=embed,view=Interface_Config.first_online.Language())
                     else:
                         await interaction.response.edit_message(content=None,embed=None,view=None)
-
             class User_Terms(View):
                 def __init__(self, Page=1):
                     super().__init__(timeout=None)
                     self.page = Page
-                    
-                    previous = Default.Buttons.previous()
-                    previous.callback = self.previous_callback
-                    self.add_item(previous)
-                    page = Button(label=f'{Page}/9', disabled=True)
-                    page.callback = self.page_callback
-                    self.add_item(page)
-                    next = Default.Buttons.next()
-                    next.callback = self.next_callback
-                    self.add_item(next)
-                    
-                    back = Default.Buttons.back()
-                    back.row = 1
-                    back.callback = self.back_callback
-                    self.add_item(back)
-
+                    if 'row-1' != 0:
+                        previous = Default.Buttons.previous()
+                        previous.callback = self.previous_callback
+                        self.add_item(previous)
+                        page = Button(label=f'{Page}/9', disabled=True)
+                        page.callback = self.page_callback
+                        self.add_item(page)
+                        next = Default.Buttons.next()
+                        next.callback = self.next_callback
+                        self.add_item(next)
+                    if 'row-2' != 0:
+                        back = Default.Buttons.back()
+                        back.row = 1
+                        back.callback = self.back_callback
+                        self.add_item(back)
                 async def previous_callback(self, interaction: discord.Interaction):
                     Page = self.page-1
                     if Page < 1:
@@ -298,10 +312,8 @@ if Test_mod:
                     List = '\n\n'.join(List)                    
                     embed=discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{eval(lang.get(f'User_Terms','"error402"'))}__\n**- {eval(lang.get(f'User_Terms_{Page}.0','"error402"'))} :**\n{List}',colour=user_color,timestamp=datetime.datetime.now())
                     await interaction.response.edit_message(content=None,embed=embed,view=Default.User_Terms(Page))
-
                 async def page_callback(self, interaction: discord.Interaction):
                     pass
-
                 async def next_callback(self, interaction: discord.Interaction):
                     Page = self.page+1
                     if Page > 9:
@@ -328,7 +340,6 @@ if Test_mod:
                     List = '\n\n'.join(List)                    
                     embed=discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{eval(lang.get(f'User_Terms','"error402"'))}__\n**- {eval(lang.get(f'User_Terms_{Page}.0','"error402"'))} :**\n{List}',colour=user_color,timestamp=datetime.datetime.now())
                     await interaction.response.edit_message(content=None,embed=embed,view=Default.User_Terms(Page))
-
                 async def back_callback(self, interaction: discord.Interaction):
                     user = interaction.user.id
                     if user == 697842681082281985:
@@ -351,10 +362,104 @@ if Test_mod:
                         await interaction.response.edit_message(content=None,embed=embed,view=Default.Player_Guidelines(Page))
                     else:
                         await interaction.response.edit_message(content=None,embed=None,view=None)
-        
+            class Color(View):
+                def __init__(self):
+                    super().__init__(timeout=None)
+                    if 'row-1' != 0:
+                        decided = Default.Buttons.decided()
+                        decided.callback = self.decided_callback
+                        self.add_item(decided)
+                        random = Default.Buttons.random()
+                        random.callback = self.random_callback
+                        self.add_item(random)
+                        back = Default.Buttons.back()
+                        back.callback = self.back_callback
+                        self.add_item(back)
+                async def decided_callback(self,interaction:discord.Interaction):
+                    user = interaction.user.id
+                    if user == 697842681082281985:
+                        user = 938100109240074310
+                    user = str(user)
+                    variable={}
+                    exec(open_file,globals(),variable)
+                    userdata = variable.get('userdata')
+                    setting = variable.get('setting')
+                    # lang = variable.get('lang')
+                    if 'RPG' not in userdata[user]:
+                        await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
+                    elif 'color' in userdata[user]['RPG']:
+                        user_color = int(userdata[user]['RPG']['color'][2:],16)
+                    else:
+                        user_color = Color
+                    embed=discord.Embed(description=f'# 123',color=user_color,timestamp=datetime.datetime.now())
+                    await interaction.response.edit_message(content=None,embed=embed)
+                async def random_callback(self,interaction:discord.Interaction):
+                    user = interaction.user.id
+                    if user == 697842681082281985:
+                        user = 938100109240074310
+                    user = str(user)
+                    variable={}
+                    exec(open_file,globals(),variable)
+                    userdata = variable.get('userdata')
+                    setting = variable.get('setting')
+                    lang = variable.get('lang')
+                    if 'RPG' not in userdata[user]:
+                        await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
+                    else:
+                        if '這裡是隨機顏色' != 0:
+                            directory = 'imege/rpg/color'
+                            os.makedirs(directory,exist_ok=True)
+                            width = 192
+                            height = 108
+                            R = random.randint(0x80,0xff)
+                            G = random.randint(0x80,0xff)
+                            B = random.randint(0x80,0xff)
+                            file_path = os.path.join(directory,f'0x{R:02x}{G:02x}{B:02x}.png')
+                            if not os.path.exists(file_path):
+                                image = Image.new('RGB',(width,height),(R,G,B))
+                                image.save(file_path,format='PNG')
+                                print(f'User:{interaction.user.display_name} adding 0x{R:02x}{G:02x}{B:02x}.png')
+                            color = f'0x{R:02x}{G:02x}{B:02x}'
+                            file_path = f'imege/rpg/color/{color}.png'
+                            while not os.path.isfile(file_path):
+                                await asyncio.sleep(0.5)
+                        file = discord.File(file_path,filename=f'{color}.png')
+                        user_color=int(color,16)
+                        if 'color' in userdata[user]['RPG']:
+                            userdata[user]['RPG']['color']=color
+                        else:
+                            userdata[user]['RPG'].update({'color':color})
+                        exec(dump_userdata)
+                        embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{eval(lang.get('random','"error402"'))}{eval(lang.get('color','"error402"'))}__',color=user_color,timestamp=datetime.datetime.now())
+                        embed.add_field(name='',value=f'**{eval(lang.get('color','"error402"'))} :**\n> RGB  `{str(R).zfill(3)},{str(G).zfill(3)},{str(B).zfill(3)}`\n> HEX `#{color[2:]}`',inline=False)
+                        embed.set_image(url=f'attachment://{color}.png')
+                        await interaction.response.edit_message(content=None,attachments=[file],embed=embed,view=Interface_Config.first_online.Color())
+                async def back_callback(self,interaction:discord.Interaction):
+                    Page=7
+                    user = interaction.user.id
+                    if user == 697842681082281985:
+                        user = 938100109240074310
+                    user = str(user)
+                    variable={}
+                    exec(open_file,globals(),variable)
+                    userdata = variable.get('userdata')
+                    setting = variable.get('setting')
+                    lang = variable.get('lang')
+                    if 'RPG' not in userdata[user]:
+                        await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
+                    elif userdata[user]['RPG']['setting_mod']:
+                        if 'color' in userdata[user]['RPG']:
+                            user_color = int(userdata[user]['RPG']['color'][2:],16)
+                        else:
+                            user_color = Color
+                        embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{eval(lang.get('Player_Guidelines','"error402"'))}__\n{eval(lang.get(f'Player_Guideline_{Page}','"error402"'))}',colour=user_color,timestamp=datetime.datetime.now())
+                        await interaction.response.edit_message(content=None,attachments=[],embed=embed,view=Default.Player_Guidelines(Page))
+                    else:
+                        await interaction.response.edit_message(content=None,embed=None,view=None)
+
         class Interface_Config:
             class first_online:
-                class language(Default.language):
+                class Language(Default.Language):
                     async def decided_callback(self,interaction:discord.Interaction):
                         user = interaction.user.id
                         if user == 697842681082281985:
@@ -388,12 +493,12 @@ if Test_mod:
                     async def back_callback(self,interaction:discord.Interaction):
                         await interaction.response.edit_message(content='** **',embed=None,view=None)
                         # await interaction.response.send_message('這是永久按鈕你想幹嘛???',ephemeral=True)
-
                 class Player_Guidelines(Default.Player_Guidelines):
                     async def back_callback(self,interaction:discord.Interaction):
-                        await interaction.response.edit_message(content=None,embed=None,view=Interface_Config.first_online.language())
-
+                        await interaction.response.edit_message(content=None,embed=None,view=Interface_Config.first_online.Language())
                 class User_Terms(Default.User_Terms):
+                    pass
+                class Color(Default.Color):
                     pass
                 
     class RPG(Cog_extension):
@@ -410,11 +515,10 @@ if Test_mod:
             setting = variable.get('setting')
             for line in Lang:
                 Lang.remove(line)
-            if 'language' in userdata[user]['RPG'] and 'RPG'in userdata[user]:
+            if 'RPG'in userdata[user] and 'language' in userdata[user]['RPG']:
                 Lang.append(userdata[user]['RPG']['language'])
             else:
                 Lang.append('en_US')
-            
             if 'RPG' not in userdata[user]:
                 await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral=True)
             else:
@@ -429,11 +533,12 @@ if Test_mod:
                     else:
                         userdata[user]['RPG'].update({'setting_mod':setting_mod})
                     exec(dump_userdata)
-                    await interaction.response.send_message('',view=Interface_Config.first_online.language())
+                    await interaction.response.send_message('',view=Interface_Config.first_online.Language())
                     # await interaction.response.send_message('',view=Interface_Config.first_online.Player_Guidelines())
                 else:
-                    # await interaction.response.send_message('',view=Interface_Config.first_online.language())
-                    await interaction.response.send_message('OK')
+                    await interaction.response.send_message('',view=Interface_Config.first_online.Player_Guidelines(7))
+                    # await interaction.response.send_message('',view=Interface_Config.first_online.Color())
+                    # await interaction.response.send_message('OK')
 
     async def setup(bot):
         await bot.add_cog(RPG(bot))
@@ -492,7 +597,7 @@ else:
                                     else:
                                         lang[key] = f'"{value}"'
 
-                            await interaction.response.edit_message(content=f"{eval(lang['language'])} {eval(lang['choice'])} : {selected_language}",view=Config.first_online.language.rechoice())
+                            await interaction.response.edit_message(content=f"{eval(lang['language'])} {eval(lang['choice'])} : {selected_language}",view=Config.first_online.Language.rechoice())
 
                         language_select.callback = language_select_callback
                         self.add_item(language_select)
@@ -565,7 +670,7 @@ else:
                                     else:
                                         lang[key] = f'"{value}"'
 
-                            await interaction.response.edit_message(content=f"{eval(lang['language'])} {eval(lang['choice'])} : {selected_language}",view=Config.first_online.language.rechoice())
+                            await interaction.response.edit_message(content=f"{eval(lang['language'])} {eval(lang['choice'])} : {selected_language}",view=Config.first_online.Language.rechoice())
                         
                         language_select.callback = language_select_callback
                         self.add_item(language_select)
@@ -620,7 +725,7 @@ else:
 
                 async def random_color_button_callback(self,interaction:discord.Interaction):
                     start = datetime.datetime.now().strftime('(int("%H")*3600)+(int("%M")*60)+int("%S")+float(int(str("%f")[:3])/1000)')
-                    directory = r'imege\rpg\color'
+                    directory = 'imege/rpg/color'
                     os.makedirs(directory,exist_ok=True)
                     width = 192
                     height = 108
@@ -628,13 +733,13 @@ else:
                     G = random.randint(0x80,0xff)
                     B = random.randint(0x80,0xff)
                     file_path = os.path.join(directory,f'0x{R:02x}{G:02x}{B:02x}.png')
-
                     if not os.path.exists(file_path):
                         image = Image.new('RGB',(width,height),(R,G,B))
                         image.save(file_path,format='PNG')
                         print(f'User:{interaction.user.display_name} adding 0x{R:02x}{G:02x}{B:02x}.png')
-                    user_color = f'0x{R:02x}{G:02x}{B:02x}'
-                    file_path = f'imege/rpg/color/{user_color}.png'
+                    
+                    user_color = f'{R:02x}{G:02x}{B:02x}'
+                    file_path = f'imege/rpg/color/0x{user_color}.png'
                     # while not os.path.isfile(file_path):
                     #     await asyncio.sleep(1)
 
@@ -648,7 +753,7 @@ else:
                     delay.append(f'{s}.{ms}/s')
                     delay = ''.join(delay)
 
-                    file = discord.File(file_path,filename=f'{user_color}.png')
+                    file = discord.File(file_path,filename=f'0x{user_color}.png')
                     embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{'random_color'}__',colour=int(user_color,16),timestamp=datetime.datetime.now())
                     embed.add_field(name='',value=f'**耗時 :**\n> `{delay}`\n\n**顏色 :**\n> RGB  `{str(R).zfill(3)} , {str(G).zfill(3)} , {str(B).zfill(3)}`\n> HEX `#{str(user_color)[2:]}`',inline=False)
                     embed.set_image(url=f'attachment://{user_color}.png')
@@ -801,7 +906,7 @@ else:
                     for list in User:
                         User.remove(list)
                     User.append(interaction.user.id)
-                    await interaction.response.send_message(view=Config.first_online.language.choice())
+                    await interaction.response.send_message(view=Config.first_online.Language.choice())
                 else:
                     await interaction.response.send_message(view=Config.Start_Screen())
            
