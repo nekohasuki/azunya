@@ -225,8 +225,9 @@ tie=平
 
 name=名9稱3.replace('9', '\u2003').replace('3', '\u2009')
 first_online_time=初次上線時間
+random=隨機
 decided=決定
-choice=選擇
+#choice=選擇
 back=返回
 previous=上一頁
 next=下一頁
