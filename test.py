@@ -1,27 +1,30 @@
 # from discord import app_commands,SelectOption
 # import json,os
 
-choice_language='zh_TW'
-
-page=5
-lang = {}
-with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
-    for line in Lang_file:
-        line = line.strip()
-        if not line or line.startswith('#'):
-            continue
-        key,value = line.split('=',1)
-        lang[key] = value
 
 
 
-List = []
-# for line in lang:
-#     if str(line).startswith(f'User_Terms_{page}') and not str(line).endswith('0'):
-#         list.append(f'- {line[-1:]}. {lang[line]}')
-# list = '\n\n'.join(list) 
-# print(f'{lang[f'User_Terms_{page}.0']}')
-print(len(List)+1)
+# choice_language='zh_TW'
+
+# page=5
+# lang = {}
+# with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
+#     for line in Lang_file:
+#         line = line.strip()
+#         if not line or line.startswith('#'):
+#             continue
+#         key,value = line.split('=',1)
+#         lang[key] = value
+
+
+
+# List = []
+# # for line in lang:
+# #     if str(line).startswith(f'User_Terms_{page}') and not str(line).endswith('0'):
+# #         list.append(f'- {line[-1:]}. {lang[line]}')
+# # list = '\n\n'.join(list) 
+# # print(f'{lang[f'User_Terms_{page}.0']}')
+# print(len(List)+1)
 # # # /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # if ('此處用於測試時代替真實玩家資料' == "with open('uesr_data.json','r',encoding='utf-8')") == False:
 #     data={
