@@ -225,6 +225,7 @@ tie=tie
 
 name=Name
 first_online_time=first online time
+random=random
 decided=decided
 choice=choice
 back=back
