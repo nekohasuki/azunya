@@ -2,6 +2,7 @@ language-Type=正體中文(臺灣)
 gamename=noname
 language=語言
 color=顏色
+color-code=色號
 coins=金幣
 
 level=等級
@@ -13,19 +14,30 @@ class=類別
 character_sheet=角色卡
 Race=種族
 Human=人類
+Human-emoji=<:raceHuman:1272670057347944568>
 Elf=精靈
+Elf-emoji=<:raceElf:1272670062167326750>
 Fairy=妖精
+Fairy-emoji=<:raceFairy:1272670063857766410>
 Giant=巨人
+Giant-emoji=<:raceGiant:1272670065396940862>
 MoonRabbit=月兔
+MoonRabbit-emoji=<:raceMoonRabbit:1272903546815250524>
 Asian=亞洲人
+Asian-emoji=<:raceAsian:1272670060464443423>
 
 profession=職業
 Main_profession=主職業
 Warrior=戰士
+Warrior-emoji=error401
 Archer=弓箭手
+Archer-emoji=error401
 Shielder=盾職
+Shielder-emoji=error401
 Thief=盜賊
+Thief-emoji=error401
 Mage=法師
+Mage-emoji=error401
 
 Sub_profession=副職業
 Merchant=商人
@@ -55,6 +67,7 @@ item=物品
 handbook=圖鑑
 
 Weapon=武器
+Initial=初始
 Claw=爪
 Hammer=錘
 Spear=槍
@@ -223,8 +236,10 @@ lose=敗
 tie=平
 
 
-name=名9稱3.replace('9', '\u2003').replace('3', '\u2009')
+Name=名稱
 first_online_time=初次上線時間
+set=設定
+reset=重設
 random=隨機
 decided=決定
 #choice=選擇
@@ -280,3 +295,8 @@ User_Terms_8.2=用戶應遵守遊戲規則以確保公平和安全的遊戲環�
 User_Terms_9.0=退款政策
 User_Terms_9.1=我們的遊戲不涉及任何現實層面金錢消費，所有交易均為遊戲內虛擬貨幣的一次性交易。如用戶在支付後遇到技術問題或發現違規行為，應聯絡我們處理相關事宜。
 User_Terms_9.2=一旦交易完成，我們原則上不提供退款，除非交易過程中存在技術問題或其他特殊情況。退款請求將根據具體情況進行審核和處理，可能需要提供相關證據。
+
+error402=未找到
+error401=未定義
+error403=格式錯誤
+error404=含有無效字元

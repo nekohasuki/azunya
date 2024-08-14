@@ -3,19 +3,37 @@
         "introduce":"這裡是用來放中文-台灣的格式化設定的地方。",
         "lang":{
             "職業":"'職9業3'.replace('9', '\u2003').replace('3', '\u2009')",
-            "經驗值":"'經驗值3'.replace('3', '\u2009')",
-            "種族":"'種9族3'.replace('9', '\u2003').replace('3', '\u2009')",
-            "名稱":"名9稱3.replace('9', '\u2003').replace('3', '\u2009')"
+            "戰士":"'戰士7'.replace('7', '\u2000')",
+            "弓箭手":"'弓箭手7'.replace('7', '\u2000')",
+            "盾職":"'盾職7'.replace('7', '\u2000')",
+            "盜賊":"'盜賊7'.replace('7', '\u2000')",
+            "法師":"'法師7'.replace('7', '\u2000')",
+            "error401":"'[未定義]'"
         },
-        "additional":{}
+        "additional":{
+            "Name-Character_Sheet":"'名9稱3'.replace('9', '\u2003').replace('3', '\u2009')",
+            "Race-Character_Sheet":"'種9族3'.replace('9', '\u2003').replace('3', '\u2009')",
+            "EXP-Character_Sheet":"'經驗值3'.replace('3', '\u2009')",
+            "HP-Character_Sheet":"'生9命'.replace('9', '\u2003').replace('3', '\u2009')",
+            "SP-Character_Sheet":"'體9力'.replace('9', '\u2003').replace('3', '\u2009')",
+            "MP-Character_Sheet":"'魔9力'.replace('9', '\u2003').replace('3', '\u2009')",
+            "ATK-Character_Sheet":"'攻擊力'.replace('3', '\u2009')",
+            "MATK-Character_Sheet":"'魔攻力'.replace('3', '\u2009')",
+            "DEF-Character_Sheet":"'防禦力'.replace('3', '\u2009')",
+            "MDEF-Character_Sheet":"'魔防力'.replace('3', '\u2009')",
+            "SPD-Character_Sheet":"'速9度'.replace('9', '\u2003').replace('3', '\u2009')",
+            "AGI-Character_Sheet":"'靈9活'.replace('9', '\u2003').replace('3', '\u2009')",
+            "LUK-Character_Sheet":"'運9氣'.replace('9', '\u2003').replace('3', '\u2009')",
+            "CHR-Character_Sheet":"'魅9力'.replace('9', '\u2003').replace('3', '\u2009')",
+            "SAN-Character_Sheet":"'精9神'.replace('9', '\u2003').replace('3', '\u2009')"
+        }
     },
     "en_US":{
         "introduce":"This is where the English-US formatting settings are placed.",
         "lang":{
-            "Name":"'N81a81m81e3'.replace('3','\u2009').replace('81','\u2007\u200a')",
-            "EXP":"'E941X941P3'.replace('941','\u2003\u2008\u200a').replace('3','\u2009')",
-            "Race":"'R82a82c82e3'.replace('3','\u2009').replace('82','\u2007\u2006')",
-            "Profession":"'Profession3'.replace('3','\u2009')",
+            "Name":"'Name3'.replace('3','\u2009')",
+            "Race":"'Race3'.replace('3','\u2009')",
+            "Profession":"'Profession333'.replace('3','\u2009')",
             "Main profession":"'Main profession3'.replace('3','\u2009')",
             "Warrior":"'Warrior3'.replace('3','\u2009')",
             "Archer":"'Archer3'.replace('3','\u2009')",
@@ -32,14 +50,52 @@
             "Armourer":"'Armourer3'.replace('3','\u2009')",
             "Hammersmith":"'Hammersmith3'.replace('3','\u2009')",
             "choice":"'choice3'.replace('3','\u2009')",
-            "language":"'language3'.replace('3','\u2009')"
+            "color":"'color3'.replace('3','\u2009')",
+            "language":"'language3'.replace('3','\u2009')",
+            "Initial":"'Initial_'",
+            "error401":"'[Undefined]'"
         },
-        "additional":{}
+        "additional":{
+            "Name-Character_Sheet":"'N3a3m3e99'.replace('3','\u2009').replace('9','\u2003')",
+            "Race-Character_Sheet":"'R3a3c3e101033'.replace('3','\u2009').replace('10','\u3000')",
+            "EXP-Character_Sheet":"'E3X3P999'.replace('9','\u2003').replace('3','\u2009')",
+            "HP-Character_Sheet":"'H393P'.replace('9', '\u2003').replace('3', '\u2009\u200a')",
+            "SP-Character_Sheet":"'S3\u200a9\u200a3P'.replace('9', '\u3000').replace('3', '\u2009\u200a')",
+            "MP-Character_Sheet":"'M393P'.replace('9', '\u3000').replace('3', '\u2009\u200a')",
+            "ATK-Character_Sheet":"'A7T7K'.replace('7', '\u2000')",
+            "MATK-Character_Sheet":"'M1A1T1K'.replace('1', '\u200a')",
+            "DEF-Character_Sheet":"'D434E434F'.replace('4', '\u2006').replace('3', '\u2009')",
+            "MDEF-Character_Sheet":"'M1D1E1F'.replace('1', '\u200a')",
+            "SPD-Character_Sheet":"'S434P434D'.replace('4', '\u2006').replace('3', '\u2009')",
+            "AGI-Character_Sheet":"'A434G434I'.replace('4', '\u2006').replace('3', '\u2009')",
+            "LUK-Character_Sheet":"'L6\u200aU\u200a6K'.replace('6', '\u2004')",
+            "CHR-Character_Sheet":"'C434H434R'.replace('4', '\u2006').replace('3', '\u2009')",
+            "SAN-Character_Sheet":"'S434A434N'.replace('4', '\u2006').replace('3', '\u2009')"
+        }
     },
     "ja_JP":{
         "introduce":"ここに日本語の書式設定が配置されます。",
-        "lang":{},
-        "additional":{}
+        "lang":{
+            "職業":"'職9業3'.replace('9', '\u2003').replace('3', '\u2009')",
+            "error401":"'[未定義]'"
+        },
+        "additional":{
+            "Name-Character_Sheet":"'名9前3'.replace('9', '\u2003').replace('3', '\u2009')",
+            "Race-Character_Sheet":"'種9族3'.replace('9', '\u2003').replace('3', '\u2009')",
+            "EXP-Character_Sheet":"'経験値3'.replace('3','\u2009')",
+            "HP-Character_Sheet":"'生9命'.replace('9', '\u2003')",
+            "SP-Character_Sheet":"'体9力'.replace('9', '\u2003')",
+            "MP-Character_Sheet":"'魔9力'.replace('9', '\u2003')",
+            "ATK-Character_Sheet":"'攻9撃'.replace('9', '\u2003')",
+            "MATK-Character_Sheet":"'魔9攻'.replace('9', '\u2003')",
+            "DEF-Character_Sheet":"'防9御'.replace('9', '\u2003')",
+            "MDEF-Character_Sheet":"'魔9防'.replace('9', '\u2003')",
+            "SPD-Character_Sheet":"'速9度'.replace('9', '\u2003')",
+            "AGI-Character_Sheet":"'敏9捷'.replace('9', '\u2003')",
+            "LUK-Character_Sheet":"'運9氣'.replace('9', '\u2003')",
+            "CHR-Character_Sheet":"'魅9力'.replace('9', '\u2003')",
+            "SAN-Character_Sheet":"'精9神'.replace('9', '\u2003')"
+        }
     
     }
 }

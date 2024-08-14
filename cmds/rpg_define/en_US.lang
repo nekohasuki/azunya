@@ -2,6 +2,7 @@ language-Type=English
 gamename=noname
 language=language
 color=color
+color-code=color code
 coins=coins
 
 level=level
@@ -13,19 +14,30 @@ class=class
 character_sheet=character sheet
 Race=Race
 Human=Human
+Human-emoji=<:raceHuman:1272670057347944568>
 Elf=Elf
+Elf-emoji=<:raceElf:1272670062167326750>
 Fairy=Fairy
+Fairy-emoji=<:raceFairy:1272670063857766410>
 Giant=Giant
+Giant-emoji=<:raceGiant:1272670065396940862>
 MoonRabbit=MoonRabbit
+MoonRabbit-emoji=<:raceMoonRabbit:1272903546815250524>
 Asian=Asian
+Asian-emoji=<:raceAsian:1272670060464443423>
 
 profession=Profession
 Main_profession=Main profession
 Warrior=Warrior
-Archer=Archer
+Warrior-emoji=error401
+Archer=Ar
+Archer-emoji=error401cher
 Shielder=Shielder
+Shielder-emoji=error401
 Thief=Thief
+Thief-emoji=error401
 Mage=Mage
+Mage-emoji=error401
 
 Sub_profession=Sub profession
 Merchant=Merchant
@@ -55,6 +67,7 @@ item=item
 handbook=handbook
 
 Weapon=Weapon
+Initial=Initial
 Claw=Claw
 Hammer=Hammer
 Spear=Spear
@@ -223,8 +236,10 @@ lose=lose
 tie=tie
 
 
-name=Name
+Name=Name
 first_online_time=first online time
+set=set
+reset=reset
 random=random
 decided=decided
 choice=choice
@@ -251,7 +266,7 @@ User_Terms_2.0=UsageRestrictions
 User_Terms_2.1=Any form of real-world monetary transactions within the game is prohibited, including but not limited to virtual currency exchanges, item sales, or service transactions. All transactions must be conducted through the in-game virtual currency and item systems.
 #Intellectual_Property
 User_Terms_3.0=IntellectualProperty
-User_Terms_3.1=This game and all its contents (including but not limited to storylines, settings, etc.) are the intellectual property of us or the relevant rights holders. Unauthorized reproduction, distribution, modification, or other use of these contents is prohibited.
+User_Terms_3.1=This game and all its contents (including but not limited to storylines, sets, etc.) are the intellectual property of us or the relevant rights holders. Unauthorized reproduction, distribution, modification, or other use of these contents is prohibited.
 User_Terms_3.2=Users may only use game content for personal purposes. Using game content for commercial purposes, including but not limited to selling, transferring, or publicly displaying, is prohibited without our written permission.
 User_Terms_3.3=We reserve the right to pursue legal action against any unauthorized use of our intellectual property. Users are responsible for reporting any intellectual property infringement.
 #Privacy_Policy
@@ -280,3 +295,8 @@ User_Terms_8.2=Users should comply with game rules to ensure a fair and safe gam
 User_Terms_9.0=RefundPolicy
 User_Terms_9.1=Our game does not involve any real-world monetary transactions.All transactions are solely for one-time purchases made with in-game virtual currency. If users encounter technical issues or discover violations after payment, they should contact us to handle the relevant matters.
 User_Terms_9.2=Once the transaction is completed, we generally do not provide refunds unless there are technical issues during the transaction or other special circumstances. Refund requests will be reviewed and processed based on the specific situation, and relevant evidence may be required.
+
+error402=Not found
+error401=Undefined
+error403=Format error
+error404=Contains invalid characters
