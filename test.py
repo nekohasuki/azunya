@@ -1,30 +1,54 @@
+import json,random
+# with open(f'cmds/rpg_define/rpg_definitions.json','r',encoding='utf-8') as RPG_definitions_fill: 
+#     rpg_definitions = json.load(RPG_definitions_fill)
+# with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill: 
+#     json.dump(rpg_definitions,RPG_definitions_fill,indent=4)
+
+# if '屬性':
+#     Aa = 100
+#     Bb = 1
+#     A = int((Aa+Bb)/1.5)
+#     B = int(abs(Aa-Bb)+(A/3))
+#     if A > B:
+#         a = A
+#         A = B
+#         B = a
+
+# print(A,B)
+# print(int(random.uniform(A-0.5,B)+.5))
+
+A = {'ABC':123}
+print(list(A)[0])
+
+
+
+
+
+# if '品階':
+#     A = 10
+#     B = 1
+
+#     c=((((A+B)/2+B)/2+B)/2)
+#     C=c+c-(c-1)
+#     if A < C:
+#         a=A
+#         A=C
+#         C=a
+
+#     print(C,A,'\n\n')
+
+#     print(int(random.uniform(C+0.5,A)+0.5))
+
+
+
+
+
+
+
+
+
 # from discord import app_commands,SelectOption
 # import json,os
-
-
-
-
-# choice_language='zh_TW'
-
-# page=5
-# lang = {}
-# with open(f'cmds/rpg_define/{choice_language}.lang','r',encoding='utf-8') as Lang_file:
-#     for line in Lang_file:
-#         line = line.strip()
-#         if not line or line.startswith('#'):
-#             continue
-#         key,value = line.split('=',1)
-#         lang[key] = value
-
-
-
-# List = []
-# # for line in lang:
-# #     if str(line).startswith(f'User_Terms_{page}') and not str(line).endswith('0'):
-# #         list.append(f'- {line[-1:]}. {lang[line]}')
-# # list = '\n\n'.join(list) 
-# # print(f'{lang[f'User_Terms_{page}.0']}')
-# print(len(List)+1)
 # # # /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # if ('此處用於測試時代替真實玩家資料' == "with open('uesr_data.json','r',encoding='utf-8')") == False:
 #     data={
