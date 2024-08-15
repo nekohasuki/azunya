@@ -221,7 +221,6 @@ class Point(Cog_extension):
                 if str(id) in str(role_members):
                     counter += 1
                     user = (users.replace('>','> ')).split()
-                    print(user)
                     userlist = {'mod':mod.name,'role':[],'succeeded':[],'state_None':[],'state_corruption':[],'insufficient':[],'unknown':[],'author':None}
                     for user in user:
                         if "<@" in user:
