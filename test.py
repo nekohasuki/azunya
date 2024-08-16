@@ -45,20 +45,33 @@ rpg_definitions = variable.get('rpg_definitions')
 
 
 
-Equipping = []
-for line in userdata[user]['RPG']['Equipping']:
-    if userdata[user]['RPG']['Equipping'][line] != {}:
-        Equipping.append(f'{eval(lang.get(line,lang['error402']))}:\n    {'\n    '.join(list(userdata[user]['RPG']['Equipping'][line]))}')
-if Equipping != []:
-    Equipping = '\n'.join(Equipping)
-else:
-    Equipping = eval(lang.get('Maybe_you_should_equip_something?',lang['error402']))
+
+point_list = []
+for line in userdata:
+    if line == str(697842681082281985):
+        pass
+    elif 'RPG' in userdata[line] and 'setting_mod' in userdata[line]['RPG'] and not userdata[line]['RPG']['setting_mod']:
+        if 'point' in userdata[line] and userdata[line]['point']['now_count'] != 0:
+            point_list.append(userdata[line]['point']['now_count'])
+if point_list == []:
+    point_list.append(1)
+
+
+point_total = sum(point_list)
+point_max = max(point_list)
+point_min = min(point_list)
+point_len = len(point_list)
+if point_max <= 0:
+    point_len = 1
+
+
+print(point_list)
+Exchange_rate = (point_total/point_max-point_total) / ((point_len**2*point_total)/point_max/(point_len+1)) *-1+1
+
+print(rpg_definitions['Exchange_rate'])
 
 
 
-
-    
-print(Equipping)
 
 
 # if '屬性':
