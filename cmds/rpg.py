@@ -12,6 +12,7 @@ with open('cmds/data/user_data.json' ,'r' ,encoding='utf-8') as userdata_file:
 with open('cmds/rpg_define/format.json','r',encoding='utf-8') as Format_file:
     format = json.load(Format_file)
 lang=format[Lang[0]]['additional']
+lang.update(format['Shared']['additional'])
 with open(f'cmds/rpg_define/{Lang[0]}.lang','r',encoding='utf-8') as Lang_file:
     for line in Lang_file:
         line = line.strip()
@@ -22,8 +23,11 @@ with open(f'cmds/rpg_define/{Lang[0]}.lang','r',encoding='utf-8') as Lang_file:
             lang[key] = format[Lang[0]]["lang"][value]
         else:
             lang[key] = f'"{value}"'
+for line in lang:
+    if eval(lang[line]) in format[Lang[0]]['additional']:
+        lang[line] = format[Lang[0]]['additional'][eval(lang[line])]
 
-with open(f'cmds/rpg_define/rpg_definitions.json','r',encoding='utf-8') as RPG_definitions_fill: 
+with open(f'cmds/rpg_define/rpg_definitions.json','r',encoding='utf-8') as RPG_definitions_fill:
     rpg_definitions = json.load(RPG_definitions_fill)
 '''
 dump_userdata='''
@@ -80,7 +84,7 @@ if Test_mod:
                     lang = variable.get('lang')
                     return Button(label = f'{eval(lang.get('next',lang['error402']))}')
             class Language(View,Select):
-                def __init__(self):
+                def __init__(self,back = True):
                     super().__init__(timeout = None)
                     variable = {}
                     exec(open_file,globals(),variable)
@@ -102,11 +106,12 @@ if Test_mod:
                         decided.row = 1
                         decided.callback = self.decided_callback
                         self.add_item(decided)
-                        back = Config.Default.Buttons.back()
-                        back.row = 1
-                        back.callback = self.back_callback
-                        self.add_item(back)
-                async def options_callback(self,interaction:discord.Interaction):
+                        if back:
+                            back = Config.Default.Buttons.back()
+                            back.row = 1
+                            back.callback = self.back_callback
+                            self.add_item(back)
+                async def options_callback(self,interaction:discord.Interaction,view = None):
                     user = interaction.user.id
                     if user == 697842681082281985:
                         user = 938100109240074310
@@ -129,8 +134,12 @@ if Test_mod:
                     variable = {}
                     exec(open_file,globals(),variable)
                     lang = variable.get('lang')
-                    await interaction.response.edit_message(content = f'{eval(lang.get('language','"rerror402"'))} : {eval(lang.get('language-Type','"rerror402"'))}',view = Config.Interface.First_online().Language())
-                async def decided_callback(self,interaction:discord.Interaction):
+                    if view == None:
+                        view = Config.Interface.First_online().Language()
+                    if view == 'Set_Screen':
+                        view = Config.Interface.Set_Screen().Language()
+                    await interaction.response.edit_message(content = f'{eval(lang.get('language','"rerror402"'))} :{eval(lang.get('language-Type','"rerror402"'))}',view = view)
+                async def decided_callback(self,interaction:discord.Interaction,view = None):
                     user = interaction.user.id
                     if user == 697842681082281985:
                         user = 938100109240074310
@@ -148,16 +157,20 @@ if Test_mod:
                         else:
                             userdata[user]['RPG'].update({'language':Lang[0]})
                         exec(dump_userdata)
-                        if userdata[user]['RPG']['setting_mod']:
-                            Page = 1
-                            if 'color' in userdata[user]['RPG']:
-                                user_color = int(userdata[user]['RPG']['color'][2:],16)
+                        if view == None:
+                            if userdata[user]['RPG']['setting_mod']:
+                                Page = 1
+                                if 'color' in userdata[user]['RPG']:
+                                    user_color = int(userdata[user]['RPG']['color'][2:],16)
+                                else:
+                                    user_color = Color
+                                embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get('Player_Guidelines',lang['error402']))}__\n{eval(lang.get(f'Player_Guideline_{Page}',lang['error402']))}',colour = user_color,timestamp = datetime.datetime.now())
+                                await interaction.response.edit_message(content = None,embed = embed,view = Config.Default.Player_Guidelines(Page))
                             else:
-                                user_color = Color
-                            embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get('Player_Guidelines',lang['error402']))}__\n{eval(lang.get(f'Player_Guideline_{Page}',lang['error402']))}',colour = user_color,timestamp = datetime.datetime.now())
-                            await interaction.response.edit_message(content = None,embed = embed,view = Config.Default.Player_Guidelines(Page))
-                        else:
-                            await interaction.response.edit_message(content = None,embed = None,view = None)
+                                await interaction.response.edit_message(delete_after = 0)
+                        elif view == 'Set_Screen':
+                            await interaction.response.edit_message(content = f'# {eval(lang.get('emoji-setting',lang['error402']))} __|  **{eval(lang.get('set',lang['error402']))}**  |__ {eval(lang.get('emoji-setting',lang['error402']))}',embed = None,view = Config.Interface.Set_Screen().Choice_Screen())
+                        
                 async def back_callback(self,interaction:discord.Interaction):
                     await interaction.response.edit_message(delete_after = 0)
                     # await interaction.response.send_message('這是永久按鈕你想幹嘛???',ephemeral = True)
@@ -178,17 +191,18 @@ if Test_mod:
                         next = Config.Default.Buttons.next()
                         next.callback = self.next_callback
                         self.add_item(next)
-                        if Page == 7:
-                            decided = Config.Default.Buttons.decided()
-                            decided.callback = self.decided_callback
-                            self.add_item(decided)
                     if 'row-2' != 0:
                         User_Terms = Button(label = eval(lang.get('User_Terms','"rerror402"')),style = discord.ButtonStyle.blurple,row = 1)
                         User_Terms.callback = self.User_Terms_callback
                         self.add_item(User_Terms)
                     if 'row-3' != 0:
+                        if Page == 7:
+                            decided = Config.Default.Buttons.decided()
+                            decided.row = 2
+                            decided.callback = self.decided_callback
+                            self.add_item(decided)
                         back = Config.Default.Buttons.back()
-                        back.row = 1
+                        back.row = 2
                         back.callback = self.back_callback
                         self.add_item(back)
                 async def previous_callback(self,interaction:discord.Interaction):
@@ -337,7 +351,7 @@ if Test_mod:
                         back.row = 1
                         back.callback = self.back_callback
                         self.add_item(back)
-                async def previous_callback(self,interaction: discord.Interaction):
+                async def previous_callback(self,interaction:discord.Interaction):
                     Page = self.page-1
                     if Page < 1:
                         Page = 1
@@ -363,9 +377,9 @@ if Test_mod:
                     List = '\n\n'.join(List)
                     embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get(f'User_Terms',lang['error402']))}__\n**- {eval(lang.get(f'User_Terms_{Page}.0',lang['error402']))} :**\n{List}',colour = user_color,timestamp = datetime.datetime.now())
                     await interaction.response.edit_message(content = None,embed = embed,view = Config.Default.User_Terms(Page))
-                async def page_callback(self,interaction: discord.Interaction):
+                async def page_callback(self,interaction:discord.Interaction):
                     pass
-                async def next_callback(self,interaction: discord.Interaction):
+                async def next_callback(self,interaction:discord.Interaction):
                     Page = self.page+1
                     if Page > 9:
                         Page = 9
@@ -391,7 +405,7 @@ if Test_mod:
                     List = '\n\n'.join(List)
                     embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get(f'User_Terms',lang['error402']))}__\n**- {eval(lang.get(f'User_Terms_{Page}.0',lang['error402']))} :**\n{List}',colour = user_color,timestamp = datetime.datetime.now())
                     await interaction.response.edit_message(content = None,embed = embed,view = Config.Default.User_Terms(Page))
-                async def back_callback(self,interaction: discord.Interaction):
+                async def back_callback(self,interaction:discord.Interaction):
                     user = interaction.user.id
                     if user == 697842681082281985:
                         user = 938100109240074310
@@ -414,7 +428,7 @@ if Test_mod:
                     else:
                         await interaction.response.edit_message(content = None,embed = None,view = None)
             class Color(View):
-                def __init__(self):
+                def __init__(self,back = True):
                     super().__init__(timeout = None)
                     variable = {}
                     exec(open_file,globals(),variable)
@@ -423,18 +437,17 @@ if Test_mod:
                         decided = Config.Default.Buttons.decided()
                         decided.callback = self.decided_callback
                         self.add_item(decided)
-
                         set = Button(label = f'{eval(lang.get('set',lang['error402']))}',style = discord.ButtonStyle.blurple)
                         set.callback = self.set_callback
                         self.add_item(set)
-
                         random = Config.Default.Buttons.random()
                         random.callback = self.random_callback
                         self.add_item(random)
-                        back = Config.Default.Buttons.back()
-                        back.callback = self.back_callback
-                        self.add_item(back)
-                async def decided_callback(self,interaction:discord.Interaction):
+                        if back:
+                            back = Config.Default.Buttons.back()
+                            back.callback = self.back_callback
+                            self.add_item(back)
+                async def decided_callback(self,interaction:discord.Interaction,view = None):
                     user = interaction.user.id
                     if user == 697842681082281985:
                         user = 938100109240074310
@@ -443,20 +456,28 @@ if Test_mod:
                     exec(open_file,globals(),variable)
                     userdata = variable.get('userdata')
                     setting = variable.get('setting')
+                    lang = variable.get('lang')
                     if 'RPG' not in userdata[user]:
                         await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral = True)
                     else:
                         if 'color' not in userdata[user]['RPG']:
                             userdata[user]['RPG'].update({'color':str(Set_Color)[2:-2]})
                             exec(dump_userdata)
-                        if userdata[user]['RPG']['setting_mod']:
-                            for set_race in Set_Race:
-                                Set_Race.remove(set_race)
-                            Set_Race.append(Race)
-                            await interaction.response.edit_message(content = None,attachments = [],embed = None,view = Config.Interface.First_online().Race())
-                        else:
-                            await interaction.response.edit_message(content = None,attachments = [],embed = None)
-                async def set_callback(self,interaction:discord.Interaction):
+                        if view == None:
+                            if userdata[user]['RPG']['setting_mod']:
+                                for set_race in Set_Race:
+                                    Set_Race.remove(set_race)
+                                Set_Race.append(Race)
+                                await interaction.response.edit_message(content = None,attachments = [],embed = None,view = Config.Interface.First_online().Race())
+                            else:
+                                await interaction.response.edit_message(delete_after = 0)
+                        elif view == 'Set_Screen':
+                            await interaction.response.edit_message(content = f'# {eval(lang.get('emoji-setting',lang['error402']))} __|  **{eval(lang.get('set',lang['error402']))}**  |__ {eval(lang.get('emoji-setting',lang['error402']))}',attachments = [],embed = None,view = Config.Interface.Set_Screen().Choice_Screen())
+                async def set_callback(self,interaction:discord.Interaction,view = None):
+                    if view == None:
+                        view = Config.Interface.First_online().Color()
+                    if view == 'Set_Screen':
+                        view = Config.Interface.Set_Screen().Color()
                     user = interaction.user.id
                     if user == 697842681082281985:
                         user = 938100109240074310
@@ -468,7 +489,7 @@ if Test_mod:
                     lang = variable.get('lang')
                     class text_input(Modal,title = f'{eval(lang.get('color',lang['error402']))}{eval(lang.get('set',lang['error402']))}'):
                         text_input = TextInput(label = eval(lang.get('color-code','"error402"')),placeholder = "#FFFFFF(HEX) / 255,255,255(RGB)",style = discord.TextStyle.short)
-                        async def on_submit(self,interaction: discord.Interaction):
+                        async def on_submit(self,interaction:discord.Interaction):
                             if 'RPG' not in userdata[user]:
                                 await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral = True)
                             else:
@@ -525,9 +546,9 @@ if Test_mod:
                                     embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get('random',lang['error402']))}{eval(lang.get('color',lang['error402']))}__',color = user_color,timestamp = datetime.datetime.now())
                                     embed.add_field(name = '',value = f'**{eval(lang.get('color',lang['error402']))} :**\n> RGB  `{str(R).zfill(3)},{str(G).zfill(3)},{str(B).zfill(3)}`\n> HEX `#{color[2:]}`',inline = False)
                                     embed.set_image(url = f'attachment://{color}.png')
-                                    await interaction.response.edit_message(content = None,attachments = [file],embed = embed,view = Config.Interface.First_online().Color())
+                                    await interaction.response.edit_message(content = None,attachments = [file],embed = embed,view = view)
                     await interaction.response.send_modal(text_input())
-                async def random_callback(self,interaction:discord.Interaction):
+                async def random_callback(self,interaction:discord.Interaction,view = None):
                     user = interaction.user.id
                     if user == 697842681082281985:
                         user = 938100109240074310
@@ -570,7 +591,11 @@ if Test_mod:
                         embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get('random',lang['error402']))}{eval(lang.get('color',lang['error402']))}__',color = user_color,timestamp = datetime.datetime.now())
                         embed.add_field(name = '',value = f'**{eval(lang.get('color',lang['error402']))} :**\n> RGB  `{str(R).zfill(3)},{str(G).zfill(3)},{str(B).zfill(3)}`\n> HEX `#{color[2:]}`',inline = False)
                         embed.set_image(url = f'attachment://{color}.png')
-                        await interaction.response.edit_message(content = None,attachments = [file],embed = embed,view = Config.Interface.First_online().Color())
+                        if view == None:
+                            view = Config.Interface.First_online().Color()
+                        if view == 'Set_Screen':
+                            view = Config.Interface.Set_Screen().Color()
+                        await interaction.response.edit_message(content = None,attachments = [file],embed = embed,view = view)
                 async def back_callback(self,interaction:discord.Interaction):
                     Page = 7
                     user = interaction.user.id
@@ -646,8 +671,8 @@ if Test_mod:
                             user_color = int(userdata[user]['RPG']['color'],16)
                         else:
                             user_color = Color
-                    embed = discord.Embed(description = f'# {eval(lang.get(f'{str(Set_Race)[2:-2]}-emoji','"rerror402"'))}\n{eval(lang.get('Race','"rerror402"'))} : {eval(lang.get(str(Set_Race)[2:-2],'"rerror402"'))}',color = user_color,timestamp = datetime.datetime.now())
-                    await interaction.response.edit_message(embed=embed,view = Config.Interface.First_online().Race())
+                    embed = discord.Embed(description = f'# {eval(lang.get(f'emoji-{str(Set_Race)[2:-2]}','"rerror402"'))}\n{eval(lang.get('Race','"rerror402"'))} :{eval(lang.get(str(Set_Race)[2:-2],'"rerror402"'))}',color = user_color,timestamp = datetime.datetime.now())
+                    await interaction.response.edit_message(embed = embed,view = Config.Interface.First_online().Race())
                 async def decided_callback(self,interaction:discord.Interaction):
                     user = interaction.user.id
                     if user == 697842681082281985:
@@ -753,11 +778,11 @@ if Test_mod:
                     else:
                         Main_profession = interaction.data['values'][0]
                         if 'Main_profession' in userdata[user]['RPG']:
-                            userdata[user]['RPG']['Main_profession'] = {"class": Main_profession,"level": 0}
+                            userdata[user]['RPG']['Main_profession'] = {"class":Main_profession,"level":0}
                         else:
-                            userdata[user]['RPG'].update({'Main_profession':{"class": Main_profession,"level": 0}})
+                            userdata[user]['RPG'].update({'Main_profession':{"class":Main_profession,"level":0}})
                         exec(dump_userdata)
-                        await interaction.response.edit_message(content = f'{eval(lang.get('Main_profession','"rerror402"'))} : {eval(lang.get(Main_profession,'"rerror402"'))}',view = Config.Interface.First_online().Main_profession())
+                        await interaction.response.edit_message(content = f'{eval(lang.get('Main_profession','"rerror402"'))} :{eval(lang.get(Main_profession,'"rerror402"'))}',view = Config.Interface.First_online().Main_profession())
                 async def decided_callback(self,interaction:discord.Interaction):
                     user = interaction.user.id
                     if user == 697842681082281985:
@@ -773,11 +798,11 @@ if Test_mod:
                         await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral = True)
                     else:
                         if 'Main_profession' not in userdata[user]['RPG']:
-                            userdata[user]['RPG'].update({'Main_profession':{"class": Main_profession,"level": 0}})
+                            userdata[user]['RPG'].update({'Main_profession':{"class":Main_profession,"level":0}})
                             exec(dump_userdata)
                         if userdata[user]['RPG']['setting_mod']:
                             userdata_update = {}
-                            full_keys = ['setting_mod','language','first_online_time','color','coins','Race','EXP','Main_profession','Sub_profession','attributes','Item','handbook','PVP']
+                            full_keys = ['setting_mod','language','first_online_time','color','coins','Race','EXP','Main_profession','Sub_profession','attributes','Equipping','Item','handbook','PVP']
                             for key in full_keys:
                                 if key in userdata[user]['RPG']:
                                     userdata_update.update({key:userdata[user]['RPG'][key]})
@@ -788,10 +813,11 @@ if Test_mod:
                                     if key == 'color':userdata_update[key] = Color
                                     if key == 'coins':userdata_update[key] = 0
                                     if key == 'Race':userdata_update[key] = Race
-                                    if key == 'EXP':userdata_update[key] = {'now': 0,'max': 10}
-                                    if key == 'Main_profession':userdata_update[key] = {'class': Main_profession,'level': 0}
+                                    if key == 'EXP':userdata_update[key] = {'now':0,'max':10}
+                                    if key == 'Main_profession':userdata_update[key] = {'class':Main_profession,'level':0}
                                     if key == 'Sub_profession':userdata_update[key] = rpg_definitions['Sub_profession']
                                     if key == 'attributes':userdata_update[key] = rpg_definitions['Main_profession'][userdata_update['Main_profession']['class']]['attributes']
+                                    if key == 'Equipping':userdata_update[key] = {"Weapon":{},"Cloak":{},"Armor":{},"Accessories":{}}
                                     if key == 'Item':
                                         for Weapon in rpg_definitions['Race'][userdata_update['Race']]['Item']['Weapon']:
                                             Weapon_properties = {eval(Weapon):{'Type':rpg_definitions['Race'][userdata_update['Race']]['Item']['Weapon'][Weapon]['Type'],'quality':rpg_definitions['Race'][userdata_update['Race']]['Item']['Weapon'][Weapon]['quality'],'attributes':rpg_definitions['Race'][userdata_update['Race']]['Item']['Weapon'][Weapon]['attributes']}}
@@ -805,9 +831,9 @@ if Test_mod:
                                         for Armor in rpg_definitions['Race'][userdata_update['Race']]['Item']['Armor']:
                                             pass
 
-                                        Item = {'Weapon':[rpg_definitions['Race'][userdata_update['Race']]['Item']['Weapon'][Weapon]['Type']],'Weapon_II': [],'Weapon_III': [],'Armor':[rpg_definitions['Race'][userdata_update['Race']]['Item']['Armor'][Armor]['Type']],'Runes': [],'Faiths': [],'Gemstones': [],'Cuisine': [],'Hostile': []}
+                                        Item = {'Weapon':[rpg_definitions['Race'][userdata_update['Race']]['Item']['Weapon'][Weapon]['Type']],'Weapon_II':[],'Weapon_III':[],'Armor':[rpg_definitions['Race'][userdata_update['Race']]['Item']['Armor'][Armor]['Type']],'Runes':[],'Faiths':[],'Gemstones':[],'Cuisine':[],'Hostile':[]}
                                         userdata_update[key] = Item
-                                    if key == 'PVP':userdata_update[key] = {'total':0,'win': 0,'lose': 0,'tie': 0}
+                                    if key == 'PVP':userdata_update[key] = {'total':0,'win':0,'lose':0,'tie':0}
                             userdata[user]['RPG'] = userdata_update
                             exec(dump_userdata)
                             if 'color' in userdata[user]['RPG']:
@@ -839,8 +865,8 @@ if Test_mod:
                                 else:
                                     top_sub_profession = {'class':f'{eval(lang[list(top_sub_profession.keys())[0]])}','level':list(top_sub_profession.values())[0]}
 
-                            embed = discord.Embed(description = f'# {eval(lang.get((f'{userdata[user]['RPG']['Race']}-emoji'),lang['error402']))}{eval(lang.get((f'{userdata[user]['RPG']['Main_profession']['class']}-emoji'),lang['error402']))}__{eval(lang.get(f'character_sheet',lang['error402']))}__',colour = user_color,timestamp = datetime.datetime.now())
-                            embed.add_field(name = '',value = f'{eval(lang.get('Name-Character_Sheet',lang['error402']))}: **{interaction.user.display_name}**\n{eval(lang.get('profession',lang['error402']))}: {eval(lang.get(userdata[user]['RPG']['Main_profession']['class'],lang['error402']))}Lv.{userdata[user]['RPG']['Main_profession']['level']} / {top_sub_profession['class']:<5}Lv.{top_sub_profession['level']:<3}\n{eval(lang.get('Race-Character_Sheet',lang['error402']))}: {eval(lang.get(userdata[user]['RPG']['Race'],lang['error402']))}\n{eval(lang.get('EXP-Character_Sheet',lang['error402']))}: {user_EXP['now']} / {user_EXP['max']}\n`{EXP_bar}`\n{str(eval(list(rpg_definitions['Race'][userdata_update['Race']]['Item']['Weapon'])[0])).replace('_',' ')} : {eval(lang.get(userdata[user]['RPG']['Item']['Weapon'][list(userdata[user]['RPG']['Item']['Weapon'])[0]]['Type'],lang['error402']))}\n{str(eval(list(rpg_definitions['Race'][userdata_update['Race']]['Item']['Armor'])[0])).replace('_',' ')} : {eval(lang.get(userdata[user]['RPG']['Item']['Armor'][list(userdata[user]['RPG']['Item']['Armor'])[0]]['Type'],lang['error402']))}',inline = False)
+                            embed = discord.Embed(description = f'# {eval(lang.get((f'emoji-{userdata[user]['RPG']['Race']}'),lang['error402']))}{eval(lang.get((f'emoji-{userdata[user]['RPG']['Main_profession']['class']}'),lang['error402']))}__{eval(lang.get(f'character_sheet',lang['error402']))}__',colour = user_color,timestamp = datetime.datetime.now())
+                            embed.add_field(name = '',value = f'{eval(lang.get('Name-Character_Sheet',lang['error402']))}:**{interaction.user.display_name}**\n{eval(lang.get('profession',lang['error402']))}:{eval(lang.get(userdata[user]['RPG']['Main_profession']['class'],lang['error402']))}Lv.{userdata[user]['RPG']['Main_profession']['level']} / {top_sub_profession['class']:<5}Lv.{top_sub_profession['level']:<3}\n{eval(lang.get('Race-Character_Sheet',lang['error402']))}:{eval(lang.get(userdata[user]['RPG']['Race'],lang['error402']))}\n{eval(lang.get('EXP-Character_Sheet',lang['error402']))}:{user_EXP['now']} / {user_EXP['max']}\n`{EXP_bar}`\n{str(eval(list(rpg_definitions['Race'][userdata_update['Race']]['Item']['Weapon'])[0])).replace('_',' ')} :{eval(lang.get(userdata[user]['RPG']['Item']['Weapon'][list(userdata[user]['RPG']['Item']['Weapon'])[0]]['Type'],lang['error402']))}\n{str(eval(list(rpg_definitions['Race'][userdata_update['Race']]['Item']['Armor'])[0])).replace('_',' ')} :{eval(lang.get(userdata[user]['RPG']['Item']['Armor'][list(userdata[user]['RPG']['Item']['Armor'])[0]]['Type'],lang['error402']))}',inline = False)
                             embed.add_field(name = '',value = (f'__**-------------------------------------**__\n**|**\u2004|__!**{eval(lang.get('HP-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['HP']).zfill(4)}`_\u2007|__!**{eval(lang.get('SAN-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['SAN']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('SP-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['SP']).zfill(4)}`_\u2007|__!**{eval(lang.get('MP-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['MP']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('ATK-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['ATK']).zfill(4)}`_\u2007|__!**{eval(lang.get('MATK-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['MATK']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('DEF-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['DEF']).zfill(4)}`_\u2007|__!**{eval(lang.get('MDEF-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['MDEF']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('LUK-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['LUK']).zfill(4)}`_\u2007|__!**{eval(lang.get('SPD-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['SPD']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('AGI-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['AGI']).zfill(4)}`_\u2007|__!**{eval(lang.get('CHR-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['CHR']).zfill(4)}`_\u2004**|**\n__**-------------------------------------**__').replace('!','\u2004'),inline = False)
                             await interaction.response.edit_message(content = None,attachments = [],embed = embed,view = Config.Interface.First_online().Check_Screen())
                         else:
@@ -898,7 +924,8 @@ if Test_mod:
                     else:
                         userdata[user]['RPG']['setting_mod'] = False
                         exec(dump_userdata)
-                        await interaction.response.edit_message(content = f'User:<@{user}>\n設定完成了，可以開始遊戲嘍!~',embed = None,view = None,delete_after = 10)
+                        await  interaction.channel.purge(check=lambda m: m.id == int(interaction.message.id))
+                        await interaction.response.send_message(content = None,embed = None,view = Config.Interface.Start_Screen().Choice_Screen(),ephemeral = True)
                 async def reset_callback(self,interaction:discord.Interaction):
                     user = interaction.user.id
                     if user == 697842681082281985:
@@ -962,16 +989,33 @@ if Test_mod:
                     return Individual()
     
             class Start_Screen:
-                def Start_Screen(self):
+                def Choice_Screen(self):
                     class Individual(View):
                         def __init__(self):
-                            super().__init__(timeout=None)
+                            super().__init__(timeout = None)
                             variable = {}
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
-                            character_sheet_button = Button(label = f'{eval(lang.get('character_sheet',lang['error402']))}')
-                            character_sheet_button.callback = self.character_sheet_callback
-                            self.add_item(character_sheet_button)
+                            if 'row-1' != 0:
+                                character_sheet = Button(emoji = eval(lang.get('emoji-character_sheet',lang.get('emoji-error'))),row = 0)
+                                character_sheet.callback = self.character_sheet_callback
+                                self.add_item(character_sheet)
+                                Item = Button(emoji = eval(lang.get('emoji-item',lang.get('emoji-error'))),row = 0)
+                                Item.callback = self.Item_callback
+                                self.add_item(Item)
+                                battle = Button(emoji = eval(lang.get('emoji-battle',lang.get('emoji-error'))),row = 0)
+                                battle.callback = self.battle_callback
+                                self.add_item(battle)
+                            if 'row-2' != 0:
+                                market = Button(emoji = eval(lang.get('emoji-coins',lang.get('emoji-error'))),row = 1)
+                                market.callback = self.market_callback
+                                self.add_item(market)
+                                handbook = Button(emoji = eval(lang.get('emoji-handbook',lang.get('emoji-error'))),row = 1)
+                                handbook.callback = self.handbook_callback
+                                self.add_item(handbook)
+                                set = Button(emoji = eval(lang.get('emoji-setting',lang.get('emoji-error'))),style = discord.ButtonStyle.blurple,row = 1)
+                                set.callback = self.set_callback
+                                self.add_item(set)
                         async def character_sheet_callback(self,interaction:discord.Interaction):
                             user = interaction.user.id
                             if user == 697842681082281985:
@@ -1005,58 +1049,399 @@ if Test_mod:
                                     top_sub_profession = {'class':f'{eval(lang[list(top_sub_profession.keys())[0]])}`+{maxlave}`','level':list(top_sub_profession.values())[0]}
                                 else:
                                     top_sub_profession = {'class':f'{eval(lang[list(top_sub_profession.keys())[0]])}','level':list(top_sub_profession.values())[0]}
-                            embed = discord.Embed(description = f'# {eval(lang.get((f'{userdata[user]['RPG']['Race']}-emoji'),lang['error402']))}{eval(lang.get((f'{userdata[user]['RPG']['Main_profession']['class']}-emoji'),lang['error402']))}__{eval(lang.get(f'character_sheet',lang['error402']))}__',colour = user_color,timestamp = datetime.datetime.now())
-                            embed.add_field(name = '',value = f'{eval(lang.get('Name-Character_Sheet',lang['error402']))}: **{interaction.user.display_name}**\n{eval(lang.get('profession',lang['error402']))}: {eval(lang.get(userdata[user]['RPG']['Main_profession']['class'],lang['error402']))}Lv.{userdata[user]['RPG']['Main_profession']['level']} / {top_sub_profession['class']:<5}Lv.{top_sub_profession['level']:<3}\n{eval(lang.get('Race-Character_Sheet',lang['error402']))}: {eval(lang.get(userdata[user]['RPG']['Race'],lang['error402']))}\n{eval(lang.get('EXP-Character_Sheet',lang['error402']))}: {user_EXP['now']} / {user_EXP['max']}\n`{EXP_bar}`',inline = False)
+                            embed = discord.Embed(description = f'# {eval(lang.get((f'emoji-{userdata[user]['RPG']['Race']}'),lang['error402']))}{eval(lang.get((f'emoji-{userdata[user]['RPG']['Main_profession']['class']}'),lang['error402']))}__{eval(lang.get(f'character_sheet',lang['error402']))}__',colour = user_color,timestamp = datetime.datetime.now())
+                            embed.add_field(name = '',value = f'{eval(lang.get('Name-Character_Sheet',lang['error402']))}:**{interaction.user.display_name}**\n{eval(lang.get('profession',lang['error402']))}:{eval(lang.get(userdata[user]['RPG']['Main_profession']['class'],lang['error402']))}Lv.{userdata[user]['RPG']['Main_profession']['level']} / {top_sub_profession['class']:<5}Lv.{top_sub_profession['level']:<3}\n{eval(lang.get('Race-Character_Sheet',lang['error402']))}:{eval(lang.get(userdata[user]['RPG']['Race'],lang['error402']))}\n{eval(lang.get('EXP-Character_Sheet',lang['error402']))}:{user_EXP['now']} / {user_EXP['max']}\n`{EXP_bar}`',inline = False)
                             embed.add_field(name = '',value = (f'__**-------------------------------------**__\n**|**\u2004|__!**{eval(lang.get('HP-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['HP']).zfill(4)}`_\u2007|__!**{eval(lang.get('SAN-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['SAN']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('SP-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['SP']).zfill(4)}`_\u2007|__!**{eval(lang.get('MP-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['MP']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('ATK-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['ATK']).zfill(4)}`_\u2007|__!**{eval(lang.get('MATK-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['MATK']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('DEF-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['DEF']).zfill(4)}`_\u2007|__!**{eval(lang.get('MDEF-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['MDEF']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('LUK-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['LUK']).zfill(4)}`_\u2007|__!**{eval(lang.get('SPD-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['SPD']).zfill(4)}`_\u2004**|**\n**|**\u2004|__!**{eval(lang.get('AGI-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['AGI']).zfill(4)}`_\u2007|__!**{eval(lang.get('CHR-Character_Sheet',lang['error402']))}**!__| :_`{str(userdata[user]['RPG']['attributes']['CHR']).zfill(4)}`_\u2004**|**\n__**-------------------------------------**__').replace('!','\u2004'),inline = False)
-                            await interaction.response.edit_message(embed=embed,view=Config.Interface.Character_Sheet().Check_Screen())
+                            await interaction.response.edit_message(embed = embed,view = Config.Interface.Character_Sheet().Check_Screen())
+                        async def Item_callback(self,interaction:discord.Interaction):
+                            user = interaction.user.id
+                            if user == 697842681082281985:
+                               user = 938100109240074310
+                            user = str(user)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            userdata = variable.get('userdata')
+                            lang = variable.get('lang')
+                            user_color = int(userdata[user]['RPG']['color'][2:],16)
+
+                            Equipping = []
+                            for line in userdata[user]['RPG']['Equipping']:
+                                if userdata[user]['RPG']['Equipping'][line] != {}:
+                                    Equipping.append(f'{eval(lang.get(line,lang['error402']))}:\n    {'\n    '.join(list(userdata[user]['RPG']['Equipping'][line]))}')
+                            if Equipping != []:
+                                Equipping = '\n'.join(Equipping)
+                            else:
+                                Equipping = eval(lang.get('Maybe_you_should_equip_something?',lang['error402']))
+
+                            embed = discord.Embed(description = f'# {eval(lang.get('emoji-item',lang['error402']))} __|  **{eval(lang.get('Item',lang['error402']))}**  |__ {eval(lang.get('emoji-item',lang['error402']))}',color = user_color,timestamp = datetime.datetime.now())
+                            embed.add_field(name = '',value = f'- __ **{eval(lang.get('Equipping',lang['error402']))} :** __\n{Equipping}',inline = False)
+                            await interaction.response.edit_message(content = None,embed = embed,view = Config.Interface.Item_Screen().Choice_Screen())
+                        async def battle_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = f'[error401]\n{datetime.datetime.now()}',embed = None,view = Config.Interface.Start_Screen().Choice_Screen()) 
+                        async def market_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = f'[error401]\n{datetime.datetime.now()}',embed = None,view = Config.Interface.Start_Screen().Choice_Screen())
+                        async def handbook_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = f'[error401]\n{datetime.datetime.now()}',embed = None,view = Config.Interface.Start_Screen().Choice_Screen())
+                        async def set_callback(self,interaction:discord.Interaction):
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            lang = variable.get('lang')
+                            await interaction.response.edit_message(content = f'# {eval(lang.get('emoji-setting',lang['error402']))} __|  **{eval(lang.get('set',lang['error402']))}**  |__ {eval(lang.get('emoji-setting',lang['error402']))}',embed = None,view = Config.Interface.Set_Screen().Choice_Screen())
                     return Individual()
                 
             class Character_Sheet:
                 def Check_Screen(self):
                     class Individual(View):
                         def __init__(self):
-                            super().__init__(timeout=None)
-                            main_profession_button =Button(label='主職業')
-                            main_profession_button.callback = self.main_profession_button_callback
-                            self.add_item(main_profession_button)
-                            sub_profession_button =Button(label='副職業')
-                            sub_profession_button.callback = self.sub_profession_button_callback
-                            self.add_item(sub_profession_button)
-                            attributes_button =Button(label='屬性')
-                            attributes_button.callback = self.attributes_button_callback
-                            self.add_item(attributes_button)
-                            back_button = Button(label='返回',style=discord.ButtonStyle.red)
-                            back_button.callback = self.back_button_callback
-                            self.add_item(back_button)
-                        async def main_profession_button_callback(self,interaction:discord.Interaction):
-                            await interaction.response.edit_message(content=f'主職業')
-                        async def sub_profession_button_callback(self,interaction:discord.Interaction):
-                            await interaction.response.edit_message(content=f'副職業')
-                        async def attributes_button_callback(self,interaction:discord.Interaction):
-                            await interaction.response.edit_message(content=f'屬性')
-                        async def back_button_callback(self,interaction:discord.Interaction):
-                            await interaction.response.edit_message(content=None,embed=None,view=Config.Interface.Start_Screen().Start_Screen())
+                            super().__init__(timeout = None)
+                            main_profession =Button(label='主職業')
+                            main_profession.callback = self.main_profession_callback
+                            self.add_item(main_profession)
+                            sub_profession =Button(label='副職業')
+                            sub_profession.callback = self.sub_profession_callback
+                            self.add_item(sub_profession)
+                            attributes =Button(label='屬性')
+                            attributes.callback = self.attributes_callback
+                            self.add_item(attributes)
+                            back = Button(label='返回',style=discord.ButtonStyle.red)
+                            back.callback = self.back_callback
+                            self.add_item(back)
+                        async def main_profession_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = f'主職業')
+                        async def sub_profession_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = f'副職業')
+                        async def attributes_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = f'屬性')
+                        async def back_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = None,embed = None,view = Config.Interface.Start_Screen().Choice_Screen())
                     return Individual()
-                # def User_Terms(self):
-                #     class Individual(Config.Default.User_Terms):
-                #         pass
-                #     return Individual()
-                # def Color(self):
-                #     class Individual(Config.Default.Color):
-                #         pass
-                #     return Individual()
-                # def Race(self):
-                #     class Individual(Config.Default.Race):
-                #         pass
-                #     return Individual()
-                # def Main_profession(self):
-                #     class Individual(Config.Default.Main_profession):
-                #         pass
-                #     return Individual()
-                # def Check_Screen(self):
-                #     class Individual(Config.Default.Check_Screen):
-                #         pass
-                #     return Individual()
+            
+            class Item_Screen:
+                def Choice_Screen(self):
+                    class Individual(View):
+                        def __init__(self):
+                            super().__init__(timeout = None)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            lang = variable.get('lang')
+                            if 'row-1' != 0:
+                                primary = Button(label = eval(lang.get('primary',lang['error402'])),emoji = None,row = 0)
+                                primary.callback = self.primary_callback
+                                self.add_item(primary)
+                                props = Button(label = eval(lang.get('props',lang['error402'])),emoji = None,row = 0)
+                                props.callback = self.props_callback
+                                self.add_item(props)
+                                others = Button(label = eval(lang.get('others',lang['error402'])),emoji = None,row = 0)
+                                others.callback = self.others_callback
+                                self.add_item(others)
+                                back = Config.Default.Buttons.back()
+                                back.callback = self.back_callback
+                                self.add_item(back)
+                        async def primary_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = datetime.datetime.now(),attachments = [],embed = None)
+                        async def props_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = datetime.datetime.now(),attachments = [],embed = None)
+                        async def others_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = datetime.datetime.now(),attachments = [],embed = None)
+                        async def back_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = None,embed = None,view = Config.Interface.Start_Screen().Choice_Screen())
+                    return Individual()
+                def Weapon_Sheet(self):
+                    class Individual(View):
+                        def __init__(self):
+                            super().__init__(timeout = None)
+
+
+                    return Individual()
+                def Armor_Sheet(self):
+                    class Individual(View):
+                        def __init__(self):
+                            super().__init__(timeout = None)
+
+
+                    return Individual()
+                def Runes_Sheet(self):
+                    class Individual(View):
+                        def __init__(self):
+                            super().__init__(timeout = None)
+
+
+                    return Individual()
+
+            class Battle_Screen:
+                def name(self):
+                    class Individual(View):
+                        pass
+                    return Individual()
+
+            class Market_Screen:
+                def name(self):
+                    class Individual(View):
+                        pass
+                    return Individual()
+
+            class Handbook_Screen:
+                def name(self):
+                    class Individual(View):
+                        pass
+                    return Individual()
+
+            class Set_Screen:
+                def Choice_Screen(self):
+                    class Individual(View):
+                        def __init__(self):
+                            super().__init__(timeout = None)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            lang = variable.get('lang')
+                            if 'row-1' != 0:
+                                Language = Button(label = f'{eval(lang.get('language',lang['error402']))}',row = 0)
+                                Language.callback = self.Language_callback
+                                self.add_item(Language)
+                                Color = Button(label = f'{eval(lang.get('color',lang['error402']))}',row = 0)
+                                Color.callback = self.Color_callback
+                                self.add_item(Color)
+                            if 'row-2' != 0:
+                                Player_Guidelines = Button(label = f'{eval(lang.get('Player_Guidelines',lang['error402']))}',style = discord.ButtonStyle.blurple,row = 1)
+                                Player_Guidelines.callback = self.Player_Guidelines_callback
+                                self.add_item(Player_Guidelines)
+                                User_Terms = Button(label = f'{eval(lang.get('User_Terms',lang['error402']))}',style = discord.ButtonStyle.blurple,row = 1)
+                                User_Terms.callback = self.User_Terms_callback
+                                self.add_item(User_Terms)
+                            if 'row-3' != 0:
+                                back = Config.Default.Buttons.back()    
+                                back.style = discord.ButtonStyle.green
+                                back.row = 2
+                                back.callback = self.back_callback
+                                self.add_item(back)
+                        async def Language_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = None,embed = None,view = Config.Interface.Set_Screen().Language())
+                        async def Color_callback(self,interaction:discord.Interaction):
+                            user = interaction.user.id
+                            if user == 697842681082281985:
+                                user = 938100109240074310
+                            user = str(user)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            userdata = variable.get('userdata')
+                            lang = variable.get('lang')
+                            color = userdata[user]['RPG']['color']
+                            user_color = int(color,16)
+                            R = int(color[2:-4],16)
+                            G = int(color[4:-2],16)
+                            B = int(color[-2:],16)
+                            embed = None
+                            
+                            embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get('random',lang['error402']))}{eval(lang.get('color',lang['error402']))}__',color = user_color,timestamp = datetime.datetime.now())
+                            embed.add_field(name = '',value = f'**{eval(lang.get('color',lang['error402']))} :**\n> RGB  `{str(R).zfill(3)},{str(G).zfill(3)},{str(B).zfill(3)}`\n> HEX `#{color[2:]}`',inline = False)
+                            embed.set_image(url = f'attachment://{color}.png')
+                            file = discord.File(f'imege/rpg/color/{color}.png',filename = f'{color}.png')
+                            await interaction.response.edit_message(content = None,attachments = [file],embed = embed,view = Config.Interface.Set_Screen().Color())
+                        async def Player_Guidelines_callback(self,interaction:discord.Interaction):
+                            Page = 1
+                            user = interaction.user.id
+                            if user == 697842681082281985:
+                                user = 938100109240074310
+                            user = str(user)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            userdata = variable.get('userdata')
+                            lang = variable.get('lang')
+                            if 'color' in userdata[user]['RPG']:
+                                user_color = int(userdata[user]['RPG']['color'][2:],16)
+                            else:
+                                user_color = Color
+                            embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get('Player_Guidelines',lang['error402']))}__\n{eval(lang.get(f'Player_Guideline_{Page}',lang['error402']))}',colour = user_color,timestamp = datetime.datetime.now())
+                            await interaction.response.edit_message(content = None,embed = embed,view = Config.Interface.Set_Screen().Player_Guidelines(Page))
+                        async def User_Terms_callback(self,interaction:discord.Interaction):
+                            Page = 1
+                            user = interaction.user.id
+                            if user == 697842681082281985:
+                                user = 938100109240074310
+                            user = str(user)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            userdata = variable.get('userdata')
+                            lang = variable.get('lang')
+                            if 'color' in userdata[user]['RPG']:
+                                user_color = int(userdata[user]['RPG']['color'][2:],16)
+                            else:
+                                user_color = Color
+                            List = []
+                            for line in lang:
+                                if str(line).startswith(f'User_Terms_{Page}') and not str(line).endswith('0'):
+                                    List.append(f'{len(List)+1}. {eval(lang.get(line,lang['error402']))}')
+                            List = '\n\n'.join(List)
+                            embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get(f'User_Terms',lang['error402']))}__\n**- {eval(lang.get(f'User_Terms_{Page}.0',lang['error402']))} :**\n{List}',colour = user_color,timestamp = datetime.datetime.now())
+                            await interaction.response.edit_message(content = None,embed = embed,view = Config.Interface.Set_Screen().User_Terms(Page))                        
+                        async def back_callback(self,interaction:discord.Interaction):
+                            await interaction.response.edit_message(content = None,embed = None,view = Config.Interface.Start_Screen().Choice_Screen())
+                    return Individual()
+                def Language(self):
+                    class Individual(Config.Default.Language):
+                        def __init__(self):
+                            super().__init__(back = False)
+                        def options_callback(self,interaction:discord.Interaction,view = 'Set_Screen'):
+                            return super().options_callback(interaction,view)
+                        def decided_callback(self,interaction:discord.Interaction,view = 'Set_Screen'):
+                            return super().decided_callback(interaction,view)
+                    return Individual()
+                def Color(self):
+                    class Individual(Config.Default.Color):
+                        def __init__(self):
+                            super().__init__(back = False)
+                        def set_callback(self,interaction:discord.Interaction,view = 'Set_Screen'):
+                            return super().set_callback(interaction,view)
+                        def random_callback(self,interaction:discord.Interaction,view = 'Set_Screen'):
+                            return super().random_callback(interaction,view)
+                        def decided_callback(self,interaction:discord.Interaction,view = 'Set_Screen'):
+                            return super().decided_callback(interaction,view)
+                    return Individual()
+                def Player_Guidelines(self,Page = 1):
+                    class Individual(View):
+                        def __init__(self):
+                            super().__init__(timeout = None)
+                            self.page = Page
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            lang = variable.get('lang')
+                            if 'row-1' != 0:
+                                previous = Config.Default.Buttons.previous()
+                                previous.callback = self.previous_callback
+                                self.add_item(previous)
+                                page = Button(label = f'{Page}/7',disabled = True)
+                                page.callback = self.page_callback
+                                self.add_item(page)
+                                next = Config.Default.Buttons.next()
+                                next.callback = self.next_callback
+                                self.add_item(next)
+                            if 'row-2' != 0:
+                                back = Config.Default.Buttons.back()
+                                back.row = 1
+                                back.callback = self.back_callback
+                                self.add_item(back)
+                        async def previous_callback(self,interaction:discord.Interaction):
+                            Page = self.page - 1
+                            if Page < 1:
+                                Page = 1
+                            user = interaction.user.id
+                            if user == 697842681082281985:
+                                user = 938100109240074310
+                            user = str(user)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            userdata = variable.get('userdata')
+                            lang = variable.get('lang')
+                            if 'color' in userdata[user]['RPG']:
+                                user_color = int(userdata[user]['RPG']['color'][2:],16)
+                            else:
+                                user_color = Color
+                            embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get('Player_Guidelines',lang['error402']))}__\n{eval(lang.get(f'Player_Guideline_{Page}',lang['error402']))}',colour = user_color,timestamp = datetime.datetime.now())
+                            await interaction.response.edit_message(content = None,embed = embed,view = Config.Interface.Set_Screen().Player_Guidelines(Page))
+                        async def page_callback():
+                            pass
+                        async def next_callback(self,interaction:discord.Interaction):
+                            Page = self.page + 1
+                            if Page > 7:
+                                Page = 7
+                            user = interaction.user.id
+                            if user == 697842681082281985:
+                                user = 938100109240074310
+                            user = str(user)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            userdata = variable.get('userdata')
+                            lang = variable.get('lang')
+                            if 'color' in userdata[user]['RPG']:
+                                user_color = int(userdata[user]['RPG']['color'][2:],16)
+                            else:
+                                user_color = Color
+                            embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get('Player_Guidelines',lang['error402']))}__\n{eval(lang.get(f'Player_Guideline_{Page}',lang['error402']))}',colour = user_color,timestamp = datetime.datetime.now())
+                            await interaction.response.edit_message(content = None,embed = embed,view = Config.Interface.Set_Screen().Player_Guidelines(Page))
+                        async def back_callback(self,interaction:discord.Interaction):
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            lang = variable.get('lang')
+                            await interaction.response.edit_message(content = f'# {eval(lang.get('emoji-setting',lang['error402']))} __|  **{eval(lang.get('set',lang['error402']))}**  |__ {eval(lang.get('emoji-setting',lang['error402']))}',embed = None,view = Config.Interface.Set_Screen().Choice_Screen())
+                    return Individual()
+                def User_Terms(self,Page = 1):
+                    class Individual(View):
+                        def __init__(self):
+                            super().__init__(timeout = None)
+                            self.page = Page
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            lang = variable.get('lang')
+                            if 'row-1' != 0:
+                                previous = Config.Default.Buttons.previous()
+                                previous.callback = self.previous_callback
+                                self.add_item(previous)
+                                page = Button(label = f'{Page}/9',disabled = True)
+                                page.callback = self.page_callback
+                                self.add_item(page)
+                                next = Config.Default.Buttons.next()
+                                next.callback = self.next_callback
+                                self.add_item(next)
+                            if 'row-2' != 0:
+                                back = Config.Default.Buttons.back()
+                                back.row = 1
+                                back.callback = self.back_callback
+                                self.add_item(back)
+                        async def previous_callback(self,interaction:discord.Interaction):
+                            Page = self.page-1
+                            if Page < 1:
+                                Page = 1
+                            user = interaction.user.id
+                            if user == 697842681082281985:
+                                user = 938100109240074310
+                            user = str(user)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            userdata = variable.get('userdata')
+                            lang = variable.get('lang')
+                            if 'color' in userdata[user]['RPG']:
+                                user_color = int(userdata[user]['RPG']['color'][2:],16)
+                            else:
+                                user_color = Color
+                            List = []
+                            for line in lang:
+                                if str(line).startswith(f'User_Terms_{Page}') and not str(line).endswith('0'):
+                                    List.append(f'{len(List)+1}. {eval(lang.get(line,lang['error402']))}')
+                            List = '\n\n'.join(List)
+                            embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get(f'User_Terms',lang['error402']))}__\n**- {eval(lang.get(f'User_Terms_{Page}.0',lang['error402']))} :**\n{List}',colour = user_color,timestamp = datetime.datetime.now())
+                            await interaction.response.edit_message(content = None,embed = embed,view = Config.Interface.Set_Screen().User_Terms(Page))
+                        async def page_callback(self,interaction:discord.Interaction):
+                            pass
+                        async def next_callback(self,interaction:discord.Interaction):
+                            Page = self.page+1
+                            if Page > 9:
+                                Page = 9
+                            user = interaction.user.id
+                            if user == 697842681082281985:
+                                user = 938100109240074310
+                            user = str(user)
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            userdata = variable.get('userdata')
+                            lang = variable.get('lang')
+                            if 'color' in userdata[user]['RPG']:
+                                user_color = int(userdata[user]['RPG']['color'][2:],16)
+                            else:
+                                user_color = Color
+                            List = []
+                            for line in lang:
+                                if str(line).startswith(f'User_Terms_{Page}') and not str(line).endswith('0'):
+                                    List.append(f'{len(List)+1}. {eval(lang.get(line,lang['error402']))}')
+                            List = '\n\n'.join(List)
+                            embed = discord.Embed(description = f'# <:LOGO1:1221378614524641332>__{eval(lang.get(f'User_Terms',lang['error402']))}__\n**- {eval(lang.get(f'User_Terms_{Page}.0',lang['error402']))} :**\n{List}',colour = user_color,timestamp = datetime.datetime.now())
+                            await interaction.response.edit_message(content = None,embed = embed,view = Config.Interface.Set_Screen().User_Terms(Page))
+                        async def back_callback(self,interaction:discord.Interaction):
+                            variable = {}
+                            exec(open_file,globals(),variable)
+                            lang = variable.get('lang')
+                            await interaction.response.edit_message(content = f'# {eval(lang.get('emoji-setting',lang['error402']))} __|  **{eval(lang.get('set',lang['error402']))}**  |__ {eval(lang.get('emoji-setting',lang['error402']))}',embed = None,view = Config.Interface.Set_Screen().Choice_Screen())
+                    return Individual()
+                           
     
     class RPG(Cog_extension):
         commandname = (f'{prefix}interface')
@@ -1072,17 +1457,18 @@ if Test_mod:
             setting = variable.get('setting')
             for line in Lang:
                 Lang.remove(line)
-            if 'RPG'in userdata[user] and 'language' in userdata[user]['RPG']:
+            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
                 Lang.append(userdata[user]['RPG']['language'])
             else:
                 Lang.append('en_US')
             if 'RPG' not in userdata[user]:
+                print(user)
                 await interaction.response.send_message(f'User:<@{user}>你的資料不知道為何但就是不完整\n請你先到[__領取身分的地方__](https://ptb.discord.com/channels/{interaction.guild.id}/{setting['ROLE_MESSAGE_CHANNEL_ID']}/{setting['ROLE_MESSAGE_ID']})重新領取身分\n如果還是不行請通知管理員',ephemeral = True)
             else:
-                Setting = ['language','first_online_time','color','coins','Race','EXP','Main_profession','Sub_profession','attributes','Item','handbook','PVP']
+                Setting = ['setting_mod','language','first_online_time','color','coins','Race','EXP','Main_profession','Sub_profession','attributes','Equipping','Item','handbook','PVP']
                 setting_mod = False
                 for line in Setting:
-                    if line not in userdata[user]['RPG'] or userdata[user]['RPG']['setting_mod'] == True:
+                    if line not in userdata[user]['RPG'] or( 'setting_mod' in userdata[user]['RPG'] and userdata[user]['RPG']['setting_mod'] == True):
                         setting_mod = True
                 if setting_mod:
                     if 'setting_mod' in userdata[user]['RPG']:
@@ -1090,9 +1476,9 @@ if Test_mod:
                     else:
                         userdata[user]['RPG'].update({'setting_mod':setting_mod})
                     exec(dump_userdata)
-                    await interaction.response.send_message('',view = Config.Interface.First_online().Language())
+                    await interaction.response.send_message('',view = Config.Interface.First_online().Language(),delete_after = 300)
                 else:
-                    await interaction.response.send_message(view = Config.Interface.Start_Screen().Start_Screen())
+                    await interaction.response.send_message(view = Config.Interface.Start_Screen().Choice_Screen(),ephemeral = True)
 
     async def setup(bot):
         await bot.add_cog(RPG(bot))
@@ -1105,94 +1491,3 @@ else:
             await interaction.response.send_message('123')
     async def setup(bot):
         await bot.add_cog(RPG(bot))
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-if 'A' == 'B':
-        class Start_Screen(View):
-            def __init__(self):
-                super().__init__(timeout=None)
-                Character_Sheet_button = Button(label='Character_Sheet')
-                Character_Sheet_button.callback = self.Character_Sheet_button_callback
-                self.add_item(Character_Sheet_button)
-
-            async def Character_Sheet_button_callback(self,interaction:discord.Interaction):
-                user = interaction.user.id
-                if user == int(697842681082281985):
-                    user = 938100109240074310
-                with open('cmds/data/user_data.json' ,'r' ,encoding='utf-8') as userdata_file:
-                    userdata = json.load(userdata_file)
-                with open('cmds/rpg_define/format.json','r',encoding='utf-8') as Format_file:
-                    format = json.load(Format_file)
-                display_name=userdata[f'{user}']['display_name']
-                RPG = userdata[f'{user}']['RPG']
-                lang=format[RPG['language']]["additional"]
-                with open(f'cmds/rpg_define/{RPG['language']}.lang','r',encoding='utf-8') as Lang_file:
-                    for line in Lang_file:
-                        line = line.strip()
-                        if not line or line.startswith('#'):
-                            continue
-                        key,value = line.split('=',1)
-                        if value in format[RPG['language']]['lang']:
-                            lang[key] = format[RPG['language']]["lang"][value]
-                        else:
-                            lang[key] = f'"{value}"'
-
-
-
-                if '此處用於找出等級最高的副職業' != 1:
-                    top_sub_profession = []
-                    maxlave = []
-                    for sub_profession_1 in RPG['Sub_profession']:
-                        maxlave.append(RPG['Sub_profession'][sub_profession_1])
-                        for sub_profession_2 in RPG['Sub_profession']:
-                            if min(maxlave) != max(maxlave):
-                                maxlave.remove(min(maxlave))
-                            if RPG['Sub_profession'][sub_profession_1] > RPG['Sub_profession'][sub_profession_2]:
-                                if {sub_profession_1:RPG['Sub_profession'][sub_profession_1]} not in top_sub_profession:
-                                    top_sub_profession.append({sub_profession_1:RPG['Sub_profession'][sub_profession_1]})
-                                if {sub_profession_2:RPG['Sub_profession'][sub_profession_2]}  in top_sub_profession:
-                                    top_sub_profession.remove({sub_profession_2:RPG['Sub_profession'][sub_profession_2]})
-                    if top_sub_profession == []:
-                        top_sub_profession.append({'full_equilibrium':RPG['Sub_profession'][sub_profession_1]})
-                    else:
-                        random.shuffle(top_sub_profession)
-                        maxlave = len(maxlave)-1
-                    top_sub_profession = top_sub_profession[0]
-                    if maxlave != 0:
-                        top_sub_profession = {'class':f'{eval(lang[list(top_sub_profession.keys())[0]])}`+{maxlave}`','level':list(top_sub_profession.values())[0]}
-                    else:
-                        top_sub_profession = {'class':f'{eval(lang[list(top_sub_profession.keys())[0]])}','level':list(top_sub_profession.values())[0]}
-                
-                
-                user_EXP = {'max':RPG['EXP']['max'],'now':RPG['EXP']['now']}
-                EXP_bar=(f'{'/|'*int(15/user_EXP['max']*(user_EXP['now']))}{'.:'*(15-int(15/user_EXP['max']*(user_EXP['now'])))}')
-                user_main_profession = {'class':lang[RPG['Main_profession']['class']],'level':RPG['Main_profession']['level']}
-            
-                embed = discord.Embed(description=f'# <:LOGO1:1221378614524641332>__{eval(lang['character_sheet'])}__',colour=int(RPG['color'],16),timestamp=datetime.datetime.now())
-                embed.add_field(name='',value=f'{eval(lang['name'])}: **{display_name}**\n{eval(lang['profession'])}: {eval(user_main_profession['class']):<5}Lv.{user_main_profession['level']:<3}{'/':<2}{top_sub_profession['class']:<5}Lv.{top_sub_profession['level']:<3}\n{eval(lang['Race'])}: {eval(lang[RPG['Race']])}\n{eval(lang['EXP'])}: {user_EXP['now']} / {user_EXP['max']}\n`{EXP_bar}`',inline=False)
-                embed.add_field(name='__**-------------------------------------**__',value=(f'**|**|!__**H~P**__!| :_`{200:>4}`_\u3000|!__**S!A!N**__!| :_`{0:>4}`_\u3000\n**|**|!__**S~P**__!| :_`{0:>4}`_\u3000|!__**M~P**__!| :_`{0:>4}`_\u3000\n**|**|!__**A!T!K**__!| :_`{0:>4}`_\u3000|!__**MATK**__!| :_`{0:>4}`_\u3000\n**|**|!__**D!E!F**__!| :_`{0:>4}`_\u3000|!__**MDEF**__!| :_`{0:>4}`_\u3000\n**|**|!__**L!U!K**__!| :_`{0:>4}`_\u3000|!__**S!P!D**__!| :_`{0:>4}`_\u3000\n**|**|!__**A!G!\u200BI\u2009**__!| :_`{0:>4}`_\u3000|!__**C!H!R**__!| :_`{0:>4}`_\u3000').replace('~','\u2009\u3000').replace('!','\u200A\u2004').replace(' ','\u2007\u200A'),inline=False)
-                await interaction.response.edit_message(embed=embed,view=Config.Character_Sheet())
-
-        class Character_Sheet(View):
-            def __init__(self):
-                super().__init__(timeout=None)
-                main_profession_button =Button(label='主職業')
-                main_profession_button.callback = self.main_profession_button_callback
-                self.add_item(main_profession_button)
-                sub_profession_button =Button(label='副職業')
-                sub_profession_button.callback = self.sub_profession_button_callback
-                self.add_item(sub_profession_button)
-                attributes_button =Button(label='屬性')
-                attributes_button.callback = self.attributes_button_callback
-                self.add_item(attributes_button)
-                back_button = Button(label='返回',style=discord.ButtonStyle.red)
-                back_button.callback = self.back_button_callback
-                self.add_item(back_button)
-            async def main_profession_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message(content=f'主職業')
-            async def sub_profession_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message(content=f'副職業')
-            async def attributes_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message(content=f'屬性')
-            async def back_button_callback(self,interaction:discord.Interaction):
-                await interaction.response.edit_message(content='',embed=None,view=Config.Start_Screen())
-

@@ -14,30 +14,19 @@ class=類別
 character_sheet=角色卡
 Race=種族
 Human=人類
-Human-emoji=<:raceHuman:1272670057347944568>
 Elf=精靈
-Elf-emoji=<:raceElf:1272670062167326750>
 Fairy=妖精
-Fairy-emoji=<:raceFairy:1272670063857766410>
 Giant=巨人
-Giant-emoji=<:raceGiant:1272670065396940862>
 MoonRabbit=月兔
-MoonRabbit-emoji=<:raceMoonRabbit:1272903546815250524>
 Asian=亞洲人
-Asian-emoji=<:raceAsian:1272670060464443423>
 
 profession=職業
 Main_profession=主職業
 Warrior=戰士
-Warrior-emoji=error401
 Archer=弓箭手
-Archer-emoji=error401
 Shielder=盾職
-Shielder-emoji=error401
 Thief=盜賊
-Thief-emoji=error401
 Mage=法師
-Mage-emoji=error401
 
 Sub_profession=副職業
 Merchant=商人
@@ -63,8 +52,13 @@ LUK=運氣
 CHR=魅力
 SAN=精神
 
-item=物品
-handbook=圖鑑
+Item=物品
+Equipping=裝備中
+primary=主要
+props=道具
+others=其他
+
+Handbook=圖鑑
 
 Weapon=武器
 Initial=初始
@@ -106,6 +100,8 @@ Scale_armor=鱗甲
 Chainmail=鏈甲
 Heavy_armor=重甲
 Plate_armor=鎧甲
+
+Accessories=飾品
 
 Enchanting=賦魔
 Runes=符篆
@@ -229,12 +225,13 @@ Hostile=敵對
 
 
 
-battle=戰鬥
+Battle=戰鬥
 PVP=玩家對戰
 win=勝
 lose=敗
 tie=平
 
+Market=市場
 
 Name=名稱
 first_online_time=初次上線時間
@@ -300,3 +297,14 @@ error402=未找到
 error401=未定義
 error403=格式錯誤
 error404=含有無效字元
+
+
+
+
+
+emoji-character_sheet=✖️
+#emoji-item=✖️
+emoji-battle=✖️
+emoji-coins=✖️
+emoji-handbook=✖️
+emoji-setting=✖️

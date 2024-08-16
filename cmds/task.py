@@ -8,6 +8,8 @@ with open('cmds/data/user_data.json' , 'r' , encoding='utf-8') as userdata_file:
     userdata = json.load(userdata_file)
 with open('cmds/data/omikuji.json','r',encoding='utf-8') as omikuji_file:
     omikuji = json.load(omikuji_file)
+with open(f'cmds/rpg_define/rpg_definitions.json','r',encoding='utf-8') as RPG_definitions_fill:
+    rpg_definitions = json.load(RPG_definitions_fill)
 '''
 dump_setting="""
 with open('setting.json','w',encoding='utf-8') as setting_file:
@@ -21,6 +23,10 @@ dump_omikuji="""
 with open('cmds/data/omikuji.json','w',encoding='utf-8') as omikuji_file:
     json.dump(omikuji,omikuji_file)
 """
+dump_rpg_definitions='''
+with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill: 
+    json.dump(rpg_definitions,RPG_definitions_fill,indent=4)
+'''
 with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 
@@ -33,10 +39,12 @@ class Task(Cog_extension):
         self.bot = bot
         self.omikujidatareload.start()
         self.onlinecount.start()
+        self.Exchange_rate.start()
         self.test.start()
     def cog_unload(self):
         self.onlinecount.cancel()
         self.omikujidatareload.cancel()
+        self.Exchange_rate.cancel()
         self.test.cancel()
 #初始化'setting.json'
     @tasks.loop(seconds=1)
@@ -160,6 +168,36 @@ class Task(Cog_extension):
         with open('setting.json','w',encoding='utf-8') as setting_file:
             json.dump(setting,setting_file,indent=0)
         await self.bot.wait_until_ready()
+#RPG匯率更新
+    @tasks.loop(minutes=1)
+    async def Exchange_rate(self):
+        variable = {}
+        exec(open_file,globals(),variable)
+        userdata = variable.get('userdata')
+        rpg_definitions = variable.get('rpg_definitions')
+        point_list = []
+        for line in userdata:
+            if line == str(697842681082281985):
+                pass
+            elif 'RPG' in userdata[line] and 'setting_mod' in userdata[line]['RPG'] and not userdata[line]['RPG']['setting_mod']:
+                if 'point' in userdata[line] and userdata[line]['point']['now_count'] != 0:
+                    point_list.append(userdata[line]['point']['now_count'])
+        if point_list == []:
+            point_list.append(1)
+        point_total = sum(point_list)
+        point_max = max(point_list)
+        point_len = len(point_list)
+        if point_max <= 0:
+            point_len = 0
+        rpg_definitions['Exchange_rate'] = (point_total/point_max-point_total) / ((point_len**2*point_total)/point_max/(point_len+1)) *-1+1
+        with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill: 
+            json.dump(rpg_definitions,RPG_definitions_fill,indent=4)
+    @Exchange_rate.before_loop
+    async def Exchange_rate_before(self):
+        now = datetime.datetime.now().strftime('%S')
+        while int(now) != 0:
+            await asyncio.sleep(1)
+            now = datetime.datetime.now().strftime('%S')
 #測試用
     @tasks.loop(seconds=1)
     async def test(self):

@@ -14,30 +14,19 @@ class=class
 character_sheet=character sheet
 Race=Race
 Human=Human
-Human-emoji=<:raceHuman:1272670057347944568>
 Elf=Elf
-Elf-emoji=<:raceElf:1272670062167326750>
 Fairy=Fairy
-Fairy-emoji=<:raceFairy:1272670063857766410>
 Giant=Giant
-Giant-emoji=<:raceGiant:1272670065396940862>
 MoonRabbit=MoonRabbit
-MoonRabbit-emoji=<:raceMoonRabbit:1272903546815250524>
 Asian=Asian
-Asian-emoji=<:raceAsian:1272670060464443423>
 
 profession=Profession
 Main_profession=Main profession
 Warrior=Warrior
-Warrior-emoji=error401
 Archer=Ar
-Archer-emoji=error401cher
 Shielder=Shielder
-Shielder-emoji=error401
 Thief=Thief
-Thief-emoji=error401
 Mage=Mage
-Mage-emoji=error401
 
 Sub_profession=Sub profession
 Merchant=Merchant
@@ -63,8 +52,8 @@ LUK=LUK
 CHR=CHR
 SAN=SAN
 
-item=item
-handbook=handbook
+Item=item
+Handbook=handbook
 
 Weapon=Weapon
 Initial=Initial
@@ -229,12 +218,13 @@ Hostile=Hostile
 
 
 
-battle=battle
+Battle=battle
 PVP=PVP
 win=win
 lose=lose
 tie=tie
 
+Market=Market
 
 Name=Name
 first_online_time=first online time

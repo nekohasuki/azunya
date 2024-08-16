@@ -14,30 +14,19 @@ class=カテゴリ
 character_sheet=キャラクターシート
 Race=種族
 Human=人間
-Human-emoji=<:raceHuman:1272670057347944568>
 Elf=エルフ
-Elf-emoji=<:raceElf:1272670062167326750>
 Fairy=フェアリー
-Fairy-emoji=<:raceFairy:1272670063857766410>
 Giant=巨人
-Giant-emoji=<:raceGiant:1272670065396940862>
 MoonRabbit=月の兎
-MoonRabbit-emoji=<:raceMoonRabbit:1272903546815250524>
 Asian=アジア人
-Asian-emoji=<:raceAsian:1272670060464443423>
 
 profession=職業
 Main_profession=メイン職業
 Warrior=戦士
-Warrior-emoji=error401
 Archer=弓使い
-Archer-emoji=error401
 Shielder=シールド職
-Shielder-emoji=error401
 Thief=盗賊
-Thief-emoji=error401
 Mage=魔法使い
-Mage-emoji=error401
 
 Sub_profession=サブ職業
 Merchant=商人
@@ -63,8 +52,8 @@ LUK=運気
 CHR=魅力
 SAN=精神
 
-item=アイテム
-handbook=図鑑
+Item=アイテム
+Handbook=図鑑
 
 Weapon=武器
 Initial=初期
@@ -229,12 +218,13 @@ Hostile=敵対
 
 
 
-battle=バトル
+Battle=バトル
 PVP=プレイヤー対戦
 win=勝
 lose=敗
 tie=平
 
+Market=市場
 
 Name=名前
 first_online_time=初回オンライン時間

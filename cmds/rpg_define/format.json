@@ -1,4 +1,33 @@
 {
+    "Shared":{
+        "introduce":"這裡是公用文件",
+        "additional":{
+            "emoji-error":"'✖️'",
+            "emoji-character_sheet":"'<:character_sheet:1273347550937616495>'",
+            "emoji-item":"'<:item:1273363837281894440>'",
+            "emoji-battle":"'🔪'",
+            "emoji-coins":"'<:coins:1273543452738719785>'",
+            "emoji-handbook":"'🔖'",
+            "emoji-setting":"'<:setting:1273303848915570738>'",
+            "emoji-Human":"'<:raceHuman:1272670057347944568>'",
+            "emoji-Elf":"'<:raceElf:1272670062167326750>'",
+            "emoji-Fairy":"'<:raceFairy:1272670063857766410>'",
+            "emoji-Giant":"'<:raceGiant:1272670065396940862>'",
+            "emoji-MoonRabbit":"'<:raceMoonRabbit:1272903546815250524>'",
+            "emoji-Asian":"'<:raceAsian:1272670060464443423>'",
+            "emoji-Warrior":"'error401'",
+            "emoji-Archer":"'error401'",
+            "emoji-Shielder":"'error401'",
+            "emoji-Thief":"'error401'",
+            "emoji-Mage":"'error401'"
+        }
+    },
+    "ABC":{
+        "lang":{
+        },
+        "additional":{
+        }
+    },
     "zh_TW":{
         "introduce":"這裡是用來放中文-台灣的格式化設定的地方。",
         "lang":{
@@ -7,8 +36,7 @@
             "弓箭手":"'弓箭手7'.replace('7', '\u2000')",
             "盾職":"'盾職7'.replace('7', '\u2000')",
             "盜賊":"'盜賊7'.replace('7', '\u2000')",
-            "法師":"'法師7'.replace('7', '\u2000')",
-            "error401":"'[未定義]'"
+            "法師":"'法師7'.replace('7', '\u2000')"
         },
         "additional":{
             "Name-Character_Sheet":"'名9稱3'.replace('9', '\u2003').replace('3', '\u2009')",
@@ -25,7 +53,9 @@
             "AGI-Character_Sheet":"'靈9活'.replace('9', '\u2003').replace('3', '\u2009')",
             "LUK-Character_Sheet":"'運9氣'.replace('9', '\u2003').replace('3', '\u2009')",
             "CHR-Character_Sheet":"'魅9力'.replace('9', '\u2003').replace('3', '\u2009')",
-            "SAN-Character_Sheet":"'精9神'.replace('9', '\u2003').replace('3', '\u2009')"
+            "SAN-Character_Sheet":"'精9神'.replace('9', '\u2003').replace('3', '\u2009')",
+
+            "Maybe_you_should_equip_something?":"'也許你應該裝備個什麼?'"
         }
     },
     "en_US":{
@@ -52,8 +82,7 @@
             "choice":"'choice3'.replace('3','\u2009')",
             "color":"'color3'.replace('3','\u2009')",
             "language":"'language3'.replace('3','\u2009')",
-            "Initial":"'Initial_'",
-            "error401":"'[Undefined]'"
+            "Initial":"'Initial_'"
         },
         "additional":{
             "Name-Character_Sheet":"'N3a3m3e99'.replace('3','\u2009').replace('9','\u2003')",
@@ -70,14 +99,16 @@
             "AGI-Character_Sheet":"'A434G434I'.replace('4', '\u2006').replace('3', '\u2009')",
             "LUK-Character_Sheet":"'L6\u200aU\u200a6K'.replace('6', '\u2004')",
             "CHR-Character_Sheet":"'C434H434R'.replace('4', '\u2006').replace('3', '\u2009')",
-            "SAN-Character_Sheet":"'S434A434N'.replace('4', '\u2006').replace('3', '\u2009')"
+            "SAN-Character_Sheet":"'S434A434N'.replace('4', '\u2006').replace('3', '\u2009')",
+
+
+             "Maybe_you_should_equip_something?":"'Maybe you should equip something?'"
         }
     },
     "ja_JP":{
         "introduce":"ここに日本語の書式設定が配置されます。",
         "lang":{
-            "職業":"'職9業3'.replace('9', '\u2003').replace('3', '\u2009')",
-            "error401":"'[未定義]'"
+            "職業":"'職9業3'.replace('9', '\u2003').replace('3', '\u2009')"
         },
         "additional":{
             "Name-Character_Sheet":"'名9前3'.replace('9', '\u2003').replace('3', '\u2009')",
@@ -94,7 +125,10 @@
             "AGI-Character_Sheet":"'敏9捷'.replace('9', '\u2003')",
             "LUK-Character_Sheet":"'運9氣'.replace('9', '\u2003')",
             "CHR-Character_Sheet":"'魅9力'.replace('9', '\u2003')",
-            "SAN-Character_Sheet":"'精9神'.replace('9', '\u2003')"
+            "SAN-Character_Sheet":"'精9神'.replace('9', '\u2003')",
+
+
+             "Maybe_you_should_equip_something?":"'何か装備したほうがいいかも？'"
         }
     
     }
