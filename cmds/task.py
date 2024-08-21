@@ -134,11 +134,11 @@ class Task(Cog_extension):
                     await asyncio.sleep(5)
                     await channel.send(f'既然是這個結果就說明至少整整一個月都沒有人玩抽籤系統...')
                     await asyncio.sleep(2)
-                    await channel.send(f'梓守我不信，難道沒有人想抽籤嗎?')
+                    await channel.send(f'梓守才不信，難道沒有人想抽籤嗎?')
                     await asyncio.sleep(1)
                     await channel.send(f'看來這個伺服器不需要我了...')      
                 shutil.copy('cmds/data/user_data.json',f'cmds/data/user_data_history/{datetime.datetime.now().strftime('%Y-%m-%d')}.json')          
-                await channel.send(f'<@&1079939318371582043>\n記得拔管')      
+                # await channel.send(f'<@&1079939318371582043>\n記得拔管')
     #重置'omikuji.json'資料
             omikuji={}
             omikuji.update(omikuji)
