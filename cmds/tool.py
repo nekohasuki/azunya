@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import json
-with open('setting.json','r',encoding='utf8') as setting_file:
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
@@ -143,7 +143,7 @@ class Tool(Cog_extension):
     commandname = (f'{prefix}name')
     @app_commands.command(name = commandname, description = '這是一段描述')
     async def name(self,interaction:discord.Interaction):
-        # with open('dict.json','r',encoding='utf8') as dict_file:
+        # with open('dict.json','r',encoding='utf-8') as dict_file:
         #     dict = json.load(dict_file)
         # dict_dessert = dict['dessert']
         # await interaction.response.send_message(f'要我列出甜點?\n讓我想想......\n那麼來嘍!')
