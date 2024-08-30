@@ -1,7 +1,14 @@
 from discord import app_commands,SelectOption
 import json,os,random
+<<<<<<< HEAD
 Lang = ['zh_TW']
 user = str(938100109240074310)
+=======
+# with open(f'cmds/rpg_define/rpg_definitions.json','r',encoding='utf-8') as RPG_definitions_fill: 
+#     rpg_definitions = json.load(RPG_definitions_fill)
+# with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill: 
+#     json.dump(rpg_definitions,RPG_definitions_fill,indent=4)
+>>>>>>> d4f08a8a2fc3bbe645a57e8ae3bf4127b1c6c211
 open_file='''
 with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
@@ -29,10 +36,16 @@ with open(f'cmds/rpg_define/rpg_definitions.json','r',encoding='utf-8') as RPG_d
     rpg_definitions = json.load(RPG_definitions_fill)
 '''
 
+<<<<<<< HEAD
 with open(f'cmds/rpg_define/rpg_definitions.json','r',encoding='utf-8') as RPG_definitions_fill: 
     rpg_definitions = json.load(RPG_definitions_fill)
 with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill: 
     json.dump(rpg_definitions,RPG_definitions_fill,indent=4)
+=======
+Lang = ['zh_TW']
+user = str(938100109240074310)
+
+>>>>>>> d4f08a8a2fc3bbe645a57e8ae3bf4127b1c6c211
 variable = {}
 exec(open_file,globals(),variable)
 userdata = variable.get('userdata')
@@ -45,6 +58,7 @@ rpg_definitions = variable.get('rpg_definitions')
 
 
 
+<<<<<<< HEAD
 # if '魂':
 #     for primary in userdata[user]['RPG']['Item']['primary']:
 #         for name in userdata[user]['RPG']['Item']['primary'][primary]:
@@ -66,6 +80,36 @@ rpg_definitions = variable.get('rpg_definitions')
 #                         userdata[user]['RPG']['Equipping'][Equipping][name]['soul'] = userdata[user]['RPG']['Item']['primary'][primary][name]['soul']
 #             print(name)
 #             print(userdata[user]['RPG']['Item']['primary'][primary][name]['soul'])
+=======
+point_list = []
+for line in userdata:
+    if line == str(697842681082281985):
+        pass
+    elif 'RPG' in userdata[line] and 'setting_mod' in userdata[line]['RPG'] and not userdata[line]['RPG']['setting_mod']:
+        if 'point' in userdata[line] and userdata[line]['point']['now_count'] != 0:
+            point_list.append(userdata[line]['point']['now_count'])
+if point_list == []:
+    point_list.append(1)
+
+
+point_total = sum(point_list)
+point_max = max(point_list)
+point_min = min(point_list)
+point_len = len(point_list)
+if point_max <= 0:
+    point_len = 1
+
+
+print(point_list)
+Exchange_rate = (point_total/point_max-point_total) / ((point_len**2*point_total)/point_max/(point_len+1)) *-1+1
+
+print(rpg_definitions['Exchange_rate'])
+
+
+
+
+
+>>>>>>> d4f08a8a2fc3bbe645a57e8ae3bf4127b1c6c211
 # if '屬性':
 #     Aa = 100
 #     Bb = 1
@@ -93,6 +137,7 @@ rpg_definitions = variable.get('rpg_definitions')
 
 #     print(int(random.uniform(C+0.5,A)+0.5))
 
+<<<<<<< HEAD
 # 魂算法:
 # 用戶攻擊力 的 魂 / 100
 # 升級方式:
@@ -113,6 +158,8 @@ rpg_definitions = variable.get('rpg_definitions')
 
 
 
+=======
+>>>>>>> d4f08a8a2fc3bbe645a57e8ae3bf4127b1c6c211
 # #--------------------------------------------------------------------------------------------------------
 # if '這裡是自動處理*.ling的代碼':
 #     Lang='ja_JP.lang'
