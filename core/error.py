@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import json
-with open('setting.json','r',encoding='utf8') as setting_file:
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Logger
