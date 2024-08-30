@@ -1,13 +1,17 @@
-language=en_Us
-name=name
-first_online_time=first online time
+language-Type=English
+gamename=noname
+language=language
+color=color
+color-code=color code
 coins=coins
+
 level=level
 EXP=EXP
 now=now
 max=max
 class=class
 
+character_sheet=character sheet
 Race=Race
 Human=Human
 Elf=Elf
@@ -16,9 +20,10 @@ Giant=Giant
 MoonRabbit=MoonRabbit
 Asian=Asian
 
+profession=Profession
 Main_profession=Main profession
 Warrior=Warrior
-Archer=Archer
+Archer=Ar
 Shielder=Shielder
 Thief=Thief
 Mage=Mage
@@ -31,6 +36,7 @@ Floriculturist=Floriculturist
 Chef=Chef
 Armourer=Armourer
 Hammersmith=Hammersmith
+full_equilibrium=full equilibrium
 
 attributes=attributes
 HP=H P
@@ -46,10 +52,11 @@ LUK=LUK
 CHR=CHR
 SAN=SAN
 
-item=item
-handbook=handbook
+Item=item
+Handbook=handbook
 
 Weapon=Weapon
+Initial=Initial
 Claw=Claw
 Hammer=Hammer
 Spear=Spear
@@ -69,14 +76,14 @@ Clawed_bow=Clawed bow
 Staff_sword=Staff sword
 Staff_blade=Staff blade
 Spear_staff=Spear staff
-Spear_mace=Spear mace
+Spear_maul=Spear maul
 Spear_axe=Spear axe
 Axe_maul=Axe maul
 
 Weapon_III=Weapon III
 Double-headed_maul_with_Spikes=Double-headed maul with Spikes
 Double-headed_Axe_with_Spikes=Double-headed Axe with Spikes
-Axe_mace_with_Spikes=Axe mace with Spikes
+Axe_maul_with_Spikes=Axe maul with Spikes
 Lance_of_Longinus=Lance of Longinus
 Jagged_Claw=Jagged Claw
 
@@ -91,19 +98,25 @@ Plate_armor=Plate armor
 
 Enchanting=Enchanting
 Runes=Runes
-Spell_Seal(T)=Spell_Seal(T)
+incantation_runes(T)=incantation runes(T)
 #Thermal
-Spell_Seal(M)=Spell_Seal(M)
+incantation_runes(M)=incantation runes(M)
 #Moistrue
-Spell_Seal(V)=Spell_Seal(V)
+incantation_runes(V)=incantation runes(V)
 #Vegatation
-Spell_Seal(P)=Spell_Seal(P)
+incantation_runes(P)=incantation runes(P)
 #Photon
-Spell_Seal(B)=Spell_Seal(B)
+incantation_runes(B)=incantation runes(B)
 #Blessing
+upgrade_runes=Upgrade runes
+upgrade_incantation_runes(T)=upgrade incantation runes(T)
+upgrade_incantation_runes(M)=upgrade incantation runes(M)
+upgrade_incantation_runes(V)=upgrade incantation runes(V)
+upgrade_incantation_runes(P)=upgrade incantation runes(P)
+upgrade_incantation_runes(B)=upgrade incantation runes(B)
 
 Emblazoning=Emblazoning
-Flowers=Flowers
+Faiths=Faiths
 Forget_me_nots=Forget me nots
 Baby's_breath=Baby's breath
 Lavender=Lavender
@@ -118,31 +131,83 @@ Calendula_officinalis=Calendula officinalis
 
 Studding=Studding
 Gemstones=Gemstones
-Jadeite=Jadeite
-Amethyst=Amethyst
-Niter=Niter
-Sky_Blue_Sapphire=Sky Blue Sapphire
-Clear_Quartz=Clear Quartz
-Aquamarine=Aquamarine
-Coloured_glaze=Coloured glaze
-Ruby=Ruby
-Feldspar=Feldspar
-Starlight_Stone=Starlight Stone
-Rainbow_Fluorite=Rainbow Fluorite
-Starburst_Quartz=Starburst Quartz
-Phosphosiderite=Phosphosiderite
-Labradorite=Labradorite
-Phantom_Quartz=Phantom Quartz
-Sun_stone=Sun stone
-Moon_stone=Moon stone
-Nebula_Stone=Nebula Stone
-Phantom_Stone=Phantom Stone
+Tiger's_Eye=Tiger's Eye
+Pyrite=Pyrite
+CrimsonPhoenix=CrimsonPhoenix
 Violet_Serenity_Calcite=Violet Serenity Calcite
-Crimson_Phoenix=Crimson Phoenix
-Dream_stone=Dream stone
 Celestial_Radiance_Pearl=Celestial Radiance Pearl
 NectarJade=NectarJade
 Restless_Crystal=Restless Crystal
+Zircon=Zircon
+Fluorite=Fluorite
+Tanzanite=Tanzanite
+Agate=Agate
+Sunstone=Sunstone
+Peridot=Peridot
+Amber=Amber
+Moonstone=Moonstone
+Lazurite=Lazurite
+Obsidian=Obsidian
+Black_Agate=Black Agate
+Sapphire=Sapphire
+Cat's_Eye=Cat's Eye
+Starburst_Quartz=Starburst Quartz
+Prehnite=Prehnite
+Opal=Opal
+Rutilated_Quartz=Rutilated Quartz
+Amethyst=Amethyst
+Green_Phantom=Green Phantom
+Turquoise=Turquoise
+White_Quartz=White Quartz
+Phantom_Quartz=Phantom Quartz
+Quartz=Quartz
+Amazonite=Amazonite
+Emerald=Emerald
+Kyanite=Kyanite
+Jasper=Jasper
+Coloured_Glaze=Coloured Glaze
+Rhodonite=Rhodonite
+Sodalite=Sodalite
+Limestone=Limestone
+Ruby=Ruby
+Yellow_Phosphorus=Yellow Phosphorus
+Red_Phosphorus=Red Phosphorus
+Niter=Niter
+Stable_Restless_Calcite=Stable Restless Calcite
+Activated_Restless_Calcite=Activated Restless Calcite
+Chill=Chill
+Cold_Resistance=Cold Resistance
+Burning=Burning
+Fire_Resistance=Fire Resistance
+Stability=Stability
+Anxiety=Anxiety
+Hope=Hope
+Vitality=Vitality
+Energized=Energized
+Development=Development
+Rebirth=Rebirth
+Energy=Energy
+Mental_Strength=Mental Strength
+Mediation=Mediation
+Balance=Balance
+Upgraded_Calcite=Upgraded Calcite
+Purified_Upgraded_Calcite=Purified Upgraded Calcite
+#霜寒:每次行動固定扣SAN
+#防寒:抵銷霜寒效果???
+#燃燒:每次行動固定扣HP
+#防燒:抵銷燃燒效果???
+#穩定:SAN值下降幅度降低
+#焦慮:SAN值下降幅度上升
+#希望:每回合隨機上升SAN
+#活力:SP值下降幅度降低
+#充沛:每回合隨機上升SP
+#成長:HP值下降幅度降低
+#重生:每回合隨機上升HP
+#能量:MP值下降幅度降低
+#精神:每回合隨機上升MP
+#調解:每次行動DEBUFF下降一回合
+#平衡:每次行動與敵方共享隨機BUFF
+
 
 Cooking=Cooking
 Cuisine=Cuisine
@@ -153,8 +218,75 @@ Hostile=Hostile
 
 
 
-battle=戰鬥
-PVP=玩家對戰
-win=勝
-lose=敗
-tie=平
+Battle=battle
+PVP=PVP
+win=win
+lose=lose
+tie=tie
+
+Market=Market
+
+Name=Name
+first_online_time=first online time
+set=set
+reset=reset
+random=random
+decided=decided
+choice=choice
+back=back
+previous=previous
+next=next
+
+
+Player_Guidelines=PlayerGuidelines
+Player_Guideline_1=Welcome to __{gamename}__! Before you embark on your adventure, please read the following “rules” to ensure your journey is fun and worry-free!
+Player_Guideline_2=The world of __{gamename}__ is filled with monsters and unknowns!\nIt is said that you have to be 2000 years old to join this feast.\nSo if one day you find an adventurer sneaking in despite everything,\njust turn a blind eye.
+Player_Guideline_3=Your Discord account is your only ticket to becoming an adventurer in __{gamename}__.\nPlease protect it well and don't let it fall into the wrong hands.\nPasswords are not meant to be shared with friends!\nKeep it secret, just like you would with your diary.
+Player_Guideline_4=Although adventure is full of unknowns and exploration, if your character encounters any trouble along the way, don't be discouraged, because your unique story is also part of the game. Let's stay happy together!
+Player_Guideline_5=We hope you have a pleasant time while playing. Therefore, interact harmoniously with other players and remain calm if any disputes arise. We believe that every interaction and journey can compose a unique melody.
+Player_Guideline_6=Although the world of __{gamename}__ has many item, really many—\nbut please avoid engaging in any real-world monetary transactions.\nBecause the experience of the journey cannot be bought with money.
+Player_Guideline_7=If you find any bugs in this world,\nwe encourage you to explore as much as possible and share with other adventurers.\nOnly when more people notice will the gods extend their invisible hands.
+
+User_Terms=UserTerms
+#Account_Management
+User_Terms_1.0=AccountManagement
+User_Terms_1.1=If you lose your account or password and can no longer log in with your previous account, you should notify us immediately. We will provide assistance where possible and may transfer your data if feasible.
+#Usage_Restrictions
+User_Terms_2.0=UsageRestrictions
+User_Terms_2.1=Any form of real-world monetary transactions within the game is prohibited, including but not limited to virtual currency exchanges, item sales, or service transactions. All transactions must be conducted through the in-game virtual currency and item systems.
+#Intellectual_Property
+User_Terms_3.0=IntellectualProperty
+User_Terms_3.1=This game and all its contents (including but not limited to storylines, sets, etc.) are the intellectual property of us or the relevant rights holders. Unauthorized reproduction, distribution, modification, or other use of these contents is prohibited.
+User_Terms_3.2=Users may only use game content for personal purposes. Using game content for commercial purposes, including but not limited to selling, transferring, or publicly displaying, is prohibited without our written permission.
+User_Terms_3.3=We reserve the right to pursue legal action against any unauthorized use of our intellectual property. Users are responsible for reporting any intellectual property infringement.
+#Privacy_Policy
+User_Terms_4.0=PrivacyPolicy
+User_Terms_4.1=We will collect necessary personal data to operate the game, including but not limited to user basic information, game progress, and transaction records. All data will be processed and protected in accordance with our privacy policy.
+User_Terms_4.2=We commit not to use users' personal data for commercial purposes outside the game unless explicitly agreed by the user. The processing of user data will comply with relevant laws and regulations.
+User_Terms_4.3=If there are any changes to the privacy policy, we will notify users through announcements and update the privacy policy text. Users should regularly review the latest privacy policy.
+#Liability_Disclaimer
+User_Terms_5.0=LiabilityDisclaimer
+User_Terms_5.1=We strive to provide a stable gaming experience but are not responsible for any direct or indirect damages that may occur during the use of the game, including but not limited to technical failures, server interruptions, or errors. Any issues or bugs in the game are considered part of the gaming experience.
+User_Terms_5.2=We are not liable for any third-party claims arising from the use of this game. Users should handle related issues themselves and bear all resulting responsibilities.
+User_Terms_5.3=We do not guarantee the continuous or error-free operation of the game service. The service may be temporarily interrupted for maintenance, updates, or other technical issues. We will minimize the impact and notify users once the service is restored.
+#Dispute_Resolution
+User_Terms_6.0=DisputeResolution
+User_Terms_6.1=If any disputes arise during the game, they should first be attempted to be resolved through negotiation. If an agreement cannot be reached, disputes will be handled according to game rules or relevant laws.
+User_Terms_6.2=We reserve the final interpretation and decision-making rights and will provide necessary assistance during the dispute resolution process. Users should comply with all relevant regulations in the game to maintain a harmonious gaming environment.
+#Service_Changes
+User_Terms_7.0=ServiceChanges
+User_Terms_7.1=We reserve the right to adjust, modify, or terminate game services at any time. If changes are necessary, we will announce them in advance and minimize the impact on users. Service changes may include, but are not limited to, game content, features, and values.
+User_Terms_7.2=If service changes involve user data processing or service terms updates, we will notify users through announcements. Users should regularly review announcements to stay informed about the latest service changes.
+#ermination_Terms
+User_Terms_8.0=TerminationTerms
+User_Terms_8.1=If users violate game rules, we have the right to alter their game data accordingly, and in severe cases, delete their game data. Once deleted, all game data will be irretrievable.
+User_Terms_8.2=Users should comply with game rules to ensure a fair and safe gaming environment. Violations, including but not limited to cheating, exploiting bugs without sharing information, or harassing other players, will be subject to appropriate penalties.
+#Refund_Policy
+User_Terms_9.0=RefundPolicy
+User_Terms_9.1=Our game does not involve any real-world monetary transactions.All transactions are solely for one-time purchases made with in-game virtual currency. If users encounter technical issues or discover violations after payment, they should contact us to handle the relevant matters.
+User_Terms_9.2=Once the transaction is completed, we generally do not provide refunds unless there are technical issues during the transaction or other special circumstances. Refund requests will be reviewed and processed based on the specific situation, and relevant evidence may be required.
+
+error402=Not found
+error401=Undefined
+error403=Format error
+error404=Contains invalid characters
