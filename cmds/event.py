@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
 import json
-with open('setting.json','r',encoding='utf8') as setting_file:
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
-with open('dict.json','r',encoding='utf8') as dict_file:
+with open('dict.json','r',encoding='utf-8') as dict_file:
     dict = json.load(dict_file)
 
 from core.classes import Cog_extension
@@ -75,26 +75,59 @@ class Event(Cog_extension):
             #第四組
             if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
-                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                         userdata = json.load(userdata_file)
-                    counter = 0
-                    for data in userdata:
-                        if user.id == int(data):
-                            counter += 1
-                            userdata_update = userdata[f'{user.id}']
+                    if str(user.id) in userdata:
+                        full_keys=['name', 'display_name', 'global_name', 'code', 'top_role', 'name_card', 'point', 'trade_count', 'VIP_tickets', 'VIP_chip', 'omikuji', 'RPG', 'recent_messages']
+                        if list(userdata[str(user.id)].keys()) != full_keys:
+                            userdata_update = {}
+                            for key in full_keys:
+                                if key in userdata[str(user.id)]:
+                                    userdata_update[key] = userdata[str(user.id)][key]
+                                else:
+                                    code=[]
+                                    if userdata != {}:
+                                        for data in userdata:
+                                            if 'code' in userdata[data] and userdata[data]['code'] != "#NO":
+                                                code.append(userdata[data]['code'])
+                                    code.append('000')
+                                    if key == 'name':userdata_update[key] = user.name
+                                    if key == 'display_name':userdata_update[key] = user.display_name
+                                    if key == 'global_name':userdata_update[key] = user.global_name
+                                    if key == 'code':userdata_update[key] = str(int(max(code))+1).zfill(3)
+                                    if key == 'top_role':userdata_update[key] = f'<@&{user.top_role.id}>'
+                                    if key == 'name_card':userdata_update[key] = None
+                                    if key == 'point':userdata_update[key] = {"state": True,"now_count": 0,"history_count": 0,"consumption": 0,"give": 0,"deprivation": 0}
+                                    if key == 'trade_count':userdata_update[key] = 0
+                                    if key == 'VIP_tickets':userdata_update[key] = 0
+                                    if key == 'VIP_chip':userdata_update[key] = 0
+                                    if key == 'omikuji':userdata_update[key] = {"badluck": 0,"today": None}
+                                    if key == 'RPG':userdata_update[key] = {}
+                                    if key == 'recent_messages':userdata_update[key] = {"url": "","time": ""}
+                            userdata[str(user.id)]=userdata_update
+                        else:
+                            userdata_update = userdata[str(user.id)]
                             userdata_update['point']['state'] = True
                             userdata_update['name'] = user.name
                             userdata_update['display_name'] = user.display_name
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
-                            userdata[f'{user.id}'].update(userdata_update)
-                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
-                                json.dump(userdata , userdata_file , indent=4)
-                    if counter == 0:
-                        userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                            userdata[str(user.id)].update(userdata_update)
+                    else:
+                        if user.bot == False:
+                            code=[]
+                            if userdata == {}:
+                                code.append('000')
+                            else:
+                                for data in userdata:
+                                    if userdata[data]['code'] != "#NO":
+                                        code.append(userdata[data]['code'])
+                            userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':str(int(max(code))+1).zfill(3),'top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
+                        else:
+                            userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
                         userdata.update(userdata_update)
-                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
-                            json.dump(userdata , userdata_file , indent=4)
+                    with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
+                        json.dump(userdata , userdata_file , indent=4)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"add {reaction.emoji}-@{role}')
                     await user.add_roles(role)
@@ -127,27 +160,59 @@ class Event(Cog_extension):
             #第四組
             if str(reaction.message_id) == setting['ROLE_MESSAGE_ID']:
                 if str(reaction.emoji) == setting['EMOII_REGIONAL_INDICATOR_P']:
-                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+                    with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
                         userdata = json.load(userdata_file)
-                    counter = 0
-                    for data in userdata:
-                        if user.id == int(data):
-                            counter += 1
-                            userdata_update = userdata[f'{user.id}']
+                    if str(user.id) in userdata:
+                        full_keys=['name', 'display_name', 'global_name', 'code', 'top_role', 'name_card', 'point', 'trade_count', 'VIP_tickets', 'VIP_chip', 'omikuji', 'RPG', 'recent_messages']
+                        if list(userdata[str(user.id)].keys()) != full_keys:
+                            userdata_update = {}
+                            for key in full_keys:
+                                if key in userdata[str(user.id)]:
+                                    userdata_update[key] = userdata[str(user.id)][key]
+                                else:
+                                    code=[]
+                                    if userdata != {}:
+                                        for data in userdata:
+                                            if 'code' in userdata[data] and userdata[data]['code'] != "#NO":
+                                                code.append(userdata[data]['code'])
+                                    code.append('000')
+                                    if key == 'name':userdata_update[key] = user.name
+                                    if key == 'display_name':userdata_update[key] = user.display_name
+                                    if key == 'global_name':userdata_update[key] = user.global_name
+                                    if key == 'code':userdata_update[key] = str(int(max(code))+1).zfill(3)
+                                    if key == 'top_role':userdata_update[key] = f'<@&{user.top_role.id}>'
+                                    if key == 'name_card':userdata_update[key] = None
+                                    if key == 'point':userdata_update[key] = {"state": False,"now_count": 0,"history_count": 0,"consumption": 0,"give": 0,"deprivation": 0}
+                                    if key == 'trade_count':userdata_update[key] = 0
+                                    if key == 'VIP_tickets':userdata_update[key] = 0
+                                    if key == 'VIP_chip':userdata_update[key] = 0
+                                    if key == 'omikuji':userdata_update[key] = {"badluck": 0,"today": None}
+                                    if key == 'RPG':userdata_update[key] = {}
+                                    if key == 'recent_messages':userdata_update[key] = {"url": "","time": ""}
+                            userdata[str(user.id)]=userdata_update
+                        else:
+                            userdata_update = userdata[str(user.id)]
                             userdata_update['point']['state'] = False
                             userdata_update['name'] = user.name
                             userdata_update['display_name'] = user.display_name
                             userdata_update['global_name'] = user.global_name
                             userdata_update['top_role'] = f'<@&{user.top_role.id}>'
-                            userdata[f'{user.id}'].update(userdata_update)
-                            with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
-                                json.dump(userdata , userdata_file , indent=4)
-                    if counter == 0:
-                        userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':f'{str(True)}','point':{'state':f'{str(True)}','now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0}}
+                            userdata[str(user.id)].update(userdata_update)
+                    else:
+                        if user.bot == False:
+                            code=[]
+                            if userdata == {}:
+                                code.append('000')
+                            else:
+                                for data in userdata:
+                                    if userdata[data]['code'] != "#NO":
+                                        code.append(userdata[data]['code'])
+                            userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':str(int(max(code))+1).zfill(3),'top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':False,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
+                        else:
+                            userdata_update = {f'{user.id}':{'name':f'{user.name}','display_name':f'{user.display_name}','global_name':f'{user.global_name}','code':f'#NO','top_role':f'<@&{user.top_role.id}>','name_card':True,'point':{'state':False,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},'trade_count': 0,'VIP_tickets': 0,'VIP_chip': 0,"omikuji": {"badluck": 0,"today": None},"RPG":{},"recent_messages":{"url":"","time":""}}}
                         userdata.update(userdata_update)
-                        with open('cmds\\data\\user_data.json','w',encoding='utf8') as userdata_file:
-                            json.dump(userdata , userdata_file , indent=4)
-
+                    with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
+                        json.dump(userdata , userdata_file , indent=4)
                     role = guild.get_role(int(setting['P_ROLE_ID']))
                     print(f'{nowtime} | [{guild}] : User"{user}"remove {reaction.emoji}-@{role}')
                     await user.remove_roles(role)
@@ -155,11 +220,11 @@ class Event(Cog_extension):
     @commands.Cog.listener()
     async def on_message(self,ctx):
 #前置設定
-        with open('setting.json','r',encoding='utf8') as setting_file:
+        with open('setting.json','r',encoding='utf-8') as setting_file:
             setting = json.load(setting_file)
-        with open('dict.json','r',encoding='utf8') as dict_file:
+        with open('dict.json','r',encoding='utf-8') as dict_file:
             dict = json.load(dict_file)
-        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf8') as userdata_file:
+        with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
             userdata = json.load(userdata_file)
         guild = ctx.guild
         channel = ctx.channel
@@ -170,11 +235,13 @@ class Event(Cog_extension):
         nowtime = datetime.datetime.now().strftime('%H:%M:%S')
         msg = ctx.content
         log_channel = self.bot.get_channel(int(setting['MESSAGE_LOG_CHANNEL_ID']))
-        nowtime = datetime.datetime.now().strftime('%H:%M:%S')
     #字典
+        dict_dict = dict['dict']
         dict_my = dict['user_self-proclaimed']
         dict_azunya = dict['azunya']
         dict_azukira = dict['azukira']
+        dict_pass = dict['pass']
+        dict_reset = dict['reset']
         dict_omikuji = dict['omikuji']
         dict_dessert = dict['dessert']
         dict_morning = dict['morning']
@@ -198,10 +265,50 @@ class Event(Cog_extension):
         #<and any(word in ctx.content for word in key)>
         #……以及訊息等於關鍵字(key)
         #<and ctx.content == key>
+
+
 #訊息日誌
-        if channel.id != log_channel.id and guild.id == int(setting['GUILD_ID']):
-            if ctx.author.bot == False:
-                await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
+        if guild.id == int(setting['GUILD_ID']):
+            with open('cmds\\data\\user_data.json' , 'r' , encoding='utf-8') as userdata_file:
+                userdata = json.load(userdata_file)
+            url = f'https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id}'
+            if str(user) not in userdata:
+                if global_name == None:
+                    global_name = f'"name":/{ctx.author}/'
+                if ctx.author.bot == False:
+                    code=[]
+                    if userdata != {}:
+                        for data in userdata:
+                            if userdata[data]['code'] != "#NO":
+                                code.append(userdata[data]['code'])
+                    else:
+                        code = '000'
+                    userdata_update = {
+                        f'{user}':{
+                            'name':f'{ctx.author.name}',
+                            'display_name':f'{display_name}',
+                            'global_name':f'{global_name}',
+                            'code':str(int(max(code))+1).zfill(3),
+                            'top_role':f'<@&{ctx.author.top_role.id}>',
+                            'name_card':True,
+                            'point':{'state':True,'now_count':0,'history_count':0,'consumption':0,'give':0,'deprivation':0},
+                            'trade_count': 0,
+                            'VIP_tickets': 0,
+                            'VIP_chip': 0,
+                            "omikuji": {"badluck": 0,"today": None},
+                            "RPG":{},
+                            "recent_messages":{"url":url,"time":f'{datetime.datetime.now()}'}
+                        }}
+            else:
+                userdata_update = userdata
+                userdata_update[str(user)]['recent_messages']['url'] = url
+                userdata_update[str(user)]['recent_messages']['time'] = f'{datetime.datetime.now()}'
+            userdata.update(userdata_update)
+            with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
+                json.dump(userdata , userdata_file , indent=4)
+            if channel.id != log_channel.id:
+                if ctx.author.bot == False:
+                    await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
 #問候
         if ctx.author.bot == False:
             await asyncio.sleep(0.1)
@@ -347,6 +454,22 @@ class Event(Cog_extension):
                     ]
             # go_to_Work = []
             # get_off_work = []
+        #字典
+            if any(word in ctx.content for word in azunya) and any(word in ctx.content for word in dict_dict) and not ctx.author.bot and any(word not in ctx.content for word in dict_pass):
+                    pass_key = ['dict','azukira','dessert','Friday','','','','','','']
+                    msg = []
+                    for key in dict:
+                        if key not in pass_key:
+                            msg.append(f'\n# - {key}:')
+                            value = []
+                            for line in dict[key]:
+                                value.append(f'{line}')
+                            if value != []:
+                                msg.append(f'```{'、'.join(value)}```')
+                            else:
+                                msg.append(f'``` ```')
+                    msg = ''.join(msg)
+                    await ctx.channel.send(msg)
         #上班上學
             if any(word in ctx.content for word in dict_go_to_Work):
                 print(f'{nowtime[:-3]} | User : "{global_name}" 觸發了上班上學')
@@ -395,11 +518,17 @@ class Event(Cog_extension):
 
 #抽籤系統/URL
         if channel != log_channel:
-            if any(word in ctx.content for word in (dict_azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
+            if any(word in ctx.content for word in dict_reset) and any(word in ctx.content for word in dict_omikuji) and any(word not in ctx.content for word in dict_pass):
+                if os.path.exists('cmds\data\omikuji.lock'):
+                    os.remove('cmds\data\omikuji.lock')
+                    await ctx.channel.send('已經重置')
+                else:
+                    await ctx.channel.send('未發現問題')
+            elif any(word in ctx.content for word in (dict_azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])) and any(word not in ctx.content for word in dict_pass):
             # if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
                 if user == (697842681082281985):
                     user = (938100109240074310)
-                with open('setting.json','r',encoding='utf8') as setting_file:
+                with open('setting.json','r',encoding='utf-8') as setting_file:
                     setting = json.load(setting_file)
                 Current_hours = datetime.datetime.now().strftime('%H')
                 Current_minutes = datetime.datetime.now().strftime('%M')
@@ -412,7 +541,7 @@ class Event(Cog_extension):
                     while os.path.exists('cmds\data\omikuji.lock') == True:
                         await asyncio.sleep(1)
                     open('cmds\data\omikuji.lock', 'w').close()
-                    with open('cmds\data\omikuji.json','r',encoding='utf8') as omikuji_file:
+                    with open('cmds\data\omikuji.json','r',encoding='utf-8') as omikuji_file:
                         omikuji = json.load(omikuji_file)
                 #抓資料
                     counter = 0
@@ -437,7 +566,7 @@ class Event(Cog_extension):
                     #omikuji資料更新
                         omikuji_update = {f'{user}':{'name':f'{display_name}','pic':f'imege\omikuji\{random_pic}'}}
                         omikuji.update(omikuji_update)
-                        with open('cmds\data\omikuji.json','w+',encoding='utf8') as omikuji_file:
+                        with open('cmds\data\omikuji.json','w+',encoding='utf-8') as omikuji_file:
                             json.dump(omikuji,omikuji_file,indent=4)
                     #如果用戶有在'user_data.json'裡就存進去,否則聊天室回復訊息
                         counter = 0
@@ -481,7 +610,7 @@ class Event(Cog_extension):
                                         userdata[f'{user}']['omikuji'].update({'badluck':userdata[f'{user}']['omikuji']['badluck'],'today':today})
                                 elif 'omikuji' not in userdata[f'{user}']:
                                     userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
-                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf8') as userdata_file:
+                            with open('cmds\\data\\user_data.json' , 'w' , encoding='utf-8') as userdata_file:
                                 json.dump(userdata , userdata_file , indent=4)
                         else:
                             await ctx.channel.send(f'是說 User :<@{user}>\n你好像沒有註冊P卡喔\n沒有註冊的話是不能參與比賽的\n現在去註冊的話今天00:00一過再抽籤就可以比賽嘍^W^')
