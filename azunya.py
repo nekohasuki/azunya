@@ -4,7 +4,7 @@ intents = discord.Intents.all()
 intents.typing = False
 intents.presences = False
 import json
-with open('setting.json','r',encoding='utf8') as setting_file:
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 bot = commands.Bot(command_prefix =[f'{setting["prefix"]}-','/'],intents = intents)
 
@@ -38,13 +38,13 @@ async def load(interaction: discord.Interaction,extension: Optional[str] = None)
         extension = "all"
         for load in extension_list:
             await bot.load_extension(f'cmds.{load}')
-        await interaction.response.send_message(f'已成功加載__{len(extension_list)}__項擴充類別')
+        await interaction.response.send_message(f'已成功加載__{len(extension_list)}__項擴充類別',delete_after = 0)
     else:
         if extension in extension_list:
             await bot.load_extension(f'cmds.{extension}')
-            await interaction.response.send_message(f'已成功加載擴充類別：__{extension}__')
+            await interaction.response.send_message(f'已成功加載擴充類別：__{extension}__',delete_after = 0)
         else:
-            await interaction.response.send_message(f'沒有擴充類別："{extension}"')
+            await interaction.response.send_message(f'沒有擴充類別："{extension}"',delete_after = 0)
 #重新加載類別
 commandname = (f'{prefix}reload')
 @bot.tree.command(name = commandname, description = '重新加載擴充類別')
@@ -62,13 +62,13 @@ async def reload(interaction: discord.Interaction,extension: Optional[str] = Non
         extension = "all"
         for reload in extension_list:
             await bot.reload_extension(f'cmds.{reload}')
-        await interaction.response.send_message(f'已成功重新加載__{len(extension_list)}__項擴充類別')
+        await interaction.response.send_message(f'已成功重新加載__{len(extension_list)}__項擴充類別',delete_after = 0)
     else:
         if extension in extension_list:
             await bot.reload_extension(f'cmds.{extension}')
-            await interaction.response.send_message(f'已成功重新加載擴充類別：__{extension}__')
+            await interaction.response.send_message(f'已成功重新加載擴充類別：__{extension}__',delete_after = 0)
         else:
-            await interaction.response.send_message(f'沒有擴充類別："{extension}"')
+            await interaction.response.send_message(f'沒有擴充類別："{extension}"',delete_after = 0)
 #取消加載類別
 commandname = (f'{prefix}unload')
 @bot.tree.command(name = commandname, description = '取消加載擴充類別')
@@ -86,13 +86,13 @@ async def unload(interaction: discord.Interaction,extension: Optional[str] = Non
         extension = "all"
         for unload in extension_list:
             await bot.unload_extension(f'cmds.{unload}')
-        await interaction.response.send_message(f'已成功取消加載__{len(extension_list)}__項擴充類別')
+        await interaction.response.send_message(f'已成功取消加載__{len(extension_list)}__項擴充類別',delete_after = 0)
     else:
         if extension in extension_list:
             await bot.unload_extension(f'cmds.{extension}')
-            await interaction.response.send_message(f'已成功取消加載擴充類別：__{extension}__')
+            await interaction.response.send_message(f'已成功取消加載擴充類別：__{extension}__',delete_after = 0)
         else:
-            await interaction.response.send_message(f'沒有擴充類別："{extension}"')
+            await interaction.response.send_message(f'沒有擴充類別："{extension}"',delete_after = 0)
 
 
 
