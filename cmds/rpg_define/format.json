@@ -15,19 +15,13 @@
             "emoji-Giant":"'<:raceGiant:1272670065396940862>'",
             "emoji-MoonRabbit":"'<:raceMoonRabbit:1272903546815250524>'",
             "emoji-Asian":"'<:raceAsian:1272670060464443423>'",
-<<<<<<< HEAD
+
             "emoji-Warrior":"'😠'",
             "emoji-Archer":"'🫡'",
             "emoji-Shielder":"'😑'",
             "emoji-Thief":"'🤫'",
             "emoji-Mage":"'🧐'"
-=======
-            "emoji-Warrior":"'error401'",
-            "emoji-Archer":"'error401'",
-            "emoji-Shielder":"'error401'",
-            "emoji-Thief":"'error401'",
-            "emoji-Mage":"'error401'"
->>>>>>> d4f08a8a2fc3bbe645a57e8ae3bf4127b1c6c211
+
         }
     },
     "ABC":{
@@ -62,11 +56,10 @@
             "LUK-Character_Sheet":"'運9氣'.replace('9', '\u2003').replace('3', '\u2009')",
             "CHR-Character_Sheet":"'魅9力'.replace('9', '\u2003').replace('3', '\u2009')",
             "SAN-Character_Sheet":"'精9神'.replace('9', '\u2003').replace('3', '\u2009')",
-
-<<<<<<< HEAD
+            
+            
+            
             "If_you_directly_press_the_decided_will_be_the_default_value_for_the_choice_race":"'如果直接按下確定將為選定種族的預設值'",
-=======
->>>>>>> d4f08a8a2fc3bbe645a57e8ae3bf4127b1c6c211
             "Maybe_you_should_equip_something?":"'也許你應該裝備個什麼?'"
         }
     },
@@ -114,12 +107,9 @@
             "SAN-Character_Sheet":"'S434A434N'.replace('4', '\u2006').replace('3', '\u2009')",
 
 
-<<<<<<< HEAD
+
             "If_you_directly_press_the_decided_will_be_the_default_value_for_the_choice_race":"'If you directly press the decided will be the default value for the choice race'",
             "Maybe_you_should_equip_something?":"'Maybe you should equip something?'"
-=======
-             "Maybe_you_should_equip_something?":"'Maybe you should equip something?'"
->>>>>>> d4f08a8a2fc3bbe645a57e8ae3bf4127b1c6c211
         }
     },
     "ja_JP":{
@@ -145,12 +135,10 @@
             "SAN-Character_Sheet":"'精9神'.replace('9', '\u2003')",
 
 
-<<<<<<< HEAD
+
             "If_you_directly_press_the_decided_will_be_the_default_value_for_the_choice_race":"'直接押すと、選択したレースのデフォルト値になります'",
             "Maybe_you_should_equip_something?":"'何か装備したほうがいいかも？'"
-=======
-             "Maybe_you_should_equip_something?":"'何か装備したほうがいいかも？'"
->>>>>>> d4f08a8a2fc3bbe645a57e8ae3bf4127b1c6c211
+
         }
     
     }
