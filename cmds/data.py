@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import json
-with open('setting.json','r',encoding='utf8') as setting_file:
+with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
 
 from core.classes import Cog_extension
@@ -15,7 +15,7 @@ class Data(Cog_extension):
     commandname = (f'{prefix}azudata')
     @app_commands.command(name = commandname, description = "查詢梓守的資料")
     async def azudata(self,interaction:discord.Interaction):
-        with open("setting.json","r",encoding="utf8") as setting_file:
+        with open("setting.json","r",encoding="utf-8") as setting_file:
             setting = json.load(setting_file)
         t = int(setting["onlinetime"])
         d = math.floor(t/60/60/24)
@@ -35,7 +35,7 @@ class Data(Cog_extension):
         if d >= 1:
             while counter > 0:
                 counter -= 1
-                with open("setting.json","r",encoding="utf8") as setting_file:
+                with open("setting.json","r",encoding="utf-8") as setting_file:
                     setting = json.load(setting_file)
                 t = int(setting["onlinetime"])
                 d = math.floor(t/60/60/24)
@@ -48,7 +48,7 @@ class Data(Cog_extension):
         else:
             while counter > 0:
                 counter -= 1
-                with open("setting.json","r",encoding="utf8") as setting_file:
+                with open("setting.json","r",encoding="utf-8") as setting_file:
                     setting = json.load(setting_file)
                 t = int(setting["onlinetime"])
                 d = math.floor(t/60/60/24)
