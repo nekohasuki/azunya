@@ -24,7 +24,7 @@ with open('cmds/data/omikuji.json','w',encoding='utf-8') as omikuji_file:
     json.dump(omikuji,omikuji_file)
 """
 dump_rpg_definitions='''
-with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill: 
+with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill:
     json.dump(rpg_definitions,RPG_definitions_fill,indent=4)
 '''
 with open('setting.json','r',encoding='utf-8') as setting_file:
@@ -136,8 +136,9 @@ class Task(Cog_extension):
                     await asyncio.sleep(2)
                     await channel.send(f'梓守才不信，難道沒有人想抽籤嗎?')
                     await asyncio.sleep(1)
-                    await channel.send(f'看來這個伺服器不需要我了...')      
-                shutil.copy('cmds/data/user_data.json',f'cmds/data/user_data_history/{datetime.datetime.now().strftime('%Y-%m-%d')}.json')          
+                    await channel.send(f'看來這個伺服器不需要我了...')
+                shutil.copy('cmds/data/user_data.json',f'cmds/data/user_data_history/{datetime.datetime.now().strftime('%Y-%m-%d')}.json')
+                shutil.copy('setting.json',f'setting_history/{datetime.datetime.now().strftime('%Y-%m-%d')}.json')
                 # await channel.send(f'<@&1079939318371582043>\n記得拔管')
     #重置'omikuji.json'資料
             omikuji={}
@@ -190,7 +191,7 @@ class Task(Cog_extension):
         if point_max <= 0:
             point_len = 0
         rpg_definitions['Exchange_rate'] = (point_total/point_max-point_total) / ((point_len**2*point_total)/point_max/(point_len+1)) *-1+1
-        with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill: 
+        with open(f'cmds/rpg_define/rpg_definitions.json','w',encoding='utf-8') as RPG_definitions_fill:
             json.dump(rpg_definitions,RPG_definitions_fill,indent=4)
     @Exchange_rate.before_loop
     async def Exchange_rate_before(self):
