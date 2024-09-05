@@ -1,5 +1,5 @@
 from discord import app_commands,SelectOption
-import json,os,random
+import datetime,json,os,random,shutil
 Lang = ['zh_TW']
 user = str(938100109240074310)
 open_file='''
@@ -41,9 +41,9 @@ lang = variable.get('lang')
 rpg_definitions = variable.get('rpg_definitions')
 
 
-with open('cmds/rpg_define/format.json','r',encoding='utf-8') as Format_file:
-    format = json.load(Format_file)
-print(format)
+
+
+
 
 
 # if '魂':
