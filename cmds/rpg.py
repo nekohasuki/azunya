@@ -1112,7 +1112,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'row-1' != 0:
@@ -1143,7 +1146,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             user_color = int(userdata[user]['RPG']['color'][2:],16)
@@ -1182,7 +1188,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             user_color = int(userdata[user]['RPG']['color'][2:],16)
@@ -1215,7 +1224,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             await interaction.response.edit_message(content = f'# {eval(lang.get('emoji-setting',lang['error402']))} __|  **{eval(lang.get('set',lang['error402']))}**  |__ {eval(lang.get('emoji-setting',lang['error402']))}',embed = None,view = Config.Interface.Set_Screen().Choice_Screen(interaction))
@@ -1233,7 +1245,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             main_profession =Button(label=f'{eval(lang.get('Main_profession',lang['error402']))}')
@@ -1261,7 +1276,7 @@ if Test_mod:
                     class Individual(View):
                         def __init__(self):
                             super().__init__(timeout = None)
-                            main_profession =Button(label='主職業')
+                            pass
                             return Individual()
             class Item_Screen:
                 def Choice_Screen(self,interaction:discord.Interaction):
@@ -1275,7 +1290,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'row-1' != 0:
@@ -1299,7 +1317,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             user_color = int(userdata[user]['RPG']['color'][2:],16)
@@ -1334,7 +1355,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'row-1' != 0:
@@ -1377,7 +1401,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             user_color = int(userdata[user]['RPG']['color'][2:],16)
@@ -1441,7 +1468,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             user_color = int(userdata[user]['RPG']['color'][2:],16)
@@ -1487,7 +1517,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             user_color = int(userdata[user]['RPG']['color'][2:],16)
@@ -1523,7 +1556,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             user_color = int(userdata[user]['RPG']['color'][2:],16)
@@ -1564,7 +1600,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             user_color = int(userdata[user]['RPG']['color'][2:],16)
@@ -1593,7 +1632,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'row-1' != 0:
@@ -1614,7 +1656,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'row-1' != 0:
@@ -1651,7 +1696,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'row-1' != 0:
@@ -1684,7 +1732,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             color = userdata[user]['RPG']['color']
@@ -1708,7 +1759,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'color' in userdata[user]['RPG']:
@@ -1726,7 +1780,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'color' in userdata[user]['RPG']:
@@ -1775,7 +1832,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'row-1' != 0:
@@ -1804,7 +1864,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'color' in userdata[user]['RPG']:
@@ -1826,7 +1889,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'color' in userdata[user]['RPG']:
@@ -1843,7 +1909,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             await interaction.response.edit_message(content = f'# {eval(lang.get('emoji-setting',lang['error402']))} __|  **{eval(lang.get('set',lang['error402']))}**  |__ {eval(lang.get('emoji-setting',lang['error402']))}',embed = None,view = Config.Interface.Set_Screen().Choice_Screen(interaction))
@@ -1860,7 +1929,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'row-1' != 0:
@@ -1889,7 +1961,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'color' in userdata[user]['RPG']:
@@ -1916,7 +1991,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             if 'color' in userdata[user]['RPG']:
@@ -1938,7 +2016,10 @@ if Test_mod:
                             variable = {}
                             exec(open_file,globals(),variable)
                             userdata = variable.get('userdata')
-                            Lang = [userdata[user]['RPG']['language']]
+                            for line in Lang:
+                                Lang.remove(line)
+                            if 'RPG' in userdata[user] and 'language' in userdata[user]['RPG']:
+                                Lang.append(userdata[user]['RPG']['language'])
                             exec(open_file,globals(),variable)
                             lang = variable.get('lang')
                             await interaction.response.edit_message(content = f'# {eval(lang.get('emoji-setting',lang['error402']))} __|  **{eval(lang.get('set',lang['error402']))}**  |__ {eval(lang.get('emoji-setting',lang['error402']))}',embed = None,view = Config.Interface.Set_Screen().Choice_Screen(interaction))
