@@ -306,7 +306,7 @@ class Event(Cog_extension):
             userdata.update(userdata_update)
             with open('cmds\\data\\user_data.json','w',encoding='utf-8') as userdata_file:
                 json.dump(userdata , userdata_file , indent=4)
-            if channel.id != log_channel.id:
+            if channel != log_channel and str(channel.id) not in setting['MESSAGE_PASS_CHANNEL_ID']:
                 if ctx.author.bot == False:
                     await log_channel.send(f'{nowtime}\n**[ {guild} ]**　|　__{channel}__\n{name}(`ID:`||`{user}`||)：\n{msg} [`訊息連結`](https://discord.com/channels/{guild.id}/{channel.id}/{ctx.id})')
 #問候
