@@ -518,16 +518,16 @@ class Event(Cog_extension):
 
 #抽籤系統/URL
         if channel != log_channel:
+            if user == (697842681082281985):
+                user = (938100109240074310)
             if any(word in ctx.content for word in dict_reset) and any(word in ctx.content for word in dict_omikuji) and any(word not in ctx.content for word in dict_pass):
                 if os.path.exists('cmds\data\omikuji.lock'):
                     os.remove('cmds\data\omikuji.lock')
                     await ctx.channel.send('已經重置')
                 else:
                     await ctx.channel.send('未發現問題')
-            elif any(word in ctx.content for word in (dict_azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])) and any(word not in ctx.content for word in dict_pass):
+            elif ((any(word in ctx.content for word in (dict_azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji))) or (user == 938100109240074310 and any(word in ctx.content for word in (dict_azunya)))and any(word in ctx.content for word in (dict_omikuji))) and any(word not in ctx.content for word in (['/say'])) and any(word not in ctx.content for word in dict_pass):   
             # if any(word in ctx.content for word in (azunya)) and any(word in ctx.content for word in (dict_my)) and any(word in ctx.content for word in (dict_omikuji)) and any(word not in ctx.content for word in (['/say'])):
-                if user == (697842681082281985):
-                    user = (938100109240074310)
                 with open('setting.json','r',encoding='utf-8') as setting_file:
                     setting = json.load(setting_file)
                 Current_hours = datetime.datetime.now().strftime('%H')
