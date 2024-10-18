@@ -15,6 +15,7 @@ prefix = 'a-'
 #機器人登陸通知
 @bot.event
 async def on_ready():
+    await bot.get_channel(int(1296794130416144405)).send(f'上線了')
     print('>>','嗨嗨嗨!! {0.user}已經成功登陸嘍!!!'.format(bot),'<<')
     try:
         synced = await bot.tree.sync()
