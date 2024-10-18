@@ -611,7 +611,7 @@ class Event(Cog_extension):
                                 elif 'omikuji' not in userdata[f'{user}']:
                                     userdata[f'{user}'].update({'omikuji':{'badluck':0,'today':today}})
                             with open('cmds\\data\\user_data.json' , 'w' , encoding='utf-8') as userdata_file:
-                                json.dump(userdata , userdata_file , indent=4)
+                                json.dump(userdata , userdata_file , indent=4 , ensure_ascii=False)
                         else:
                             await ctx.channel.send(f'是說 User :<@{user}>\n你好像沒有註冊P卡喔\n沒有註冊的話是不能參與比賽的\n現在去註冊的話今天00:00一過再抽籤就可以比賽嘍^W^')
                     os.remove('cmds\data\omikuji.lock')
