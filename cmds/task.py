@@ -92,8 +92,9 @@ class Task(Cog_extension):
                 await channel.send(f'難道今天沒有人抽籤嗎?QQ')
                 await asyncio.sleep(1)
                 await channel.send(f'梓守我不被需要了嗎Q^O')
-            await channel.send(f'對了')
-            await channel.send(f'去投稿')
+                await channel.send(f'梓喵我今天開始休息\n(測試新功能,1分鐘後就會再打開了)')
+            # await channel.send(f'對了')
+            # await channel.send(f'去投稿')
         #每月固定日期
             add_ponit_count = int(setting['add_ponit_count'])
             max_number = []
@@ -145,6 +146,8 @@ class Task(Cog_extension):
             omikuji.update(omikuji)
             with open('cmds\data\omikuji.json','w',encoding='utf-8') as omikuji_file:
                 json.dump(omikuji,omikuji_file)
+    #關閉機器人
+            await self.bot.close()
     @omikujidatareload.before_loop
     async def omikujidatareload_before(self):
         await self.bot.wait_until_ready()
