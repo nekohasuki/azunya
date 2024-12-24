@@ -13,4 +13,4 @@ imege/rpg
 __pycache__
 .vscode
 node_modules
-setting_history/*
+setting_history/*.json
