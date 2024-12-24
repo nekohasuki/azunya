@@ -4,12 +4,17 @@ intents = discord.Intents.all()
 intents.typing = False
 intents.presences = False
 import json
+
+from typing import Optional
+import asyncio,keep_alive,os
 with open('setting.json','r',encoding='utf-8') as setting_file:
     setting = json.load(setting_file)
+if setting.get('TOKEN') == None:
+    with open(f'setting_history/{os.listdir('./setting_history')[-1]}','r',encoding='utf-8') as setting_file_history:
+        setting_history = json.load(setting_file_history)
+    with open('setting.json','w',encoding='utf-8') as setting_file:
+        json.dump(setting_history,setting_file,indent=4,ensure_ascii=True)
 bot = commands.Bot(command_prefix =[f'{setting["prefix"]}-','/'],intents = intents)
-
-import asyncio,keep_alive,os
-from typing import Optional
 
 prefix = 'a-'
 #機器人登陸通知
